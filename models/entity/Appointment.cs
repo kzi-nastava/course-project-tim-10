@@ -7,37 +7,128 @@ using HealthCareInfromationSystem.models.users;
 
 namespace HealthCareInfromationSystem.models.entity
 {
-	public enum AppointmentType
-	{
-		physical,
-		operation
-	}
-	public class Appointment
-	{
-		int id;
-		Person doctor;
-		Person patient;
-		Premise premise;
-		DateTime beginning;
-		int duration;
-		AppointmentType operation;
-		string comment;
+	
+    public class Appointment
+    {
+        public enum AppointmentType
+        {
+            physical,
+            operation
+        }
 
-		public Appointment()
-		{
-		}
+        private int _id;
+        private Person _patient;
+        private Person _doctor;
+        private Premise _premise;
+        private DateTime _beginning;
+        private AppointmentType _type;
+        private int _duration;
+        private string _comment;
 
-		public Appointment(int id, Person doctor, Person patient, Premise premise,
+
+
+        public Appointment()
+        {
+            
+        }
+
+        public Appointment(int id, Person doctor, Person patient, Premise premise,
 			DateTime beginning, int duration, AppointmentType operation, string comment)
-		{
-			this.id = id;
-			this.doctor = doctor;
-			this.patient = patient;
-			this.premise = premise;
-			this.beginning = beginning;
-			this.duration = duration;
-			this.operation = operation;
-			this.comment = comment;
-		}
-	}
+		  {
+            _id = id;
+            _patient = patient;
+            _doctor = doctor;
+            _premise = premise;
+            _beginning = beginning;
+            _type = type;
+            _duration = duration;
+            _comment = "";
+        }
+
+
+        public int Duration
+        {
+            get { return _duration; }
+            set { _duration = value; }
+        }
+
+        public AppointmentType Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
+
+        public DateTime Beginning
+        {
+            get { return _beginning; }
+            set { _beginning = value; }
+        }
+
+        public Person Doctor
+        {
+            get { return _doctor; }
+            set { _doctor = value; }
+        }
+
+
+        public Person Patient
+        {
+            get { return _patient; }
+            set { _patient = value; }
+        }
+
+        public Premise Premise
+        {
+            get { return _premise; }
+            set { _premise = value; }
+        }
+
+
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+
+        public String Comment
+        {
+            get { return _comment; }
+            set { _comment = value; }
+        }
+
+        internal static Appointment Parse(DataGridViewRow row)
+        {
+            String id = row.Cells["ID"].Value.ToString();
+            String doctor = row.Cells["doctorId"].Value.ToString();
+            String patient = row.Cells["patientId"].Value.ToString();
+            String premise = row.Cells["premiseId"].Value.ToString();
+            String beginning = row.Cells["beginning"].Value.ToString();
+            String duration = row.Cells["duration"].Value.ToString();
+            String type = row.Cells["type"].Value.ToString();
+            String comment = row.Cells["comment"].Value.ToString();
+            return new Appointment(id, patient, doctor, premise, beginning, type, duration);
+
+        }
+      
+      public static Appointment Parse(OleDbDataReader reader)
+        {
+            int id = int.Parse(reader[0].ToString());
+            Person doctor = PersonContoller.LoadOnePerson(Constants.connectionString, 
+                            "select * from users where id="" + reader[1].ToString() + """);
+            Person patient = PersonContoller.LoadOnePerson(Constants.connectionString, 
+                            "select * from users where id="" + reader[2].ToString() + """);
+            Premise premise = PremiseController.LoadOnePremise(Constants.connectionString, 
+                            "select * from premises where id="" + reader[3].ToString() + """);
+            DateTime beginning = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
+            int duration = int.Parse(reader[5].ToString());
+            Enum.TryParse(reader[6].ToString(), out AppointmentType type);
+            string comment = reader[7].ToString();
+            return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
+        }
+
+
+
+    }
+
 }
