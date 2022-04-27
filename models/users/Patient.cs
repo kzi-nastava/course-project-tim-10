@@ -1,11 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.entity;
 
-namespace HealthCareInfromationSystem
+namespace HealthCareInfromationSystem.models.users
 {
+	
+
 	public class Patient : Person
 	{
         //private MedicalRecord _medicalRecord;
@@ -26,11 +29,11 @@ namespace HealthCareInfromationSystem
         }
 
 
-        //public MedicalRecord MedicalRecord
-        //{
-        //    get { return _medicalRecord; }
-        //    set { _medicalRecord = value; }
-        //}
+        public MedicalRecord MedicalRecord
+        {
+            get { return _medicalRecord; }
+            set { _medicalRecord = value; }
+        }
 
 
 
