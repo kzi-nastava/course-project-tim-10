@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCareInfromationSystem
+namespace HealthCareInfromationSystem.models.users
 {
     class Secretary : Person
     {
