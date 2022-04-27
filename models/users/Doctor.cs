@@ -12,7 +12,7 @@ namespace HealthCareInfromationSystem.models.users
 
 
 		public Doctor() : base() { }
-		public Doctor(int id, string name, string lastName, Role role,
+		public Doctor(int id, string name, string lastName, Roles role,
 					  string password, bool blocked, int blocker, string username) : base(id, name, lastName, role,
 						  password, blocked, blocker, username)
 		{ }
