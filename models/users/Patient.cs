@@ -11,7 +11,7 @@ namespace HealthCareInfromationSystem.models.users
 
 	public class Patient : Person
 	{
-        //private MedicalRecord _medicalRecord;
+        private MedicalRecord _medicalRecord;
         private List<Appointment> _myAppointments;
         //private List<MedicalPrescription> _medicalPrescriptions;
 

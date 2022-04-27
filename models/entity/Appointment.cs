@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.users;
+using System.Data.OleDb;
 
 namespace HealthCareInfromationSystem.models.entity
 {
@@ -40,7 +41,7 @@ namespace HealthCareInfromationSystem.models.entity
             _doctor = doctor;
             _premise = premise;
             _beginning = beginning;
-            _type = type;
+            _type = operation;
             _duration = duration;
             _comment = "";
         }
@@ -97,7 +98,7 @@ namespace HealthCareInfromationSystem.models.entity
             set { _comment = value; }
         }
 
-        internal static Appointment Parse(DataGridViewRow row)
+        /**internal static Appointment Parse(DataGridViewRow row)
         {
             String id = row.Cells["ID"].Value.ToString();
             String doctor = row.Cells["doctorId"].Value.ToString();
@@ -125,7 +126,7 @@ namespace HealthCareInfromationSystem.models.entity
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);
             string comment = reader[7].ToString();
             return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
-        }
+        }**/
 
 
 
