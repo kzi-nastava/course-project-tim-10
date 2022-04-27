@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="models\entity\Appointment.cs" />
+    <Compile Include="models\entity\MedicalRecord.cs" />
+    <Compile Include="models\users\Doctor.cs" />
+    <Compile Include="models\users\Patient.cs" />
+    <Compile Include="models\users\Person.cs" />
+    <Compile Include="models\users\Premise.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
