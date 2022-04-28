@@ -78,7 +78,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.btnClear.TabIndex = 16;
             this.btnClear.Text = "Clear fields";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnDelete
             // 
@@ -97,7 +97,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.btnEdit.TabIndex = 14;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnAddNew
             // 
@@ -107,7 +107,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.btnAddNew.TabIndex = 13;
             this.btnAddNew.Text = "Add new";
             this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.btnAddNew.Click += new System.EventHandler(this.BtnAddNew_Click);
             // 
             // cbBlocked
             // 

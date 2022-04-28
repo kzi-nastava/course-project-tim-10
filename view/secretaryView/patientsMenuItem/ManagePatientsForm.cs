@@ -91,13 +91,13 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             labelStatus.Text = "";
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private void BtnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
         }
 
 
-        private void btnAddNew_Click(object sender, EventArgs e)
+        private void BtnAddNew_Click(object sender, EventArgs e)
         {
             if (!CheckIfFilledFields())
             {
@@ -132,8 +132,38 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
+            if (!CheckIfFilledFields())
+            {
+                labelStatus.Text = "Status: Incomplete fields.";
+                return;
+            }
+            if (tbId.Text != selectedId && PatientController.CheckIfExistsById(this.tbId.Text))
+            {
+                labelStatus.Text = "Status: Patient exists under assigned Id.";
+                return;
+            }
+            if (tbUserName.Text != selectedUserName && PatientController.CheckIfExistsByUsername(this.tbUserName.Text))
+            {
+                labelStatus.Text = "Status: Patient exists under assigned Username.";
+                return;
+            }
+
+            int blocker = 0;
+            if (this.cbBlocked.Checked)
+            {
+                blocker = 1;
+            }
+            if (PatientController.Edit(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUserName.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            {
+                labelStatus.Text = "Status: Operation succeeded.";
+                DisplayData();
+            }
+            else
+            {
+                labelStatus.Text = "Status: Operation fail.";
+            }
         }
 
         
