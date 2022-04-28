@@ -110,17 +110,18 @@ namespace HealthCareInfromationSystem.models.entity
             String comment = row.Cells["comment"].Value.ToString();
             return new Appointment(id, patient, doctor, premise, beginning, type, duration);
 
-        }
+        }**/
       
-      public static Appointment Parse(OleDbDataReader reader)
+      /**public static Appointment Parse(OleDbDataReader reader)
         {
+            
             int id = int.Parse(reader[0].ToString());
-            Person doctor = PersonContoller.LoadOnePerson(Constants.connectionString, 
-                            "select * from users where id="" + reader[1].ToString() + """);
-            Person patient = PersonContoller.LoadOnePerson(Constants.connectionString, 
-                            "select * from users where id="" + reader[2].ToString() + """);
-            Premise premise = PremiseController.LoadOnePremise(Constants.connectionString, 
-                            "select * from premises where id="" + reader[3].ToString() + """);
+            Person doctor = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + reader[1].ToString() + "\"");
+            Person patient = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + reader[2].ToString() + "\"");
+            Premise premise = PremiseController.LoadOnePremise(Constants.connectionString,
+                            "select * from premises where id=\"" + reader[3].ToString() + "\"");
             DateTime beginning = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
             int duration = int.Parse(reader[5].ToString());
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);
