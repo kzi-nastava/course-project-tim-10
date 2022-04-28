@@ -79,9 +79,6 @@ namespace HealthCareInfromationSystem.contollers
                         MessageBox.Show("You can't delete premise because equipment is scheduled to be moved in it.");
                         return;
                     }
-                    // result -1 je prosao datum
-                    // ako je prosao datum ne sme biti opreme u novoj prostoriji. isto i za =
-                    // ako nije prosao datum ne sme se brisati ni stara ni nova prostorija
                 }
 
                 reader.Close();
