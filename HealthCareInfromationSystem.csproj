@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="contollers\PersonController.cs" />
+    <Compile Include="contollers\PremiseController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
@@ -76,6 +77,12 @@
     <Compile Include="view\ManagerView\ManagerMainForm.Designer.cs">
       <DependentUpon>ManagerMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\PremisesCRUDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
+      <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -85,6 +92,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\ManagerView\ManagerMainForm.resx">
+      <DependentUpon>ManagerMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
+      <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="contollers\.gitkeep" />
     <None Include="models\entity\.gitkeep" />
     <None Include="models\users\.gitkeep" />

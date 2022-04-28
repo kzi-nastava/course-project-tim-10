@@ -62,6 +62,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button4.TabIndex = 24;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // button3
             // 
@@ -92,6 +93,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button1.TabIndex = 21;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label3
             // 
@@ -151,6 +153,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(903, 351);
             this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
             // 
             // PremisesCRUDForm
             // 
@@ -171,6 +174,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.Controls.Add(this.dataGridView1);
             this.Name = "PremisesCRUDForm";
             this.Text = "PremisesCRUDForm";
+            this.Load += new System.EventHandler(this.PremisesCRUDForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

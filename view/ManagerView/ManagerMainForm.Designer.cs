@@ -31,15 +31,16 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.managingPremisesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchAndFilterEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrangingEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
@@ -60,17 +61,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
-            // logoutToolStripMenuItem
-            // 
-            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
-            this.logoutToolStripMenuItem.Text = "Logout";
-            // 
             // managingPremisesToolStripMenuItem
             // 
             this.managingPremisesToolStripMenuItem.Name = "managingPremisesToolStripMenuItem";
             this.managingPremisesToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.managingPremisesToolStripMenuItem.Text = "Managing premises";
+            this.managingPremisesToolStripMenuItem.Click += new System.EventHandler(this.ManagingPremisesToolStripMenuItem_Click);
             // 
             // searchAndFilterEquipmentToolStripMenuItem
             // 
@@ -83,6 +79,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.arrangingEquipmentToolStripMenuItem.Name = "arrangingEquipmentToolStripMenuItem";
             this.arrangingEquipmentToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.arrangingEquipmentToolStripMenuItem.Text = "Arranging equipment";
+            // 
+            // logoutToolStripMenuItem
+            // 
+            this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
+            this.logoutToolStripMenuItem.Text = "Logout";
             // 
             // ManagerMainForm
             // 

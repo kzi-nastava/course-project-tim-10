@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.models.entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -42,6 +43,20 @@ namespace HealthCareInfromationSystem.view.ManagerView
             comboBox1.Items.Add("other");
         }
 
+        private void ResetTextBoxes()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            comboBox1.Text = "";
+        }
+
+        private bool CheckIfTextBoxesAreEmpty()
+        {
+            return String.IsNullOrWhiteSpace(textBox1.Text) &&
+                    String.IsNullOrWhiteSpace(textBox2.Text) &&
+                    String.IsNullOrWhiteSpace(comboBox1.SelectedItem.ToString());
+        }
+
         private void FillTable(String query, OleDbConnection connection)
         {
             OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
@@ -64,6 +79,50 @@ namespace HealthCareInfromationSystem.view.ManagerView
             {
                 FillTable("select * from premises where type <> \"warehouse\"", connection);
             }
+        }
+
+        private void PremisesCRUDForm_Load(object sender, EventArgs e)
+        {
+            SetLabelsAndButtons();
+            FillComboBox();
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            RefreshTable();
+        }
+
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow == null) return;
+
+            String premiseId = currentRow.Cells[0].Value.ToString();
+            String name = currentRow.Cells[1].Value.ToString();
+            String type = currentRow.Cells[2].Value.ToString();
+            textBox1.Text = premiseId;
+            textBox1.Enabled = false;
+            textBox2.Text = name;
+            comboBox1.SelectedItem = type;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (CheckIfTextBoxesAreEmpty() ||
+                !textBox1.Enabled ||
+                premiseController.CheckIfPremiseExistsById(textBox1.Text))
+                return;
+
+            String premiseId = textBox1.Text;
+            String name = textBox2.Text;
+            String type = comboBox1.SelectedItem.ToString();
+            Premise premise = new Premise(premiseId, name, type);
+            premiseController.SavePremise(premise);
+            ResetTextBoxes();
+            RefreshTable();
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            ResetTextBoxes();
+            textBox1.Enabled = true;
         }
     }
 }

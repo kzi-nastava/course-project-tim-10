@@ -16,5 +16,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             InitializeComponent();
         }
+
+        private void ManagingPremisesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PremisesCRUDForm premisesCRUDForm = new PremisesCRUDForm();
+            premisesCRUDForm.Show();
+        }
     }
 }

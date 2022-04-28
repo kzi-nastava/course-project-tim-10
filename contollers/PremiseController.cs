@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.models.entity;
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
@@ -18,6 +19,17 @@ namespace HealthCareInfromationSystem.contollers
                 OleDbCommand command = new OleDbCommand(query, connection);
                 OleDbDataReader reader = command.ExecuteReader();
                 return reader.HasRows;
+            }
+        }
+
+        public void SavePremise(Premise premise)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into premises values (\"{premise.Id}\", \"{premise.Name}\", \"{premise.Type}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
             }
         }
     }
