@@ -73,6 +73,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.searchAndFilterEquipmentToolStripMenuItem.Name = "searchAndFilterEquipmentToolStripMenuItem";
             this.searchAndFilterEquipmentToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.searchAndFilterEquipmentToolStripMenuItem.Text = "Search and filter equipment";
+            this.searchAndFilterEquipmentToolStripMenuItem.Click += new System.EventHandler(this.SearchAndFilterEquipmentToolStripMenuItem_Click);
             // 
             // arrangingEquipmentToolStripMenuItem
             // 
