@@ -34,7 +34,7 @@ namespace HealthCareInfromationSystem
             _type = type;
             _newDoctorId = newDoctorId;
             _newBeginning = newBeginning;
-            _reqDateTime = MyConverter.ToString(DateTime.Now);
+            //_reqDateTime = MyConverter.ToString(DateTime.Now);
             _state = state;
             _secretaryId = "";
         }
