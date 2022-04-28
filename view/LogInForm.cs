@@ -47,8 +47,8 @@ namespace HealthCareInfromationSystem.view
 			else if (loggedUser.Role == Person.Roles.doctor)
 			{
 				errorLabel.Text = "Welcome doctor";
-				/*MainDoctor mainDoctor = new MainDoctor();
-				mainDoctor.Show();*/
+				DoctorMainForm doctorMainForm = new DoctorMainForm();
+				doctorMainForm.Show();
 
 			}
 			else if (loggedUser.Role == Person.Roles.patient) { errorLabel.Text = "Welcome patient"; }
