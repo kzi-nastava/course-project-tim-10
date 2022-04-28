@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.view.ManagerView;
 
 namespace HealthCareInfromationSystem.view
 {
@@ -51,7 +52,11 @@ namespace HealthCareInfromationSystem.view
 
 			}
 			else if (loggedUser.Role == Person.Roles.patient) { errorLabel.Text = "Welcome patient"; }
-			else { errorLabel.Text = "Welcome manager"; } //manager
+			else 
+			{
+				ManagerMainForm managerMainForm = new ManagerMainForm();
+				managerMainForm.Show();
+			} //manager
 
 
 		}
