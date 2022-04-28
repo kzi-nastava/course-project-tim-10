@@ -24,10 +24,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
 
         private void ManagePatientsForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'patientsDataSet.users' table. You can move, or remove it, as needed.
-            this.usersTableAdapter.Fill(this.patientsDataSet.users);
             DisplayData();
-
         }
 
         private void DisplayData()
@@ -42,8 +39,33 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
         }
 
 
+        private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            labelStatus.Text = "Selected";
 
+            selectedId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
+            tbId.Text = selectedId;
+            tbId.Enabled = false;
 
+            tbName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[1].Value.ToString();
+            tbLastName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[2].Value.ToString();
+            selectedUserName = dataGridViewPatients.Rows[e.RowIndex].Cells[3].Value.ToString();
+            tbUserName.Text = selectedUserName;
+            tbPassword.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+            if (bool.TryParse(dataGridViewPatients.Rows[e.RowIndex].Cells[5].Value.ToString(), out bool blocked))
+            {
+                cbBlocked.Checked = blocked;
+                if (blocked == true)
+                {
+                    cbBlocked.Enabled = false;
+                }
+                else
+                {
+                    cbBlocked.Enabled = true;
+                }
+            }
+        }
 
 
         // Field manipulation
@@ -74,41 +96,46 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             ClearFields();
         }
 
-        private void dataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            labelStatus.Text = "";
-
-            selectedId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            tbId.Text = selectedId;
-            tbId.Enabled = false;
-
-            tbName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[1].Value.ToString();
-            tbLastName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[2].Value.ToString();
-            selectedUserName = dataGridViewPatients.Rows[e.RowIndex].Cells[3].Value.ToString();
-            tbUserName.Text = selectedUserName;
-            tbPassword.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[4].Value.ToString();
-
-            if (bool.TryParse(dataGridViewPatients.Rows[e.RowIndex].Cells[5].Value.ToString(), out bool blocked))
-            {
-                cbBlocked.Checked = blocked;
-                if (blocked == true)
-                {
-                    cbBlocked.Enabled = false;
-                }
-                else
-                {
-                    cbBlocked.Enabled = true;
-                }
-            }   
-        }
 
         private void btnAddNew_Click(object sender, EventArgs e)
         {
+            if (!CheckIfFilledFields())
+            {
+                labelStatus.Text = "Status: Incomplete fields.";
+                return;
+            }
+            if (PatientController.CheckIfExistsById(this.tbId.Text))
+            {
+                labelStatus.Text = "Status: User exists under assigned Id.";
+                return;
+            }
+            if (PatientController.CheckIfExistsByUsername(this.tbUserName.Text))
+            {
+                labelStatus.Text = "Status: User exists under assigned Username.";
+                return;
+            }
+
+            int blocker = 0;
+            if (this.cbBlocked.Checked)
+            {
+                blocker = 1;
+            }
+            if (PatientController.AddNew(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUserName.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            {
+                ClearFields();
+                labelStatus.Text = "Status: Operation succeeded.";
+                DisplayData();
+            }
+            else
+            {
+                labelStatus.Text = "Status: Operation fail.";
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
         }
 
+        
     }
 }

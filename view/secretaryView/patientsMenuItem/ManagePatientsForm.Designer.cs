@@ -47,24 +47,24 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.tbId = new System.Windows.Forms.TextBox();
             this.labelId = new System.Windows.Forms.Label();
             this.dataGridViewPatients = new System.Windows.Forms.DataGridView();
-            this.patientsDataSet = new HealthCareInfromationSystem.patientsDataSet();
-            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.usersTableAdapter = new HealthCareInfromationSystem.patientsDataSetTableAdapters.usersTableAdapter();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.patientsDataSet = new HealthCareInfromationSystem.patientsDataSet();
+            this.usersTableAdapter = new HealthCareInfromationSystem.patientsDataSetTableAdapters.usersTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatients)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.patientsDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.patientsDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(562, 399);
+            this.labelStatus.Location = new System.Drawing.Point(519, 402);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(43, 13);
             this.labelStatus.TabIndex = 17;
@@ -72,7 +72,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(562, 431);
+            this.btnClear.Location = new System.Drawing.Point(522, 432);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 16;
@@ -215,20 +215,7 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.dataGridViewPatients.Name = "dataGridViewPatients";
             this.dataGridViewPatients.Size = new System.Drawing.Size(624, 202);
             this.dataGridViewPatients.TabIndex = 18;
-            // 
-            // patientsDataSet
-            // 
-            this.patientsDataSet.DataSetName = "patientsDataSet";
-            this.patientsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // usersBindingSource
-            // 
-            this.usersBindingSource.DataMember = "users";
-            this.usersBindingSource.DataSource = this.patientsDataSet;
-            // 
-            // usersTableAdapter
-            // 
-            this.usersTableAdapter.ClearBeforeFill = true;
+            this.dataGridViewPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewPatients_RowHeaderMouseClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -266,11 +253,25 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.dataGridViewTextBoxColumn6.HeaderText = "blocked";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "users";
+            this.usersBindingSource.DataSource = this.patientsDataSet;
+            // 
+            // patientsDataSet
+            // 
+            this.patientsDataSet.DataSetName = "patientsDataSet";
+            this.patientsDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersTableAdapter
+            // 
+            this.usersTableAdapter.ClearBeforeFill = true;
+            // 
             // ManagePatientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(689, 498);
+            this.ClientSize = new System.Drawing.Size(771, 498);
             this.Controls.Add(this.dataGridViewPatients);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.btnClear);
@@ -292,8 +293,8 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             this.Text = "ManagePatientsForm";
             this.Load += new System.EventHandler(this.ManagePatientsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatients)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.patientsDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.patientsDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
