@@ -38,7 +38,7 @@ namespace HealthCareInfromationSystem.contollers
             try
             {
                 InsertPatient(id, name, lastName, username, password, blocked, blocker);
-                MedicalRecordController.AddNew(id);
+                MedicalRecordController.AddNewByPatientId(id);
                 return true;
             }
             catch (OleDbException)
@@ -60,7 +60,26 @@ namespace HealthCareInfromationSystem.contollers
                 return false;
             }
         }
+
+        public static bool Delete(string id)
+        {
+            try
+            {
+                DeletePatient(id);
+                MedicalRecordController.DeleteByPatientId(id);
+                AppointmentController.DeleteByPatientId(id);
+                ReferralLetterController.DeleteByPatientId(id);
+                AppointmentRequestController.DeleteByPatientId(id);
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
         
+
+        // From database
 
         private static void InsertPatient(string id, string name, string lastName, string username, string password, string blocked, int blocker)
         {
@@ -101,6 +120,7 @@ namespace HealthCareInfromationSystem.contollers
             {
                 connection.Open();
                 string query = $"delete from users where id=\"{id}\"";
+                Console.WriteLine(query);
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }

@@ -10,23 +10,32 @@ namespace HealthCareInfromationSystem.contollers
     class MedicalRecordController
     {
 
-        public static void AddNew(string patientId)
-        {
-            InsertMedicalRecord(patientId);
-        }
-
-        private static void InsertMedicalRecord(string patientId)
+        public static void AddNewByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                string query = $"insert into medical_record (id, patientId) values (\"{patientId}\", \"{patientId}\")";
+                string query = $"insert into medical_record (id, patientId) values (\"{id}\", \"{id}\")";
                 Console.WriteLine(query);
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
 
             }
         }
+
+        public static void DeleteByPatientId(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"delete from medical_record where patientId=\"{id}\"";
+                Console.WriteLine(query);
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+
+            }
+        }
+
 
     }
 }

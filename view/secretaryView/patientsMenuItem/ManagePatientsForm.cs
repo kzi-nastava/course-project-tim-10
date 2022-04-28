@@ -166,6 +166,18 @@ namespace HealthCareInfromationSystem.view.secretaryView.patientsMenuItem
             }
         }
 
-        
+        private void BtnDelete_Click(object sender, EventArgs e)
+        {
+            if (selectedId != "")
+            {
+                if (PatientController.Delete(selectedId))
+                {
+                    ClearFields();
+                    labelStatus.Text = "Status: Operation succeeded.";
+                    DisplayData();
+                }
+                
+            }
+        }
     }
 }
