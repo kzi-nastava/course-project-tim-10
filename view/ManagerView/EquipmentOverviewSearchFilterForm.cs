@@ -140,5 +140,17 @@ namespace HealthCareInfromationSystem.view.ManagerView
                 FillTable(query, connection);
             }
         }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                String query = $"" +
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                    $"from equipment as eq, premises as pr1, premises as pr2 " +
+                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
+                FillTable(query, connection);
+            }
+        }
     }
 }
