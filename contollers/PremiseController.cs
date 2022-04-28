@@ -32,5 +32,16 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
+
+        public void EditPremise(Premise premise)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update premises set name=\"{premise.Name}\", type=\"{premise.Type}\" where premises_id=\"{premise.Id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }

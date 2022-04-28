@@ -124,5 +124,18 @@ namespace HealthCareInfromationSystem.view.ManagerView
             ResetTextBoxes();
             textBox1.Enabled = true;
         }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            if (CheckIfTextBoxesAreEmpty() || textBox1.Enabled) return;
+
+            String premiseId = textBox1.Text;
+            String name = textBox2.Text;
+            String type = comboBox1.SelectedItem.ToString();
+            Premise premise = new Premise(premiseId, name, type);
+            premiseController.EditPremise(premise);
+            ResetTextBoxes();
+            RefreshTable();
+        }
     }
 }
