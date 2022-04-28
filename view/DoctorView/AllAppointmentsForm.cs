@@ -40,8 +40,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (selectedRowCount == 1)
 			{
 
-				/*EdditAppointment edditAppointment = new EdditAppointment(dataGridView1.SelectedRows[0].Cells[6].Value.ToString());
-				edditAppointment.Show();*/
+				EdditAppointmentForm edditAppointmentForm = new EdditAppointmentForm(GetSelectedAppointmentId());
+				edditAppointmentForm.Show();
 			}
 			else
 			{
@@ -88,6 +88,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
 		{
 
+		}
+
+		private string GetSelectedAppointmentId()
+		{
+			return dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
 		}
 	}
 }
