@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +51,22 @@ namespace HealthCareInfromationSystem.view.ManagerView
             return comboBox1.SelectedItem == null &&
                     comboBox2.SelectedItem == null &&
                     comboBox3.SelectedItem == null;
+        }
+
+        private void FillTable(String query, OleDbConnection connection)
+        {
+            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+            //OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(adapter);
+            //BindingSource bindingSource = new BindingSource();
+            //dataGridView1.DataSource = bindingSource;
+            DataTable table = new DataTable
+            {
+                Locale = CultureInfo.InvariantCulture
+            };
+
+            adapter.Fill(table);
+            //bindingSource.DataSource = table;
+            dataGridView1.DataSource = table;
         }
     }
 }
