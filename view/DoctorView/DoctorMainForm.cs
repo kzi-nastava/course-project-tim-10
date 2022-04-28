@@ -20,8 +20,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void AllAppointmentsButtonClick(object sender, EventArgs e)
 		{
-			//TableAppointments tableAppointments = new TableAppointments();
-			//tableAppointments.Show();
+			AllAppointmentsForm allAppointmentsForm = new AllAppointmentsForm();
+			allAppointmentsForm.Show();
 		}
 
 		private void dateAppoinmentsBtn_Click(object sender, EventArgs e)
