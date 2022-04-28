@@ -137,7 +137,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.saveBtn.TabIndex = 10;
 			this.saveBtn.Text = "Save";
 			this.saveBtn.UseVisualStyleBackColor = true;
-			this.saveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+			this.saveBtn.Click += new System.EventHandler(this.SaveBtnClick);
 			// 
 			// cancelBtn
 			// 
@@ -147,7 +147,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.cancelBtn.TabIndex = 11;
 			this.cancelBtn.Text = "Cancel";
 			this.cancelBtn.UseVisualStyleBackColor = true;
-			this.cancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
+			this.cancelBtn.Click += new System.EventHandler(this.CancelBtnClick);
 			// 
 			// AddAppointment
 			// 
