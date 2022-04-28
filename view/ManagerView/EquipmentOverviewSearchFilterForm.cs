@@ -16,5 +16,39 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             InitializeComponent();
         }
+
+        private void SetLabelsAndButtons()
+        {
+            label1.Text = "Search term";
+            label2.Text = "Premises type";
+            label3.Text = "Quantity";
+            label4.Text = "Equipment type";
+            button1.Text = "Search";
+            button2.Text = "Filter";
+            button3.Text = "Show all";
+        }
+
+        private void FillComboBox()
+        {
+            comboBox1.Items.Add("operational room");
+            comboBox1.Items.Add("examination room");
+            comboBox1.Items.Add("rest room");
+            comboBox1.Items.Add("warehouse");
+            comboBox1.Items.Add("other");
+            comboBox2.Items.Add("out of stock");
+            comboBox2.Items.Add("0-10");
+            comboBox2.Items.Add("10+");
+            comboBox3.Items.Add("examination equipment");
+            comboBox3.Items.Add("equipment for operations");
+            comboBox3.Items.Add("room furniture");
+            comboBox3.Items.Add("equipment in the hallways");
+        }
+
+        private bool CheckIfComboBoxesAreEmpty()
+        {
+            return comboBox1.SelectedItem == null &&
+                    comboBox2.SelectedItem == null &&
+                    comboBox3.SelectedItem == null;
+        }
     }
 }
