@@ -80,6 +80,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.arrangingEquipmentToolStripMenuItem.Name = "arrangingEquipmentToolStripMenuItem";
             this.arrangingEquipmentToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.arrangingEquipmentToolStripMenuItem.Text = "Arranging equipment";
+            this.arrangingEquipmentToolStripMenuItem.Click += new System.EventHandler(this.ArrangingEquipmentToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 

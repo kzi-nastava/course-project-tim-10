@@ -28,5 +28,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             EquipmentOverviewSearchFilterForm equipmentOverviewSearchFilterForm = new EquipmentOverviewSearchFilterForm();
             equipmentOverviewSearchFilterForm.Show();
         }
+
+        private void ArrangingEquipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArrangingEquipmentForm arrangingEquipmentForm = new ArrangingEquipmentForm();
+            arrangingEquipmentForm.Show();
+        }
     }
 }
