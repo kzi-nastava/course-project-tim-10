@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -107,6 +108,30 @@ namespace HealthCareInfromationSystem.view.ManagerView
             else if (result == 1) currentPremise = currentRow.Cells[4].Value.ToString();
 
             textBox1.Text = currentPremise;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow == null) return;
+            if (CheckIfTextBoxesAreEmpty()) return;
+
+            String equipmentId = currentRow.Cells[0].Value.ToString();
+            String newPremiseId = comboBox1.SelectedItem.ToString().Split('-')[0].Trim();
+            String date = textBox2.Text;
+
+            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
+            if (!Regex.IsMatch(date, dateRegex)) return;
+
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update equipment set new_premises_id=\"{newPremiseId}\", move_date=\"{date}\" where equipment_id=\"{equipmentId}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+
+            RefreshTable();
         }
     }
 }
