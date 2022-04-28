@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.contollers;
 
 namespace HealthCareInfromationSystem.view
 {
@@ -28,7 +29,7 @@ namespace HealthCareInfromationSystem.view
 				errorLabel.Text = "You must fill in the form";
 				return;
 			}
-			Person loggedUser = PersonContoller.LoadOnePerson(Constants.connectionString, "select * from users where username=\"" + inputUsername + "\" and password=\"" + inputPassword + "\"");
+			Person loggedUser = PersonController.LoadOnePerson(Constants.connectionString, "select * from users where username=\"" + inputUsername + "\" and password=\"" + inputPassword + "\"");
 
 			//checking if we found an user
 			if (loggedUser is null)
