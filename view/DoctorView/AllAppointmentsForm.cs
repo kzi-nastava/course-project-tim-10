@@ -64,10 +64,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 					MessageBox.Show("Changes saved.", "Success");
 					//TO DO CHANGE BASE
 				}
-				/*else if (dialogResult == DialogResult.No)
-				{
-					MessageBox.Show("radi ovo.", "super");
-				}*/
+				
 			}
 			else
 			{
