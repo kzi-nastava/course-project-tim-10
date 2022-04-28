@@ -124,6 +124,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button1.TabIndex = 15;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // textBox1
             // 
@@ -170,6 +171,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.Controls.Add(this.dataGridView1);
             this.Name = "EquipmentOverviewSearchFilterForm";
             this.Text = "EquipmentOverviewSearchFilterForm";
+            this.Load += new System.EventHandler(this.EquipmentOverviewSearchFilterForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

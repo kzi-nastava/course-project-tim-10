@@ -68,5 +68,44 @@ namespace HealthCareInfromationSystem.view.ManagerView
             //bindingSource.DataSource = table;
             dataGridView1.DataSource = table;
         }
+
+        private void EquipmentOverviewSearchFilterForm_Load(object sender, EventArgs e)
+        {
+            SetLabelsAndButtons();
+            FillComboBox();
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                String query = $"" +
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                    $"from equipment as eq, premises as pr1, premises as pr2 " +
+                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
+                FillTable(query, connection);
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            String searchTerm = textBox1.Text;
+
+            String query = $"" +
+                $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                $"from equipment as eq, premises as pr1, premises as pr2 " +
+                $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id and " +
+                $"(" +
+                $"eq.equipment_id like \"%{searchTerm}%\" or " +
+                $"eq.name like \"%{searchTerm}%\" or " +
+                $"eq.quantity like \"%{searchTerm}%\" or " +
+                $"eq.type like \"%{searchTerm}%\" or " +
+                $"eq.move_date like \"%{searchTerm}%\" or " +
+                $"pr1.name like \"%{searchTerm}%\" or " +
+                $"pr2.name like \"%{searchTerm}%\"" +
+                $")";
+
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                FillTable(query, connection);
+            }
+        }
     }
 }
