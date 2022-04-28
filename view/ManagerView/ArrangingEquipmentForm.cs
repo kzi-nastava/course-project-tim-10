@@ -82,5 +82,31 @@ namespace HealthCareInfromationSystem.view.ManagerView
                 FillTable(query, connection);
             }
         }
+
+        private void ArrangingEquipmentForm_Load(object sender, EventArgs e)
+        {
+            SetLabelsAndButtons();
+            FillComboBox();
+            RefreshTable();
+        }
+
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow == null) return;
+
+            String date = currentRow.Cells[6].Value.ToString();
+            String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
+            DateTime dateFromSelection = DateTime.Parse(date);
+            DateTime dateToday = DateTime.Parse(today);
+
+            int result = DateTime.Compare(dateFromSelection, dateToday);
+
+            String currentPremise = "";
+            if (result == -1 || result == 0) currentPremise = currentRow.Cells[5].Value.ToString();
+            else if (result == 1) currentPremise = currentRow.Cells[4].Value.ToString();
+
+            textBox1.Text = currentPremise;
+        }
     }
 }

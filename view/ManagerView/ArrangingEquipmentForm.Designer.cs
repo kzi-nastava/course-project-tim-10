@@ -108,6 +108,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(1219, 266);
             this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
             // 
             // ArrangingEquipmentForm
             // 
@@ -124,6 +125,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.Controls.Add(this.dataGridView1);
             this.Name = "ArrangingEquipmentForm";
             this.Text = "ArrangingEquipmentForm";
+            this.Load += new System.EventHandler(this.ArrangingEquipmentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
