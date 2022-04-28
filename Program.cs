@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.view;
 
 namespace HealthCareInfromationSystem
 {
@@ -17,8 +18,8 @@ namespace HealthCareInfromationSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            Constants.ReadData(Constants.connectionString, "select name from users");
+            Application.Run(new LogInForm());
+            //Constants.ReadData(Constants.connectionString, "select name from users");
         }
     }
 }
