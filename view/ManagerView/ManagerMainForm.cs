@@ -22,5 +22,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             PremisesCRUDForm premisesCRUDForm = new PremisesCRUDForm();
             premisesCRUDForm.Show();
         }
+
+        private void SearchAndFilterEquipmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EquipmentOverviewSearchFilterForm equipmentOverviewSearchFilterForm = new EquipmentOverviewSearchFilterForm();
+            equipmentOverviewSearchFilterForm.Show();
+        }
     }
 }
