@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthCareInfromationSystem.models.entity
 {
-    class Premise
+    public class Premise
     {
         private String id;
         private String name;
