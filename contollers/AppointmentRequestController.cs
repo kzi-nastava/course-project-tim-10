@@ -14,7 +14,7 @@ namespace HealthCareInfromationSystem.contollers
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                string query = $"delete from appointment_request where patientId=\"{id}\"";
+                string query = $"delete from appointment_request where patient_id=\"{id}\"";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
 

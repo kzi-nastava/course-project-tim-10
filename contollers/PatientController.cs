@@ -69,8 +69,7 @@ namespace HealthCareInfromationSystem.contollers
                 MedicalRecordController.DeleteByPatientId(id);
                 AppointmentController.DeleteByPatientId(id);
                 ReferralLetterController.DeleteByPatientId(id);
-                // TODO Add table AppointmentRequest in Database
-                // AppointmentRequestController.DeleteByPatientId(id);
+                AppointmentRequestController.DeleteByPatientId(id);
                 return true;
             }
             catch (OleDbException)
