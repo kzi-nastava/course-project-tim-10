@@ -88,5 +88,39 @@ namespace HealthCareInfromationSystem.contollers
                 return true;
             }
         }
+
+        public static int GetFirstFreeId()
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand("select * from appointments", connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                int maxId = 0;
+
+                while (reader.Read())
+                {
+                    int id = int.Parse(reader[0].ToString());
+                    if (id > maxId) { maxId = id; }
+                }
+                reader.Close();
+                return maxId + 1;
+            }
+        }
+
+        public static void AddToBase(string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
+        {
+            int id = GetFirstFreeId();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into appointments values (\"{id}\", \"{doctorId}\", \"{patientId}\", \"{premiseId}\", \"{beginning}\", \"{duration}\", \"{type}\", \"\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+
+        }
     }
 }
