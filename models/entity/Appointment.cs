@@ -44,7 +44,7 @@ namespace HealthCareInfromationSystem.models.entity
             _beginning = beginning;
             _type = operation;
             _duration = duration;
-            _comment = "";
+            _comment = comment;
         }
 
 
@@ -127,6 +127,7 @@ namespace HealthCareInfromationSystem.models.entity
             int duration = int.Parse(reader[5].ToString());
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);
             string comment = reader[7].ToString();
+            Console.WriteLine(comment);
             return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
         }
 

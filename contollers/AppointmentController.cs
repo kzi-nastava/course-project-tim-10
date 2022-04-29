@@ -106,6 +106,7 @@ namespace HealthCareInfromationSystem.contollers
                 while (reader.Read())
                 {
                     appointment = Appointment.Parse(reader);
+                    Console.WriteLine($"commet iz:{appointment.Comment}");
                 }
                 reader.Close();
                 return appointment;
@@ -198,6 +199,17 @@ namespace HealthCareInfromationSystem.contollers
                 connection.Open();
                 String query = $"update appointments set doctorId=\"{doctorId}\", patientId=\"{patientId}\", " +
                     $"premiseId=\"{premiseId}\", beginning=\"{beginning}\", duration=\"{duration}\", type=\"{type}\" where id=\"{appointmentId}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void EdditAppointmentComment(string appointmentId, string comment)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update appointments set comment=\"{comment}\" where id=\"{appointmentId}\"";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
