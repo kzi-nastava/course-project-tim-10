@@ -45,13 +45,13 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-                FillTable("select id, name, last_name, username, password, blocked from users where role=\"patient\"", connection);
+                FillTable("select id, name, last_name as 'last name', username, password, blocked from users where role=\"patient\"", connection);
             }
         }
 
 
         // Displays data from selected patient in fields
-        private void dataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             selectedId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
             tbId.Text = selectedId;
@@ -106,7 +106,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             ClearFields();
         }
 
-        private void btnAddNew_Click(object sender, EventArgs e)
+        private void BtnAddNew_Click(object sender, EventArgs e)
         {
             if (!CheckIfFilledFields())
             {
@@ -141,7 +141,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (!CheckIfFilledFields())
             {
@@ -175,7 +175,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (selectedId != "")
             {
