@@ -154,5 +154,16 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
+
+        public static void DeleteFromBase(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"delete from appointments where id = \"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
