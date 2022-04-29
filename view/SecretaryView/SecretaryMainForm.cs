@@ -25,7 +25,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void BlockedPatientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            BlockedPatientsForm blockedPatientsForm = new BlockedPatientsForm();
+            blockedPatientsForm.Show();
         }
 
         private void RequestsForChangeAndCancellationToolStripMenuItem_Click(object sender, EventArgs e)

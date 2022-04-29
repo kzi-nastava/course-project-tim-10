@@ -54,6 +54,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewPatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPatients.Location = new System.Drawing.Point(13, 13);
             this.dataGridViewPatients.Name = "dataGridViewPatients";
+            this.dataGridViewPatients.ReadOnly = true;
             this.dataGridViewPatients.Size = new System.Drawing.Size(688, 232);
             this.dataGridViewPatients.TabIndex = 0;
             this.dataGridViewPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatients_RowHeaderMouseClick);
