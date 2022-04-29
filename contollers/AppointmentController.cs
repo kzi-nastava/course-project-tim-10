@@ -44,6 +44,34 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static List<Appointment> LoadAppointmentsForDate(string connectionString, string queryString, string inputDate)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<Appointment> appointments = new List<Appointment>();
+                DateTime beginningDate = DateTime.ParseExact(inputDate, "dd.MM.yyyy.", null);
+                DateTime endingDate = beginningDate.AddDays(3);
+
+                while (reader.Read())
+                {
+                    DateTime appoinmentDate = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
+                    if (beginningDate <= appoinmentDate && appoinmentDate < endingDate)
+                    {
+                        Appointment appointment = Appointment.Parse(reader);
+                        appointments.Add(appointment);
+                    }
+
+                }
+                reader.Close();
+                return appointments;
+            }
+        }
+
         public static Appointment LoadOneAppointment(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))

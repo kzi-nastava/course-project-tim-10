@@ -26,8 +26,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void dateAppoinmentsBtn_Click(object sender, EventArgs e)
 		{
-			//FutureAppointmentsForm tableFutureAppointments = new FutureAppointmentsForm();
-			//tableFutureAppointments.Show();
+			AppointmentsByDateForm appointmentsByDateForm = new AppointmentsByDateForm();
+			appointmentsByDateForm.Show();
 		}
 	}
 }

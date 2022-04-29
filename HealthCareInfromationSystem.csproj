@@ -79,6 +79,12 @@
     <Compile Include="view\DoctorView\AllAppointmentsForm.Designer.cs">
       <DependentUpon>AllAppointmentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.Designer.cs">
+      <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\DoctorView\DoctorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
