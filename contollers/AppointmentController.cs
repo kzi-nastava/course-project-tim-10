@@ -142,5 +142,17 @@ namespace HealthCareInfromationSystem.contollers
             }
 
         }
+
+        public static void EdditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update appointments set doctorId=\"{doctorId}\", patientId=\"{patientId}\", " +
+                    $"premiseId=\"{premiseId}\", beginning=\"{beginning}\", duration=\"{duration}\", type=\"{type}\" where id=\"{appointmentId}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }
