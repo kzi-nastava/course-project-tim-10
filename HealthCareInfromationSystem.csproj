@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,13 +51,122 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="contollers\AppointmentController.cs" />
+    <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\MedicalRecordController.cs" />
+    <Compile Include="contollers\PatientController.cs" />
+    <Compile Include="contollers\PersonController.cs" />
+    <Compile Include="contollers\PremiseController.cs" />
+    <Compile Include="contollers\ReferralLetterController.cs" />
+    <Compile Include="models\entity\Appointment.cs" />
+    <Compile Include="models\entity\AppointmentRequest.cs" />
+    <Compile Include="models\entity\MedicalRecord.cs" />
+    <Compile Include="models\entity\Premise.cs" />
+    <Compile Include="models\users\Doctor.cs" />
+    <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />
+    <Compile Include="models\users\Secretary.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
-    <Compile Include="utils\Constants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utils\Constants.cs" />
-    <Compile Include="utils\MyConverter.cs" />
+    <Compile Include="utils\LoggedInUser.cs" />
+    <Compile Include="view\DoctorView\AddAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AddAppointmentForm.Designer.cs">
+      <DependentUpon>AddAppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AllAppointmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AllAppointmentsForm.Designer.cs">
+      <DependentUpon>AllAppointmentsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AnamnesisInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AnamnesisInputForm.Designer.cs">
+      <DependentUpon>AnamnesisInputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.Designer.cs">
+      <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\DoctorMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\DoctorMainForm.Designer.cs">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\EditAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\EditAppointmentForm.Designer.cs">
+      <DependentUpon>EditAppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.Designer.cs">
+      <DependentUpon>SingleMedicalRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\LogInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\LogInForm.Designer.cs">
+      <DependentUpon>LogInForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\ArrangingEquipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\ArrangingEquipmentForm.Designer.cs">
+      <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\EquipmentOverviewSearchFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\EquipmentOverviewSearchFilterForm.Designer.cs">
+      <DependentUpon>EquipmentOverviewSearchFilterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\ManagerMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\ManagerMainForm.Designer.cs">
+      <DependentUpon>ManagerMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\PremisesCRUDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
+      <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\AppointmentRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\AppointmentRequestForm.Designer.cs">
+      <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\BlockedPatientsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\BlockedPatientsForm.Designer.cs">
+      <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\ManagePatientsForm.Designer.cs">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\SecretaryMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\SecretaryMainForm.Designer.cs">
+      <DependentUpon>SecretaryMainForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -66,10 +176,36 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="bin\Debug\HealthCareInfromationSystem.exe.config" />
+    <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
+      <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\EquipmentOverviewSearchFilterForm.resx">
+      <DependentUpon>EquipmentOverviewSearchFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\ManagerMainForm.resx">
+      <DependentUpon>ManagerMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
+      <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
+      <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\BlockedPatientsForm.resx">
+      <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\SecretaryMainForm.resx">
+      <DependentUpon>SecretaryMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="contollers\.gitkeep" />
     <None Include="models\entity\.gitkeep" />
     <None Include="models\users\.gitkeep" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\HealthCareInfromationSystem.csproj.AssemblyReference.cache" />
+    <None Include="bin\Debug\HealthCareInfromationSystem.exe.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -83,13 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\HealthCareInfromationSystem.exe" />
-    <Content Include="bin\Debug\HealthCareInfromationSystem.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

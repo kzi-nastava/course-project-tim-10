@@ -1,20 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.OleDb;
 
-namespace HealthCareInfromationSystem
+namespace HealthCareInfromationSystem.models.users
 {
 
-	//public enum Role
-	//{
-	//	manager,
-	//	patient,
-	//	doctor,
-	//	secretary
-	//}
+
+
+	
 	public class Person
 	{
 		public enum Roles
@@ -112,30 +108,12 @@ namespace HealthCareInfromationSystem
 			this._username = username;
 		
 		}
+    
 
-		//public string GetName()
-		//{
-		//	return name;
-		//}
-
-		//public string GetLastName()
-		//{
-		//	return lastName;
-		//}
-
-		//public string GetUsername() {
-		//	return username;
-		//}
+		
 
 
-		//public string GetPassword()
-		//{
-		//	return password;
-		//}
-
-		//public Role GetRole() {
-		//	return role;
-		//}
+		
 
 		public Person DeepCopy()
 		{
@@ -143,13 +121,7 @@ namespace HealthCareInfromationSystem
 						  _password, _blocked, _blocker, _username);
 		}
 
-		//public bool IsBlocked() {
-		//	return blocked;
-		//}
-
-		//public int GetBlocker() {
-		//	return blocker;
-		//}
+		
 
 		public static Person Parse(OleDbDataReader reader)
 		{
@@ -165,4 +137,7 @@ namespace HealthCareInfromationSystem
 			  password, blocked, blocker, username);
 		}
 	}
+
 }
+
+

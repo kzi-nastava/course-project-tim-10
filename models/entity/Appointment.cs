@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.users;
 using System.Data.OleDb;
-using System.Windows.Forms;
+using HealthCareInfromationSystem.contollers;
 
-namespace HealthCareInfromationSystem
+namespace HealthCareInfromationSystem.models.entity
 {
+	
     public class Appointment
     {
-        public enum ATypes
+        public enum AppointmentType
         {
             physical,
             operation
         }
 
-        private String _id;
-        private String _patient;
-        private String _doctor;
-        private String _premise;
-        private String _beginning;
-        private String _type;
-        private String _duration;
-        private String _comment;
-
+        private int _id;
+        private Person _patient;
+        private Person _doctor;
+        private Premise _premise;
+        private DateTime _beginning;
+        private AppointmentType _type;
+        private int _duration;
+        private string _comment;
 
 
 
@@ -33,58 +34,59 @@ namespace HealthCareInfromationSystem
             
         }
 
-        public Appointment(String id, String patient, String doctor, String premise, String beginning, String type, String duration)
-        {
+        public Appointment(int id, Person doctor, Person patient, Premise premise,
+			DateTime beginning, int duration, AppointmentType operation, string comment)
+		  {
             _id = id;
             _patient = patient;
             _doctor = doctor;
             _premise = premise;
             _beginning = beginning;
-            _type = type;
+            _type = operation;
             _duration = duration;
-            _comment = "";
+            _comment = comment;
         }
 
 
-        public String Duration
+        public int Duration
         {
             get { return _duration; }
             set { _duration = value; }
         }
 
-        public String Type
+        public AppointmentType Type
         {
             get { return _type; }
             set { _type = value; }
         }
 
-        public String Beginning
+        public DateTime Beginning
         {
             get { return _beginning; }
             set { _beginning = value; }
         }
 
-        public String Doctor
+        public Person Doctor
         {
             get { return _doctor; }
             set { _doctor = value; }
         }
 
 
-        public String Patient
+        public Person Patient
         {
             get { return _patient; }
             set { _patient = value; }
         }
 
-        public String Premise
+        public Premise Premise
         {
             get { return _premise; }
             set { _premise = value; }
         }
 
 
-        public String Id
+        public int Id
         {
             get { return _id; }
             set { _id = value; }
@@ -97,7 +99,7 @@ namespace HealthCareInfromationSystem
             set { _comment = value; }
         }
 
-        internal static Appointment Parse(DataGridViewRow row)
+        /**internal static Appointment Parse(DataGridViewRow row)
         {
             String id = row.Cells["ID"].Value.ToString();
             String doctor = row.Cells["doctorId"].Value.ToString();
@@ -109,9 +111,28 @@ namespace HealthCareInfromationSystem
             String comment = row.Cells["comment"].Value.ToString();
             return new Appointment(id, patient, doctor, premise, beginning, type, duration);
 
+        }**/
+
+        public static Appointment Parse(OleDbDataReader reader)
+        {
+
+            int id = int.Parse(reader[0].ToString());
+            Person doctor = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + reader[1].ToString() + "\"");
+            Person patient = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + reader[2].ToString() + "\"");
+            Premise premise = PremiseController.LoadOnePremise(Constants.connectionString,
+                            "select * from premises where premises_id=\"" + reader[3].ToString() + "\"");
+            DateTime beginning = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
+            int duration = int.Parse(reader[5].ToString());
+            Enum.TryParse(reader[6].ToString(), out AppointmentType type);
+            string comment = reader[7].ToString();
+            Console.WriteLine(comment);
+            return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
         }
 
 
 
     }
+
 }
