@@ -31,7 +31,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void RequestsForChangeAndCancellationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            AppointmentRequestForm appointmentRequestForm = new AppointmentRequestForm();
+            appointmentRequestForm.Show();
         }
     }
 }
