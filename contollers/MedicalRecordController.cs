@@ -54,5 +54,17 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static void DeleteByPatientId(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"delete from medical_record where patientId=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+
+            }
+        }
+
     }
 }

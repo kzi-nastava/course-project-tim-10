@@ -174,5 +174,19 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                 labelStatus.Text = "Status: Operation fail.";
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (selectedId != "")
+            {
+                if (PatientController.Delete(selectedId))
+                {
+                    ClearFields();
+                    labelStatus.Text = "Status: Operation succeeded.";
+                    DisplayTableData();
+                }
+
+            }
+        }
     }
 }
