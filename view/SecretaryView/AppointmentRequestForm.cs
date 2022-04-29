@@ -61,7 +61,17 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void BtnDecline_Click(object sender, EventArgs e)
         {
-
+            if (selectedId != "")
+            {
+                if (AppointmentRequestController.DeclineRequest(selectedId))
+                {
+                    labelStatus.Text = "Status: Operation succeeded.";
+                }
+                else
+                {
+                    labelStatus.Text = "Status: Operation fail.";
+                }
+            }
         }
     }
 }

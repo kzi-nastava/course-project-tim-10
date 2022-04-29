@@ -53,6 +53,18 @@ namespace HealthCareInfromationSystem.contollers
             AppointmentController.DeleteFromBase(request.Appointment.Id.ToString());
         }
 
+        public static bool DeclineRequest(string id)
+        {
+            try
+            {
+                ChangeRequestState(id, "declined");
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
 
         private static void ChangeRequestState(string requestId, string state)
         {
