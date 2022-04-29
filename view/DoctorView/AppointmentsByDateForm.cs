@@ -55,8 +55,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
 				MedicalRecord medical = MedicalRecordController.LoadMedical(Constants.connectionString,
 				"select * from medical_record where patientId=\"" + patientId + "\"");
-				//MedicalRecordForm medicalRecordWindow = new MedicalRecordForm(medical);
-				//medicalRecordWindow.Show();
+				SingleMedicalRecordForm medicalRecordForm = new SingleMedicalRecordForm(medical);
+				medicalRecordForm.Show();
 			}
 			else
 			{

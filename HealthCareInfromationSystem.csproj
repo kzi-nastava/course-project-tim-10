@@ -98,6 +98,12 @@
     <Compile Include="view\DoctorView\EdditAppointmentForm.Designer.cs">
       <DependentUpon>EdditAppointmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.Designer.cs">
+      <DependentUpon>SingleMedicalRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
