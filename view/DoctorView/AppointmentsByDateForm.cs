@@ -66,7 +66,20 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void AmnesisBtnClick(object sender, EventArgs e)
 		{
-			
+			int selectedRowCount =
+			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			if (selectedRowCount == 1)
+			{
+				Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString,
+				"select * from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
+
+				AnamnesisInputForm anamnesisInputForm = new AnamnesisInputForm(appointment);
+				anamnesisInputForm.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select ONLY ONE row for inputing amnesis.", "Error");
+			}
 		}
 
 		private void CancelClick(object sender, EventArgs e)
