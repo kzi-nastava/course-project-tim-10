@@ -1,7 +1,7 @@
 ﻿
 namespace HealthCareInfromationSystem.view.DoctorView
 {
-	partial class EdditAppointmentForm
+	partial class EditAppointmentForm
 	{
 		/// <summary>
 		/// Required designer variable.

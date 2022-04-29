@@ -40,7 +40,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (selectedRowCount == 1)
 			{
 
-				EdditAppointmentForm edditAppointmentForm = new EdditAppointmentForm(GetSelectedAppointmentId());
+				EditAppointmentForm edditAppointmentForm = new EditAppointmentForm(GetSelectedAppointmentId());
 				edditAppointmentForm.Show();
 			}
 			else
