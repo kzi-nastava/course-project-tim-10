@@ -29,5 +29,17 @@ namespace HealthCareInfromationSystem.contollers
                 return null;
             }
         }
-    }
+
+		internal static void EdditInBase(int id, string height, string weight, string bloodType, string disease, string alergie)
+		{
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update medical_record set height=\"{height}\", weight=\"{weight}\", " +
+                    $"bloodType=\"{bloodType}\", disease=\"{disease}\", alergies=\"{alergie}\" where id=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+	}
 }

@@ -23,6 +23,13 @@ namespace HealthCareInfromationSystem.models.entity
 		string disease;
 		string alergies;
 
+		public int Id { get => id; set => id = value; }
+		public double Height { get => height; set => height = value; }
+		public double Weight { get => weight; set => weight = value; }
+		public BloodType BloodType { get => bloodType; set => bloodType = value; }
+		public string Disease { get => disease; set => disease = value; }
+		public string Alergies { get => alergies; set => alergies = value; }
+
 		public MedicalRecord()
 		{
 		}
@@ -38,37 +45,6 @@ namespace HealthCareInfromationSystem.models.entity
 			this.alergies = alergies;
 		}
 
-		public int GetId()
-		{
-			return id;
-		}
-
-		public double GetHeight()
-		{
-			return height;
-		}
-
-
-
-		public double GetWeight()
-		{
-			return weight;
-		}
-
-		public string GetDisease()
-		{
-			return disease;
-		}
-
-		public string GetAlergies()
-		{
-			return alergies;
-		}
-
-		public BloodType GetBloodType()
-		{
-			return bloodType;
-		}
 
 		internal static MedicalRecord Parse(OleDbDataReader reader)
 		{
