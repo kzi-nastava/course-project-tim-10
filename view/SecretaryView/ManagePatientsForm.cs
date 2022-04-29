@@ -86,7 +86,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             && this.tbName.Text != ""
             && this.tbLastName.Text != ""
             && this.tbUsername.Text != ""
-            && this.label4.Text != "";
+            && this.tbPassword.Text != "";
         }
 
         private void ClearFields()
@@ -96,7 +96,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.tbName.Text = "";
             this.tbLastName.Text = "";
             this.tbUsername.Text = "";
-            this.label4.Text = "";
+            this.tbPassword.Text = "";
             this.cbBlocked.Checked = false;
             labelStatus.Text = "";
         }
@@ -132,6 +132,40 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (PatientController.AddNew(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUsername.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
             {
                 ClearFields();
+                labelStatus.Text = "Status: Operation succeeded.";
+                DisplayTableData();
+            }
+            else
+            {
+                labelStatus.Text = "Status: Operation fail.";
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (!CheckIfFilledFields())
+            {
+                labelStatus.Text = "Status: Incomplete fields.";
+                return;
+            }
+            if (tbId.Text != selectedId && PatientController.CheckIfExistsById(this.tbId.Text))
+            {
+                labelStatus.Text = "Status: Patient exists under assigned Id.";
+                return;
+            }
+            if (tbUsername.Text != selectedUsername && PatientController.CheckIfExistsByUsername(this.tbUsername.Text))
+            {
+                labelStatus.Text = "Status: Patient exists under assigned Username.";
+                return;
+            }
+
+            int blocker = 0;
+            if (this.cbBlocked.Checked)
+            {
+                blocker = 1;
+            }
+            if (PatientController.Edit(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUsername.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            {
                 labelStatus.Text = "Status: Operation succeeded.";
                 DisplayTableData();
             }

@@ -48,6 +48,19 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static bool Edit(string id, string name, string lastName, string username, string password, string blocked, int blocker)
+        {
+            try
+            {
+                UpdatePatient(id, name, lastName, username, password, blocked, blocker);
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
+
 
         // Working with database
 
@@ -59,6 +72,28 @@ namespace HealthCareInfromationSystem.contollers
                 string query = $"insert into users values (\"{id}\", \"{name}\", \"{lastName}\", \"patient\", \"{username}\", \"{password}\", \"{blocked}\", {blocker})";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
+            }
+        }
+
+        public static void UpdatePatient(string id, string name, string lastName, string username, string password, string blocked, int blocker)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand();
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update users set name=@name, last_name=@lastName, username=@userName, [password]=@password, blocked=@blocked, blocker=@blocker where id=@id";
+                command.Parameters.AddWithValue("@name", name);
+                command.Parameters.AddWithValue("@lastName", lastName);
+                command.Parameters.AddWithValue("@userName", username);
+                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@blocked", blocked);
+                command.Parameters.AddWithValue("@blocker", blocker.ToString());
+                command.Parameters.AddWithValue("@id", id);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
             }
         }
 
