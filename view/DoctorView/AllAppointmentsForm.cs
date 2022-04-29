@@ -29,7 +29,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void AddButtonClick(object sender, EventArgs e)
 		{
-			
+			AddAppointmentForm addAppointmentForm = new AddAppointmentForm();
+			addAppointmentForm.Show();
 		}
 
 		private void EditButtonClick(object sender, EventArgs e)
