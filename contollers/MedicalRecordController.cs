@@ -41,5 +41,30 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-	}
+
+        public static void AddNewByPatientId(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"insert into medical_record (id, patientId) values (\"{id}\", \"{id}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+        public static void DeleteByPatientId(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"delete from medical_record where patientId=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+    }
 }
