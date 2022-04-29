@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.users;
 using System.Data.OleDb;
+using HealthCareInfromationSystem.contollers;
 
 namespace HealthCareInfromationSystem.models.entity
 {
@@ -111,10 +112,10 @@ namespace HealthCareInfromationSystem.models.entity
             return new Appointment(id, patient, doctor, premise, beginning, type, duration);
 
         }**/
-      
-      /**public static Appointment Parse(OleDbDataReader reader)
+
+        public static Appointment Parse(OleDbDataReader reader)
         {
-            
+
             int id = int.Parse(reader[0].ToString());
             Person doctor = PersonController.LoadOnePerson(Constants.connectionString,
                             "select * from users where id=\"" + reader[1].ToString() + "\"");
@@ -127,7 +128,7 @@ namespace HealthCareInfromationSystem.models.entity
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);
             string comment = reader[7].ToString();
             return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
-        }**/
+        }
 
 
 
