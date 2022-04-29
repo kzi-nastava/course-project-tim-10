@@ -35,7 +35,18 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void EditButtonClick(object sender, EventArgs e)
 		{
-			
+			int selectedRowCount =
+			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			if (selectedRowCount == 1)
+			{
+
+				EdditAppointmentForm edditAppointmentForm = new EdditAppointmentForm(GetSelectedAppointmentId());
+				edditAppointmentForm.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select ONLY ONE row for editing.", "Error");
+			}
 		}
 
 		private void DeleteButtonClick(object sender, EventArgs e)

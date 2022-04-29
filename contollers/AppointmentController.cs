@@ -44,6 +44,26 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static Appointment LoadOneAppointment(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                Appointment appointment = null;
+
+                while (reader.Read())
+                {
+                    appointment = Appointment.Parse(reader);
+                }
+                reader.Close();
+                return appointment;
+            }
+        }
+
         /*
 	    * Checks if any apointments exist at this time
 
