@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
+    <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\PersonController.cs" />
     <Compile Include="contollers\PremiseController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
@@ -79,6 +80,12 @@
     <Compile Include="view\DoctorView\AllAppointmentsForm.Designer.cs">
       <DependentUpon>AllAppointmentsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AppointmentsByDateForm.Designer.cs">
+      <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\DoctorView\DoctorMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +97,12 @@
     </Compile>
     <Compile Include="view\DoctorView\EdditAppointmentForm.Designer.cs">
       <DependentUpon>EdditAppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\SingleMedicalRecordForm.Designer.cs">
+      <DependentUpon>SingleMedicalRecordForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
