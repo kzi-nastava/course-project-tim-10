@@ -51,7 +51,24 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void DeleteButtonClick(object sender, EventArgs e)
 		{
-			
+			int selectedRowCount =
+			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			if (selectedRowCount == 1)
+			{
+
+				DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
+				if (dialogResult == DialogResult.Yes)
+				{
+					//Console.WriteLine(dataGridView1.SelectedRows[0].Cells[6].Value.ToString());
+					MessageBox.Show("Changes saved.", "Success");
+					AppointmentController.DeleteFromBase(GetSelectedAppointmentId());
+				}
+
+			}
+			else
+			{
+				MessageBox.Show("Please select ONLY ONE row for deliting.", "Error");
+			}
 		}
 
 		private void CancleButtonClick(object sender, EventArgs e)
