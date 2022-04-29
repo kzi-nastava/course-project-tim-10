@@ -72,6 +72,26 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        internal static string GetPatientId(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+
+                while (reader.Read())
+                {
+                    return reader[0].ToString();
+                }
+                reader.Close();
+                return null;
+            }
+        }
+
         public static Appointment LoadOneAppointment(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
