@@ -41,5 +41,36 @@ namespace HealthCareInfromationSystem.contollers
                 return person;
             }
         }
+
+        /*
+	    * Creates dictionary used for filling in a combobox
+
+            Parameters:
+                    connectionString(string): name of the connection
+                    queryString(string): query for retrieving data
+
+            Returns:
+                    Dictionary where key = user id(firs value in query) and value = userd full name name(second value in query).
+	    * */
+        public static Dictionary<string, string> LoadPair(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                Dictionary<string, string> personPair = new Dictionary<string, string>();
+
+                while (reader.Read())
+                {
+                    personPair.Add(reader[0].ToString(), reader[1].ToString() + " " + reader[2].ToString());
+
+                }
+                reader.Close();
+                return personPair;
+            }
+        }
     }
 }
