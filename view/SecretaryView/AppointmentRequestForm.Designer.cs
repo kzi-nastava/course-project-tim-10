@@ -30,8 +30,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void InitializeComponent()
         {
             this.dataGridViewRequests = new System.Windows.Forms.DataGridView();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.btnDecline = new System.Windows.Forms.Button();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPatientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPatientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +38,9 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnNewTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnNewDoctor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnReqTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnDecline = new System.Windows.Forms.Button();
+            this.labelStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequests)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,26 +62,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewRequests.Size = new System.Drawing.Size(843, 315);
             this.dataGridViewRequests.TabIndex = 0;
             this.dataGridViewRequests.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewRequests_RowHeaderMouseClick);
-            // 
-            // btnAccept
-            // 
-            this.btnAccept.Location = new System.Drawing.Point(303, 367);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(89, 34);
-            this.btnAccept.TabIndex = 1;
-            this.btnAccept.Text = "Accept";
-            this.btnAccept.UseVisualStyleBackColor = true;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
-            // 
-            // btnDecline
-            // 
-            this.btnDecline.Location = new System.Drawing.Point(470, 367);
-            this.btnDecline.Name = "btnDecline";
-            this.btnDecline.Size = new System.Drawing.Size(92, 35);
-            this.btnDecline.TabIndex = 2;
-            this.btnDecline.Text = "Decline";
-            this.btnDecline.UseVisualStyleBackColor = true;
-            this.btnDecline.Click += new System.EventHandler(this.btnDecline_Click);
             // 
             // ColumnId
             // 
@@ -130,11 +111,41 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnReqTime.Name = "ColumnReqTime";
             this.ColumnReqTime.ReadOnly = true;
             // 
+            // btnAccept
+            // 
+            this.btnAccept.Location = new System.Drawing.Point(129, 367);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(89, 34);
+            this.btnAccept.TabIndex = 1;
+            this.btnAccept.Text = "Accept";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
+            // 
+            // btnDecline
+            // 
+            this.btnDecline.Location = new System.Drawing.Point(286, 367);
+            this.btnDecline.Name = "btnDecline";
+            this.btnDecline.Size = new System.Drawing.Size(92, 35);
+            this.btnDecline.TabIndex = 2;
+            this.btnDecline.Text = "Decline";
+            this.btnDecline.UseVisualStyleBackColor = true;
+            this.btnDecline.Click += new System.EventHandler(this.BtnDecline_Click);
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(435, 389);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(43, 13);
+            this.labelStatus.TabIndex = 3;
+            this.labelStatus.Text = "Status: ";
+            // 
             // AppointmentRequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(865, 450);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.btnDecline);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.dataGridViewRequests);
@@ -142,6 +153,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.Text = "AppointmentRequestForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRequests)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -158,5 +170,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNewTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNewDoctor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnReqTime;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
