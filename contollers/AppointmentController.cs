@@ -192,7 +192,7 @@ namespace HealthCareInfromationSystem.contollers
 
         }
 
-        public static void EdditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
+        public static void EditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -204,7 +204,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void EdditAppointmentComment(string appointmentId, string comment)
+        public static void EditAppointmentComment(string appointmentId, string comment)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

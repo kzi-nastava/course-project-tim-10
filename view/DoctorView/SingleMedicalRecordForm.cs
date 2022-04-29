@@ -57,7 +57,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalRecordController.EdditInBase(MedicalRecord.Id, height, weight, bloodType, disease, alergie);
+				MedicalRecordController.EditInBase(MedicalRecord.Id, height, weight, bloodType, disease, alergie);
 			}
 			
 		}

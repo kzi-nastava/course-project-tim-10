@@ -14,17 +14,17 @@ using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
-	public partial class EdditAppointmentForm : Form
+	public partial class EditAppointmentForm : Form
 	{
 		public string appointmentId { get; }
 
-		public EdditAppointmentForm()
+		public EditAppointmentForm()
 		{
 			InitializeComponent();
 		}
 
 
-		public EdditAppointmentForm(string appointmentId)
+		public EditAppointmentForm(string appointmentId)
 		{
 			InitializeComponent();
 			this.appointmentId = appointmentId;
@@ -113,7 +113,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				AppointmentController.EdditInBase(appointmentId, patientId, premiseId, LoggedInUser.loggedIn.Id, beginning, duration, type);
+				AppointmentController.EditInBase(appointmentId, patientId, premiseId, LoggedInUser.loggedIn.Id, beginning, duration, type);
 			}
 		}
 

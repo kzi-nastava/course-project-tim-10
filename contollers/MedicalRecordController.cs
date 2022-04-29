@@ -30,7 +30,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void EdditInBase(int id, string height, string weight, string bloodType, string disease, string alergie)
+		internal static void EditInBase(int id, string height, string weight, string bloodType, string disease, string alergie)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

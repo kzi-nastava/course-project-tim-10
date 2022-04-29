@@ -37,7 +37,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			{
 				string anamnesis = anamnesisTextBox.Text;
 				Appointment.Comment = anamnesis;
-				AppointmentController.EdditAppointmentComment(Appointment.Id.ToString(), anamnesis);
+				AppointmentController.EditAppointmentComment(Appointment.Id.ToString(), anamnesis);
 				MessageBox.Show("Changes saved.", "Success");
 			}
 		}
