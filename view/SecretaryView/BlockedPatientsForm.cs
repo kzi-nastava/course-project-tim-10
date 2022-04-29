@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.contollers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,8 +43,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
-        // Displays data from selected patient in fields
-        private void dataGridViewBlockedPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        // Previews selected patient in fields
+        private void DataGridViewBlockedPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             selectedId = dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
             tbId.Text = selectedId;
@@ -52,12 +53,25 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 tbBlocker.Text = "Secretary";
             }
-            else
+            else if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[4].Value.ToString() == "2")
             {
                 tbBlocker.Text = "System";
             }
         }
 
-
+        private void BtnUnblock_Click(object sender, EventArgs e)
+        {
+            if (selectedId != "")
+            {
+                if (PatientController.Unblock(selectedId)) {
+                    DisplayTableData();
+                    labelStatus.Text = "Status: Operation succeeded.";
+                } 
+                else
+                {
+                    labelStatus.Text = "Status: Operation fail.";
+                }
+            }
+        }
     }
 }

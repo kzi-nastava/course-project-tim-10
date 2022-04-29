@@ -78,6 +78,31 @@ namespace HealthCareInfromationSystem.contollers
                 return false;
             }
         }
+
+        public static bool Unblock(string id)
+        {
+            try
+            {
+                using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+                {
+
+                    OleDbCommand command = new OleDbCommand();
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "update users set  blocked=@blocked, blocker=@blocker where id=@id";
+                    command.Parameters.AddWithValue("@blocked", "false");
+                    command.Parameters.AddWithValue("@blocker", "0");
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Connection = connection;
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
         
 
         // Working with database

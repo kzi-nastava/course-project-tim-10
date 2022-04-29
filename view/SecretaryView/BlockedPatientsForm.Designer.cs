@@ -47,7 +47,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewBlockedPatients.ReadOnly = true;
             this.dataGridViewBlockedPatients.Size = new System.Drawing.Size(541, 266);
             this.dataGridViewBlockedPatients.TabIndex = 0;
-            this.dataGridViewBlockedPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewBlockedPatients_RowHeaderMouseClick);
+            this.dataGridViewBlockedPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewBlockedPatients_RowHeaderMouseClick);
             // 
             // label1
             // 
@@ -89,6 +89,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnUnblock.TabIndex = 5;
             this.btnUnblock.Text = "Unblock";
             this.btnUnblock.UseVisualStyleBackColor = true;
+            this.btnUnblock.Click += new System.EventHandler(this.BtnUnblock_Click);
             // 
             // labelStatus
             // 
