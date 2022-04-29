@@ -11,6 +11,8 @@ using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.view.ManagerView;
+using HealthCareInfromationSystem.view.DoctorView;
+
 
 namespace HealthCareInfromationSystem.view
 {
@@ -47,8 +49,8 @@ namespace HealthCareInfromationSystem.view
 			else if (loggedUser.Role == Person.Roles.doctor)
 			{
 				errorLabel.Text = "Welcome doctor";
-				//DoctorMainForm doctorMainForm = new DoctorMainForm();
-				//doctorMainForm.Show();
+				DoctorMainForm doctorMainForm = new DoctorMainForm();
+				doctorMainForm.Show();
 
 			}
 			else if (loggedUser.Role == Person.Roles.patient) { errorLabel.Text = "Welcome patient"; }
