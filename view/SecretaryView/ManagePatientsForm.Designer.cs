@@ -54,9 +54,10 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewPatients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPatients.Location = new System.Drawing.Point(13, 13);
             this.dataGridViewPatients.Name = "dataGridViewPatients";
+            this.dataGridViewPatients.ReadOnly = true;
             this.dataGridViewPatients.Size = new System.Drawing.Size(688, 232);
             this.dataGridViewPatients.TabIndex = 0;
-            this.dataGridViewPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewPatients_RowHeaderMouseClick);
+            this.dataGridViewPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewPatients_RowHeaderMouseClick);
             // 
             // label1
             // 
@@ -156,7 +157,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnAddNew.TabIndex = 12;
             this.btnAddNew.Text = "Add new";
             this.btnAddNew.UseVisualStyleBackColor = true;
-            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
+            this.btnAddNew.Click += new System.EventHandler(this.BtnAddNew_Click);
             // 
             // btnEdit
             // 
@@ -166,7 +167,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnEdit.TabIndex = 13;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnDelete
             // 
@@ -176,7 +177,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // labelStatus
             // 
