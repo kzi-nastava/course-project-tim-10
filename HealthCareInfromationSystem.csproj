@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -140,6 +140,18 @@
     <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\ManagePatientsForm.Designer.cs">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\SecretaryMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\SecretaryMainForm.Designer.cs">
+      <DependentUpon>SecretaryMainForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -160,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
+      <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\SecretaryMainForm.resx">
+      <DependentUpon>SecretaryMainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="contollers\.gitkeep" />
     <None Include="models\entity\.gitkeep" />

@@ -12,7 +12,7 @@ using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.view.ManagerView;
 using HealthCareInfromationSystem.view.DoctorView;
-
+using HealthCareInfromationSystem.view.SecretaryView;
 
 namespace HealthCareInfromationSystem.view
 {
@@ -44,8 +44,12 @@ namespace HealthCareInfromationSystem.view
 			LoggedInUser.loggedIn = loggedUser;
 
 			//user found, opening windows based on user type
-			if (loggedUser.Role == Person.Roles.secretary) { errorLabel.Text = "Welcome secretary"; }
-
+			if (loggedUser.Role == Person.Roles.secretary) 
+			{ 
+				errorLabel.Text = "Welcome secretary";
+				SecretaryMainForm secretaryMainForm = new SecretaryMainForm();
+				secretaryMainForm.Show();
+			}
 			else if (loggedUser.Role == Person.Roles.doctor)
 			{
 				errorLabel.Text = "Welcome doctor";

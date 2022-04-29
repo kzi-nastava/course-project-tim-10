@@ -19,7 +19,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void ManagePatientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ManagePatientsForm managePatientsForm = new ManagePatientsForm();
+            managePatientsForm.Show();
         }
 
         private void BlockedPatientsToolStripMenuItem_Click(object sender, EventArgs e)
