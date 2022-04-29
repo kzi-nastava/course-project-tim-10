@@ -156,6 +156,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnAddNew.TabIndex = 12;
             this.btnAddNew.Text = "Add new";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // btnEdit
             // 
@@ -178,7 +179,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(524, 456);
+            this.labelStatus.Location = new System.Drawing.Point(476, 460);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(43, 13);
             this.labelStatus.TabIndex = 15;
@@ -186,7 +187,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(527, 485);
+            this.btnClear.Location = new System.Drawing.Point(479, 485);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 16;

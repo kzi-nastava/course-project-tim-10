@@ -41,5 +41,18 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-	}
+
+        public static void AddNewByPatientId(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"insert into medical_record (id, patientId) values (\"{id}\", \"{id}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+    }
 }

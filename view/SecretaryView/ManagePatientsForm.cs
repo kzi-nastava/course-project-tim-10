@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.contollers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -103,6 +104,41 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void BtnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            if (!CheckIfFilledFields())
+            {
+                labelStatus.Text = "Status: Incomplete fields.";
+                return;
+            }
+            if (PatientController.CheckIfExistsById(this.tbId.Text))
+            {
+                labelStatus.Text = "Status: User exists under assigned Id.";
+                return;
+            }
+            if (PatientController.CheckIfExistsByUsername(this.tbUsername.Text))
+            {
+                labelStatus.Text = "Status: User exists under assigned Username.";
+                return;
+            }
+
+            int blocker = 0;
+            if (this.cbBlocked.Checked)
+            {
+                blocker = 1;
+            }
+            if (PatientController.AddNew(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUsername.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            {
+                ClearFields();
+                labelStatus.Text = "Status: Operation succeeded.";
+                DisplayTableData();
+            }
+            else
+            {
+                labelStatus.Text = "Status: Operation fail.";
+            }
         }
     }
 }
