@@ -20,5 +20,26 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
+
+        public static List<AppointmentRequest> LoadAppointmentRequests(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<AppointmentRequest> appointmentRequests = new List<AppointmentRequest>();
+
+                while (reader.Read())
+                {
+                    AppointmentRequest appointmentRequest = AppointmentRequest.Parse(reader);
+                    appointmentRequests.Add(appointmentRequest);
+                }
+                reader.Close();
+                return appointmentRequests;
+            }
+        }
     }
 }
