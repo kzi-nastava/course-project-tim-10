@@ -1,6 +1,7 @@
 ﻿using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -40,7 +41,7 @@ namespace HealthCareInfromationSystem
             _type = type;
             _newDoctorId = newDoctorId;
             _newBeginning = newBeginning;
-            //_reqDateTime = MyConverter.ToString(DateTime.Now);
+            _reqDateTime = MyConverter.ToString(DateTime.Now);
             _state = state;
             _secretaryId = "";
         }

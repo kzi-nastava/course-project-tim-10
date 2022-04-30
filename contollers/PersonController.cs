@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 //using System.Collections.Generic;
 using System.Data.OleDb;
 using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.contollers
 {
@@ -21,6 +22,13 @@ namespace HealthCareInfromationSystem.contollers
             Returns:
                     Person or null if the person is not found.
 	    * */
+
+        public static Person SearchPerson(string id)
+        {
+            return LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + id + "\"");
+        }
+
         public static Person LoadOnePerson(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))

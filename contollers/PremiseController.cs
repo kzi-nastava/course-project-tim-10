@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -149,6 +150,11 @@ namespace HealthCareInfromationSystem.contollers
                 reader.Close();
                 return premise;
             }
+        }
+
+        public static Premise SearchPremise(string id)
+        {
+            return LoadOnePremise(Constants.connectionString, $"select * from premises where premises_id = \"{id}\"");
         }
     }
 }
