@@ -57,7 +57,10 @@ namespace HealthCareInfromationSystem.view
 				doctorMainForm.Show();
 
 			}
-			else if (loggedUser.Role == Person.Roles.patient) { errorLabel.Text = "Welcome patient"; }
+			else if (loggedUser.Role == Person.Roles.patient) 
+			{
+				PatientLogin();
+			}
 			else 
 			{
 				ManagerMainForm managerMainForm = new ManagerMainForm();
@@ -75,6 +78,17 @@ namespace HealthCareInfromationSystem.view
 		private void LogInForm_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void PatientLogin()
+        {
+			if (PatientController.IsPossibleLogin())
+			{
+				PatientMainForm patientMainForm = new PatientMainForm();
+				patientMainForm.Show();
+			}
+			else
+				MessageBox.Show("You cannot log in.");
 		}
 	}
 }

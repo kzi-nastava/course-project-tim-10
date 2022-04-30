@@ -69,8 +69,10 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\LoggedInUser.cs" />
+    <Compile Include="utils\MyConverter.cs" />
     <Compile Include="view\DoctorView\AddAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +145,18 @@
     <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PatientView\AllAppointmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\AllAppointmentsForm.Designer.cs" />
+    <Compile Include="view\PatientView\AppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\AppointmentForm.Designer.cs" />
+    <Compile Include="view\PatientView\PatientMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\PatientMainForm.Designer.cs" />
     <Compile Include="view\SecretaryView\AppointmentRequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +202,9 @@
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
+    <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
+    <EmbeddedResource Include="view\PatientView\PatientMainForm.resx" />
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
     </EmbeddedResource>

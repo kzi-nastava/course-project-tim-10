@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.contollers
 {

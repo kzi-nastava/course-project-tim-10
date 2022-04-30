@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.users;
 using System.Data.OleDb;
 using HealthCareInfromationSystem.contollers;
+using System.Windows.Forms;
+using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.models.entity
 {
@@ -35,7 +37,7 @@ namespace HealthCareInfromationSystem.models.entity
         }
 
         public Appointment(int id, Person doctor, Person patient, Premise premise,
-			DateTime beginning, int duration, AppointmentType operation, string comment)
+			DateTime beginning, int duration, AppointmentType operation, string comment="")
 		  {
             _id = id;
             _patient = patient;
@@ -127,6 +129,23 @@ namespace HealthCareInfromationSystem.models.entity
             int duration = int.Parse(reader[5].ToString());
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);
             string comment = reader[7].ToString();
+            Console.WriteLine(comment);
+            return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
+        }
+
+        public static Appointment Parse(DataGridViewRow row)
+        {
+            int id = int.Parse(row.Cells["ID"].Value.ToString());
+            Person doctor = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + row.Cells["doctorId"].Value.ToString() + "\"");
+            Person patient = PersonController.LoadOnePerson(Constants.connectionString,
+                            "select * from users where id=\"" + row.Cells["patientId"].Value.ToString() + "\"");
+            Premise premise = PremiseController.LoadOnePremise(Constants.connectionString,
+                            "select * from premises where premises_id=\"" + row.Cells["premiseId"].Value.ToString() + "\"");
+            DateTime beginning = DateTime.ParseExact(row.Cells["beginning"].Value.ToString(), "dd.MM.yyyy. HH:mm", null);
+            int duration = int.Parse(row.Cells["duration"].Value.ToString());
+            Enum.TryParse(row.Cells["type"].Value.ToString(), out AppointmentType type);
+            string comment = row.Cells["comment"].Value.ToString();
             Console.WriteLine(comment);
             return new Appointment(id, doctor, patient, premise, beginning, duration, type, comment);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.utils;
+using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
@@ -148,6 +149,56 @@ namespace HealthCareInfromationSystem.contollers
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
+        }
+
+        internal static bool IsPossibleLogin()
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                return CorrectUpdates(connection) && CorrectCreation(connection);
+            }
+        }
+
+        private static bool CorrectCreation(OleDbConnection connection)
+        {
+            connection.Open();
+            string patientId = LoggedInUser.loggedIn.Id.ToString();
+            string query = $"select * from appointments where patientId = \"{patientId}\"";
+            OleDbCommand command = new OleDbCommand(query, connection);
+            OleDbDataReader reader = command.ExecuteReader();
+
+            int appointmentCounter = 0;
+            while (reader.Read())
+            {
+                DateTime appDate = MyConverter.ToDateTime(reader[4].ToString());
+                DateTime now = DateTime.Now;
+                if ((appDate.AddDays(30).CompareTo(now) > 0) && (++appointmentCounter >= 8))
+                    return false;
+            }
+            connection.Close();
+            return true;
+        }
+
+        private static bool CorrectUpdates(OleDbConnection connection)
+        {
+            connection.Open();
+            string patientId = LoggedInUser.loggedIn.Id.ToString();
+            string query = $"select * from appointment_request where patient_id = \"{patientId}\"";
+            OleDbCommand command = new OleDbCommand(query, connection);
+            OleDbDataReader reader = command.ExecuteReader();
+
+            int requestCounter = 0;
+            while (reader.Read())
+            {
+                if (reader[0].ToString().Equals(""))
+                    continue;
+                DateTime reqDate = MyConverter.ToDateTime(reader[6].ToString());
+                DateTime now = DateTime.Now;
+                if ((reqDate.AddDays(30).CompareTo(now) > 0) && (++requestCounter >= 5))
+                    return false;
+            }
+            connection.Close();
+            return true;
         }
 
     }
