@@ -64,7 +64,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 selectedReferralLetterId = dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Console.WriteLine(selectedReferralLetterId);
             }
         }
 
@@ -73,9 +72,13 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (dataGridViewPatients.Rows[e.RowIndex] != null)
             {
                 selectedPatientId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Console.WriteLine(selectedPatientId);
                 DisplayReferralsTableData(selectedPatientId);
             }
+        }
+
+        private void BtnAssignTime_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

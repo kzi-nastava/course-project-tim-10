@@ -93,6 +93,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnAssignTime.TabIndex = 4;
             this.btnAssignTime.Text = "Assign time";
             this.btnAssignTime.UseVisualStyleBackColor = true;
+            this.btnAssignTime.Click += new System.EventHandler(this.BtnAssignTime_Click);
             // 
             // ColumnId
             // 
