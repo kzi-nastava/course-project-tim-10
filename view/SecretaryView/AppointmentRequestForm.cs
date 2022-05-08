@@ -30,7 +30,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
-        private void dataGridViewRequests_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DataGridViewRequests_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             selectedId = dataGridViewRequests.Rows[e.RowIndex].Cells[0].Value.ToString();
             requestType = dataGridViewRequests.Rows[e.RowIndex].Cells[4].Value.ToString();

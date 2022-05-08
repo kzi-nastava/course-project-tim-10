@@ -169,6 +169,12 @@
     <Compile Include="view\SecretaryView\BlockedPatientsForm.Designer.cs">
       <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\BookingByReferralForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\BookingByReferralForm.Designer.cs">
+      <DependentUpon>BookingByReferralForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\BlockedPatientsForm.resx">
       <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\BookingByReferralForm.resx">
+      <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
