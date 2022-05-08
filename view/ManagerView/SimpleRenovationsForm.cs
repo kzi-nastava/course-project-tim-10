@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +17,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class SimpleRenovationsForm : Form
     {
+        private PremiseController premiseController = new PremiseController();
+
         public SimpleRenovationsForm()
         {
             InitializeComponent();
@@ -27,6 +31,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             label3.Text = "Start date";
             label4.Text = "End date";
             button1.Text = "Add renovation";
+        }
+
+        private bool CheckIfTextBoxesAreEmpty()
+        {
+            return String.IsNullOrWhiteSpace(textBox1.Text) ||
+                    String.IsNullOrWhiteSpace(textBox2.Text);
         }
 
         private void FillRenovationTable()
@@ -79,6 +89,23 @@ namespace HealthCareInfromationSystem.view.ManagerView
             String premiseName = currentRow.Cells[1].Value.ToString();
 
             textBox2.Text = $"{premiseId} - {premiseName}";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //if (CheckIfTextBoxesAreEmpty()) return;
+
+            String renovationId = textBox1.Text;
+            String premiseId = textBox2.Text.Split('-')[0].Trim();
+            String startDate = textBox3.Text;
+            String endDate = textBox4.Text;
+
+            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
+            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+
+            if (premiseController.CheckIfPremiseIsOccupied(premiseId, startDate, endDate))
+                MessageBox.Show("Premise is occupied in that time interval.");
+            else MessageBox.Show("moze");
         }
     }
 }
