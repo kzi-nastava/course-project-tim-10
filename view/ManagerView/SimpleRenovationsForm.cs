@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
     public partial class SimpleRenovationsForm : Form
     {
         private PremiseController premiseController = new PremiseController();
+        private RenovationController RenovationController = new RenovationController();
 
         public SimpleRenovationsForm()
         {
@@ -93,19 +95,31 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //if (CheckIfTextBoxesAreEmpty()) return;
+            if (CheckIfTextBoxesAreEmpty()) return;
 
             String renovationId = textBox1.Text;
             String premiseId = textBox2.Text.Split('-')[0].Trim();
             String startDate = textBox3.Text;
             String endDate = textBox4.Text;
 
+            if (RenovationController.CheckIfSimpleRenovationExistsById(renovationId)) return;
+
             String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
             if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
 
             if (premiseController.CheckIfPremiseIsOccupied(premiseId, startDate, endDate))
+            {
                 MessageBox.Show("Premise is occupied in that time interval.");
-            else MessageBox.Show("moze");
+                return;
+            }
+
+            SimpleRenovation renovation = new SimpleRenovation(renovationId, premiseId, startDate, endDate);
+            RenovationController.SaveSimpleRenovation(renovation);
+
+            FillRenovationTable();
+            textBox1.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
         }
     }
 }
