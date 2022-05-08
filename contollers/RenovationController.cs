@@ -8,5 +8,9 @@ namespace HealthCareInfromationSystem.contollers
 {
     class RenovationController
     {
+        public void SaveSimpleRenovation()
+        {
+
+        }
     }
 }
