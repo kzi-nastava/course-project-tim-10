@@ -145,6 +145,12 @@
     <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.Designer.cs">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\SimpleRenovationsForm.resx">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
     <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
