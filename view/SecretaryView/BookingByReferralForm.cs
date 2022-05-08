@@ -1,4 +1,6 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 {
     public partial class BookingByReferralForm : Form
     {
+        private string selectedPatientId = "";
+        private string selectedReferralLetterId = "";
         public BookingByReferralForm()
         {
             InitializeComponent();
@@ -39,9 +43,39 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-                FillPatientsTable("select name, last_name as \'last name\', username from users where role=\"patient\" and blocked=\"false\"", connection);
+                FillPatientsTable("select id, name, last_name as \'last name\', username from users where role=\"patient\" and blocked=\"false\"", connection);
+            }
+        }
+        
+        private void DisplayReferralsTableData(string patientId)
+        {
+            string query = $"select * from referral_letter where patientId=\"{patientId}\" and used=\"false\"";
+            List<ReferralLetter> referralLetters = ReferralLetterController.LoadReferalLetters(Constants.connectionString, query);
+            foreach (ReferralLetter referralLetter in referralLetters)
+            {
+                if (referralLetter.Doctor == null) dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Specialisation);
+                else dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Doctor.FirstName + " " + referralLetter.Doctor.LastName);
+
             }
         }
 
+        private void DataGridViewReferrals_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value != null)
+            {
+                selectedReferralLetterId = dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Console.WriteLine(selectedReferralLetterId);
+            }
+        }
+
+        private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridViewPatients.Rows[e.RowIndex] != null)
+            {
+                selectedPatientId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Console.WriteLine(selectedPatientId);
+                DisplayReferralsTableData(selectedPatientId);
+            }
+        }
     }
 }

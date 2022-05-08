@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -19,6 +20,27 @@ namespace HealthCareInfromationSystem.contollers
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
 
+            }
+        }
+
+        public static List<ReferralLetter> LoadReferalLetters(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<ReferralLetter> referralLetters = new List<ReferralLetter>();
+
+                while (reader.Read())
+                {
+                    ReferralLetter referralLetter = ReferralLetter.Parse(reader);
+                    referralLetters.Add(referralLetter);
+                }
+                reader.Close();
+                return referralLetters;
             }
         }
     }

@@ -62,6 +62,7 @@
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Premise.cs" />
+    <Compile Include="models\entity\ReferralLetter.cs" />
     <Compile Include="models\users\Doctor.cs" />
     <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />

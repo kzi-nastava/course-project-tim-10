@@ -34,6 +34,9 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAssignTime = new System.Windows.Forms.Button();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCreator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReferrals)).BeginInit();
             this.SuspendLayout();
@@ -45,18 +48,24 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewPatients.Name = "dataGridViewPatients";
             this.dataGridViewPatients.RowHeadersWidth = 62;
             this.dataGridViewPatients.RowTemplate.Height = 28;
-            this.dataGridViewPatients.Size = new System.Drawing.Size(360, 383);
+            this.dataGridViewPatients.Size = new System.Drawing.Size(500, 495);
             this.dataGridViewPatients.TabIndex = 0;
+            this.dataGridViewPatients.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewPatients_RowHeaderMouseClick);
             // 
             // dataGridViewReferrals
             // 
             this.dataGridViewReferrals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReferrals.Location = new System.Drawing.Point(479, 55);
+            this.dataGridViewReferrals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnId,
+            this.ColumnDate,
+            this.ColumnCreator});
+            this.dataGridViewReferrals.Location = new System.Drawing.Point(628, 55);
             this.dataGridViewReferrals.Name = "dataGridViewReferrals";
             this.dataGridViewReferrals.RowHeadersWidth = 62;
             this.dataGridViewReferrals.RowTemplate.Height = 28;
-            this.dataGridViewReferrals.Size = new System.Drawing.Size(470, 274);
+            this.dataGridViewReferrals.Size = new System.Drawing.Size(618, 368);
             this.dataGridViewReferrals.TabIndex = 1;
+            this.dataGridViewReferrals.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewReferrals_RowHeaderMouseClick);
             // 
             // label1
             // 
@@ -70,7 +79,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(475, 29);
+            this.label2.Location = new System.Drawing.Point(624, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 20);
             this.label2.TabIndex = 3;
@@ -78,18 +87,39 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnAssignTime
             // 
-            this.btnAssignTime.Location = new System.Drawing.Point(651, 360);
+            this.btnAssignTime.Location = new System.Drawing.Point(895, 449);
             this.btnAssignTime.Name = "btnAssignTime";
             this.btnAssignTime.Size = new System.Drawing.Size(116, 41);
             this.btnAssignTime.TabIndex = 4;
             this.btnAssignTime.Text = "Assign time";
             this.btnAssignTime.UseVisualStyleBackColor = true;
             // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "ID";
+            this.ColumnId.MinimumWidth = 8;
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Width = 150;
+            // 
+            // ColumnDate
+            // 
+            this.ColumnDate.HeaderText = "Date Created";
+            this.ColumnDate.MinimumWidth = 8;
+            this.ColumnDate.Name = "ColumnDate";
+            this.ColumnDate.Width = 150;
+            // 
+            // ColumnCreator
+            // 
+            this.ColumnCreator.HeaderText = "Created by";
+            this.ColumnCreator.MinimumWidth = 8;
+            this.ColumnCreator.Name = "ColumnCreator";
+            this.ColumnCreator.Width = 150;
+            // 
             // BookingByReferralForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 541);
+            this.ClientSize = new System.Drawing.Size(1291, 614);
             this.Controls.Add(this.btnAssignTime);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -111,5 +141,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAssignTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCreator;
     }
 }
