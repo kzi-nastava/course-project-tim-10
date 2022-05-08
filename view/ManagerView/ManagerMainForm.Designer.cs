@@ -35,6 +35,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.searchAndFilterEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrangingEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.managingPremisesToolStripMenuItem,
             this.searchAndFilterEquipmentToolStripMenuItem,
-            this.arrangingEquipmentToolStripMenuItem});
+            this.arrangingEquipmentToolStripMenuItem,
+            this.simpleRenovationsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -88,6 +90,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.logoutToolStripMenuItem.Text = "Logout";
             // 
+            // simpleRenovationsToolStripMenuItem
+            // 
+            this.simpleRenovationsToolStripMenuItem.Name = "simpleRenovationsToolStripMenuItem";
+            this.simpleRenovationsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.simpleRenovationsToolStripMenuItem.Text = "Simple renovations";
+            this.simpleRenovationsToolStripMenuItem.Click += new System.EventHandler(this.simpleRenovationsToolStripMenuItem_Click);
+            // 
             // ManagerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -112,5 +121,6 @@ namespace HealthCareInfromationSystem.view.ManagerView
         private System.Windows.Forms.ToolStripMenuItem searchAndFilterEquipmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arrangingEquipmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simpleRenovationsToolStripMenuItem;
     }
 }

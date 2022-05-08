@@ -34,5 +34,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             ArrangingEquipmentForm arrangingEquipmentForm = new ArrangingEquipmentForm();
             arrangingEquipmentForm.Show();
         }
+
+        private void simpleRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SimpleRenovationsForm simpleRenovationsForm = new SimpleRenovationsForm();
+            simpleRenovationsForm.Show();
+        }
     }
 }
