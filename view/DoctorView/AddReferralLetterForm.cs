@@ -46,11 +46,18 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void SaveClick(object sender, EventArgs e)
 		{
+			string doctorId = doctorComboBox.SelectedValue.ToString();
+			//Console.WriteLine(premiseComboBox.SelectedValue.ToString());
+			string specialisation = specialisationComboBox.SelectedValue.ToString();
+			if (doctorId == "" && specialisation == "") {
+				MessageBox.Show("Both fields for doctor and specialisation can not be ampty", "Error");
+				return;
+			}
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				//ReferralLetterController.AddToBase();
+				ReferralLetterController.AddToBase(patientId, specialisation, doctorId);
 			}
 
 		}

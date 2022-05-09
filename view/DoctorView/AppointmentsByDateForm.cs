@@ -105,7 +105,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 			else
 			{
-				MessageBox.Show("Please select ONLY ONE row for inputing amnesis.", "Error");
+				MessageBox.Show("Please select ONLY ONE row for creating referral letter.", "Error");
 			}
 		}
 	}
