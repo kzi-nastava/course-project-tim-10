@@ -80,5 +80,44 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
+
+        public static ReferralLetter LoadOne(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                ReferralLetter referralLetter = null;
+
+                while (reader.Read())
+                {
+                    referralLetter = ReferralLetter.Parse(reader);
+                }
+                reader.Close();
+                return referralLetter;
+
+            }
+        }
+
+        public static void MarkUsed(ReferralLetter referralLetter)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                referralLetter.Used = true;
+                OleDbCommand command = new OleDbCommand();
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update referral_letter set used=@used where id=@id";
+                command.Parameters.AddWithValue("@used", "true");
+                command.Parameters.AddWithValue("@id", referralLetter.Id);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
+    }
 	}
 }

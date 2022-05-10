@@ -73,7 +73,25 @@ namespace HealthCareInfromationSystem.models.entity
             set { creator = value; }
         }
 
+        public void AssignDoctor(string beginning, string duration)
+        {
+            // Doctors who specialize in spec from referral letter
+            List<string> doctorIds = SpecialisationController.GetDoctorIds(Constants.connectionString, this.Specialisation);             
 
+            this.doctor = null;     // For avoiding copying doctor from previous input in form
+
+            foreach (string id in doctorIds)
+            {
+                if (AppointmentController.IsAvailable(Constants.connectionString,
+                    "select * from appointments where doctorId =\"" + id + "\"",
+                    beginning, duration))
+                {
+                    // Found first available doctor
+                    this.Doctor = PersonController.LoadOnePerson(Constants.connectionString, $"select * from users where id=\"{id}\"");
+                    return;
+                } 
+            }
+        }
         public static ReferralLetter Parse(OleDbDataReader reader)
         {
             string id = reader[0].ToString();
@@ -90,7 +108,6 @@ namespace HealthCareInfromationSystem.models.entity
             Person creator = PersonController.LoadOnePerson(Constants.connectionString,
                 "select * from users where id=\"" + reader[5].ToString() + "\"");
             bool used = Boolean.Parse(reader[6].ToString());
-            Console.WriteLine(id, patient.Id, specialisation, dateCreated.ToString(), creator.Id, used.ToString());
             return new ReferralLetter(id, patient, specialisation, doctor, dateCreated, creator, used);
         }
 
