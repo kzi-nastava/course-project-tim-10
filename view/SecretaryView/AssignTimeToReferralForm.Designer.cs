@@ -93,6 +93,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(172, 28);
             this.cbType.TabIndex = 6;
+            this.cbType.SelectionChangeCommitted += new System.EventHandler(this.CbType_SelectionChangeCommitted);
             // 
             // tbDuration
             // 
@@ -110,7 +111,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(221, 367);
+            this.btnAdd.Location = new System.Drawing.Point(206, 359);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(138, 53);
             this.btnAdd.TabIndex = 9;

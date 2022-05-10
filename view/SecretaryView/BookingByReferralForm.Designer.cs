@@ -108,7 +108,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnAssignTime
             // 
-            this.btnAssignTime.Location = new System.Drawing.Point(895, 449);
+            this.btnAssignTime.Location = new System.Drawing.Point(956, 458);
             this.btnAssignTime.Name = "btnAssignTime";
             this.btnAssignTime.Size = new System.Drawing.Size(116, 41);
             this.btnAssignTime.TabIndex = 4;
@@ -120,7 +120,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1489, 614);
+            this.ClientSize = new System.Drawing.Size(1662, 614);
             this.Controls.Add(this.btnAssignTime);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

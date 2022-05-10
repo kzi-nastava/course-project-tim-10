@@ -25,51 +25,39 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             DisplayPatientsTableData();
         }
 
-        private void FillPatientsTable(String query, OleDbConnection connection)
-        {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            dataGridViewPatients.DataSource = table;
-        }
-
-
+        // Adds rows of non-blocked patients to dataGridViewPatients 
+        // with columns ID, NAME, LAST NAME
         private void DisplayPatientsTableData()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-                FillPatientsTable("select id, name, last_name as \'last name\', username from users where role=\"patient\" and blocked=\"false\"", connection);
+                string query = "select id, name, last_name as \'last name\', username from users where role=\"patient\" and blocked=\"false\"";
+                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+
+                DataTable table = new DataTable
+                {
+                    Locale = CultureInfo.InvariantCulture
+                };
+
+                adapter.Fill(table);
+                dataGridViewPatients.DataSource = table;
             }
         }
         
+        // Adds rows of unused referral letters to dataGridViewReferrals for selected patient
+        // with columns ID, DATE CREATED, CREATED BY
         private void DisplayReferralsTableData(string patientId)
         {
             string query = $"select * from referral_letter where patientId=\"{patientId}\" and used=\"false\"";
-            List<ReferralLetter> referralLetters = ReferralLetterController.LoadReferalLetters(Constants.connectionString, query);
+            List<ReferralLetter> referralLetters = ReferralLetterController.LoadAll(Constants.connectionString, query);
+            dataGridViewReferrals.Rows.Clear();
             foreach (ReferralLetter referralLetter in referralLetters)
             {
-                if (referralLetter.Doctor == null) dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Specialisation);
-                else
-                {
-                    dataGridViewReferrals.Rows.Clear();
-                    dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Doctor.FirstName + " " + referralLetter.Doctor.LastName);
-                }
+                dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Creator.FirstName + " " + referralLetter.Creator.LastName);
             }
         }
 
-        private void DataGridViewReferrals_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value != null)
-            {
-                selectedReferralLetterId = dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value.ToString();
-            }
-        }
-
+        // When patient is selected their referral letters are displayed in dataGridViewReferral
         private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             dataGridViewReferrals.Rows.Clear();
@@ -81,11 +69,20 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
+        private void DataGridViewReferrals_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value != null)
+            {
+                selectedReferralLetterId = dataGridViewReferrals.Rows[e.RowIndex].Cells[0].Value.ToString();
+            }
+        }
+
+
         private void BtnAssignTime_Click(object sender, EventArgs e)
         {
             if (selectedPatientId != "" && selectedReferralLetterId != "")
             {
-                AssignTimeToReferralForm assignTimeToReferralForm = new AssignTimeToReferralForm(selectedPatientId, selectedReferralLetterId);
+                AssignTimeToReferralForm assignTimeToReferralForm = new AssignTimeToReferralForm(selectedReferralLetterId);
                 assignTimeToReferralForm.Show();
             }
             

@@ -15,7 +15,7 @@ namespace HealthCareInfromationSystem.contollers
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                string query = $"select doctorId from specialisations where name=\"{specName}\"";
+                string query = $"select doctors from specialisations where name=\"{specName}\"";
 
                 OleDbCommand command = new OleDbCommand(query, connection);
 
