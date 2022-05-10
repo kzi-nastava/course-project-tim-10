@@ -58,10 +58,12 @@
     <Compile Include="contollers\PersonController.cs" />
     <Compile Include="contollers\PremiseController.cs" />
     <Compile Include="contollers\ReferralLetterController.cs" />
+    <Compile Include="contollers\RenovationController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Premise.cs" />
+    <Compile Include="models\entity\SimpleRenovation.cs" />
     <Compile Include="models\users\Doctor.cs" />
     <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />
@@ -145,6 +147,12 @@
     <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.Designer.cs">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\SimpleRenovationsForm.resx">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
     <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
