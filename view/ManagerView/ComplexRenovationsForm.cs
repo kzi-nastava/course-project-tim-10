@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,10 +73,79 @@ namespace HealthCareInfromationSystem.view.ManagerView
             }
         }
 
+        private bool CheckIfCombineTextBoxesAreEmpty()
+        {
+            return String.IsNullOrWhiteSpace(textBox1.Text) ||
+                    String.IsNullOrWhiteSpace(textBox2.Text) ||
+                    String.IsNullOrWhiteSpace(textBox3.Text) ||
+                    String.IsNullOrWhiteSpace(textBox4.Text) ||
+                    comboBox1.SelectedItem == null ||
+                    String.IsNullOrWhiteSpace(comboBox1.SelectedItem.ToString()) ||
+                    comboBox2.SelectedItem == null ||
+                    String.IsNullOrWhiteSpace(comboBox2.SelectedItem.ToString()) ||
+                    comboBox3.SelectedItem == null ||
+                    String.IsNullOrWhiteSpace(comboBox3.SelectedItem.ToString());
+        }
+
+        private bool CheckIfNewPremiseOneTextBoxesAreEmpty()
+        {
+            return String.IsNullOrWhiteSpace(textBox5.Text) ||
+                    String.IsNullOrWhiteSpace(textBox6.Text) ||
+                    comboBox5.SelectedItem == null ||
+                    String.IsNullOrWhiteSpace(comboBox5.SelectedItem.ToString());
+        }
+
+        private bool CheckIfNewPremiseTwoTextBoxesAreEmpty()
+        {
+            return String.IsNullOrWhiteSpace(textBox7.Text) ||
+                    String.IsNullOrWhiteSpace(textBox8.Text) ||
+                    comboBox5.SelectedItem == null ||
+                    String.IsNullOrWhiteSpace(comboBox6.SelectedItem.ToString());
+        }
+
+        private bool CheckIfDivideTextBoxesAreEmpty()
+        {
+            return CheckIfNewPremiseOneTextBoxesAreEmpty() ||
+                    CheckIfNewPremiseTwoTextBoxesAreEmpty() ||
+                    String.IsNullOrWhiteSpace(textBox9.Text) ||
+                    String.IsNullOrWhiteSpace(textBox10.Text);
+        }
+
         private void ComplexRenovationsForm_Load(object sender, EventArgs e)
         {
             SetLabelsAndButtons();
             FillComboBox();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (CheckIfCombineTextBoxesAreEmpty()) MessageBox.Show("ne valja");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (CheckIfDivideTextBoxesAreEmpty()) MessageBox.Show("ne valja");
+        }
+
+        private void comboBox4_SelectedValueChanged(object sender, EventArgs e)
+        {
+            /*using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                String query = $"" +
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                    $"from equipment as eq, premises as pr1, premises as pr2 " +
+                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
+
+                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+                DataTable table = new DataTable
+                {
+                    Locale = CultureInfo.InvariantCulture
+                };
+
+                adapter.Fill(table);
+                dataGridView1.DataSource = table;
+            }*/
+            MessageBox.Show("asd");
         }
     }
 }

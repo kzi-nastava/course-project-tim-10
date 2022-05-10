@@ -193,6 +193,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button1.TabIndex = 14;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dataGridView1
             // 
@@ -211,6 +212,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(134, 28);
             this.comboBox4.TabIndex = 16;
+            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox4_SelectedValueChanged);
             // 
             // label8
             // 
@@ -380,6 +382,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button4.TabIndex = 36;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // ComplexRenovationsForm
             // 
