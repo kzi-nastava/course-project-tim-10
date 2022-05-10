@@ -31,12 +31,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             this.dataGridViewPatients = new System.Windows.Forms.DataGridView();
             this.dataGridViewReferrals = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAssignTime = new System.Windows.Forms.Button();
             this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCreator = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnAssignTime = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReferrals)).BeginInit();
             this.SuspendLayout();
@@ -63,9 +63,30 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewReferrals.Name = "dataGridViewReferrals";
             this.dataGridViewReferrals.RowHeadersWidth = 62;
             this.dataGridViewReferrals.RowTemplate.Height = 28;
-            this.dataGridViewReferrals.Size = new System.Drawing.Size(618, 368);
+            this.dataGridViewReferrals.Size = new System.Drawing.Size(782, 368);
             this.dataGridViewReferrals.TabIndex = 1;
             this.dataGridViewReferrals.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewReferrals_RowHeaderMouseClick);
+            // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "ID";
+            this.ColumnId.MinimumWidth = 8;
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Width = 150;
+            // 
+            // ColumnDate
+            // 
+            this.ColumnDate.HeaderText = "Date Created";
+            this.ColumnDate.MinimumWidth = 8;
+            this.ColumnDate.Name = "ColumnDate";
+            this.ColumnDate.Width = 150;
+            // 
+            // ColumnCreator
+            // 
+            this.ColumnCreator.HeaderText = "Created by";
+            this.ColumnCreator.MinimumWidth = 8;
+            this.ColumnCreator.Name = "ColumnCreator";
+            this.ColumnCreator.Width = 150;
             // 
             // label1
             // 
@@ -95,32 +116,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnAssignTime.UseVisualStyleBackColor = true;
             this.btnAssignTime.Click += new System.EventHandler(this.BtnAssignTime_Click);
             // 
-            // ColumnId
-            // 
-            this.ColumnId.HeaderText = "ID";
-            this.ColumnId.MinimumWidth = 8;
-            this.ColumnId.Name = "ColumnId";
-            this.ColumnId.Width = 150;
-            // 
-            // ColumnDate
-            // 
-            this.ColumnDate.HeaderText = "Date Created";
-            this.ColumnDate.MinimumWidth = 8;
-            this.ColumnDate.Name = "ColumnDate";
-            this.ColumnDate.Width = 150;
-            // 
-            // ColumnCreator
-            // 
-            this.ColumnCreator.HeaderText = "Created by";
-            this.ColumnCreator.MinimumWidth = 8;
-            this.ColumnCreator.Name = "ColumnCreator";
-            this.ColumnCreator.Width = 150;
-            // 
             // BookingByReferralForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1291, 614);
+            this.ClientSize = new System.Drawing.Size(1489, 614);
             this.Controls.Add(this.btnAssignTime);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

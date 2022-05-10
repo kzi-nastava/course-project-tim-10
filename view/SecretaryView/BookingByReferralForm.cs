@@ -54,8 +54,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             foreach (ReferralLetter referralLetter in referralLetters)
             {
                 if (referralLetter.Doctor == null) dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Specialisation);
-                else dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Doctor.FirstName + " " + referralLetter.Doctor.LastName);
-
+                else
+                {
+                    dataGridViewReferrals.Rows.Clear();
+                    dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Doctor.FirstName + " " + referralLetter.Doctor.LastName);
+                }
             }
         }
 
@@ -69,6 +72,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
+            dataGridViewReferrals.Rows.Clear();
+            selectedReferralLetterId = "";
             if (dataGridViewPatients.Rows[e.RowIndex] != null)
             {
                 selectedPatientId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
@@ -78,7 +83,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         private void BtnAssignTime_Click(object sender, EventArgs e)
         {
-
+            if (selectedPatientId != "" && selectedReferralLetterId != "")
+            {
+                AssignTimeToReferralForm assignTimeToReferralForm = new AssignTimeToReferralForm(selectedPatientId, selectedReferralLetterId);
+                assignTimeToReferralForm.Show();
+            }
+            
         }
     }
 }
