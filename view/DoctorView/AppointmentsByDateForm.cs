@@ -89,8 +89,24 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private string GetSelectedAppointmentId()
 		{
-			Console.WriteLine(dataGridView1.SelectedRows[0].Cells[6].Value.ToString());
 			return dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+		}
+
+		private void ReferralLetterClick(object sender, EventArgs e)
+		{
+			int selectedRowCount =
+			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			if (selectedRowCount == 1)
+			{
+				string patientId = AppointmentController.GetPatientId(Constants.connectionString,
+				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
+				AddReferralLetterForm addReferralLetter = new AddReferralLetterForm(patientId);
+				addReferralLetter.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select ONLY ONE row for creating referral letter.", "Error");
+			}
 		}
 	}
 }

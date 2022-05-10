@@ -50,6 +50,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             string query = $"select * from referral_letter where patientId=\"{patientId}\" and used=\"false\"";
             List<ReferralLetter> referralLetters = ReferralLetterController.LoadAll(Constants.connectionString, query);
+
             dataGridViewReferrals.Rows.Clear();
             foreach (ReferralLetter referralLetter in referralLetters)
             {

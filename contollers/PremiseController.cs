@@ -24,6 +24,23 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public bool CheckIfPremiseIsOccupied(String id, String startDate, String endDate)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"" +
+                    $"select premiseId, Mid(beginning, 1, 11) " +
+                    $"from appointments " +
+                    $"where premiseId=\"{id}\" and " +
+                    $"DateValue(Replace(Replace(\"{startDate}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(Mid(beginning, 1, 11), \'.\', \'/\', 1, 2), \'.\', \'\')) and " +
+                    $"DateValue(Replace(Replace(\"{endDate}\", \'.\', \'/\', 1, 2), \'.\', \'\')) > DateValue(Replace(Replace(Mid(beginning, 1, 11), \'.\', \'/\', 1, 2), \'.\', \'\'))";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                OleDbDataReader reader = command.ExecuteReader();
+                return reader.HasRows;
+            }
+        }
+
         public void SavePremise(Premise premise)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
