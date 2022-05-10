@@ -40,5 +40,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             SimpleRenovationsForm simpleRenovationsForm = new SimpleRenovationsForm();
             simpleRenovationsForm.Show();
         }
+
+        private void complexRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ComplexRenovationsForm complexRenovationsForm = new ComplexRenovationsForm();
+            complexRenovationsForm.Show();
+        }
     }
 }

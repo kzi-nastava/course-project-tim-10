@@ -385,7 +385,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1201, 719);
+            this.ClientSize = new System.Drawing.Size(1077, 766);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -425,6 +425,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.Controls.Add(this.label1);
             this.Name = "ComplexRenovationsForm";
             this.Text = "ComplexRenovationsForm";
+            this.Load += new System.EventHandler(this.ComplexRenovationsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
