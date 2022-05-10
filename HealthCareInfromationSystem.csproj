@@ -219,9 +219,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="view\DoctorView\AddAppointmentForm.resx">
-      <DependentUpon>AddAppointmentForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </EmbeddedResource>
