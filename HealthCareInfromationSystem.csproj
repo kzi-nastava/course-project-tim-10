@@ -203,6 +203,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\DoctorView\AddAppointmentForm.resx">
+      <DependentUpon>AddAppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -220,6 +223,9 @@
     <EmbeddedResource Include="view\PatientView\PatientMainForm.resx" />
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\AssignTimeToReferralForm.resx">
+      <DependentUpon>AssignTimeToReferralForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\BlockedPatientsForm.resx">
       <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
