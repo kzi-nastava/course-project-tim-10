@@ -50,7 +50,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void DisplayReferralsTableData(string patientId)
         {
             string query = $"select * from referral_letter where patientId=\"{patientId}\" and used=\"false\"";
-            List<ReferralLetter> referralLetters = ReferralLetterController.LoadReferalLetters(Constants.connectionString, query);
+            List<ReferralLetter> referralLetters = ReferralLetterController.LoadAll(Constants.connectionString, query);
             foreach (ReferralLetter referralLetter in referralLetters)
             {
                 if (referralLetter.Doctor == null) dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Specialisation);

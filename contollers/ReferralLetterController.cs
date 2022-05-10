@@ -23,7 +23,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static List<ReferralLetter> LoadReferalLetters(string connectionString, string queryString)
+        public static List<ReferralLetter> LoadAll(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
