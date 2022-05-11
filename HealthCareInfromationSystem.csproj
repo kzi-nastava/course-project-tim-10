@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\MedicineController.cs" />
     <Compile Include="contollers\PatientController.cs" />
