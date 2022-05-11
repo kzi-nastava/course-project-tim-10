@@ -155,7 +155,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             renovationController.SaveComplexRenovation(secondPremiseRenovation);
             renovationController.SaveComplexRenovation(newPremiseRenovation);
 
-            MessageBox.Show("asd");
+            ComplexMoving complexMoving = new ComplexMoving(firstPremise.Id, secondPremise.Id, newPremiseId, "combine", endDate);
+
+            renovationController.SaveComplexMoving(complexMoving);
+
+            MessageBox.Show("Scheduled complex renovation");
         }
 
         private void Button4_Click(object sender, EventArgs e)
