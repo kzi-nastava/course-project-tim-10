@@ -7,9 +7,18 @@ using System.Data.OleDb;
 
 
 namespace HealthCareInfromationSystem.models.entity
+
 {
 	public class Medicine
 	{
+
+		public enum DrinkingPeriod { 
+			NotImportant, 
+			BeforeLunch, 
+			DuringLunch, 
+			AfterLunch
+
+		}
 		private int _id;
 		private string _name;
 		private string _description;
