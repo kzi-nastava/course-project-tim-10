@@ -45,13 +45,9 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public void SaveComplexMoving(ComplexMoving moving)
+        public void SaveCombiningComplexMoving(ComplexMoving moving)
         {
-            String addToQuery = "";
             String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
-
-            if (moving.Flag == "combine")
-                addToQuery = $", {moving.Id2}";
            
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -64,7 +60,7 @@ namespace HealthCareInfromationSystem.contollers
                     $"switch (" +
                     $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.old_premises_id, " +
                     $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) >= DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.new_premises_id " +
-                    $") in (\"{moving.Id1}\"" + addToQuery + ")";
+                    $") in (\"{moving.Id1}\", \"{moving.Id2}\")";
 
                 OleDbCommand command = new OleDbCommand(query, connection);
                 OleDbDataReader reader = command.ExecuteReader();

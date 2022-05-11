@@ -137,7 +137,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             if (premiseController.CheckIfPremiseExistsById(newPremiseId) ||
                 premiseController.CheckIfPremiseIsOccupied(firstPremiseId, startDate, endDate) ||
-                premiseController.CheckIfPremiseIsOccupied(secondPremiseId, startDate, endDate)) 
+                premiseController.CheckIfPremiseIsOccupied(secondPremiseId, startDate, endDate))
                 return;
 
             String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
@@ -157,14 +157,46 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             ComplexMoving complexMoving = new ComplexMoving(firstPremise.Id, secondPremise.Id, newPremiseId, "combine", endDate);
 
-            renovationController.SaveComplexMoving(complexMoving);
+            renovationController.SaveCombiningComplexMoving(complexMoving);
 
-            MessageBox.Show("Scheduled complex renovation");
+            MessageBox.Show("Scheduled complex renovation.");
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            if (CheckIfDivideTextBoxesAreEmpty()) MessageBox.Show("ne valja");
+            if (CheckIfDivideTextBoxesAreEmpty()) return;
+
+            String oldPremiseId = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
+            String firstNewPremiseId = textBox5.Text;
+            String firstNewPremiseName = textBox6.Text;
+            String firstNewPremiseType = comboBox5.SelectedItem.ToString();
+            String secondNewPremiseId = textBox7.Text;
+            String secondNewPremiseName = textBox8.Text;
+            String secondNewPremiseType = comboBox6.SelectedItem.ToString();
+            String startDate = textBox9.Text;
+            String endDate = textBox10.Text;
+
+            if (premiseController.CheckIfPremiseExistsById(firstNewPremiseId) ||
+                premiseController.CheckIfPremiseExistsById(secondNewPremiseId) ||
+                premiseController.CheckIfPremiseIsOccupied(oldPremiseId, startDate, endDate))
+                return;
+
+            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
+            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+
+            Premise oldPremise = new Premise(oldPremiseId, "", "");
+            Premise firstNewPremise = new Premise(firstNewPremiseId, firstNewPremiseName, firstNewPremiseType);
+            Premise secondNewPremise = new Premise(secondNewPremiseId, secondNewPremiseName, secondNewPremiseType);
+
+            ComplexRenovation oldPremiseRenovation = new ComplexRenovation(oldPremise, "delete", endDate);
+            ComplexRenovation firstNewPremiseRenovation = new ComplexRenovation(firstNewPremise, "add", endDate);
+            ComplexRenovation secondNewPremiseRenovation = new ComplexRenovation(secondNewPremise, "add", endDate);
+
+            renovationController.SaveComplexRenovation(oldPremiseRenovation);
+            renovationController.SaveComplexRenovation(firstNewPremiseRenovation);
+            renovationController.SaveComplexRenovation(secondNewPremiseRenovation);
+
+            MessageBox.Show("asd");
         }
 
         private void ComboBox4_SelectedValueChanged(object sender, EventArgs e)
