@@ -67,32 +67,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				return;
 			}
 
-			//checking if the doctor is available
-			if (!AppointmentController.IsAvailable(Constants.connectionString,
-				"select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\"",
-				beginning, duration))
-			{
-				MessageBox.Show("Doctor has an appointment.", "Error");
-				return;
-			}
-
-			//checking if the room is available
-			if (!AppointmentController.IsAvailable(Constants.connectionString,
-			"select * from appointments where premiseId =\"" + premiseId + "\"",
-			beginning, duration))
-			{
-				MessageBox.Show("Premise occupied.", "Error");
-				return;
-			}
-
-			//checking if the patient is available
-			if (!AppointmentController.IsAvailable(Constants.connectionString,
-			"select * from appointments where patientId=\"" + patientId + "\"",
-			beginning, duration))
-			{
-				MessageBox.Show("Patient has an appointment.", "Error");
-				return;
-			}
+			if (!AppointmentController.IsAvailableAllChecks(beginning, duration, premiseId, patientId)) return;
 
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
