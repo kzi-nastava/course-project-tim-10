@@ -61,6 +61,7 @@
     <Compile Include="contollers\RenovationController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
+    <Compile Include="models\entity\ComplexRenovation.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Premise.cs" />
     <Compile Include="models\entity\SimpleRenovation.cs" />

@@ -1,4 +1,6 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +10,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +18,9 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ComplexRenovationsForm : Form
     {
+        PremiseController premiseController = new PremiseController();
+        RenovationController renovationController = new RenovationController();
+
         public ComplexRenovationsForm()
         {
             InitializeComponent();
@@ -117,24 +123,60 @@ namespace HealthCareInfromationSystem.view.ManagerView
             FillComboBox();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            if (CheckIfCombineTextBoxesAreEmpty()) MessageBox.Show("ne valja");
+            if (CheckIfCombineTextBoxesAreEmpty()) return;
+
+            String firstPremiseId = comboBox1.SelectedItem.ToString().Split('-')[0].Trim();
+            String secondPremiseId = comboBox2.SelectedItem.ToString().Split('-')[0].Trim();
+            String newPremiseId = textBox1.Text;
+            String newPremiseName = textBox2.Text;
+            String newPremiseType = comboBox3.SelectedItem.ToString();
+            String startDate = textBox3.Text;
+            String endDate = textBox4.Text;
+
+            if (premiseController.CheckIfPremiseExistsById(newPremiseId) ||
+                premiseController.CheckIfPremiseIsOccupied(firstPremiseId, startDate, endDate) ||
+                premiseController.CheckIfPremiseIsOccupied(secondPremiseId, startDate, endDate)) 
+                return;
+
+            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
+            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+
+            Premise firstPremise = new Premise(firstPremiseId, "", "");
+            Premise secondPremise = new Premise(secondPremiseId, "", "");
+            Premise newPremise = new Premise(newPremiseId, newPremiseName, newPremiseType);
+
+            ComplexRenovation firstPremiseRenovation = new ComplexRenovation(firstPremise, "delete", endDate);
+            ComplexRenovation secondPremiseRenovation = new ComplexRenovation(secondPremise, "delete", endDate);
+            ComplexRenovation newPremiseRenovation = new ComplexRenovation(newPremise, "add", endDate);
+
+            renovationController.SaveComplexRenovation(firstPremiseRenovation);
+            renovationController.SaveComplexRenovation(secondPremiseRenovation);
+            renovationController.SaveComplexRenovation(newPremiseRenovation);
+
+            MessageBox.Show("asd");
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             if (CheckIfDivideTextBoxesAreEmpty()) MessageBox.Show("ne valja");
         }
 
-        private void comboBox4_SelectedValueChanged(object sender, EventArgs e)
+        private void ComboBox4_SelectedValueChanged(object sender, EventArgs e)
         {
-            /*using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
+                String id = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
+                String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
+
                 String query = $"" +
-                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
-                    $"from equipment as eq, premises as pr1, premises as pr2 " +
-                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type " +
+                    $"from equipment as eq " +
+                    $"where switch (" +
+                    $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.old_premises_id, " +
+                    $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) >= DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.new_premises_id " +
+                    $") = \"{id}\"";
 
                 OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
                 DataTable table = new DataTable
@@ -144,8 +186,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
                 adapter.Fill(table);
                 dataGridView1.DataSource = table;
-            }*/
-            MessageBox.Show("asd");
+            }
         }
     }
 }

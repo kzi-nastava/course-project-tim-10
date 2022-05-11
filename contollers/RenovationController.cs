@@ -33,5 +33,16 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
+
+        public void SaveComplexRenovation(ComplexRenovation renovation)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into complex_renovations values (\"{renovation.Premise.Id}\", \"{renovation.Premise.Name}\", \"{renovation.Premise.Type}\", \"{renovation.Flag}\", \"{renovation.Move_date}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }

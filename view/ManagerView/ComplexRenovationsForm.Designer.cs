@@ -193,12 +193,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button1.TabIndex = 14;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(21, 226);
+            this.dataGridView1.Location = new System.Drawing.Point(21, 202);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
@@ -208,16 +208,16 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // comboBox4
             // 
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(25, 457);
+            this.comboBox4.Location = new System.Drawing.Point(21, 436);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(134, 28);
+            this.comboBox4.Size = new System.Drawing.Size(138, 28);
             this.comboBox4.TabIndex = 16;
-            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox4_SelectedValueChanged);
+            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.ComboBox4_SelectedValueChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 414);
+            this.label8.Location = new System.Drawing.Point(17, 393);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(51, 20);
             this.label8.TabIndex = 17;
@@ -226,7 +226,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(229, 413);
+            this.label9.Location = new System.Drawing.Point(225, 392);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 20);
             this.label9.TabIndex = 18;
@@ -235,7 +235,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(421, 413);
+            this.label10.Location = new System.Drawing.Point(417, 392);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 20);
             this.label10.TabIndex = 19;
@@ -244,7 +244,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(604, 412);
+            this.label11.Location = new System.Drawing.Point(600, 391);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(60, 20);
             this.label11.TabIndex = 20;
@@ -252,22 +252,22 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(233, 458);
+            this.textBox5.Location = new System.Drawing.Point(229, 437);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 26);
+            this.textBox5.Size = new System.Drawing.Size(125, 26);
             this.textBox5.TabIndex = 21;
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(425, 458);
+            this.textBox6.Location = new System.Drawing.Point(421, 437);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(116, 26);
+            this.textBox6.Size = new System.Drawing.Size(120, 26);
             this.textBox6.TabIndex = 22;
             // 
             // comboBox5
             // 
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(608, 457);
+            this.comboBox5.Location = new System.Drawing.Point(604, 436);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(132, 28);
             this.comboBox5.TabIndex = 23;
@@ -275,7 +275,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(233, 519);
+            this.label12.Location = new System.Drawing.Point(229, 498);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 20);
             this.label12.TabIndex = 24;
@@ -284,7 +284,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(425, 519);
+            this.label13.Location = new System.Drawing.Point(421, 498);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 20);
             this.label13.TabIndex = 25;
@@ -293,7 +293,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(608, 519);
+            this.label14.Location = new System.Drawing.Point(604, 498);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(60, 20);
             this.label14.TabIndex = 26;
@@ -301,22 +301,22 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(237, 565);
+            this.textBox7.Location = new System.Drawing.Point(233, 544);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(117, 26);
+            this.textBox7.Size = new System.Drawing.Size(121, 26);
             this.textBox7.TabIndex = 27;
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(429, 564);
+            this.textBox8.Location = new System.Drawing.Point(425, 543);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(112, 26);
+            this.textBox8.Size = new System.Drawing.Size(116, 26);
             this.textBox8.TabIndex = 28;
             // 
             // comboBox6
             // 
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(612, 562);
+            this.comboBox6.Location = new System.Drawing.Point(608, 541);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(128, 28);
             this.comboBox6.TabIndex = 29;
@@ -324,7 +324,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(233, 627);
+            this.label15.Location = new System.Drawing.Point(229, 606);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 20);
             this.label15.TabIndex = 30;
@@ -333,7 +333,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(429, 627);
+            this.label16.Location = new System.Drawing.Point(425, 606);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(60, 20);
             this.label16.TabIndex = 31;
@@ -341,22 +341,22 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(237, 671);
+            this.textBox9.Location = new System.Drawing.Point(233, 650);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(117, 26);
+            this.textBox9.Size = new System.Drawing.Size(121, 26);
             this.textBox9.TabIndex = 32;
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(433, 670);
+            this.textBox10.Location = new System.Drawing.Point(429, 649);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(108, 26);
+            this.textBox10.Size = new System.Drawing.Size(112, 26);
             this.textBox10.TabIndex = 33;
             // 
             // button2
             // 
             this.button2.AutoSize = true;
-            this.button2.Location = new System.Drawing.Point(816, 456);
+            this.button2.Location = new System.Drawing.Point(812, 435);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 30);
             this.button2.TabIndex = 34;
@@ -366,7 +366,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // button3
             // 
             this.button3.AutoSize = true;
-            this.button3.Location = new System.Drawing.Point(816, 560);
+            this.button3.Location = new System.Drawing.Point(812, 539);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 30);
             this.button3.TabIndex = 35;
@@ -376,19 +376,19 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // button4
             // 
             this.button4.AutoSize = true;
-            this.button4.Location = new System.Drawing.Point(816, 666);
+            this.button4.Location = new System.Drawing.Point(812, 645);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 30);
             this.button4.TabIndex = 36;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // ComplexRenovationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1077, 766);
+            this.ClientSize = new System.Drawing.Size(1077, 746);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
