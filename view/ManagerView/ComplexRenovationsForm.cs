@@ -196,7 +196,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             renovationController.SaveComplexRenovation(firstNewPremiseRenovation);
             renovationController.SaveComplexRenovation(secondNewPremiseRenovation);
 
-            MessageBox.Show("asd");
+            MessageBox.Show("Scheduled complex renovation.");
         }
 
         private void ComboBox4_SelectedValueChanged(object sender, EventArgs e)
@@ -223,6 +223,42 @@ namespace HealthCareInfromationSystem.view.ManagerView
                 adapter.Fill(table);
                 dataGridView1.DataSource = table;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow == null) return;
+
+            String equipmentId = currentRow.Cells[0].Value.ToString();
+            String oldPremiseId = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
+            String firstNewPremiseId = textBox5.Text;
+            String secondNewPremiseId = textBox7.Text;
+            String endDate = textBox10.Text;
+
+            ComplexMoving complexMoving = new ComplexMoving(oldPremiseId, firstNewPremiseId, secondNewPremiseId, "divide-1", endDate);
+
+            renovationController.SaveDividingComplexMoving(complexMoving, equipmentId);
+
+            MessageBox.Show("Scheduled to move to first new premise.");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = dataGridView1.CurrentRow;
+            if (currentRow == null) return;
+
+            String equipmentId = currentRow.Cells[0].Value.ToString();
+            String oldPremiseId = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
+            String firstNewPremiseId = textBox5.Text;
+            String secondNewPremiseId = textBox7.Text;
+            String endDate = textBox10.Text;
+
+            ComplexMoving complexMoving = new ComplexMoving(oldPremiseId, firstNewPremiseId, secondNewPremiseId, "divide-2", endDate);
+
+            renovationController.SaveDividingComplexMoving(complexMoving, equipmentId);
+
+            MessageBox.Show("Scheduled to move to second new premise.");
         }
     }
 }

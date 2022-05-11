@@ -76,5 +76,16 @@ namespace HealthCareInfromationSystem.contollers
                 reader.Close();
             }
         }
+
+        public void SaveDividingComplexMoving(ComplexMoving moving, String equipmentId)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into complex_movings values (\"{equipmentId}\", \"{moving.Id1}\", \"{moving.Id2}\", \"{moving.Id3}\", \"{moving.Flag}\", \"{moving.Move_date}\")";
+                OleDbCommand commandToAdd = new OleDbCommand(query, connection);
+                commandToAdd.ExecuteNonQuery();
+            }
+        }
     }
 }
