@@ -240,10 +240,10 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static bool IsAvailableAllChecks(string beginning, string duration, string premiseId, string patientId) {
+        public static bool IsAvailableAllChecks(string beginning, string duration, string premiseId, string patientId, string appointmentId) {
             //checking if the doctor is available
             if (!IsAvailable(Constants.connectionString,
-                "select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\"",
+                "select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\" and not id=\"" + appointmentId + "\"",
                 beginning, duration))
             {
                 MessageBox.Show("Doctor has an appointment.", "Error");
@@ -252,7 +252,7 @@ namespace HealthCareInfromationSystem.contollers
 
             //checking if the room is available
             if (!IsAvailable(Constants.connectionString,
-            "select * from appointments where premiseId =\"" + premiseId + "\"",
+            "select * from appointments where premiseId =\"" + premiseId + "\" and not id=\"" + appointmentId + "\"",
             beginning, duration))
             {
                 MessageBox.Show("Premise occupied.", "Error");
@@ -261,7 +261,7 @@ namespace HealthCareInfromationSystem.contollers
 
             //checking if the patient is available
             if (!IsAvailable(Constants.connectionString,
-            "select * from appointments where patientId=\"" + patientId + "\"",
+            "select * from appointments where patientId=\"" + patientId + "\" and not id=\"" + appointmentId + "\"",
             beginning, duration))
             {
                 MessageBox.Show("Patient has an appointment.", "Error");

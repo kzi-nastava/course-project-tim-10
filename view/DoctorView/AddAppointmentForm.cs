@@ -67,7 +67,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				return;
 			}
 
-			if (!AppointmentController.IsAvailableAllChecks(beginning, duration, premiseId, patientId)) return;
+			if (!AppointmentController.IsAvailableAllChecks(beginning, duration, premiseId, patientId, "0")) return;
 
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
