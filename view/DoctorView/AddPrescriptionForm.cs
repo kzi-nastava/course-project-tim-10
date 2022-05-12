@@ -17,7 +17,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 	public partial class AddPrescriptionForm : Form
 	{
 		private int patientId;
-
+		private Person patient;
 
 		public AddPrescriptionForm()
 		{
@@ -27,9 +27,10 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		public AddPrescriptionForm(int id)
 		{
 			InitializeComponent();
-			this.patientId = id;
+			patientId = id;
 			Person patient = PersonController.LoadOnePerson(Constants.connectionString,
 							"select * from users where id=\"" + patientId + "\"");
+			this.patient = patient;
 			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
 			Dictionary<string, string> medicinePair = MedicineController.LoadPair("select id, name from medicine where isVerified = \"true\" ");
 			medicineComboBox.DataSource = new BindingSource(medicinePair, null);
@@ -49,7 +50,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 							"select * from medical_record where patientId=\"" + patientId + "\""); 
 			string medicineId = medicineComboBox.SelectedValue.ToString();
 			Medicine medicine = MedicineController.LoadOneById(medicineId);
-			string tymeOfConsumption = periodComboBox.SelectedItem.ToString();
+			//string tymeOfConsumption = periodComboBox.SelectedItem.ToString();
+			Enum.TryParse(periodComboBox.SelectedItem.ToString(), out Medicine.DrinkingPeriod timeOfConsumption);
 			string quantity = quantityTextBox.Text;
 
 			if (medical.IsAlergic(medicine.Ingredients))
@@ -61,7 +63,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				//ReferralLetterController.AddToBase(patientId, specialisation, doctorId);
+				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeOfConsumption, patient);
+				MedicalPrescriptionController.SaveToBase(medicalPrescription);
 			}
 
 		}
