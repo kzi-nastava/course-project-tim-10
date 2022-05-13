@@ -38,7 +38,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			doctorComboBox.ValueMember = "Key";
 			doctorComboBox.SelectedIndex = doctorComboBox.FindString("");
 
-			List<string> specialisations = SpecialisationContoller.LoadSpecialisations(Constants.connectionString, "select distinct name from specialisations");
+			List<string> specialisations = SpecialisationController.LoadSpecialisations(Constants.connectionString, "select distinct name from specialisations");
 			specialisations.Add("");
 			specialisationComboBox.DataSource = specialisations;
 			specialisationComboBox.SelectedItem = "";
