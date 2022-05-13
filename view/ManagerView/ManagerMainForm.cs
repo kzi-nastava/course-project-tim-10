@@ -55,6 +55,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             label1.Text = "Checking if there is complex renovations to be executed...";
 
             renovationController.CheckForComplexRenovationToExecute();
+            renovationController.CheckForComplexMovingToExecute();
 
             label1.Text = "Done checking.";
         }

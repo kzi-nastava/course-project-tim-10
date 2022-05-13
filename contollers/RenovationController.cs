@@ -155,7 +155,7 @@ namespace HealthCareInfromationSystem.contollers
 
                 while (reader.Read())
                 {
-                    Console.WriteLine($"{reader[0].ToString()}, {reader[1].ToString()}, {reader[2].ToString()}, {reader[3].ToString()}, {reader[4].ToString()}, {reader[5].ToString()}, {reader[6].ToString()}");
+                    Console.WriteLine($"{reader[0].ToString()}, {reader[1].ToString()}, {reader[2].ToString()}, {reader[3].ToString()}, {reader[4].ToString()}, {reader[5].ToString()}");
                     String equipmentId = reader[0].ToString();
                     String id1 = reader[1].ToString();
                     String id2 = reader[2].ToString();
@@ -163,15 +163,23 @@ namespace HealthCareInfromationSystem.contollers
                     String flag = reader[4].ToString();
                     String move_date = reader[5].ToString();
 
-                    if (flag == "add")
+                    String queryToMove = "";
+
+                    if (flag == "combine" || flag == "divide-2")
                     {
-                        Premise premise = new Premise(premisesId, name, type);
-                        premiseController.SavePremise(premise);
+                        queryToMove = $"" +
+                            $"update equipment set old_premises_id=\"{id3}\", new_premises_id=\"{id3}\", move_date=\"{move_date}\" " +
+                            $"where equipment_id=\"{equipmentId}\"";
                     }
                     else
                     {
-                        premiseController.SimpleDeletePremise(premisesId);
+                        queryToMove = $"" +
+                            $"update equipment set old_premises_id=\"{id2}\", new_premises_id=\"{id2}\", move_date=\"{move_date}\" " +
+                            $"where equipment_id=\"{equipmentId}\"";
                     }
+
+                    OleDbCommand commandToMove = new OleDbCommand(queryToMove, connection);
+                    commandToMove.ExecuteNonQuery();
                 }
 
                 DeleteExecutedComplexMovings();
