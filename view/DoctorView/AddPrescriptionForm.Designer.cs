@@ -39,12 +39,14 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button2 = new System.Windows.Forms.Button();
 			this.label4 = new System.Windows.Forms.Label();
 			this.quantityTextBox = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.dateTextBox = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(63, 70);
+			this.label1.Location = new System.Drawing.Point(84, 41);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(56, 17);
 			this.label1.TabIndex = 0;
@@ -53,7 +55,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(63, 133);
+			this.label2.Location = new System.Drawing.Point(84, 104);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(75, 17);
 			this.label2.TabIndex = 1;
@@ -62,7 +64,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(63, 199);
+			this.label3.Location = new System.Drawing.Point(84, 170);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(108, 17);
 			this.label3.TabIndex = 2;
@@ -71,7 +73,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// patientFullNameLabel
 			// 
 			this.patientFullNameLabel.AutoSize = true;
-			this.patientFullNameLabel.Location = new System.Drawing.Point(268, 70);
+			this.patientFullNameLabel.Location = new System.Drawing.Point(289, 41);
 			this.patientFullNameLabel.Name = "patientFullNameLabel";
 			this.patientFullNameLabel.Size = new System.Drawing.Size(0, 17);
 			this.patientFullNameLabel.TabIndex = 3;
@@ -80,7 +82,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// 
 			this.medicineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.medicineComboBox.FormattingEnabled = true;
-			this.medicineComboBox.Location = new System.Drawing.Point(271, 133);
+			this.medicineComboBox.Location = new System.Drawing.Point(292, 104);
 			this.medicineComboBox.Name = "medicineComboBox";
 			this.medicineComboBox.Size = new System.Drawing.Size(148, 24);
 			this.medicineComboBox.TabIndex = 4;
@@ -89,7 +91,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// 
 			this.periodComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.periodComboBox.FormattingEnabled = true;
-			this.periodComboBox.Location = new System.Drawing.Point(271, 199);
+			this.periodComboBox.Location = new System.Drawing.Point(292, 170);
 			this.periodComboBox.Name = "periodComboBox";
 			this.periodComboBox.Size = new System.Drawing.Size(148, 24);
 			this.periodComboBox.TabIndex = 5;
@@ -117,7 +119,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(63, 269);
+			this.label4.Location = new System.Drawing.Point(84, 240);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(65, 17);
 			this.label4.TabIndex = 8;
@@ -125,16 +127,34 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			// 
 			// quantityTextBox
 			// 
-			this.quantityTextBox.Location = new System.Drawing.Point(271, 263);
+			this.quantityTextBox.Location = new System.Drawing.Point(292, 234);
 			this.quantityTextBox.Name = "quantityTextBox";
 			this.quantityTextBox.Size = new System.Drawing.Size(148, 22);
 			this.quantityTextBox.TabIndex = 9;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(87, 299);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(134, 17);
+			this.label5.TabIndex = 10;
+			this.label5.Text = "Date: (dd.MM.yyyy.)";
+			// 
+			// dateTextBox
+			// 
+			this.dateTextBox.Location = new System.Drawing.Point(292, 293);
+			this.dateTextBox.Name = "dateTextBox";
+			this.dateTextBox.Size = new System.Drawing.Size(148, 22);
+			this.dateTextBox.TabIndex = 11;
 			// 
 			// AddPrescriptionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.dateTextBox);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.quantityTextBox);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.button2);
@@ -164,5 +184,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox quantityTextBox;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox dateTextBox;
 	}
 }

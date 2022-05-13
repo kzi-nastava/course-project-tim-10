@@ -53,6 +53,17 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			//string tymeOfConsumption = periodComboBox.SelectedItem.ToString();
 			Enum.TryParse(periodComboBox.SelectedItem.ToString(), out Medicine.DrinkingPeriod timeOfConsumption);
 			string quantity = quantityTextBox.Text;
+			string date = dateTextBox.Text;
+			DateTime dateCheck;
+			try
+			{
+				dateCheck = DateTime.ParseExact(date, "dd.MM.yyyy.", null);
+			}
+			catch
+			{
+				MessageBox.Show("Please check date field and enter correct values.", "Error");
+				return;
+			}
 
 			if (medical.IsAlergic(medicine.Ingredients))
 			{
@@ -63,7 +74,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeOfConsumption, patient);
+				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeOfConsumption, patient, DateTime.Now, dateCheck);
 				MedicalPrescriptionController.SaveToBase(medicalPrescription);
 			}
 

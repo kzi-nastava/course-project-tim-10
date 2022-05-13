@@ -62,7 +62,6 @@
     <Compile Include="contollers\ReferralLetterController.cs" />
     <Compile Include="contollers\SpecialisationController.cs" />
     <Compile Include="contollers\RenovationController.cs" />
-    <Compile Include="contollers\SpecialisationContoller.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\MedicalPrescription.cs" />

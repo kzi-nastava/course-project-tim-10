@@ -32,14 +32,18 @@ namespace HealthCareInfromationSystem.contollers
                 return maxId + 1;
             }
         }
+        
         public static void SaveToBase(MedicalPrescription medicalPrescription)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-				String query = $"insert into medical_prescription values (\"{GetFirstFreeId()}\", \"{medicalPrescription.Medicine.Id}\", " +
+                string beginning = medicalPrescription.Beginning.ToString("dd.MM.yyyy.");
+                string ending = medicalPrescription.Ending.ToString("dd.MM.yyyy.");
+
+                String query = $"insert into medical_prescription values (\"{GetFirstFreeId()}\", \"{medicalPrescription.Medicine.Id}\", " +
                                                                          $"\"{medicalPrescription.Quantity}\", \"{medicalPrescription.TimeOfConsumption}\", " +
-                                                                         $"\"{medicalPrescription.Patient.Id}\")";
+                                                                         $"\"{medicalPrescription.Patient.Id}\", \"{beginning}\", \"{ending}\")";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }

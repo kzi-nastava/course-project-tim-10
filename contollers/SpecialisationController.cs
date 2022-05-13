@@ -32,5 +32,25 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
+
+        public static List<string> LoadSpecialisations(string connectionString, string queryString)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<string> specialisations = new List<string>();
+
+                while (reader.Read())
+                {
+                    specialisations.Add(reader[0].ToString());
+                }
+                reader.Close();
+                return specialisations;
+            }
+        }
     }
 }
