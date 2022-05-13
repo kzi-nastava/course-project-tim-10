@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.contollers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ManagerMainForm : Form
     {
+        private RenovationController renovationController = new RenovationController();
+
         public ManagerMainForm()
         {
             InitializeComponent();
@@ -45,6 +48,15 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             ComplexRenovationsForm complexRenovationsForm = new ComplexRenovationsForm();
             complexRenovationsForm.Show();
+        }
+
+        private void ManagerMainForm_Load(object sender, EventArgs e)
+        {
+            label1.Text = "Checking if there is complex renovations to be executed...";
+
+            renovationController.CheckForComplexRenovationToExecute();
+
+            label1.Text = "Done checking.";
         }
     }
 }
