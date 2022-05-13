@@ -18,8 +18,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ComplexRenovationsForm : Form
     {
-        PremiseController premiseController = new PremiseController();
-        RenovationController renovationController = new RenovationController();
+        private PremiseController premiseController = new PremiseController();
+        private RenovationController renovationController = new RenovationController();
 
         public ComplexRenovationsForm()
         {
@@ -225,7 +225,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             if (currentRow == null) return;
@@ -243,7 +243,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             MessageBox.Show("Scheduled to move to first new premise.");
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             if (currentRow == null) return;

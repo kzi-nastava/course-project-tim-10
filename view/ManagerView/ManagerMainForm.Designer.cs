@@ -92,14 +92,14 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.simpleRenovationsToolStripMenuItem.Name = "simpleRenovationsToolStripMenuItem";
             this.simpleRenovationsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.simpleRenovationsToolStripMenuItem.Text = "Simple renovations";
-            this.simpleRenovationsToolStripMenuItem.Click += new System.EventHandler(this.simpleRenovationsToolStripMenuItem_Click);
+            this.simpleRenovationsToolStripMenuItem.Click += new System.EventHandler(this.SimpleRenovationsToolStripMenuItem_Click);
             // 
             // complexRenovationsToolStripMenuItem
             // 
             this.complexRenovationsToolStripMenuItem.Name = "complexRenovationsToolStripMenuItem";
             this.complexRenovationsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.complexRenovationsToolStripMenuItem.Text = "Complex renovations";
-            this.complexRenovationsToolStripMenuItem.Click += new System.EventHandler(this.complexRenovationsToolStripMenuItem_Click);
+            this.complexRenovationsToolStripMenuItem.Click += new System.EventHandler(this.ComplexRenovationsToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 

@@ -38,13 +38,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
             arrangingEquipmentForm.Show();
         }
 
-        private void simpleRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SimpleRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SimpleRenovationsForm simpleRenovationsForm = new SimpleRenovationsForm();
             simpleRenovationsForm.Show();
         }
 
-        private void complexRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ComplexRenovationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ComplexRenovationsForm complexRenovationsForm = new ComplexRenovationsForm();
             complexRenovationsForm.Show();

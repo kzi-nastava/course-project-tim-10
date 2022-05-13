@@ -362,7 +362,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button2.TabIndex = 34;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button3
             // 
@@ -373,7 +373,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.button3.TabIndex = 35;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button4
             // 
