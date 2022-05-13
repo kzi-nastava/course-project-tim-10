@@ -63,6 +63,8 @@
     <Compile Include="contollers\SpecialisationContoller.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
+    <Compile Include="models\entity\ComplexMoving.cs" />
+    <Compile Include="models\entity\ComplexRenovation.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Premise.cs" />
     <Compile Include="models\entity\ReferralLetter.cs" />
@@ -137,6 +139,12 @@
     </Compile>
     <Compile Include="view\ManagerView\ArrangingEquipmentForm.Designer.cs">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\ComplexRenovationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\ComplexRenovationsForm.Designer.cs">
+      <DependentUpon>ComplexRenovationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\ManagerView\EquipmentOverviewSearchFilterForm.cs">
       <SubType>Form</SubType>
@@ -227,6 +235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\ComplexRenovationsForm.resx">
+      <DependentUpon>ComplexRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\EquipmentOverviewSearchFilterForm.resx">
       <DependentUpon>EquipmentOverviewSearchFilterForm.cs</DependentUpon>

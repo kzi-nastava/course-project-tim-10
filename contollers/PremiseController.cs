@@ -107,6 +107,17 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public void SimpleDeletePremise(String id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"delete from premises where premises_id=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
         /*
 	    * Retrieves a specific premise from dataset
 
