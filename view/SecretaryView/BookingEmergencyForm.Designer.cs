@@ -106,7 +106,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(459, 553);
+            this.btnSave.Location = new System.Drawing.Point(428, 555);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(187, 56);
             this.btnSave.TabIndex = 7;

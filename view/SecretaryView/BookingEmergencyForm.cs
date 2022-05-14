@@ -118,14 +118,18 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                     DialogResult dialogResult = MessageBox.Show("Found available appointment at " + appointment.Beginning.ToString() 
                         + " with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName 
                         + "\nConfirm booking?", "Check", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes) Console.WriteLine("found doctor and time" + appointment.Doctor.Id + appointment.Beginning.ToString());
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        AppointmentController.AddToBase(appointment.Patient.Id.ToString(), appointment.Premise.Id.ToString(), appointment.Doctor.Id, appointment.Beginning.ToString("dd.MM.yyyy. HH:mm"), appointment.Duration.ToString(), appointment.Type.ToString());
+                        MessageBox.Show("Emergency booked.", "Success");
+                    }
                 }
                 else
                 {
                     DialogResult dialogResult = MessageBox.Show("Unable to find available appointment in the next two hours.\nContinue to rescheduling?", "Check", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        RescheduleAppointmentForm rescheduleAppointmentForm = new RescheduleAppointmentForm(appointment);
+                        RescheduleAppointmentForm rescheduleAppointmentForm = new RescheduleAppointmentForm(appointment, doctorIds);
                         rescheduleAppointmentForm.Show();
                     }
                 }

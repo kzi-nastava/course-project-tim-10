@@ -107,7 +107,7 @@ namespace HealthCareInfromationSystem.contollers
                 while (reader.Read())
                 {
                     appointment = Appointment.Parse(reader);
-                    Console.WriteLine($"commet iz:{appointment.Comment}");
+                    //Console.WriteLine($"commet iz:{appointment.Comment}");
                 }
                 reader.Close();
                 return appointment;
@@ -149,12 +149,12 @@ namespace HealthCareInfromationSystem.contollers
                         || (beginningOld <= endingNew && endingNew <= endingOld)
                         || (beginningNew <= beginningOld && endingNew >= endingOld))
                     {
-                        Console.WriteLine(c);
+                        //Console.WriteLine(c);
                         return false;
                     }
 
                 }
-                Console.WriteLine(c);
+                //Console.WriteLine(c);
                 reader.Close();
                 return true;
             }
@@ -307,21 +307,21 @@ namespace HealthCareInfromationSystem.contollers
             return true;
         }
 
-        private static Dictionary<Appointment, DateTime> GetPotentialRescheduleTimes()
+        private static Dictionary<Appointment, DateTime> GetPotentialRescheduleTimes(List<string> doctorIds)
         {
             Dictionary<Appointment, DateTime> earliestRescheduleTimes = new Dictionary<Appointment, DateTime>();
 
             // Get all doctor's future appointments in the next two hours in ascending order
             DateTime timestampNow = DateTime.Now;
             DateTime timestampTwoHoursFromNow = DateTime.Now.AddMinutes(120);
-            string query = "select * from appointments";
+            string query = $"select * from appointments";
             List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, query);
 
 
-            // Finding the earliest reschedule time for every appointment in the next two hours
+            // Finding the earliest reschedule time for every appointment in the next two hours for doctors with specialisation
             foreach (Appointment appointment in appointments)
             {
-                if (appointment.Beginning > timestampNow && appointment.Beginning < timestampTwoHoursFromNow)
+                if (appointment.Beginning > timestampNow && appointment.Beginning < timestampTwoHoursFromNow && doctorIds.Contains(appointment.Doctor.Id.ToString()))
                 {
                     earliestRescheduleTimes[appointment] = appointment.GetEarliestRescheduleTime();
                 }
@@ -330,10 +330,10 @@ namespace HealthCareInfromationSystem.contollers
             return earliestRescheduleTimes;
         }
 
-        public static List<KeyValuePair<Appointment, DateTime>> SortEarliestToReschedule()
+        public static List<KeyValuePair<Appointment, DateTime>> SortEarliestToReschedule(List<String> doctorIds)
         {
             // Get all appointments in the next two hours with the times possible to reschedule to
-            Dictionary<Appointment, DateTime> appointmentsByPotentialRescheduleTimes = GetPotentialRescheduleTimes();
+            Dictionary<Appointment, DateTime> appointmentsByPotentialRescheduleTimes = GetPotentialRescheduleTimes(doctorIds);
 
             // Calculating time difference between original appointment beginning and reschedule beginning
             Dictionary<Appointment, TimeSpan> appointmentsByRescheduleDifference = new Dictionary<Appointment, TimeSpan>();

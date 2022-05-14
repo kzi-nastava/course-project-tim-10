@@ -36,6 +36,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnDoctor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnPatient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnReschedule = new System.Windows.Forms.Button();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAppointments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,13 +48,15 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnDuration,
             this.ColumnRescheduledBeginning,
             this.ColumnDoctor,
-            this.ColumnPatient});
+            this.ColumnPatient,
+            this.ColumnId});
             this.dataGridViewAppointments.Location = new System.Drawing.Point(31, 32);
             this.dataGridViewAppointments.Name = "dataGridViewAppointments";
             this.dataGridViewAppointments.RowHeadersWidth = 62;
             this.dataGridViewAppointments.RowTemplate.Height = 28;
-            this.dataGridViewAppointments.Size = new System.Drawing.Size(816, 378);
+            this.dataGridViewAppointments.Size = new System.Drawing.Size(964, 378);
             this.dataGridViewAppointments.TabIndex = 0;
+            this.dataGridViewAppointments.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewAppointments_RowHeaderMouseClick);
             // 
             // ColumnBeginning
             // 
@@ -92,7 +95,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             // btnReschedule
             // 
-            this.btnReschedule.Location = new System.Drawing.Point(370, 428);
+            this.btnReschedule.Location = new System.Drawing.Point(434, 428);
             this.btnReschedule.Name = "btnReschedule";
             this.btnReschedule.Size = new System.Drawing.Size(161, 55);
             this.btnReschedule.TabIndex = 1;
@@ -100,11 +103,18 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnReschedule.UseVisualStyleBackColor = true;
             this.btnReschedule.Click += new System.EventHandler(this.BtnReschedule_Click);
             // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Appointment Id";
+            this.ColumnId.MinimumWidth = 8;
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Width = 150;
+            // 
             // RescheduleAppointmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 505);
+            this.ClientSize = new System.Drawing.Size(1063, 505);
             this.Controls.Add(this.btnReschedule);
             this.Controls.Add(this.dataGridViewAppointments);
             this.Name = "RescheduleAppointmentForm";
@@ -123,5 +133,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRescheduledBeginning;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDoctor;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPatient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
     }
 }
