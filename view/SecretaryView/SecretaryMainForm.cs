@@ -40,5 +40,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             BookingByReferralForm bookingByReferralForm = new BookingByReferralForm();
             bookingByReferralForm.Show();
         }
+
+        private void EmergencyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookingEmergency bookingEmergencyForm = new BookingEmergency();
+            bookingEmergencyForm.Show();
+        }
     }
 }

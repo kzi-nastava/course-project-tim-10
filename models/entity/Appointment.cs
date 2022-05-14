@@ -157,6 +157,66 @@ namespace HealthCareInfromationSystem.models.entity
         }
 
 
+        // Sets doctor and beginning if suitable slot is found in range of two hours from now
+        // for the previously assigned patient, appointment type, duration and premise
+        public bool AssignEmergencySlot(List<string> doctorIds)
+        {
+
+            DateTime bookingStartTime = DateTime.Now.AddMinutes(5);
+            // Appointment should start as soon as possible, at most two hours from current time
+            DateTime beginningMinimum = bookingStartTime.AddMinutes(115); // Initialized to maximum value for comparing in sort
+            string doctorId = "";
+
+
+            // Checking availability in the next 2 hours for every doctor and finding the earliest 
+            foreach (string id in doctorIds)
+            {
+                DateTime beginning = bookingStartTime;
+                while (beginning <= bookingStartTime.AddMinutes(120) && beginning < beginningMinimum)
+                {
+                    if (AppointmentController.CheckAvailability(int.Parse(id), beginning, this.Duration, this.Premise.Id, this.Patient.Id))
+                    {
+                        doctorId = id;
+                        beginningMinimum = beginning;
+                        break; // Found earliest available time for current doctor, move on to next doctor
+                    }
+                    beginning = beginning.AddMinutes(5);
+                }
+            }
+
+            // Found appointment that fits the requirements
+            if (doctorId != "")
+            {
+                this.Beginning = beginningMinimum;
+                this.Doctor = PersonController.LoadOnePerson(Constants.connectionString, $"select * from users where id=\"{doctorId}\"");
+                return true;
+            }
+
+            return false;
+
+        }
+
+        // Finds the earliest time for potential rescheduling of an appointment
+        // when patient, doctor and premise would be available
+        public DateTime GetEarliestRescheduleTime()
+        {
+            // Rescheduled beginning time will be as early as the original appointment's ending + 5 minutes
+            DateTime beginning = this.Beginning.AddMinutes(this.Duration);
+
+            while (true)
+            {
+                if (AppointmentController.CheckAvailability(this.Doctor.Id, beginning, this.Duration, this.Premise.Id, this.Patient.Id))
+                {
+                    return beginning; // The first time is earliest available time 
+                }
+                beginning = beginning.AddMinutes(5);
+            }
+
+        }
+
+        
+
+
     }
 
 }

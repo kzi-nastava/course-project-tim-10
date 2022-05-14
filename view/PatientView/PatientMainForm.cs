@@ -1,8 +1,11 @@
-﻿using HealthCareInfromationSystem.view.PatientView;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.view.PatientView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +20,25 @@ namespace HealthCareInfromationSystem
         public PatientMainForm()
         {
             InitializeComponent();
+            ShowNotifications();
+        }
+
+        private void ShowNotifications()
+        {
+            try
+            {
+                string notificationText = NotificationController.GetRescheduleNotifications(Constants.connectionString, utils.LoggedInUser.GetId(), "");
+                if (notificationText != "")
+                {
+                    MessageBox.Show(notificationText);
+                    NotificationController.MarkRescheduleNotificationsAsRecieved(Constants.connectionString, utils.LoggedInUser.GetId(), "");
+                }
+            }
+            catch (OleDbException)
+            {
+               Console.WriteLine("Error while recieving notifications.");
+            }
+
         }
 
         //private void button1_Click(object sender, EventArgs e)

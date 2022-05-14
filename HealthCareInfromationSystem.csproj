@@ -56,6 +56,7 @@
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\MedicineController.cs" />
+    <Compile Include="contollers\NotificationController.cs" />
     <Compile Include="contollers\PatientController.cs" />
     <Compile Include="contollers\PersonController.cs" />
     <Compile Include="contollers\PremiseController.cs" />
@@ -226,11 +227,23 @@
     <Compile Include="view\SecretaryView\BookingByReferralForm.Designer.cs">
       <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\BookingEmergencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\BookingEmergencyForm.Designer.cs">
+      <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.Designer.cs">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\RescheduleAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\RescheduleAppointmentForm.Designer.cs">
+      <DependentUpon>RescheduleAppointmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\SecretaryView\SecretaryMainForm.cs">
       <SubType>Form</SubType>
@@ -296,8 +309,14 @@
     <EmbeddedResource Include="view\SecretaryView\BookingByReferralForm.resx">
       <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\BookingEmergencyForm.resx">
+      <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\RescheduleAppointmentForm.resx">
+      <DependentUpon>RescheduleAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\SecretaryMainForm.resx">
       <DependentUpon>SecretaryMainForm.cs</DependentUpon>
