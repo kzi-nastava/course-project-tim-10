@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 
@@ -43,6 +44,7 @@ namespace HealthCareInfromationSystem.contollers
                 return appointments;
             }
         }
+
 
         public static List<Appointment> LoadAppointmentsForDate(string connectionString, string queryString, string inputDate)
         {
@@ -106,7 +108,7 @@ namespace HealthCareInfromationSystem.contollers
                 while (reader.Read())
                 {
                     appointment = Appointment.Parse(reader);
-                    Console.WriteLine($"commet iz:{appointment.Comment}");
+                    //Console.WriteLine($"commet iz:{appointment.Comment}");
                 }
                 reader.Close();
                 return appointment;
@@ -145,14 +147,15 @@ namespace HealthCareInfromationSystem.contollers
                     DateTime beginningOld = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
                     DateTime endingOld = beginningOld.AddMinutes(int.Parse(reader[5].ToString()));
                     if ((beginningOld <= beginningNew && beginningNew <= endingOld)
-                        || (beginningOld <= endingNew && endingNew <= endingOld))
+                        || (beginningOld <= endingNew && endingNew <= endingOld)
+                        || (beginningNew <= beginningOld && endingNew >= endingOld))
                     {
-                        Console.WriteLine(c);
+                        //Console.WriteLine(c);
                         return false;
                     }
 
                 }
-                Console.WriteLine(c);
+                //Console.WriteLine(c);
                 reader.Close();
                 return true;
             }
@@ -190,6 +193,18 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
 
+        }
+
+        public static void AddEmergencyToBase(Appointment emergency)
+        {
+            emergency.Id =  GetFirstFreeId();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into appointments values (\"{emergency.Id.ToString()}\", \"{emergency.Doctor.Id.ToString()}\", \"{emergency.Patient.Id.ToString()}\", \"{emergency.Premise.Id.ToString()}\", \"{emergency.Beginning.ToString("dd.MM.yyyy. HH:mm")}\", \"{emergency.Duration.ToString()}\", \"{emergency.Type.ToString()}\", \"\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
         }
 
         public static void EditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
@@ -236,6 +251,127 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
 
             }
+        }
+
+        public static bool IsAvailableAllChecks(string beginning, string duration, string premiseId, string patientId, string appointmentId) {
+            //checking if the doctor is available
+            if (!IsAvailable(Constants.connectionString,
+                "select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\" and not id=\"" + appointmentId + "\"",
+                beginning, duration))
+            {
+                MessageBox.Show("Doctor has an appointment.", "Error");
+                return false;
+            }
+
+            //checking if the room is available
+            if (!IsAvailable(Constants.connectionString,
+            "select * from appointments where premiseId =\"" + premiseId + "\" and not id=\"" + appointmentId + "\"",
+            beginning, duration))
+            {
+                MessageBox.Show("Premise occupied.", "Error");
+                return false;
+            }
+
+            //checking if the patient is available
+            if (!IsAvailable(Constants.connectionString,
+            "select * from appointments where patientId=\"" + patientId + "\" and not id=\"" + appointmentId + "\"",
+            beginning, duration))
+            {
+                MessageBox.Show("Patient has an appointment.", "Error");
+                return false;
+            }
+
+            return true;
+        }
+
+
+        public static void InsertNew(Appointment app)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"insert into appointments values (\"{app.Id}\", \"{app.Doctor.Id}\", \"{app.Patient.Id}\", " +
+                    $"\"{app.Premise.Id}\", \"{MyConverter.ToString(app.Beginning)}\", \"{app.Duration}\", \"{app.Type}\", \"{app.Comment}\")";
+
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public static bool CheckAvailability(int doctorId, DateTime beginning, int duration, string premiseId, int patientId)
+        {
+            // doctor
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+                    "select * from appointments where doctorId =\"" + doctorId + "\"",
+                    beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            // patient
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+            "select * from appointments where patientId=\"" + patientId + "\"",
+            beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            // premise
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+            "select * from appointments where premiseId =\"" + premiseId + "\"",
+            beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            return true;
+        }
+
+        private static Dictionary<Appointment, DateTime> GetPotentialRescheduleTimes(List<string> doctorIds)
+        {
+            Dictionary<Appointment, DateTime> earliestRescheduleTimes = new Dictionary<Appointment, DateTime>();
+
+            // Get all doctor's future appointments in the next two hours in ascending order
+            DateTime timestampNow = DateTime.Now;
+            DateTime timestampTwoHoursFromNow = DateTime.Now.AddMinutes(120);
+            string query = $"select * from appointments";
+            List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, query);
+
+
+            // Finding the earliest reschedule time for every appointment in the next two hours for doctors with specialisation
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.Beginning > timestampNow && appointment.Beginning < timestampTwoHoursFromNow && doctorIds.Contains(appointment.Doctor.Id.ToString()))
+                {
+                    earliestRescheduleTimes[appointment] = appointment.GetEarliestRescheduleTime();
+                }
+            }
+
+            return earliestRescheduleTimes;
+        }
+
+        public static List<KeyValuePair<Appointment, DateTime>> SortEarliestToReschedule(List<String> doctorIds)
+        {
+            // Get all appointments in the next two hours with the times possible to reschedule to
+            Dictionary<Appointment, DateTime> appointmentsByPotentialRescheduleTimes = GetPotentialRescheduleTimes(doctorIds);
+
+            // Calculating time difference between original appointment beginning and reschedule beginning
+            Dictionary<Appointment, TimeSpan> appointmentsByRescheduleDifference = new Dictionary<Appointment, TimeSpan>();
+            foreach (KeyValuePair<Appointment, DateTime> pair in appointmentsByPotentialRescheduleTimes)
+            {
+                appointmentsByRescheduleDifference[pair.Key] = pair.Key.Beginning - pair.Value;
+            }
+
+            // Sorting appointments by difference in beginnings in ascending order
+            List<KeyValuePair<Appointment, TimeSpan>> sortedEarliestToReschedule = appointmentsByRescheduleDifference.ToList();
+            sortedEarliestToReschedule.Sort(delegate (KeyValuePair<Appointment, TimeSpan> pair1,
+                KeyValuePair<Appointment, TimeSpan> pair2)
+            {
+                return pair2.Value.CompareTo(pair1.Value);
+            });
+
+            // Combining the results from the sort with time for reschedule beginning 
+            List<KeyValuePair<Appointment, DateTime>> sortedAppointmentsByEarliestReschedule = new List<KeyValuePair<Appointment, DateTime>>();
+            foreach (var pair in sortedEarliestToReschedule)
+            {
+                sortedAppointmentsByEarliestReschedule.Add(new KeyValuePair<Appointment, DateTime>(pair.Key, appointmentsByPotentialRescheduleTimes[pair.Key]));
+            }
+
+            return sortedAppointmentsByEarliestReschedule;
+
         }
     }
 }

@@ -18,7 +18,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			InitializeComponent();
 			List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
-			Console.WriteLine(appointments.Count);
 			foreach (Appointment appointment in appointments)
 			{
 				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
@@ -59,7 +58,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
 				if (dialogResult == DialogResult.Yes)
 				{
-					//Console.WriteLine(dataGridView1.SelectedRows[0].Cells[6].Value.ToString());
 					MessageBox.Show("Changes saved.", "Success");
 					AppointmentController.DeleteFromBase(GetSelectedAppointmentId());
 				}

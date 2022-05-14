@@ -34,7 +34,10 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.managingPremisesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchAndFilterEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrangingEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.complexRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +59,9 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.managingPremisesToolStripMenuItem,
             this.searchAndFilterEquipmentToolStripMenuItem,
-            this.arrangingEquipmentToolStripMenuItem});
+            this.arrangingEquipmentToolStripMenuItem,
+            this.simpleRenovationsToolStripMenuItem,
+            this.complexRenovationsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -82,21 +87,46 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.arrangingEquipmentToolStripMenuItem.Text = "Arranging equipment";
             this.arrangingEquipmentToolStripMenuItem.Click += new System.EventHandler(this.ArrangingEquipmentToolStripMenuItem_Click);
             // 
+            // simpleRenovationsToolStripMenuItem
+            // 
+            this.simpleRenovationsToolStripMenuItem.Name = "simpleRenovationsToolStripMenuItem";
+            this.simpleRenovationsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.simpleRenovationsToolStripMenuItem.Text = "Simple renovations";
+            this.simpleRenovationsToolStripMenuItem.Click += new System.EventHandler(this.SimpleRenovationsToolStripMenuItem_Click);
+            // 
+            // complexRenovationsToolStripMenuItem
+            // 
+            this.complexRenovationsToolStripMenuItem.Name = "complexRenovationsToolStripMenuItem";
+            this.complexRenovationsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.complexRenovationsToolStripMenuItem.Text = "Complex renovations";
+            this.complexRenovationsToolStripMenuItem.Click += new System.EventHandler(this.ComplexRenovationsToolStripMenuItem_Click);
+            // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(85, 29);
             this.logoutToolStripMenuItem.Text = "Logout";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 111);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
             // ManagerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "ManagerMainForm";
             this.Text = "ManagerMainForm";
+            this.Load += new System.EventHandler(this.ManagerMainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -112,5 +142,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
         private System.Windows.Forms.ToolStripMenuItem searchAndFilterEquipmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem arrangingEquipmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem simpleRenovationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem complexRenovationsToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }

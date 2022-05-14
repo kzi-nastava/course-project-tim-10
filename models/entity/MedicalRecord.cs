@@ -57,5 +57,14 @@ namespace HealthCareInfromationSystem.models.entity
 
 			return new MedicalRecord(id, height, weight, bloodType, disease, alergie);
 		}
+
+		internal bool IsAlergic(string[] ingredients)
+		{
+			string[] allAlergies = alergies.Split(',');
+			foreach (string alergie in allAlergies) {
+				if (ingredients.Contains(alergie.Trim())) return true;
+			}
+			return false;
+		}
 	}
 }

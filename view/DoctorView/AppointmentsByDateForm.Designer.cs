@@ -43,6 +43,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.label1 = new System.Windows.Forms.Label();
 			this.dateTextBox = new System.Windows.Forms.TextBox();
 			this.searchBtn = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -52,13 +53,13 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.dataGridView1.AllowUserToDeleteRows = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-			this.premiseName,
-			this.patientName,
-			this.patientLastName,
-			this.beggining,
-			this.duration,
-			this.type,
-			this.Id});
+            this.premiseName,
+            this.patientName,
+            this.patientLastName,
+            this.beggining,
+            this.duration,
+            this.type,
+            this.Id});
 			this.dataGridView1.Location = new System.Drawing.Point(41, 120);
 			this.dataGridView1.MinimumSize = new System.Drawing.Size(1100, 450);
 			this.dataGridView1.Name = "dataGridView1";
@@ -140,7 +141,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.amnesisBtn.Name = "amnesisBtn";
 			this.amnesisBtn.Size = new System.Drawing.Size(110, 45);
 			this.amnesisBtn.TabIndex = 3;
-			this.amnesisBtn.Text = "Amnesis";
+			this.amnesisBtn.Text = "Amnesis and prescriptions";
 			this.amnesisBtn.UseVisualStyleBackColor = true;
 			this.amnesisBtn.Click += new System.EventHandler(this.AmnesisBtnClick);
 			// 
@@ -180,11 +181,22 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.searchBtn.UseVisualStyleBackColor = true;
 			this.searchBtn.Click += new System.EventHandler(this.SearchBtnClick);
 			// 
-			// TableFutureAppointments
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(615, 619);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(110, 45);
+			this.button1.TabIndex = 8;
+			this.button1.Text = "Referral Letter";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.ReferralLetterClick);
+			// 
+			// AppointmentsByDateForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1182, 753);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.searchBtn);
 			this.Controls.Add(this.dateTextBox);
 			this.Controls.Add(this.label1);
@@ -193,7 +205,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.Controls.Add(this.moreInfoBtn);
 			this.Controls.Add(this.dataGridView1);
 			this.MinimumSize = new System.Drawing.Size(1200, 800);
-			this.Name = "TableFutureAppointments";
+			this.Name = "AppointmentsByDateForm";
 			this.Text = "MainWindowDoctor";
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
@@ -217,5 +229,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox dateTextBox;
 		private System.Windows.Forms.Button searchBtn;
+		private System.Windows.Forms.Button button1;
 	}
 }

@@ -108,12 +108,7 @@ namespace HealthCareInfromationSystem.models.users
 			this._username = username;
 		
 		}
-    
 
-		
-
-
-		
 
 		public Person DeepCopy()
 		{
@@ -136,8 +131,14 @@ namespace HealthCareInfromationSystem.models.users
 			return new Person(id, name, lastName, role,
 			  password, blocked, blocker, username);
 		}
-	}
 
+		public override string ToString()
+		{
+			return _firstname + " " + _lastname;
+		}
+
+
+	}
 }
 
 

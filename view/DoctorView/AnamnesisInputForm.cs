@@ -14,7 +14,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AnamnesisInputForm : Form
 	{
-		Appointment Appointment { get; set; }
+		Appointment appointment { get; set; }
 
 		public AnamnesisInputForm()
 		{
@@ -24,7 +24,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		public AnamnesisInputForm(Appointment appointment)
 		{
 			InitializeComponent();
-			this.Appointment = appointment;
+			this.appointment = appointment;
 			Console.WriteLine($"id={appointment.Id}, comment={appointment.Comment}");
 			anamnesisTextBox.Text = appointment.Comment;
 
@@ -36,8 +36,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				string anamnesis = anamnesisTextBox.Text;
-				Appointment.Comment = anamnesis;
-				AppointmentController.EditAppointmentComment(Appointment.Id.ToString(), anamnesis);
+				appointment.Comment = anamnesis;
+				AppointmentController.EditAppointmentComment(appointment.Id.ToString(), anamnesis);
 				MessageBox.Show("Changes saved.", "Success");
 			}
 		}
@@ -45,6 +45,12 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private void CancelBtnClick(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+
+		private void AddPrescriptionBtnClick(object sender, EventArgs e)
+		{
+			AddPrescriptionForm addPrescriptionForm = new AddPrescriptionForm(appointment.Patient.Id);
+			addPrescriptionForm.Show();
 		}
 	}
 }

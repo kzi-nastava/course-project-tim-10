@@ -34,5 +34,17 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             AppointmentRequestForm appointmentRequestForm = new AppointmentRequestForm();
             appointmentRequestForm.Show();
         }
+
+        private void ByReferralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookingByReferralForm bookingByReferralForm = new BookingByReferralForm();
+            bookingByReferralForm.Show();
+        }
+
+        private void EmergencyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookingEmergency bookingEmergencyForm = new BookingEmergency();
+            bookingEmergencyForm.Show();
+        }
     }
 }
