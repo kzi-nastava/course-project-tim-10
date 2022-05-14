@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,15 +25,18 @@ namespace HealthCareInfromationSystem.view.DoctorView
         {
 			try
             {
+
 				string notificationText = NotificationController.GetEmergencyNotifications(Constants.connectionString, utils.LoggedInUser.GetId());
+				notificationText += NotificationController.GetRescheduleNotifications(Constants.connectionString, "", utils.LoggedInUser.GetId());
 				if (notificationText != "")
 				{
 					MessageBox.Show(notificationText);
 					NotificationController.MarkEmergencyNotificationsAsRecieved(Constants.connectionString, utils.LoggedInUser.GetId());
+					NotificationController.MarkRescheduleNotificationsAsRecieved(Constants.connectionString, "", utils.LoggedInUser.GetId());
 				}
-			} catch
-            {
-				Console.WriteLine("Error while recieving notifications");
+            } catch (OleDbException)
+			{
+				Console.WriteLine("Error while recieving notifications.");
             }
 
 		}

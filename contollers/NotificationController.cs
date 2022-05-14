@@ -83,5 +83,62 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static void AddRescheduleNotification(Appointment appointment)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"insert into reschedule_notifications values (\"{GetFirstFreeId("reschedule_notifications")}\", \"{appointment.Patient.Id.ToString()}\", \"{appointment.Doctor.Id.ToString()}\", \"{appointment.Id.ToString()}\", \"false\", \"false\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        // Loads all unrecieved notifications' text 
+        public static string GetRescheduleNotifications(string connectionString, string patientId, string doctorId)
+        {
+            using (OleDbConnection connection = new OleDbConnection(connectionString))
+            {
+                string query;
+                if (patientId != "") query = $"select * from reschedule_notifications where patientId=\"{patientId}\" and patientRecieved=\"false\"";
+                else query = $"select * from reschedule_notifications where doctorId=\"{doctorId}\" and doctorRecieved=\"false\"";
+
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<string> notifications = new List<string>();
+
+                while (reader.Read())
+                {
+                    Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString, $"select * from appointments where id=\"{reader[3].ToString()}\"");
+                    if (patientId != "") notifications.Add("Rescheduled appointment with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName + " to " + appointment.Beginning.ToString() + ".");
+                    else notifications.Add("Rescheduled appointment with patient " + appointment.Patient.FirstName + " " + appointment.Patient.LastName + " to " + appointment.Beginning.ToString() + ".");
+                }
+                reader.Close();
+
+                string notificationText = "";
+                foreach (string notification in notifications)
+                {
+                    notificationText += notification + "\n";
+                }
+                return notificationText;
+            }
+        }
+
+        public static void MarkRescheduleNotificationsAsRecieved(string connectionString, string patientId, string doctorId)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = "";
+                // Patient recieved notification
+                if (patientId != "") query = $"update reschedule_notifications set patientRecieved=\"true\" where patientId=\"{patientId}\"";
+                else query = $"update reschedule_notifications set doctorRecieved=\"true\" where doctorId=\"{doctorId}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
     }
 }

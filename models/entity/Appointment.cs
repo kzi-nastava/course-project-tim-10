@@ -171,11 +171,15 @@ namespace HealthCareInfromationSystem.models.entity
             // Checking availability in the next 2 hours for every doctor and finding the earliest 
             foreach (string id in doctorIds)
             {
+                Console.WriteLine("checking out " + id);
                 DateTime beginning = bookingStartTime;
                 while (beginning <= bookingStartTime.AddMinutes(120) && beginning < beginningMinimum)
                 {
+                    Console.WriteLine("checking out time" + beginning.ToString());
+                    Console.WriteLine(beginning.ToString() + this.Duration.ToString() + this.Premise.Id.ToString() + this.Patient.Id.ToString());
                     if (AppointmentController.CheckAvailability(int.Parse(id), beginning, this.Duration, this.Premise.Id, this.Patient.Id))
                     {
+                        Console.WriteLine(id + "is available earliest at" + beginning.ToString());
                         doctorId = id;
                         beginningMinimum = beginning;
                         break; // Found earliest available time for current doctor, move on to next doctor

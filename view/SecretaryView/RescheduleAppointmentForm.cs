@@ -17,7 +17,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         Appointment emergency;
         string selectedAppointmentId;
-        Dictionary<int, string> appointmentRescheduleTime = new Dictionary<int, string>();
+        Dictionary<int, DateTime> appointmentRescheduleTime = new Dictionary<int, DateTime>();
         List<String> doctorIds;
         public RescheduleAppointmentForm(Appointment emergency, List<String> doctorIds)
         {
@@ -35,7 +35,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             int i = 0;
             foreach (KeyValuePair<Appointment, DateTime> pair in appointments)
             {
-                appointmentRescheduleTime[pair.Key.Id] = pair.Value.ToString("dd.MM.yyyy. HH:mm");
+                appointmentRescheduleTime[pair.Key.Id] = pair.Value;
                 dataGridViewAppointments.Rows.Add(pair.Key.Beginning.ToString(), pair.Key.Duration.ToString(), pair.Value.ToString(), pair.Key.Doctor.FirstName + " " + pair.Key.Doctor.LastName, pair.Key.Patient.FirstName + " " + pair.Key.Patient.LastName, pair.Key.Id.ToString());
                 ++i;
                 if (i>5)
@@ -50,10 +50,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (selectedAppointmentId != "")
             {
                 Appointment forRescheduling = AppointmentController.LoadOneAppointment(Constants.connectionString, $"select * from appointments where id=\"{selectedAppointmentId}\"");
-                AppointmentController.EditInBase(forRescheduling.Id.ToString(), forRescheduling.Patient.Id.ToString(), forRescheduling.Premise.Id, forRescheduling.Doctor.Id, appointmentRescheduleTime[forRescheduling.Id], forRescheduling.Duration.ToString(), forRescheduling.Type.ToString());
+                AppointmentController.EditInBase(forRescheduling.Id.ToString(), forRescheduling.Patient.Id.ToString(), forRescheduling.Premise.Id, forRescheduling.Doctor.Id, appointmentRescheduleTime[forRescheduling.Id].ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), forRescheduling.Type.ToString());
                 AppointmentController.AddToBase(emergency.Patient.Id.ToString(), emergency.Premise.Id, forRescheduling.Doctor.Id, forRescheduling.Beginning.ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), emergency.Type.ToString());
                 MessageBox.Show("Appointment at " + forRescheduling.Beginning.ToString("dd.MM.yyyy. HH:mm") + " rescheduled to " + appointmentRescheduleTime[forRescheduling.Id] + ".\nEmergency sucessfully booked instead.", "Success");
-                // TODO Send notifications
+                
+                forRescheduling.Beginning = appointmentRescheduleTime[forRescheduling.Id];
+                NotificationController.AddRescheduleNotification(forRescheduling);
             }
         }
 
