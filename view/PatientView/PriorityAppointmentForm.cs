@@ -14,6 +14,7 @@ using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
 using static HealthCareInfromationSystem.models.entity.Appointment;
 
+
 namespace HealthCareInfromationSystem.view.PatientView
 {
     public partial class PriorityAppointmentForm : Form
@@ -31,12 +32,14 @@ namespace HealthCareInfromationSystem.view.PatientView
 
         Appointment appointment;
 
+
         public PriorityAppointmentForm()
         {
             InitializeComponent();
             InitializeAppointment();
             FillDoctorsComboBox();
         }
+
 
         private void InitializeAppointment()
         {
@@ -48,6 +51,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             appointment.Duration = 15;
             appointment.Comment = "";
         }
+
 
         private Appointment CreatePossibleAppointment(DateTime datetime, Person doctor)
         {
@@ -63,6 +67,7 @@ namespace HealthCareInfromationSystem.view.PatientView
 
             return newApp;
         }
+
 
         private void FillDoctorsComboBox()
         {
@@ -106,6 +111,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             }
         }
 
+
         private List<Appointment> GetAvailableAppointments(List<Appointment> reservedAppointments)
         {
             List<Appointment> appointments = new List<Appointment>();
@@ -129,7 +135,6 @@ namespace HealthCareInfromationSystem.view.PatientView
             }
             return appointments;
         }
-
 
 
         private bool Available(Appointment datetime, List<Appointment> reservedAppointments)
@@ -181,27 +186,13 @@ namespace HealthCareInfromationSystem.view.PatientView
         }
 
 
-        //private void CreateNewAppointment()
-        //{
-        //    int id = int.Parse(BaseFunctions.GenerateId("appointments", "id"));
-        //    DateTime beginning = (DateTime)appointmentsBox.SelectedItem;
-        //    Person patient = LoggedInUser.loggedIn;
-        //    Premise premise = PremiseController.SearchPremise("2");
-        //    AppointmentType type = Appointment.AppointmentType.physical;
-        //    string comment = "";
-        //    Appointment appointment = new Appointment(id, doctor, patient, premise, beginning, 15, type, comment);
-        //    AppointmentController.InsertNew(appointment);
-        //    MessageBox.Show("You have successfully created appointment.");
-        //}
-
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            // NECE RADITI ZATO STO JE PACIJENT NULL
             Appointment selectedApp = (Appointment) appointmentsBox.SelectedItem;
             AppointmentController.InsertNew(selectedApp);
             MessageBox.Show("You have successfully created appointment.");
         }
+
 
     }
 }

@@ -36,6 +36,7 @@ namespace HealthCareInfromationSystem
             this.appointmentRewiewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createAppointmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPriorityAppointmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.anamnesisReviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +76,8 @@ namespace HealthCareInfromationSystem
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.appointmentRewiewToolStripMenuItem,
             this.createAppointmentToolStripMenuItem,
-            this.createPriorityAppointmentToolStripMenuItem});
+            this.createPriorityAppointmentToolStripMenuItem,
+            this.anamnesisReviewToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -100,6 +102,13 @@ namespace HealthCareInfromationSystem
             this.createPriorityAppointmentToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
             this.createPriorityAppointmentToolStripMenuItem.Text = "Create priority appointment";
             this.createPriorityAppointmentToolStripMenuItem.Click += new System.EventHandler(this.createPriorityAppointmentToolStripMenuItem_Click);
+            // 
+            // anamnesisReviewToolStripMenuItem
+            // 
+            this.anamnesisReviewToolStripMenuItem.Name = "anamnesisReviewToolStripMenuItem";
+            this.anamnesisReviewToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+            this.anamnesisReviewToolStripMenuItem.Text = "Anamnesis review";
+            this.anamnesisReviewToolStripMenuItem.Click += new System.EventHandler(this.anamnesisReviewToolStripMenuItem_Click);
             // 
             // HomePageForm
             // 
@@ -128,5 +137,6 @@ namespace HealthCareInfromationSystem
         private System.Windows.Forms.ToolStripMenuItem appointmentRewiewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createAppointmentToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createPriorityAppointmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem anamnesisReviewToolStripMenuItem;
     }
 }
