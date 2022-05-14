@@ -306,5 +306,59 @@ namespace HealthCareInfromationSystem.contollers
 
             return true;
         }
+
+        private static Dictionary<Appointment, DateTime> GetPotentialRescheduleTimes()
+        {
+            Dictionary<Appointment, DateTime> earliestRescheduleTimes = new Dictionary<Appointment, DateTime>();
+
+            // Get all doctor's future appointments in the next two hours in ascending order
+            DateTime timestampNow = DateTime.Now;
+            DateTime timestampTwoHoursFromNow = DateTime.Now.AddMinutes(120);
+            string query = "select * from appointments";
+            List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, query);
+
+
+            // Finding the earliest reschedule time for every appointment in the next two hours
+            foreach (Appointment appointment in appointments)
+            {
+                if (appointment.Beginning > timestampNow && appointment.Beginning < timestampTwoHoursFromNow)
+                {
+                    earliestRescheduleTimes[appointment] = appointment.GetEarliestRescheduleTime();
+                }
+            }
+
+            return earliestRescheduleTimes;
+        }
+
+        public static List<KeyValuePair<Appointment, DateTime>> SortEarliestToReschedule()
+        {
+            // Get all appointments in the next two hours with the times possible to reschedule to
+            Dictionary<Appointment, DateTime> appointmentsByPotentialRescheduleTimes = GetPotentialRescheduleTimes();
+
+            // Calculating time difference between original appointment beginning and reschedule beginning
+            Dictionary<Appointment, TimeSpan> appointmentsByRescheduleDifference = new Dictionary<Appointment, TimeSpan>();
+            foreach (KeyValuePair<Appointment, DateTime> pair in appointmentsByPotentialRescheduleTimes)
+            {
+                appointmentsByRescheduleDifference[pair.Key] = pair.Key.Beginning - pair.Value;
+            }
+
+            // Sorting appointments by difference in beginnings in ascending order
+            List<KeyValuePair<Appointment, TimeSpan>> sortedEarliestToReschedule = appointmentsByRescheduleDifference.ToList();
+            sortedEarliestToReschedule.Sort(delegate (KeyValuePair<Appointment, TimeSpan> pair1,
+                KeyValuePair<Appointment, TimeSpan> pair2)
+            {
+                return pair2.Value.CompareTo(pair1.Value);
+            });
+
+            // Combining the results from the sort with time for reschedule beginning 
+            List<KeyValuePair<Appointment, DateTime>> sortedAppointmentsByEarliestReschedule = new List<KeyValuePair<Appointment, DateTime>>();
+            foreach (var pair in sortedEarliestToReschedule)
+            {
+                sortedAppointmentsByEarliestReschedule.Add(new KeyValuePair<Appointment, DateTime>(pair.Key, appointmentsByPotentialRescheduleTimes[pair.Key]));
+            }
+
+            return sortedAppointmentsByEarliestReschedule;
+
+        }
     }
 }

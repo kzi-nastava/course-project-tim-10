@@ -175,7 +175,6 @@ namespace HealthCareInfromationSystem.models.entity
                 while (beginning <= bookingStartTime.AddMinutes(120) && beginning < beginningMinimum)
                 {
                     if (AppointmentController.CheckAvailability(int.Parse(id), beginning, this.Duration, this.Premise.Id, this.Patient.Id))
-                    // TODO Test with CheckAvailability(id, beginning, this.Duration, this.Premise.Id, this.Patient.Id)
                     {
                         doctorId = id;
                         beginningMinimum = beginning;
@@ -196,6 +195,27 @@ namespace HealthCareInfromationSystem.models.entity
             return false;
 
         }
+
+        // Finds the earliest time for potential rescheduling of an appointment
+        // when patient, doctor and premise would be available
+        public DateTime GetEarliestRescheduleTime()
+        {
+            // Rescheduled beginning time will be as early as the original appointment's ending + 5 minutes
+            DateTime beginning = this.Beginning.AddMinutes(this.Duration);
+
+            while (true)
+            {
+                if (AppointmentController.CheckAvailability(this.Doctor.Id, beginning, this.Duration, this.Premise.Id, this.Patient.Id))
+                {
+                    return beginning; // The first time is earliest available time 
+                }
+                beginning = beginning.AddMinutes(5);
+            }
+
+        }
+
+        
+
 
     }
 
