@@ -194,6 +194,18 @@ namespace HealthCareInfromationSystem.contollers
 
         }
 
+        public static void AddEmergencyToBase(Appointment emergency)
+        {
+            emergency.Id =  GetFirstFreeId();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into appointments values (\"{emergency.Id.ToString()}\", \"{emergency.Doctor.Id.ToString()}\", \"{emergency.Patient.Id.ToString()}\", \"{emergency.Premise.Id.ToString()}\", \"{emergency.Beginning.ToString("dd.MM.yyyy. HH:mm")}\", \"{emergency.Duration.ToString()}\", \"{emergency.Type.ToString()}\", \"\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+
         public static void EditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

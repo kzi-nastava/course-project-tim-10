@@ -56,6 +56,7 @@
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\MedicineController.cs" />
+    <Compile Include="contollers\NotificationController.cs" />
     <Compile Include="contollers\PatientController.cs" />
     <Compile Include="contollers\PersonController.cs" />
     <Compile Include="contollers\PremiseController.cs" />

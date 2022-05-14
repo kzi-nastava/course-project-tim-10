@@ -120,8 +120,9 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                         + "\nConfirm booking?", "Check", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        AppointmentController.AddToBase(appointment.Patient.Id.ToString(), appointment.Premise.Id.ToString(), appointment.Doctor.Id, appointment.Beginning.ToString("dd.MM.yyyy. HH:mm"), appointment.Duration.ToString(), appointment.Type.ToString());
+                        AppointmentController.AddEmergencyToBase(appointment);
                         MessageBox.Show("Emergency booked.", "Success");
+                        NotificationController.AddEmergencyNotification(appointment);
                     }
                 }
                 else
