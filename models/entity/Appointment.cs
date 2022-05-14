@@ -151,6 +151,11 @@ namespace HealthCareInfromationSystem.models.entity
         }
 
 
+        public override string ToString()
+        {
+            return _beginning + "  -  " + _doctor;
+        }
+
 
     }
 

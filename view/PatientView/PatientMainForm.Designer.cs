@@ -35,6 +35,7 @@ namespace HealthCareInfromationSystem
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appointmentRewiewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createAppointmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createPriorityAppointmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +74,8 @@ namespace HealthCareInfromationSystem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.appointmentRewiewToolStripMenuItem,
-            this.createAppointmentToolStripMenuItem});
+            this.createAppointmentToolStripMenuItem,
+            this.createPriorityAppointmentToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -91,6 +93,13 @@ namespace HealthCareInfromationSystem
             this.createAppointmentToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
             this.createAppointmentToolStripMenuItem.Text = "Create appointment";
             this.createAppointmentToolStripMenuItem.Click += new System.EventHandler(this.createAppointmentToolStripMenuItem_Click);
+            // 
+            // createPriorityAppointmentToolStripMenuItem
+            // 
+            this.createPriorityAppointmentToolStripMenuItem.Name = "createPriorityAppointmentToolStripMenuItem";
+            this.createPriorityAppointmentToolStripMenuItem.Size = new System.Drawing.Size(231, 26);
+            this.createPriorityAppointmentToolStripMenuItem.Text = "Create priority appointment";
+            this.createPriorityAppointmentToolStripMenuItem.Click += new System.EventHandler(this.createPriorityAppointmentToolStripMenuItem_Click);
             // 
             // HomePageForm
             // 
@@ -118,5 +127,6 @@ namespace HealthCareInfromationSystem
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appointmentRewiewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createAppointmentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createPriorityAppointmentToolStripMenuItem;
     }
 }

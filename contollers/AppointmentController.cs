@@ -270,5 +270,21 @@ namespace HealthCareInfromationSystem.contollers
 
             return true;
         }
+
+
+        public static void InsertNew(Appointment app)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"insert into appointments values (\"{app.Id}\", \"{app.Doctor.Id}\", \"{app.Patient.Id}\", " +
+                    $"\"{app.Premise.Id}\", \"{MyConverter.ToString(app.Beginning)}\", \"{app.Duration}\", \"{app.Type}\", \"{app.Comment}\")";
+
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
     }
 }

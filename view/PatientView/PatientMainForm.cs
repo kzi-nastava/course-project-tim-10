@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.view.PatientView;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,6 +51,12 @@ namespace HealthCareInfromationSystem
         private void createAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             serviceForm = new AppointmentForm();
+            serviceForm.Show();
+        }
+
+        private void createPriorityAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serviceForm = new PriorityAppointmentForm();
             serviceForm.Show();
         }
     }
