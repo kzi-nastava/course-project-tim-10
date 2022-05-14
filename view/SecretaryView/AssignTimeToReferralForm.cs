@@ -70,7 +70,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
             catch
             {
-                MessageBox.Show("Beginning in incorrect format.", "Error");
+                MessageBox.Show("Beginning or duration in incorrect format.", "Error");
                 return;
             }
 

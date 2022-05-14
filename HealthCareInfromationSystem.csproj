@@ -220,6 +220,12 @@
     <Compile Include="view\SecretaryView\BookingByReferralForm.Designer.cs">
       <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\BookingEmergencyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\BookingEmergencyForm.Designer.cs">
+      <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\BookingByReferralForm.resx">
       <DependentUpon>BookingByReferralForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\BookingEmergencyForm.resx">
+      <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
