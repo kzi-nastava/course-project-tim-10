@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,23 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		public DoctorMainForm()
 		{
 			InitializeComponent();
+			ShowNotifications();
+		}
+
+		private void ShowNotifications()
+        {
+			try
+            {
+				string notificationText = NotificationController.GetEmergencyNotifications(Constants.connectionString, utils.LoggedInUser.GetId());
+				if (notificationText != "")
+				{
+					MessageBox.Show(notificationText);
+					NotificationController.MarkEmergencyNotificationsAsRecieved(Constants.connectionString, utils.LoggedInUser.GetId());
+				}
+			} catch
+            {
+				Console.WriteLine("Error while recieving notifications");
+            }
 
 		}
 
