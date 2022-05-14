@@ -132,9 +132,13 @@ namespace HealthCareInfromationSystem.models.users
 			  password, blocked, blocker, username);
 		}
 
-		
-	}
+		public override string ToString()
+		{
+			return _firstname + " " + _lastname;
+		}
 
+
+	}
 }
 
 
