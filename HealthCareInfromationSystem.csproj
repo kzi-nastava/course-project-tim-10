@@ -232,6 +232,12 @@
     <Compile Include="view\SecretaryView\ManagePatientsForm.Designer.cs">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\RescheduleAppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\RescheduleAppointmentForm.Designer.cs">
+      <DependentUpon>RescheduleAppointmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\SecretaryMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\RescheduleAppointmentForm.resx">
+      <DependentUpon>RescheduleAppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\SecretaryMainForm.resx">
       <DependentUpon>SecretaryMainForm.cs</DependentUpon>

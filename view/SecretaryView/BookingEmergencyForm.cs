@@ -103,7 +103,33 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                     MessageBox.Show("Duration in incorrect format.", "Error");
                     return;
                 }
-                
+
+                Appointment appointment = new Appointment();
+                appointment.Patient = PersonController.LoadOnePerson(Constants.connectionString, $"select * from users where id=\"{selectedPatientId}\"");
+                appointment.Premise = PremiseController.LoadOnePremise(Constants.connectionString, $"select * from premises where premises_id=\"{cbPremise.SelectedValue}\"");
+                if (cbType.SelectedItem.ToString() == "physical") appointment.Type = Appointment.AppointmentType.physical;
+                else appointment.Type = Appointment.AppointmentType.operation;
+                appointment.Duration = int.Parse(tbDuration.Text);
+
+                List<string> doctorIds = SpecialisationController.GetDoctorIds(Constants.connectionString, cbSpecialisation.SelectedItem.ToString());
+                if (appointment.AssignEmergencySlot(doctorIds))
+                {
+                    // found doctor and time
+                    DialogResult dialogResult = MessageBox.Show("Found available appointment at " + appointment.Beginning.ToString() 
+                        + " with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName 
+                        + "\nConfirm booking?", "Check", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes) Console.WriteLine("found doctor and time" + appointment.Doctor.Id + appointment.Beginning.ToString());
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Unable to find available appointment in the next two hours.\nContinue to rescheduling?", "Check", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        RescheduleAppointmentForm rescheduleAppointmentForm = new RescheduleAppointmentForm(appointment);
+                        rescheduleAppointmentForm.Show();
+                    }
+                }
+
             } else
             {
                 MessageBox.Show("Incomplete selection.", "Error");
