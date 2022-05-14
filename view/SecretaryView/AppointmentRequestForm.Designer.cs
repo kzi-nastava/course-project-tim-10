@@ -61,7 +61,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.dataGridViewRequests.ReadOnly = true;
             this.dataGridViewRequests.Size = new System.Drawing.Size(843, 315);
             this.dataGridViewRequests.TabIndex = 0;
-            this.dataGridViewRequests.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewRequests_RowHeaderMouseClick);
+            this.dataGridViewRequests.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewRequests_RowHeaderMouseClick);
             // 
             // ColumnId
             // 

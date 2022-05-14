@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 
@@ -145,7 +146,8 @@ namespace HealthCareInfromationSystem.contollers
                     DateTime beginningOld = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
                     DateTime endingOld = beginningOld.AddMinutes(int.Parse(reader[5].ToString()));
                     if ((beginningOld <= beginningNew && beginningNew <= endingOld)
-                        || (beginningOld <= endingNew && endingNew <= endingOld))
+                        || (beginningOld <= endingNew && endingNew <= endingOld)
+                        || (beginningNew <= beginningOld && endingNew >= endingOld))
                     {
                         Console.WriteLine(c);
                         return false;
@@ -236,6 +238,37 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
 
             }
+        }
+
+        public static bool IsAvailableAllChecks(string beginning, string duration, string premiseId, string patientId, string appointmentId) {
+            //checking if the doctor is available
+            if (!IsAvailable(Constants.connectionString,
+                "select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\" and not id=\"" + appointmentId + "\"",
+                beginning, duration))
+            {
+                MessageBox.Show("Doctor has an appointment.", "Error");
+                return false;
+            }
+
+            //checking if the room is available
+            if (!IsAvailable(Constants.connectionString,
+            "select * from appointments where premiseId =\"" + premiseId + "\" and not id=\"" + appointmentId + "\"",
+            beginning, duration))
+            {
+                MessageBox.Show("Premise occupied.", "Error");
+                return false;
+            }
+
+            //checking if the patient is available
+            if (!IsAvailable(Constants.connectionString,
+            "select * from appointments where patientId=\"" + patientId + "\" and not id=\"" + appointmentId + "\"",
+            beginning, duration))
+            {
+                MessageBox.Show("Patient has an appointment.", "Error");
+                return false;
+            }
+
+            return true;
         }
     }
 }

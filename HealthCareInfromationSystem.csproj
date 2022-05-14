@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,15 +53,25 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
+    <Compile Include="contollers\MedicineController.cs" />
     <Compile Include="contollers\PatientController.cs" />
     <Compile Include="contollers\PersonController.cs" />
     <Compile Include="contollers\PremiseController.cs" />
     <Compile Include="contollers\ReferralLetterController.cs" />
+    <Compile Include="contollers\SpecialisationController.cs" />
+    <Compile Include="contollers\RenovationController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
+    <Compile Include="models\entity\ComplexMoving.cs" />
+    <Compile Include="models\entity\ComplexRenovation.cs" />
+    <Compile Include="models\entity\MedicalPrescription.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
+    <Compile Include="models\entity\Medicine.cs" />
     <Compile Include="models\entity\Premise.cs" />
+    <Compile Include="models\entity\ReferralLetter.cs" />
+    <Compile Include="models\entity\SimpleRenovation.cs" />
     <Compile Include="models\users\Doctor.cs" />
     <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />
@@ -78,6 +88,18 @@
     </Compile>
     <Compile Include="view\DoctorView\AddAppointmentForm.Designer.cs">
       <DependentUpon>AddAppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AddPrescriptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AddPrescriptionForm.Designer.cs">
+      <DependentUpon>AddPrescriptionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AddReferralLetterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AddReferralLetterForm.Designer.cs">
+      <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\DoctorView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
@@ -127,6 +149,12 @@
     <Compile Include="view\ManagerView\ArrangingEquipmentForm.Designer.cs">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\ComplexRenovationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\ComplexRenovationsForm.Designer.cs">
+      <DependentUpon>ComplexRenovationsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ManagerView\EquipmentOverviewSearchFilterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +172,12 @@
     </Compile>
     <Compile Include="view\ManagerView\PremisesCRUDForm.Designer.cs">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\SimpleRenovationsForm.Designer.cs">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
@@ -163,11 +197,23 @@
     <Compile Include="view\SecretaryView\AppointmentRequestForm.Designer.cs">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\AssignTimeToReferralForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\AssignTimeToReferralForm.Designer.cs">
+      <DependentUpon>AssignTimeToReferralForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\BlockedPatientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\SecretaryView\BlockedPatientsForm.Designer.cs">
       <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SecretaryView\BookingByReferralForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\BookingByReferralForm.Designer.cs">
+      <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
       <SubType>Form</SubType>
@@ -190,8 +236,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\DoctorView\AddPrescriptionForm.resx">
+      <DependentUpon>AddPrescriptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
+      <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\AnamnesisInputForm.resx">
+      <DependentUpon>AnamnesisInputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\AppointmentsByDateForm.resx">
+      <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\ComplexRenovationsForm.resx">
+      <DependentUpon>ComplexRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\EquipmentOverviewSearchFilterForm.resx">
       <DependentUpon>EquipmentOverviewSearchFilterForm.cs</DependentUpon>
@@ -202,14 +263,23 @@
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\SimpleRenovationsForm.resx">
+      <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
     <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
     <EmbeddedResource Include="view\PatientView\PatientMainForm.resx" />
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\AssignTimeToReferralForm.resx">
+      <DependentUpon>AssignTimeToReferralForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\BlockedPatientsForm.resx">
       <DependentUpon>BlockedPatientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\BookingByReferralForm.resx">
+      <DependentUpon>BookingByReferralForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>
