@@ -110,7 +110,7 @@ namespace HealthCareInfromationSystem.contollers
                 OleDbCommand command = new OleDbCommand();
                 command.CommandType = System.Data.CommandType.Text;
                 command.CommandText = "update referral_letter set used=@used where id=@id";
-                command.Parameters.AddWithValue("@used", "true");
+                command.Parameters.AddWithValue("@used", "True");
                 command.Parameters.AddWithValue("@id", referralLetter.Id);
                 command.Connection = connection;
                 connection.Open();

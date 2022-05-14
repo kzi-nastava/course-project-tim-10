@@ -286,5 +286,25 @@ namespace HealthCareInfromationSystem.contollers
                 connection.Close();
             }
         }
+
+        public static bool CheckAvailability(int doctorId, DateTime beginning, int duration, string premiseId, int patientId)
+        {
+            // doctor
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+                    "select * from appointments where doctorId =\"" + doctorId + "\"",
+                    beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            // patient
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+            "select * from appointments where patientId=\"" + patientId + "\"",
+            beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            // premise
+            if (!AppointmentController.IsAvailable(Constants.connectionString,
+            "select * from appointments where premiseId =\"" + premiseId + "\"",
+            beginning.ToString("dd.MM.yyyy. HH:mm"), duration.ToString())) return false;
+
+            return true;
+        }
     }
 }
