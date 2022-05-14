@@ -45,6 +45,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+
         public static List<Appointment> LoadAppointmentsForDate(string connectionString, string queryString, string inputDate)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))

@@ -81,5 +81,11 @@ namespace HealthCareInfromationSystem
             serviceForm = new PriorityAppointmentForm();
             serviceForm.Show();
         }
+
+        private void anamnesisReviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serviceForm = new AnamnesisReviewForm();
+            serviceForm.Show();
+        }
     }
 }

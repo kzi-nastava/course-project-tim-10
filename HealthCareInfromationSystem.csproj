@@ -185,6 +185,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.Designer.cs" />
+    <Compile Include="view\PatientView\AnamnesisReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\AnamnesisReviewForm.Designer.cs">
+      <DependentUpon>AnamnesisReviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\AppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +291,9 @@
       <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
+    <EmbeddedResource Include="view\PatientView\AnamnesisReviewForm.resx">
+      <DependentUpon>AnamnesisReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
     <EmbeddedResource Include="view\PatientView\PatientMainForm.resx" />
     <EmbeddedResource Include="view\PatientView\PriorityAppointmentForm.resx" />
