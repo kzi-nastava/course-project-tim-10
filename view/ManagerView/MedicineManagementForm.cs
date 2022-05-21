@@ -38,11 +38,10 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private bool IsFormValid()
         {
-            return String.IsNullOrWhiteSpace(textBox1.Text) &&
-                String.IsNullOrWhiteSpace(textBox2.Text) &&
-                String.IsNullOrWhiteSpace(textBox3.Text) &&
-                String.IsNullOrWhiteSpace(textBox4.Text) &&
-                String.IsNullOrWhiteSpace(textBox5.Text);
+            return !String.IsNullOrWhiteSpace(textBox1.Text) &&
+                !String.IsNullOrWhiteSpace(textBox2.Text) &&
+                !String.IsNullOrWhiteSpace(textBox3.Text) &&
+                !String.IsNullOrWhiteSpace(textBox4.Text);
         }
 
         private void FillTable()
@@ -107,7 +106,9 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (!IsFormValid() || textBox1.Enabled == false) return;
+            if (!IsFormValid() || 
+                textBox1.Enabled == false ||
+                MedicineController.LoadOneById(textBox1.Text) != null) return;
 
             int id = Convert.ToInt32(textBox1.Text);
             string name = textBox2.Text;
@@ -117,6 +118,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
             Medicine medicine = new Medicine(id, name, description, ingredients, "in progress", "");
 
             medicineController.Save(medicine);
+
+            MessageBox.Show("Medicine added.");
         }
     }
 }

@@ -74,5 +74,17 @@ namespace HealthCareInfromationSystem.contollers
                 return medicine;
             }
         }
+
+        public void Save(Medicine medicine)
+        {
+            String ingredients = String.Join(", ", medicine.Ingredients).Trim();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into medicine values (\"{medicine.Id}\", \"{medicine.Name}\", \"{medicine.Description}\", \"{ingredients}\", \"{medicine.Status}\", \"{medicine.Comment}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
 	}
 }
