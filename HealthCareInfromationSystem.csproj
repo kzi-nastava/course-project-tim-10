@@ -169,6 +169,12 @@
     <Compile Include="view\ManagerView\ManagerMainForm.Designer.cs">
       <DependentUpon>ManagerMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\MedicineManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\MedicineManagementForm.Designer.cs">
+      <DependentUpon>MedicineManagementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ManagerView\PremisesCRUDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ManagerMainForm.resx">
       <DependentUpon>ManagerMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\MedicineManagementForm.resx">
+      <DependentUpon>MedicineManagementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>

@@ -44,6 +44,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
@@ -122,6 +123,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.medicineManagementToolStripMenuItem.Name = "medicineManagementToolStripMenuItem";
             this.medicineManagementToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
             this.medicineManagementToolStripMenuItem.Text = "Medicine management";
+            this.medicineManagementToolStripMenuItem.Click += new System.EventHandler(this.medicineManagementToolStripMenuItem_Click);
             // 
             // ManagerMainForm
             // 
