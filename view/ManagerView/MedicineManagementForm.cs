@@ -91,7 +91,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             textBox5.Enabled = false;
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void ResetFieldsClick(object sender, EventArgs e)
         {
             textBox1.Text = "";
             textBox2.Text = "";
