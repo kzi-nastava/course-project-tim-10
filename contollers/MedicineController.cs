@@ -86,5 +86,17 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-	}
+
+        public void Edit(Medicine medicine)
+        {
+            String ingredients = String.Join(", ", medicine.Ingredients).Trim();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update medicine set name=\"{medicine.Name}\", description=\"{medicine.Description}\", ingredients=\"{ingredients}\", status=\"{medicine.Status}\" where id=\"{medicine.Id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
 }

@@ -83,9 +83,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             textBox1.Text = id;
             textBox1.Enabled = false;
             textBox2.Text = name;
-            textBox2.Enabled = false;
             textBox3.Text = description;
-            textBox3.Enabled = false;
             textBox4.Text = ingredients;
             textBox5.Text = comment;
             textBox5.Enabled = false;
@@ -120,6 +118,25 @@ namespace HealthCareInfromationSystem.view.ManagerView
             medicineController.Save(medicine);
 
             MessageBox.Show("Medicine added.");
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            if (!IsFormValid() || textBox1.Enabled == true) return;
+
+            int id = Convert.ToInt32(textBox1.Text);
+            string name = textBox2.Text;
+            string description = textBox3.Text;
+            string[] ingredients = textBox4.Text.Split(',');
+            string comment = textBox5.Text;
+
+            Medicine medicine = new Medicine(id, name, description, ingredients, "in progress", comment);
+
+            medicineController.Edit(medicine);
+
+            MessageBox.Show("Medicine edited.");
+
+            FillTable();
         }
     }
 }
