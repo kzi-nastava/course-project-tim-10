@@ -38,6 +38,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.complexRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.medicineManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.searchAndFilterEquipmentToolStripMenuItem,
             this.arrangingEquipmentToolStripMenuItem,
             this.simpleRenovationsToolStripMenuItem,
-            this.complexRenovationsToolStripMenuItem});
+            this.complexRenovationsToolStripMenuItem,
+            this.medicineManagementToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -116,6 +118,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
+            // medicineManagementToolStripMenuItem
+            // 
+            this.medicineManagementToolStripMenuItem.Name = "medicineManagementToolStripMenuItem";
+            this.medicineManagementToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.medicineManagementToolStripMenuItem.Text = "Medicine management";
+            this.medicineManagementToolStripMenuItem.Click += new System.EventHandler(this.medicineManagementToolStripMenuItem_Click);
+            // 
             // ManagerMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -145,5 +154,6 @@ namespace HealthCareInfromationSystem.view.ManagerView
         private System.Windows.Forms.ToolStripMenuItem simpleRenovationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem complexRenovationsToolStripMenuItem;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem medicineManagementToolStripMenuItem;
     }
 }
