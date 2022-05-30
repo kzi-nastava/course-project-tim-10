@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\EquipmentController.cs" />
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\MedicineController.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
     <Compile Include="models\entity\ComplexRenovation.cs" />
+    <Compile Include="models\entity\Equipment.cs" />
     <Compile Include="models\entity\MedicalPrescription.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Medicine.cs" />
