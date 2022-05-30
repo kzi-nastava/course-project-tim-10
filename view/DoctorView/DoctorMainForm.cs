@@ -47,10 +47,16 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			allAppointmentsForm.Show();
 		}
 
-		private void dateAppoinmentsBtn_Click(object sender, EventArgs e)
+		private void DateAppoinmentsBtnClick(object sender, EventArgs e)
 		{
 			AppointmentsByDateForm appointmentsByDateForm = new AppointmentsByDateForm();
 			appointmentsByDateForm.Show();
+		}
+
+		private void UnverifiedMedicineClick(object sender, EventArgs e)
+		{
+			UnverifiedMedicine unverifiedMedicine = new UnverifiedMedicine();
+			unverifiedMedicine.Show();
 		}
 	}
 }
