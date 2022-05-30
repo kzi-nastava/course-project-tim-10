@@ -53,19 +53,48 @@ namespace HealthCareInfromationSystem.view.PatientView
         }
 
 
-        private Appointment CreatePossibleAppointment(DateTime datetime, Person doctor)
+        private List<Appointment> CreatePossibleAppointments(DateTime datetime)
         {
-            Appointment newApp = new Appointment();
-            newApp.Id = appointment.Id;
-            newApp.Patient = appointment.Patient;
-            newApp.Premise = appointment.Premise;
-            newApp.Type = appointment.Type;
-            newApp.Duration = appointment.Duration;
-            newApp.Comment = appointment.Comment;
-            newApp.Beginning = datetime;
-            newApp.Doctor = doctor;
+            List<Appointment> appointments = new List<Appointment>();
+            List<Person> doctors = GetAllDoctors();
+            foreach (Person doctor in doctors)
+            {
+                Appointment newApp = new Appointment();
+                newApp.Id = appointment.Id;
+                newApp.Patient = appointment.Patient;
+                newApp.Premise = appointment.Premise;
+                newApp.Type = appointment.Type;
+                newApp.Duration = appointment.Duration;
+                newApp.Comment = appointment.Comment;
+                newApp.Beginning = datetime;
+                newApp.Doctor = doctor;
 
-            return newApp;
+                appointments.Add(newApp);
+            }
+            return appointments;
+        }
+
+
+        List<Person> GetAllDoctors()
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                List<Person> doctors = new List<Person>();
+                string queryString = $"Select * from users where role = \"doctor\"";
+                OleDbCommand command = new OleDbCommand(queryString, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                Person person = null;
+
+                while (reader.Read())
+                {
+                    person = Person.Parse(reader);
+                    doctors.Add(person);
+                }
+                reader.Close();
+                return doctors;
+            }
         }
 
 
@@ -98,36 +127,31 @@ namespace HealthCareInfromationSystem.view.PatientView
         {
             List<Appointment> reservedAppointments = GetReservedAppointments(doctor);
             List<Appointment> availableAppointments = GetAvailableAppointments(reservedAppointments);
+            if (availableAppointments.Count == 0)
+            {
+                MessageBox.Show("Nismo nasli da sve odgovara.");
+                availableAppointments = GetAvailableAppointments(reservedAppointments, priority);
+            }        
             ShowAvailableAppointments(availableAppointments);
         }
 
 
-        private void ShowAvailableAppointments(List<Appointment> availableAppointments)
-        {
-            appointmentsBox.Text = "Choose";
-            foreach (Appointment app in availableAppointments)
-            {
-                appointmentsBox.Items.Add(app);
-            }
-        }
-
-
-        private List<Appointment> GetAvailableAppointments(List<Appointment> reservedAppointments)
+        private List<Appointment> GetAvailableAppointments(List<Appointment> reservedAppointments, string priority="")
         {
             List<Appointment> appointments = new List<Appointment>();
             DateTime currDay = priorityDay;
-
+            DateTime upperLimit = (priority != "Doctor") ? this.upperLimit : MyConverter.ToTime("16:00");
             while (currDay.CompareTo(endDay) < 0)
             {
-                DateTime currTime = lowerLimit;
+                DateTime currTime = (priority != "Doctor") ? lowerLimit : MyConverter.ToTime("10:00");
+
                 while (currTime.CompareTo(upperLimit) < 0)
                 {
                     DateTime datetime = MyConverter.CalculateDateTime(currDay, currTime);
-                    Appointment appointment = CreatePossibleAppointment(datetime, doctor);
-                    if (Available(appointment, reservedAppointments))
-                    {
-                        appointments.Add(appointment);
-                    }
+                    List<Appointment> appointments2 = CreatePossibleAppointments(datetime);
+                    foreach (Appointment appointment in appointments2)    
+                        if (Available(appointment, reservedAppointments, priority))
+                            appointments.Add(appointment);
 
                     currTime = currTime.AddMinutes(15);
                 }
@@ -137,18 +161,28 @@ namespace HealthCareInfromationSystem.view.PatientView
         }
 
 
-        private bool Available(Appointment datetime, List<Appointment> reservedAppointments)
+        private bool Available(Appointment appointment, List<Appointment> reservedAppointments, string priority="")
         {
             foreach (Appointment reserved in reservedAppointments)
             {
-                DateTime appBeginning = datetime.Beginning;
+                DateTime appBeginning = appointment.Beginning;
                 DateTime begin = reserved.Beginning;
                 DateTime end = reserved.Beginning.AddMinutes(reserved.Duration);
-                if (Methods.Between(appBeginning, begin, end) || Methods.Between(appBeginning.AddMinutes(15), begin, end))
+
+                if (priority != "Doctor" && !AvailableDate(appBeginning, begin, end))
                     return false;
+                if (priority != "Date" && appointment.Doctor.Id != doctor.Id)
+                    return false;
+
             }
             return true;
         }
+
+        private bool AvailableDate(DateTime appBeginning, DateTime begin, DateTime end)
+        {
+            return !(Methods.Between(appBeginning, begin, end) || Methods.Between(appBeginning.AddMinutes(15), begin, end));
+        }
+
 
         private List<Appointment> GetReservedAppointments(Person doctor=null)
         {
@@ -158,6 +192,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             return appointments;
         }
 
+
         private void ShowErrorMessage()
         {
             MessageBox.Show("Invalid input! Check if you follow the instructions below:\n\n" +
@@ -166,6 +201,16 @@ namespace HealthCareInfromationSystem.view.PatientView
                 "\nTime format should be like: " + Constants.TimeFmt +
                 "\nYou must choose doctor.");
         }
+
+
+        private void ShowAvailableAppointments(List<Appointment> availableAppointments)
+        {
+            appointmentsBox.Text = "Choose";
+            appointmentsBox.Items.Clear();
+            foreach (Appointment app in availableAppointments)
+                appointmentsBox.Items.Add(app);
+        }
+
 
         private bool ValidInput()
         {

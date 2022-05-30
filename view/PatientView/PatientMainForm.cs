@@ -19,51 +19,36 @@ namespace HealthCareInfromationSystem
             InitializeComponent();
         }
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    switch (servicesBox.SelectedIndex)
-        //    {
-        //        case 0:
-        //            serviceForm = new AllAppointmentsForm();
-        //            serviceForm.Show();
-        //            break;
-        //        case 1:
-        //            serviceForm = new AppointmentForm();
-        //            serviceForm.Show();
-        //            break;
-        //        default:
-        //            MessageBox.Show("Niste odabrali uslugu!");
-        //            break;
-        //    }
-        //}
 
-        //private void servicesBox_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        private void appointmentRewiewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AppointmentRewiewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             serviceForm = new AllAppointmentsForm();
             serviceForm.Show();
         }
 
-        private void createAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreateAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             serviceForm = new AppointmentForm();
             serviceForm.Show();
         }
 
-        private void createPriorityAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CreatePriorityAppointmentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             serviceForm = new PriorityAppointmentForm();
             serviceForm.Show();
         }
 
-        private void anamnesisReviewToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AnamnesisReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             serviceForm = new AnamnesisReviewForm();
             serviceForm.Show();
         }
+
+        private void SearchDoctorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serviceForm = new SearchDoctorForm();
+            serviceForm.Show();
+        }
+
     }
 }
