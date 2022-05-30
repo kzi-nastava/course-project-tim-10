@@ -40,11 +40,7 @@ namespace HealthCareInfromationSystem.models.entity
 
 		internal string ConvertIngredientsForTable()
 		{
-			string ingredientsForTable = "";
-			foreach (string ingredient in _ingredients) {
-				ingredientsForTable += ingredient + ", ";
-			}
-			return ingredientsForTable;
+			return String.Join(", ", Ingredients).Trim();
 		}
 
 		public int Id { get => _id; set => _id = value; }

@@ -31,7 +31,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.label1 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.commentComboBox = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,12 +69,12 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Comment:";
 			// 
-			// textBox1
+			// commentComboBox
 			// 
-			this.textBox1.Location = new System.Drawing.Point(149, 338);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(618, 22);
-			this.textBox1.TabIndex = 2;
+			this.commentComboBox.Location = new System.Drawing.Point(149, 338);
+			this.commentComboBox.Name = "commentComboBox";
+			this.commentComboBox.Size = new System.Drawing.Size(618, 22);
+			this.commentComboBox.TabIndex = 2;
 			// 
 			// button1
 			// 
@@ -135,7 +135,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.button1);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.commentComboBox);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.dataGridView1);
 			this.Name = "UnverifiedMedicine";
@@ -150,7 +150,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox commentComboBox;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
