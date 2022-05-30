@@ -33,5 +33,16 @@ namespace HealthCareInfromationSystem.contollers
                 return equipments;
             }
         }
-    }
+
+		internal static void SaveToBase(string id, int newQuantity)
+		{
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update equipment set quantity=\"{newQuantity}\" where equipment_id=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+	}
 }

@@ -68,10 +68,18 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
+				int newQuantity = CalculateNewQuantity();
+				EquipmentController.SaveToBase(GetSelectedEquipmentId(), newQuantity);
 				MessageBox.Show("Changes saved.", "Success");
 				
 			}
 
+		}
+
+		private int CalculateNewQuantity()
+		{
+			int quantityToRemove = int.Parse(quantitySpentTextBox.Text);
+			return GetSelectedEquipmentQuantity() - quantityToRemove;
 		}
 
 		private bool IsValidInput(string quantitySpent)
