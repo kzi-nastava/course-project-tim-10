@@ -36,11 +36,12 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.sortByLbl = new System.Windows.Forms.Label();
             this.firstNameTxt = new System.Windows.Forms.TextBox();
             this.lastNameTxt = new System.Windows.Forms.TextBox();
-            this.specialisationsComboBox = new System.Windows.Forms.ComboBox();
-            this.criteriaComboBox = new System.Windows.Forms.ComboBox();
+            this.specialisationsBox = new System.Windows.Forms.ComboBox();
+            this.criteriaBox = new System.Windows.Forms.ComboBox();
             this.doctorsGrid = new System.Windows.Forms.DataGridView();
             this.showDoctorsBtn = new System.Windows.Forms.Button();
             this.createAppointmentBtn = new System.Windows.Forms.Button();
+            this.sortBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.doctorsGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +84,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             // sortByLbl
             // 
             this.sortByLbl.AutoSize = true;
-            this.sortByLbl.Location = new System.Drawing.Point(65, 430);
+            this.sortByLbl.Location = new System.Drawing.Point(65, 405);
             this.sortByLbl.Name = "sortByLbl";
             this.sortByLbl.Size = new System.Drawing.Size(57, 17);
             this.sortByLbl.TabIndex = 4;
@@ -103,23 +104,28 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.lastNameTxt.Size = new System.Drawing.Size(147, 22);
             this.lastNameTxt.TabIndex = 6;
             // 
-            // specialisationsComboBox
+            // specialisationsBox
             // 
-            this.specialisationsComboBox.FormattingEnabled = true;
-            this.specialisationsComboBox.Location = new System.Drawing.Point(170, 187);
-            this.specialisationsComboBox.Name = "specialisationsComboBox";
-            this.specialisationsComboBox.Size = new System.Drawing.Size(170, 24);
-            this.specialisationsComboBox.TabIndex = 7;
-            this.specialisationsComboBox.Text = "Choose specialisation";
+            this.specialisationsBox.FormattingEnabled = true;
+            this.specialisationsBox.Location = new System.Drawing.Point(170, 187);
+            this.specialisationsBox.Name = "specialisationsBox";
+            this.specialisationsBox.Size = new System.Drawing.Size(170, 24);
+            this.specialisationsBox.TabIndex = 7;
+            this.specialisationsBox.Text = "Choose specialisation";
             // 
-            // criteriaComboBox
+            // criteriaBox
             // 
-            this.criteriaComboBox.FormattingEnabled = true;
-            this.criteriaComboBox.Location = new System.Drawing.Point(140, 428);
-            this.criteriaComboBox.Name = "criteriaComboBox";
-            this.criteriaComboBox.Size = new System.Drawing.Size(174, 24);
-            this.criteriaComboBox.TabIndex = 8;
-            this.criteriaComboBox.Text = "Choose criteria";
+            this.criteriaBox.FormattingEnabled = true;
+            this.criteriaBox.Items.AddRange(new object[] {
+            "First name",
+            "Last name",
+            "Specialisation",
+            "Rating"});
+            this.criteriaBox.Location = new System.Drawing.Point(140, 403);
+            this.criteriaBox.Name = "criteriaBox";
+            this.criteriaBox.Size = new System.Drawing.Size(174, 24);
+            this.criteriaBox.TabIndex = 8;
+            this.criteriaBox.Text = "Choose criteria";
             // 
             // doctorsGrid
             // 
@@ -130,6 +136,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.doctorsGrid.RowTemplate.Height = 24;
             this.doctorsGrid.Size = new System.Drawing.Size(644, 204);
             this.doctorsGrid.TabIndex = 9;
+            this.doctorsGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DoctorsGrid_CellContentClick);
             // 
             // showDoctorsBtn
             // 
@@ -139,26 +146,39 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.showDoctorsBtn.TabIndex = 10;
             this.showDoctorsBtn.Text = "Show doctors";
             this.showDoctorsBtn.UseVisualStyleBackColor = true;
+            this.showDoctorsBtn.Click += new System.EventHandler(this.ShowDoctorsBtn_Click);
             // 
             // createAppointmentBtn
             // 
-            this.createAppointmentBtn.Location = new System.Drawing.Point(625, 423);
+            this.createAppointmentBtn.Location = new System.Drawing.Point(625, 422);
             this.createAppointmentBtn.Name = "createAppointmentBtn";
-            this.createAppointmentBtn.Size = new System.Drawing.Size(171, 32);
+            this.createAppointmentBtn.Size = new System.Drawing.Size(171, 33);
             this.createAppointmentBtn.TabIndex = 11;
             this.createAppointmentBtn.Text = "Create appointment";
             this.createAppointmentBtn.UseVisualStyleBackColor = true;
+            this.createAppointmentBtn.Click += new System.EventHandler(this.CreateAppointmentBtn_Click);
+            // 
+            // sortBtn
+            // 
+            this.sortBtn.Location = new System.Drawing.Point(140, 449);
+            this.sortBtn.Name = "sortBtn";
+            this.sortBtn.Size = new System.Drawing.Size(75, 31);
+            this.sortBtn.TabIndex = 12;
+            this.sortBtn.Text = "Sort";
+            this.sortBtn.UseVisualStyleBackColor = true;
+            this.sortBtn.Click += new System.EventHandler(this.SortBtn_Click);
             // 
             // SearchDoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1097, 526);
+            this.Controls.Add(this.sortBtn);
             this.Controls.Add(this.createAppointmentBtn);
             this.Controls.Add(this.showDoctorsBtn);
             this.Controls.Add(this.doctorsGrid);
-            this.Controls.Add(this.criteriaComboBox);
-            this.Controls.Add(this.specialisationsComboBox);
+            this.Controls.Add(this.criteriaBox);
+            this.Controls.Add(this.specialisationsBox);
             this.Controls.Add(this.lastNameTxt);
             this.Controls.Add(this.firstNameTxt);
             this.Controls.Add(this.sortByLbl);
@@ -183,10 +203,11 @@ namespace HealthCareInfromationSystem.view.PatientView
         private System.Windows.Forms.Label sortByLbl;
         private System.Windows.Forms.TextBox firstNameTxt;
         private System.Windows.Forms.TextBox lastNameTxt;
-        private System.Windows.Forms.ComboBox specialisationsComboBox;
-        private System.Windows.Forms.ComboBox criteriaComboBox;
+        private System.Windows.Forms.ComboBox specialisationsBox;
+        private System.Windows.Forms.ComboBox criteriaBox;
         private System.Windows.Forms.DataGridView doctorsGrid;
         private System.Windows.Forms.Button showDoctorsBtn;
         private System.Windows.Forms.Button createAppointmentBtn;
+        private System.Windows.Forms.Button sortBtn;
     }
 }

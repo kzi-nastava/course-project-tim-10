@@ -32,14 +32,33 @@ namespace HealthCareInfromationSystem.view.PatientView
 
         Appointment appointment;
 
-
-        public PriorityAppointmentForm()
+        private void PriorityAppointment()
         {
             InitializeComponent();
             InitializeAppointment();
             FillDoctorsComboBox();
         }
 
+        public PriorityAppointmentForm()
+        {
+            PriorityAppointment();
+        }
+
+        private void SetDoctorPriority(Person doctor)
+        {
+            priorityBox.SelectedItem = priorityBox.Items[1];   // priority is doctor automatically
+            priorityBox.Enabled = false;
+            doctorsBox.Items.Add(doctor);
+            doctorsBox.SelectedItem = doctor;
+            doctorsBox.Enabled = false;
+            this.doctor = doctor;
+        }
+
+        public PriorityAppointmentForm(Person doctor)
+        {
+            PriorityAppointment();
+            SetDoctorPriority(doctor);
+        }
 
         private void InitializeAppointment()
         {
@@ -47,7 +66,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             appointment.Id = int.Parse(BaseFunctions.GenerateId("appointments", "id"));
             appointment.Patient = LoggedInUser.loggedIn;
             appointment.Premise = PremiseController.SearchPremise("2");
-            appointment.Type = Appointment.AppointmentType.physical;
+            appointment.Type = AppointmentType.physical;
             appointment.Duration = 15;
             appointment.Comment = "";
         }
@@ -59,15 +78,17 @@ namespace HealthCareInfromationSystem.view.PatientView
             List<Person> doctors = GetAllDoctors();
             foreach (Person doctor in doctors)
             {
-                Appointment newApp = new Appointment();
-                newApp.Id = appointment.Id;
-                newApp.Patient = appointment.Patient;
-                newApp.Premise = appointment.Premise;
-                newApp.Type = appointment.Type;
-                newApp.Duration = appointment.Duration;
-                newApp.Comment = appointment.Comment;
-                newApp.Beginning = datetime;
-                newApp.Doctor = doctor;
+                Appointment newApp = new Appointment
+                {
+                    Id = appointment.Id,
+                    Patient = appointment.Patient,
+                    Premise = appointment.Premise,
+                    Type = appointment.Type,
+                    Duration = appointment.Duration,
+                    Comment = appointment.Comment,
+                    Beginning = datetime,
+                    Doctor = doctor
+                };
 
                 appointments.Add(newApp);
             }
