@@ -147,6 +147,12 @@
     <Compile Include="view\DoctorView\SingleMedicalRecordForm.Designer.cs">
       <DependentUpon>SingleMedicalRecordForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\UnverifiedMedicine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\UnverifiedMedicine.Designer.cs">
+      <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +286,9 @@
     <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\DoctorMainForm.resx">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\EquipmentStateForm.resx">
       <DependentUpon>EquipmentStateForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\AppointmentsByDateForm.resx">
       <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\UnverifiedMedicine.resx">
+      <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
