@@ -43,10 +43,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-			//equipmentName.Text = "hej";
-		}
 
 		private void EditBtnClick(object sender, EventArgs e)
 		{
@@ -69,7 +65,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				int newQuantity = CalculateNewQuantity();
-				EquipmentController.SaveToBase(GetSelectedEquipmentId(), newQuantity);
+				EquipmentController.Save(GetSelectedEquipmentId(), newQuantity);
 				MessageBox.Show("Changes saved.", "Success");
 				
 			}

@@ -34,7 +34,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void SaveToBase(string id, int newQuantity)
+		internal static void Save(string id, int newQuantity)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

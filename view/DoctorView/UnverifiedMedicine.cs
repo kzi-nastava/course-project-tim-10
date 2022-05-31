@@ -31,10 +31,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
 
 		private void AcceptClick(object sender, EventArgs e)
 		{
