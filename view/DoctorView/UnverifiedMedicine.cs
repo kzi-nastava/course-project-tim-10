@@ -14,6 +14,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class UnverifiedMedicine : Form
 	{
+		MedicineController medicineController = new MedicineController();
+
 		public UnverifiedMedicine()
 		{
 			InitializeComponent();
@@ -61,7 +63,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
-				MedicineController.Edit(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
+				medicineController.Edit(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
 					GetSelectedMedicineDescription(), GetSelectedMedicineIngridients(), status, commentComboBox.Text ));
 				MessageBox.Show("Changes saved.", "Success");
 

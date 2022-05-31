@@ -75,20 +75,6 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void Edit(Medicine medicine)
-		{
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String ingredients = String.Join(", ", medicine.Ingredients).Trim();
-                String query = $"update medicine set name=\"{medicine.Name}\", description=\"{medicine.Description}\"" +
-                    $", ingredients=\"{medicine.Ingredients}\", status=\"{medicine.Status}\"" +
-                    $", comment=\"{medicine.Comment}\" where id=\"{medicine.Id}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
 		public void Save(Medicine medicine)
         {
             String ingredients = String.Join(", ", medicine.Ingredients).Trim();
@@ -100,5 +86,17 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-	}
+
+        public void Edit(Medicine medicine)
+        {
+            String ingredients = String.Join(", ", medicine.Ingredients).Trim();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update medicine set name=\"{medicine.Name}\", description=\"{medicine.Description}\", ingredients=\"{ingredients}\", status=\"{medicine.Status}\" where id=\"{medicine.Id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
 }
