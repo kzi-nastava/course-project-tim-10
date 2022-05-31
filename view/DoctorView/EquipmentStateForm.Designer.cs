@@ -104,7 +104,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button1.TabIndex = 3;
 			this.button1.Text = "Eddit";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.EdditClick);
+			this.button1.Click += new System.EventHandler(this.EditBtnClick);
 			// 
 			// button2
 			// 
@@ -114,7 +114,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button2.TabIndex = 4;
 			this.button2.Text = "Save";
 			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.SaveClick);
+			this.button2.Click += new System.EventHandler(this.SaveBtnClick);
 			// 
 			// EquipmentStateForm
 			// 

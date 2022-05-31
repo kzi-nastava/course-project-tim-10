@@ -48,7 +48,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			//equipmentName.Text = "hej";
 		}
 
-		private void EdditClick(object sender, EventArgs e)
+		private void EditBtnClick(object sender, EventArgs e)
 		{
 			int selectedRowCount =
 			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
@@ -62,7 +62,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
-		private void SaveClick(object sender, EventArgs e)
+		private void SaveBtnClick(object sender, EventArgs e)
 		{
 			if (!IsValidInput(quantitySpentTextBox.Text)) return;
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want save changes?", "Check", MessageBoxButtons.YesNo);

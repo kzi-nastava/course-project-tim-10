@@ -75,7 +75,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void Eddit(Medicine medicine)
+		internal static void Edit(Medicine medicine)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

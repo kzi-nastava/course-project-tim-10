@@ -53,7 +53,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			appointmentsByDateForm.Show();
 		}
 
-		private void UnverifiedMedicineClick(object sender, EventArgs e)
+		private void UnverifiedMedicineBtnClick(object sender, EventArgs e)
 		{
 			UnverifiedMedicine unverifiedMedicine = new UnverifiedMedicine();
 			unverifiedMedicine.Show();
