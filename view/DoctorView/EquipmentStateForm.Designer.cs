@@ -55,7 +55,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.dataGridView1.RowHeadersWidth = 51;
 			this.dataGridView1.Size = new System.Drawing.Size(410, 235);
 			this.dataGridView1.TabIndex = 0;
-			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
 			// Column1
 			// 
@@ -104,7 +103,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button1.TabIndex = 3;
 			this.button1.Text = "Eddit";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.EdditClick);
+			this.button1.Click += new System.EventHandler(this.EditClick);
 			// 
 			// button2
 			// 

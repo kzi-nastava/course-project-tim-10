@@ -43,12 +43,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-			//equipmentName.Text = "hej";
-		}
-
-		private void EdditClick(object sender, EventArgs e)
+		private void EditClick(object sender, EventArgs e)
 		{
 			int selectedRowCount =
 			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
