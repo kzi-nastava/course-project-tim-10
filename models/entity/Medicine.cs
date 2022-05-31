@@ -38,14 +38,19 @@ namespace HealthCareInfromationSystem.models.entity
 			_comment = comment;
 		}
 
-        public int Id { get => _id; set => _id = value; }
+		internal string ConvertIngredientsForTable()
+		{
+			return String.Join(", ", Ingredients).Trim();
+		}
+
+		public int Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }
         public string Description { get => _description; set => _description = value; }
         public string[] Ingredients { get => _ingredients; set => _ingredients = value; }
         public string Status { get => _status; set => _status = value; }
         public string Comment { get => _comment; set => _comment = value; }
-
-        public static Medicine Parse(OleDbDataReader reader) {
+		
+		public static Medicine Parse(OleDbDataReader reader) {
 			int id = int.Parse(reader[0].ToString());
 			string name = reader[1].ToString();
 			string description = reader[2].ToString();

@@ -67,7 +67,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.dateAppoinmentsBtn.TabIndex = 3;
 			this.dateAppoinmentsBtn.Text = "Appointments For Date";
 			this.dateAppoinmentsBtn.UseVisualStyleBackColor = true;
-			this.dateAppoinmentsBtn.Click += new System.EventHandler(this.dateAppoinmentsBtn_Click);
+			this.dateAppoinmentsBtn.Click += new System.EventHandler(this.DateAppoinmentsBtnClick);
 			// 
 			// button3
 			// 
@@ -75,8 +75,9 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(129, 49);
 			this.button3.TabIndex = 4;
-			this.button3.Text = "button3";
+			this.button3.Text = "Unverified Medicine";
 			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.UnverifiedMedicineBtnClick);
 			// 
 			// button4
 			// 
@@ -87,13 +88,13 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button4.Text = "button4";
 			this.button4.UseVisualStyleBackColor = true;
 			// 
-			// MainDoctor
+			// DoctorMainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(378, 322);
 			this.Controls.Add(this.flowLayoutPanel1);
-			this.Name = "MainDoctor";
+			this.Name = "DoctorMainForm";
 			this.Text = "MainDoctor";
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.ResumeLayout(false);

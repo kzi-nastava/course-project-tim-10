@@ -73,7 +73,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString,
 				"select * from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
 				Console.WriteLine($"comment:{appointment.Comment}");
-				AnamnesisInputForm anamnesisInputForm = new AnamnesisInputForm(appointment);
+				PerformExaminationForm anamnesisInputForm = new PerformExaminationForm(appointment);
 				anamnesisInputForm.Show();
 			}
 			else
