@@ -44,6 +44,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		}
 
 
+
 		private void EditBtnClick(object sender, EventArgs e)
 		{
 			int selectedRowCount =
