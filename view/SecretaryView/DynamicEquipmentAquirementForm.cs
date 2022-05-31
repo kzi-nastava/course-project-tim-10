@@ -62,7 +62,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (IfRowSelected() && IfQuantityFieldCorrect())
             {
-                // Send request
+                DynamicEquipmentRequestController.SendRequest(int.Parse(selectedEquipmentId), int.Parse(tbQuantity.Text));
             }
         }
     }
