@@ -75,7 +75,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public void Save(Medicine medicine)
+		public void Save(Medicine medicine)
         {
             String ingredients = String.Join(", ", medicine.Ingredients).Trim();
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\EquipmentController.cs" />
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
     <Compile Include="contollers\MedicineController.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
     <Compile Include="models\entity\ComplexRenovation.cs" />
+    <Compile Include="models\entity\Equipment.cs" />
     <Compile Include="models\entity\MedicalPrescription.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Medicine.cs" />
@@ -109,11 +111,17 @@
     <Compile Include="view\DoctorView\AllAppointmentsForm.Designer.cs">
       <DependentUpon>AllAppointmentsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\DoctorView\AnamnesisInputForm.cs">
+    <Compile Include="view\DoctorView\EquipmentStateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\DoctorView\AnamnesisInputForm.Designer.cs">
-      <DependentUpon>AnamnesisInputForm.cs</DependentUpon>
+    <Compile Include="view\DoctorView\EquipmentStateForm.Designer.cs">
+      <DependentUpon>EquipmentStateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\PerformExaminationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\PerformExaminationForm.Designer.cs">
+      <DependentUpon>PerformExaminationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\DoctorView\AppointmentsByDateForm.cs">
       <SubType>Form</SubType>
@@ -138,6 +146,12 @@
     </Compile>
     <Compile Include="view\DoctorView\SingleMedicalRecordForm.Designer.cs">
       <DependentUpon>SingleMedicalRecordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\UnverifiedMedicine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\UnverifiedMedicine.Designer.cs">
+      <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
     </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
@@ -272,11 +286,20 @@
     <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\DoctorView\AnamnesisInputForm.resx">
-      <DependentUpon>AnamnesisInputForm.cs</DependentUpon>
+    <EmbeddedResource Include="view\DoctorView\DoctorMainForm.resx">
+      <DependentUpon>DoctorMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\EquipmentStateForm.resx">
+      <DependentUpon>EquipmentStateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\PerformExaminationForm.resx">
+      <DependentUpon>PerformExaminationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\AppointmentsByDateForm.resx">
       <DependentUpon>AppointmentsByDateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\UnverifiedMedicine.resx">
+      <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>

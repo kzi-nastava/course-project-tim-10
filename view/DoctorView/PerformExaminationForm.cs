@@ -12,16 +12,16 @@ using HealthCareInfromationSystem.contollers;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
-	public partial class AnamnesisInputForm : Form
+	public partial class PerformExaminationForm : Form
 	{
 		Appointment appointment { get; set; }
 
-		public AnamnesisInputForm()
+		public PerformExaminationForm()
 		{
 			InitializeComponent();
 		}
 
-		public AnamnesisInputForm(Appointment appointment)
+		public PerformExaminationForm(Appointment appointment)
 		{
 			InitializeComponent();
 			this.appointment = appointment;
@@ -51,6 +51,12 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			AddPrescriptionForm addPrescriptionForm = new AddPrescriptionForm(appointment.Patient.Id);
 			addPrescriptionForm.Show();
+		}
+
+		private void EquipmentStateClick(object sender, EventArgs e)
+		{
+			EquipmentStateForm equipmentStateForm = new EquipmentStateForm(appointment.Premise);
+			equipmentStateForm.Show();
 		}
 	}
 }
