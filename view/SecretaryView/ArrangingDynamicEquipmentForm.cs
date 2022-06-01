@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         private string selectedFromPremiseId = "";
         private string selectedToPremiseId = "";
-        private string selectedEquipmentId = "";
         private int selectedQuantity;
         public ArrangingDynamicEquipmentForm()
         {
@@ -28,9 +28,9 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             tbToPremise.Text = "";
             selectedToPremiseId = "";
-            selectedEquipmentId = "";
             tbFromPremise.Text = "";
             selectedFromPremiseId = "";
+            tbQuantity.Text = "";
             selectedQuantity = 0;
         }
         private void InitializeEquipmentNameComboBox()
@@ -73,12 +73,10 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 tbToPremise.Text = dataGridViewLowStock.Rows[e.RowIndex].Cells[3].Value.ToString();
                 selectedToPremiseId = dataGridViewLowStock.Rows[e.RowIndex].Cells[2].Value.ToString();
-                selectedEquipmentId = dataGridViewLowStock.Rows[e.RowIndex].Cells[1].Value.ToString();
             } else
             {
                 tbToPremise.Text = "";
                 selectedToPremiseId = "";
-                selectedEquipmentId = "";
             }
         }
 
@@ -122,7 +120,17 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (IfEquipmentSelected() && IfQuantityFieldCorrect())
             {
-                // move
+                try
+                {
+                EquipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
+                MessageBox.Show("Equipment successfully arranged.");
+                ClearFields();
+                dataGridViewLowStock.Rows.Clear();
+                dataGridViewSufficentStock.Rows.Clear();
+                } catch (OleDbException)
+                {
+                    MessageBox.Show("Error occured.");
+                }
             }
         }
 

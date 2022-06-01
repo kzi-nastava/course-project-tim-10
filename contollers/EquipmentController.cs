@@ -45,6 +45,26 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        private static Equipment GetByNameAndPremise(string name, string premiseId)
+        {
+            Equipment equipment = null;
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"select name, quantity, equipment_id, new_premises_id from equipment where new_premises_id=\"{premiseId}\" and name=\"{name}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    equipment = Equipment.ParseWithPremise(reader);
+                }
+                reader.Close();
+                return equipment;
+            }
+        }
+
         public static List<Equipment> GetDynamicEquipment()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -150,13 +170,21 @@ namespace HealthCareInfromationSystem.contollers
         private static List<string> GetTableRow(Equipment equipment)
         {
             List<string> row = new List<string>();
-            if (equipment.Quantity == 0) row.Add("!");
+            if (equipment.Quantity == 0) row.Add("Out Of Stock!");
             else row.Add("");
             row.Add(equipment.Id.ToString());
             row.Add(equipment.Premise.Id.ToString());
             row.Add(equipment.Premise.Name);
             row.Add(equipment.Quantity.ToString());
             return row;
+        }
+
+        public static void Move(string equipmentName, string oldPremiseId, string newPremiseId, int quantity)
+        {
+            Equipment fromOldPremise = GetByNameAndPremise(equipmentName, oldPremiseId);
+            Equipment fromNewPremise = GetByNameAndPremise(equipmentName, newPremiseId);
+            Save(fromOldPremise.Id.ToString(), fromOldPremise.Quantity - quantity);
+            Save(fromNewPremise.Id.ToString(), fromNewPremise.Quantity + quantity);
         }
 
     }

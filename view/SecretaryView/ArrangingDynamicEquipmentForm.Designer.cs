@@ -30,28 +30,28 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void InitializeComponent()
         {
             this.dataGridViewLowStock = new System.Windows.Forms.DataGridView();
-            this.ColumnMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnEquipmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPremiseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPremiseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbEquipmentName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewSufficentStock = new System.Windows.Forms.DataGridView();
+            this.ColumnOutOfStock1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEquipmentId1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPremiseId1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPremiseName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQuantity1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tbToPremise = new System.Windows.Forms.TextBox();
             this.tbFromPremise = new System.Windows.Forms.TextBox();
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.ColumnOutOfStock1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnEquipmentId1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPremiseId1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPremiseName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnQuantity1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEquipmentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPremiseId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPremiseName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLowStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSufficentStock)).BeginInit();
             this.SuspendLayout();
@@ -67,47 +67,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnQuantity});
             this.dataGridViewLowStock.Location = new System.Drawing.Point(47, 186);
             this.dataGridViewLowStock.Name = "dataGridViewLowStock";
+            this.dataGridViewLowStock.ReadOnly = true;
             this.dataGridViewLowStock.RowHeadersWidth = 62;
             this.dataGridViewLowStock.RowTemplate.Height = 28;
             this.dataGridViewLowStock.Size = new System.Drawing.Size(856, 250);
             this.dataGridViewLowStock.TabIndex = 0;
             this.dataGridViewLowStock.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewLowStock_RowHeaderMouseClick);
-            // 
-            // ColumnMark
-            // 
-            this.ColumnMark.HeaderText = "Out Of Stock!";
-            this.ColumnMark.MinimumWidth = 8;
-            this.ColumnMark.Name = "ColumnMark";
-            this.ColumnMark.Width = 150;
-            // 
-            // ColumnEquipmentId
-            // 
-            this.ColumnEquipmentId.HeaderText = "Equipment Id";
-            this.ColumnEquipmentId.MinimumWidth = 8;
-            this.ColumnEquipmentId.Name = "ColumnEquipmentId";
-            this.ColumnEquipmentId.Visible = false;
-            this.ColumnEquipmentId.Width = 150;
-            // 
-            // ColumnPremiseId
-            // 
-            this.ColumnPremiseId.HeaderText = "Premise Id";
-            this.ColumnPremiseId.MinimumWidth = 8;
-            this.ColumnPremiseId.Name = "ColumnPremiseId";
-            this.ColumnPremiseId.Width = 150;
-            // 
-            // ColumnPremiseName
-            // 
-            this.ColumnPremiseName.HeaderText = "Premise Name";
-            this.ColumnPremiseName.MinimumWidth = 8;
-            this.ColumnPremiseName.Name = "ColumnPremiseName";
-            this.ColumnPremiseName.Width = 150;
-            // 
-            // ColumnQuantity
-            // 
-            this.ColumnQuantity.HeaderText = "Quantity";
-            this.ColumnQuantity.MinimumWidth = 8;
-            this.ColumnQuantity.Name = "ColumnQuantity";
-            this.ColumnQuantity.Width = 150;
             // 
             // cbEquipmentName
             // 
@@ -165,11 +130,54 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.ColumnQuantity1});
             this.dataGridViewSufficentStock.Location = new System.Drawing.Point(1007, 186);
             this.dataGridViewSufficentStock.Name = "dataGridViewSufficentStock";
+            this.dataGridViewSufficentStock.ReadOnly = true;
             this.dataGridViewSufficentStock.RowHeadersWidth = 62;
             this.dataGridViewSufficentStock.RowTemplate.Height = 28;
             this.dataGridViewSufficentStock.Size = new System.Drawing.Size(810, 250);
             this.dataGridViewSufficentStock.TabIndex = 6;
             this.dataGridViewSufficentStock.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewSufficentStock_RowHeaderMouseClick);
+            // 
+            // ColumnOutOfStock1
+            // 
+            this.ColumnOutOfStock1.HeaderText = "Out Of Stock!";
+            this.ColumnOutOfStock1.MinimumWidth = 8;
+            this.ColumnOutOfStock1.Name = "ColumnOutOfStock1";
+            this.ColumnOutOfStock1.ReadOnly = true;
+            this.ColumnOutOfStock1.Visible = false;
+            this.ColumnOutOfStock1.Width = 150;
+            // 
+            // ColumnEquipmentId1
+            // 
+            this.ColumnEquipmentId1.HeaderText = "Equipment Id";
+            this.ColumnEquipmentId1.MinimumWidth = 8;
+            this.ColumnEquipmentId1.Name = "ColumnEquipmentId1";
+            this.ColumnEquipmentId1.ReadOnly = true;
+            this.ColumnEquipmentId1.Visible = false;
+            this.ColumnEquipmentId1.Width = 150;
+            // 
+            // ColumnPremiseId1
+            // 
+            this.ColumnPremiseId1.HeaderText = "Premise Id";
+            this.ColumnPremiseId1.MinimumWidth = 8;
+            this.ColumnPremiseId1.Name = "ColumnPremiseId1";
+            this.ColumnPremiseId1.ReadOnly = true;
+            this.ColumnPremiseId1.Width = 150;
+            // 
+            // ColumnPremiseName1
+            // 
+            this.ColumnPremiseName1.HeaderText = "Premise Name";
+            this.ColumnPremiseName1.MinimumWidth = 8;
+            this.ColumnPremiseName1.Name = "ColumnPremiseName1";
+            this.ColumnPremiseName1.ReadOnly = true;
+            this.ColumnPremiseName1.Width = 150;
+            // 
+            // ColumnQuantity1
+            // 
+            this.ColumnQuantity1.HeaderText = "Quantity";
+            this.ColumnQuantity1.MinimumWidth = 8;
+            this.ColumnQuantity1.Name = "ColumnQuantity1";
+            this.ColumnQuantity1.ReadOnly = true;
+            this.ColumnQuantity1.Width = 150;
             // 
             // label5
             // 
@@ -222,42 +230,46 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.BtnConfirm_Click);
             // 
-            // ColumnOutOfStock1
+            // ColumnMark
             // 
-            this.ColumnOutOfStock1.HeaderText = "Out Of Stock!";
-            this.ColumnOutOfStock1.MinimumWidth = 8;
-            this.ColumnOutOfStock1.Name = "ColumnOutOfStock1";
-            this.ColumnOutOfStock1.Visible = false;
-            this.ColumnOutOfStock1.Width = 150;
+            this.ColumnMark.HeaderText = " ";
+            this.ColumnMark.MinimumWidth = 8;
+            this.ColumnMark.Name = "ColumnMark";
+            this.ColumnMark.ReadOnly = true;
+            this.ColumnMark.Width = 150;
             // 
-            // ColumnEquipmentId1
+            // ColumnEquipmentId
             // 
-            this.ColumnEquipmentId1.HeaderText = "Equipment Id";
-            this.ColumnEquipmentId1.MinimumWidth = 8;
-            this.ColumnEquipmentId1.Name = "ColumnEquipmentId1";
-            this.ColumnEquipmentId1.Visible = false;
-            this.ColumnEquipmentId1.Width = 150;
+            this.ColumnEquipmentId.HeaderText = "Equipment Id";
+            this.ColumnEquipmentId.MinimumWidth = 8;
+            this.ColumnEquipmentId.Name = "ColumnEquipmentId";
+            this.ColumnEquipmentId.ReadOnly = true;
+            this.ColumnEquipmentId.Visible = false;
+            this.ColumnEquipmentId.Width = 150;
             // 
-            // ColumnPremiseId1
+            // ColumnPremiseId
             // 
-            this.ColumnPremiseId1.HeaderText = "Premise Id";
-            this.ColumnPremiseId1.MinimumWidth = 8;
-            this.ColumnPremiseId1.Name = "ColumnPremiseId1";
-            this.ColumnPremiseId1.Width = 150;
+            this.ColumnPremiseId.HeaderText = "Premise Id";
+            this.ColumnPremiseId.MinimumWidth = 8;
+            this.ColumnPremiseId.Name = "ColumnPremiseId";
+            this.ColumnPremiseId.ReadOnly = true;
+            this.ColumnPremiseId.Width = 150;
             // 
-            // ColumnPremiseName1
+            // ColumnPremiseName
             // 
-            this.ColumnPremiseName1.HeaderText = "Premise Name";
-            this.ColumnPremiseName1.MinimumWidth = 8;
-            this.ColumnPremiseName1.Name = "ColumnPremiseName1";
-            this.ColumnPremiseName1.Width = 150;
+            this.ColumnPremiseName.HeaderText = "Premise Name";
+            this.ColumnPremiseName.MinimumWidth = 8;
+            this.ColumnPremiseName.Name = "ColumnPremiseName";
+            this.ColumnPremiseName.ReadOnly = true;
+            this.ColumnPremiseName.Width = 150;
             // 
-            // ColumnQuantity1
+            // ColumnQuantity
             // 
-            this.ColumnQuantity1.HeaderText = "Quantity";
-            this.ColumnQuantity1.MinimumWidth = 8;
-            this.ColumnQuantity1.Name = "ColumnQuantity1";
-            this.ColumnQuantity1.Width = 150;
+            this.ColumnQuantity.HeaderText = "Quantity";
+            this.ColumnQuantity.MinimumWidth = 8;
+            this.ColumnQuantity.Name = "ColumnQuantity";
+            this.ColumnQuantity.ReadOnly = true;
+            this.ColumnQuantity.Width = 150;
             // 
             // ArrangingDynamicEquipmentForm
             // 
@@ -301,15 +313,15 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private System.Windows.Forms.TextBox tbFromPremise;
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEquipmentId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnOutOfStock1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEquipmentId1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseId1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseName1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEquipmentId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPremiseName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnQuantity;
     }
 }
