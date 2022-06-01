@@ -138,7 +138,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.aquirementToolStripMenuItem.Name = "aquirementToolStripMenuItem";
             this.aquirementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.aquirementToolStripMenuItem.Text = "Aquirement";
-            this.aquirementToolStripMenuItem.Click += new System.EventHandler(this.aquirementToolStripMenuItem_Click);
+            this.aquirementToolStripMenuItem.Click += new System.EventHandler(this.AquirementToolStripMenuItem_Click);
             // 
             // placementToolStripMenuItem
             // 

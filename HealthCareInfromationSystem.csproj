@@ -220,11 +220,19 @@
     <Compile Include="view\PatientView\PatientMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\PatientView\PatientMainForm.Designer.cs" />
+    <Compile Include="view\PatientView\PatientMainForm.Designer.cs">
+      <DependentUpon>PatientMainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\PriorityAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\PatientView\PriorityAppointmentForm.Designer.cs" />
+    <Compile Include="view\PatientView\SearchDoctorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\SearchDoctorForm.Designer.cs">
+      <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\AppointmentRequestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,8 +343,13 @@
       <DependentUpon>AnamnesisReviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AppointmentForm.resx" />
-    <EmbeddedResource Include="view\PatientView\PatientMainForm.resx" />
+    <EmbeddedResource Include="view\PatientView\PatientMainForm.resx">
+      <DependentUpon>PatientMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\PriorityAppointmentForm.resx" />
+    <EmbeddedResource Include="view\PatientView\SearchDoctorForm.resx">
+      <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
     </EmbeddedResource>

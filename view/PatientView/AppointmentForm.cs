@@ -34,6 +34,13 @@ namespace HealthCareInfromationSystem
             FillForm(app);
         }
 
+        public AppointmentForm(int doctor)
+        {
+            InitializeComponent();
+            edit = false;
+            this.doctor = doctor;
+        }
+
         private void FillForm(Appointment app)
         {
             dateTimeTxt.Text = MyConverter.ToString(app.Beginning);
@@ -42,7 +49,7 @@ namespace HealthCareInfromationSystem
             FindAvailableDoctors();
         }
 
-        private void checkDateTime(string text)
+        private void CheckDateTime(string text)
         {
             try
             {
@@ -89,14 +96,13 @@ namespace HealthCareInfromationSystem
                 Person patient = PersonController.SearchPerson(LoggedInUser.loggedIn.Id.ToString());
                 Person doctor = PersonController.SearchPerson(this.doctor.ToString());
                 Premise premise = PremiseController.SearchPremise("1");
-                DateTime beginning = dateTime;
+                DateTime beginning = MyConverter.ToDateTime(dateTimeTxt.Text);
                 AppointmentType type = AppointmentType.physical;
                 int duration = 15;
                 Appointment newApp = new Appointment(id, doctor, patient, premise, beginning, duration, type);
                 InsertNewAppointment(newApp);
                 MessageBox.Show("You have successfully created appointment.");
             }
-
         }
 
         private void UpdateAppointment(Appointment app)
@@ -216,16 +222,9 @@ namespace HealthCareInfromationSystem
             reader.Close();
         }
 
-
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ShowDoctorsButton_Click(object sender, EventArgs e)
         {
-            checkDateTime(dateTimeTxt.Text);
+            CheckDateTime(dateTimeTxt.Text);
             FindAvailableDoctors();
         }
 

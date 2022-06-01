@@ -40,6 +40,7 @@ namespace HealthCareInfromationSystem.contollers
                 connection.Open();
                 string beginning = medicalPrescription.Beginning.ToString("dd.MM.yyyy.");
                 string ending = medicalPrescription.Ending.ToString("dd.MM.yyyy.");
+                string takingTime = medicalPrescription.TimeTaking.ToString("HH:mm");
 
                 String query = $"insert into medical_prescription values (\"{GetFirstFreeId()}\", \"{medicalPrescription.Medicine.Id}\", " +
                                                                          $"\"{medicalPrescription.Quantity}\", \"{medicalPrescription.TimeOfConsumption}\", " +
@@ -48,5 +49,26 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
+
+        public static List<MedicalPrescription> Load(string query)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                List<MedicalPrescription> prescriptions = new List<MedicalPrescription>();
+                OleDbCommand command = new OleDbCommand(query, connection);
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    prescriptions.Add(MedicalPrescription.Parse(reader));
+
+                reader.Close();
+                connection.Close();
+
+                return prescriptions;
+            }
+        }
+            
+        
     }
 }
