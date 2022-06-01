@@ -141,7 +141,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.amnesisBtn.Name = "amnesisBtn";
 			this.amnesisBtn.Size = new System.Drawing.Size(110, 45);
 			this.amnesisBtn.TabIndex = 3;
-			this.amnesisBtn.Text = "Amnesis and prescriptions";
+			this.amnesisBtn.Text = "Preforme examination";
 			this.amnesisBtn.UseVisualStyleBackColor = true;
 			this.amnesisBtn.Click += new System.EventHandler(this.AmnesisBtnClick);
 			// 

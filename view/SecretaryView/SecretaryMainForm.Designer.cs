@@ -36,13 +36,13 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.appointmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestsForChangeAndCancellationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bookingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.byReferralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emergencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.equipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aquirementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.placementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.requestsForOffDaysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.byReferralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emergencyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +58,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.logOutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1200, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1200, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -110,6 +110,20 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.bookingToolStripMenuItem.Size = new System.Drawing.Size(407, 34);
             this.bookingToolStripMenuItem.Text = "Booking";
             // 
+            // byReferralToolStripMenuItem
+            // 
+            this.byReferralToolStripMenuItem.Name = "byReferralToolStripMenuItem";
+            this.byReferralToolStripMenuItem.Size = new System.Drawing.Size(201, 34);
+            this.byReferralToolStripMenuItem.Text = "By referral";
+            this.byReferralToolStripMenuItem.Click += new System.EventHandler(this.ByReferralToolStripMenuItem_Click);
+            // 
+            // emergencyToolStripMenuItem
+            // 
+            this.emergencyToolStripMenuItem.Name = "emergencyToolStripMenuItem";
+            this.emergencyToolStripMenuItem.Size = new System.Drawing.Size(201, 34);
+            this.emergencyToolStripMenuItem.Text = "Emergency";
+            this.emergencyToolStripMenuItem.Click += new System.EventHandler(this.EmergencyToolStripMenuItem_Click);
+            // 
             // equipmentToolStripMenuItem
             // 
             this.equipmentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -122,13 +136,14 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // aquirementToolStripMenuItem
             // 
             this.aquirementToolStripMenuItem.Name = "aquirementToolStripMenuItem";
-            this.aquirementToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.aquirementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.aquirementToolStripMenuItem.Text = "Aquirement";
+            this.aquirementToolStripMenuItem.Click += new System.EventHandler(this.aquirementToolStripMenuItem_Click);
             // 
             // placementToolStripMenuItem
             // 
             this.placementToolStripMenuItem.Name = "placementToolStripMenuItem";
-            this.placementToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.placementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.placementToolStripMenuItem.Text = "Placement";
             // 
             // requestsForOffDaysToolStripMenuItem
@@ -142,19 +157,6 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             this.logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
             this.logOutToolStripMenuItem.Size = new System.Drawing.Size(90, 29);
             this.logOutToolStripMenuItem.Text = "Log out";
-            // 
-            // byReferralToolStripMenuItem
-            // 
-            this.byReferralToolStripMenuItem.Name = "byReferralToolStripMenuItem";
-            this.byReferralToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.byReferralToolStripMenuItem.Text = "By referral";
-            this.byReferralToolStripMenuItem.Click += new System.EventHandler(this.ByReferralToolStripMenuItem_Click);
-            // 
-            // emergencyToolStripMenuItem
-            // 
-            this.emergencyToolStripMenuItem.Name = "emergencyToolStripMenuItem";
-            this.emergencyToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.emergencyToolStripMenuItem.Text = "Emergency";
             // 
             // SecretaryMainForm
             // 

@@ -32,7 +32,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 							"select * from users where id=\"" + patientId + "\"");
 			this.patient = patient;
 			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
-			Dictionary<string, string> medicinePair = MedicineController.LoadPair("select id, name from medicine where isVerified = \"true\" ");
+			Dictionary<string, string> medicinePair = MedicineController.LoadPair("select id, name from medicine where status = \"accepted\" ");
 			medicineComboBox.DataSource = new BindingSource(medicinePair, null);
 			medicineComboBox.DisplayMember = "Value";
 			medicineComboBox.ValueMember = "Key";
