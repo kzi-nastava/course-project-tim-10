@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
+    <Compile Include="contollers\DynamicEquipmentRequestController.cs" />
     <Compile Include="contollers\EquipmentController.cs" />
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="models\entity\ComplexMoving.cs" />
     <Compile Include="models\entity\ComplexRenovation.cs" />
     <Compile Include="models\entity\Equipment.cs" />
+    <Compile Include="models\entity\EquipmentRequest.cs" />
     <Compile Include="models\entity\MedicalPrescription.cs" />
     <Compile Include="models\entity\MedicalRecord.cs" />
     <Compile Include="models\entity\Medicine.cs" />
@@ -253,6 +255,12 @@
     <Compile Include="view\SecretaryView\BookingEmergencyForm.Designer.cs">
       <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\DynamicEquipmentAquirementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\DynamicEquipmentAquirementForm.Designer.cs">
+      <DependentUpon>DynamicEquipmentAquirementForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\ManagePatientsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -343,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\BookingEmergencyForm.resx">
       <DependentUpon>BookingEmergencyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\DynamicEquipmentAquirementForm.resx">
+      <DependentUpon>DynamicEquipmentAquirementForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\ManagePatientsForm.resx">
       <DependentUpon>ManagePatientsForm.cs</DependentUpon>

@@ -113,14 +113,14 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // byReferralToolStripMenuItem
             // 
             this.byReferralToolStripMenuItem.Name = "byReferralToolStripMenuItem";
-            this.byReferralToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.byReferralToolStripMenuItem.Size = new System.Drawing.Size(201, 34);
             this.byReferralToolStripMenuItem.Text = "By referral";
             this.byReferralToolStripMenuItem.Click += new System.EventHandler(this.ByReferralToolStripMenuItem_Click);
             // 
             // emergencyToolStripMenuItem
             // 
             this.emergencyToolStripMenuItem.Name = "emergencyToolStripMenuItem";
-            this.emergencyToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.emergencyToolStripMenuItem.Size = new System.Drawing.Size(201, 34);
             this.emergencyToolStripMenuItem.Text = "Emergency";
             this.emergencyToolStripMenuItem.Click += new System.EventHandler(this.EmergencyToolStripMenuItem_Click);
             // 
@@ -136,13 +136,14 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // aquirementToolStripMenuItem
             // 
             this.aquirementToolStripMenuItem.Name = "aquirementToolStripMenuItem";
-            this.aquirementToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.aquirementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.aquirementToolStripMenuItem.Text = "Aquirement";
+            this.aquirementToolStripMenuItem.Click += new System.EventHandler(this.aquirementToolStripMenuItem_Click);
             // 
             // placementToolStripMenuItem
             // 
             this.placementToolStripMenuItem.Name = "placementToolStripMenuItem";
-            this.placementToolStripMenuItem.Size = new System.Drawing.Size(207, 34);
+            this.placementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.placementToolStripMenuItem.Text = "Placement";
             // 
             // requestsForOffDaysToolStripMenuItem

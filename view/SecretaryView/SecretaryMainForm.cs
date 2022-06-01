@@ -46,5 +46,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             BookingEmergency bookingEmergencyForm = new BookingEmergency();
             bookingEmergencyForm.Show();
         }
+
+        private void AquirementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DynamicEquipmentAquirementForm dynamicEquipmentAquirementForm = new DynamicEquipmentAquirementForm();
+            dynamicEquipmentAquirementForm.Show();
+        }
     }
 }

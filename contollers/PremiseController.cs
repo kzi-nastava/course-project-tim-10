@@ -184,5 +184,27 @@ namespace HealthCareInfromationSystem.contollers
         {
             return LoadOnePremise(Constants.connectionString, $"select * from premises where premises_id = \"{id}\"");
         }
+
+        public static Premise GetPremiseById(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"select * from premises where premises_id=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                Premise premise = null;
+
+                while (reader.Read())
+                {
+                    premise = Premise.Parse(reader);
+
+                }
+                reader.Close();
+                return premise;
+            }
+        }
+
     }
 }
