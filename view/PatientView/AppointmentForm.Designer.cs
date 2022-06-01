@@ -56,7 +56,6 @@ namespace HealthCareInfromationSystem
             this.dateTimeLabel.Size = new System.Drawing.Size(140, 17);
             this.dateTimeLabel.TabIndex = 1;
             this.dateTimeLabel.Text = "Enter date and time: ";
-            this.dateTimeLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 

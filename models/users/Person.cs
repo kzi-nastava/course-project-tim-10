@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace HealthCareInfromationSystem.models.users
 {
@@ -132,12 +133,11 @@ namespace HealthCareInfromationSystem.models.users
 			  password, blocked, blocker, username);
 		}
 
+
 		public override string ToString()
 		{
 			return _firstname + " " + _lastname;
 		}
-
-
 	}
 }
 

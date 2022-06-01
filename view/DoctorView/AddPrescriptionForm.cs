@@ -51,13 +51,15 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			string medicineId = medicineComboBox.SelectedValue.ToString();
 			Medicine medicine = MedicineController.LoadOneById(medicineId);
 			//string tymeOfConsumption = periodComboBox.SelectedItem.ToString();
-			Enum.TryParse(periodComboBox.SelectedItem.ToString(), out Medicine.DrinkingPeriod timeOfConsumption);
+			//Enum.TryParse(periodComboBox.SelectedItem.ToString(), out Medicine.DrinkingPeriod timeOfConsumption);
+			string time = periodTextBox.Text;
 			string quantity = quantityTextBox.Text;
 			string date = dateTextBox.Text;
-			DateTime dateCheck;
+			DateTime dateCheck, timeTaking;
 			try
 			{
 				dateCheck = DateTime.ParseExact(date, "dd.MM.yyyy.", null);
+				timeTaking = DateTime.ParseExact(time, "HH:mm", null);
 			}
 			catch
 			{
@@ -74,7 +76,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeOfConsumption, patient, DateTime.Now, dateCheck);
+				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeTaking, patient, DateTime.Now, dateCheck);
 				MedicalPrescriptionController.SaveToBase(medicalPrescription);
 			}
 
