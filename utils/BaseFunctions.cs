@@ -35,12 +35,15 @@ namespace HealthCareInfromationSystem.utils
 
         public static void FillDataGridView(string query, DataGridView dataGridView)
         {
-            OleDbCommand command = new OleDbCommand(query, Constants.connection);
-            OleDbDataAdapter da = new OleDbDataAdapter(command);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            dataGridView.DataSource = dt;
-            Constants.connection.Close();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                OleDbCommand command = new OleDbCommand(query, connection);
+                OleDbDataAdapter da = new OleDbDataAdapter(command);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGridView.DataSource = dt;
+                connection.Close();
+            }
         }
 
     }

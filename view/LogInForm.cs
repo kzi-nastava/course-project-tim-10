@@ -13,6 +13,7 @@ using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.view.ManagerView;
 using HealthCareInfromationSystem.view.DoctorView;
 using HealthCareInfromationSystem.view.SecretaryView;
+using HealthCareInfromationSystem.view.PatientView;
 
 namespace HealthCareInfromationSystem.view
 {

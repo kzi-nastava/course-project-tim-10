@@ -28,6 +28,11 @@ namespace HealthCareInfromationSystem.utils
             return DateTime.ParseExact(timeStr, Constants.TimeFmt, null);
         }
 
+        public static DateTime ToFullTime(string fullTimeStr)
+        {
+            return DateTime.ParseExact(fullTimeStr, Constants.FullTimeFmt, null);
+        }
+
         public static DateTime CalculateDateTime(DateTime currDay, DateTime currTime)
         {
             return new DateTime(currDay.Year, currDay.Month, currDay.Day, currTime.Hour, currTime.Minute, currTime.Second);
