@@ -144,7 +144,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             // 
             this.placementToolStripMenuItem.Name = "placementToolStripMenuItem";
             this.placementToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.placementToolStripMenuItem.Text = "Placement";
+            this.placementToolStripMenuItem.Text = "Arranging";
+            this.placementToolStripMenuItem.Click += new System.EventHandler(this.PlacementToolStripMenuItem_Click);
             // 
             // requestsForOffDaysToolStripMenuItem
             // 

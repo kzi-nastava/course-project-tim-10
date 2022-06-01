@@ -11,8 +11,8 @@ using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.contollers
 {
-	class EquipmentController
-	{
+    class EquipmentController
+    {
         public static List<Equipment> LoadEquipments(string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -34,8 +34,8 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void Save(string id, int newQuantity)
-		{
+        internal static void Save(string id, int newQuantity)
+        {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
@@ -87,6 +87,76 @@ namespace HealthCareInfromationSystem.contollers
                 Save(request.EquipmentId.ToString(), request.Quantity); // supplies the requested quantity
                 DynamicEquipmentRequestController.SetSuppliedStatus(request);
             }
+        }
+
+        public static List<string> GetDistinctEquipmentNames()
+        {
+            List<string> names = new List<string>();
+            foreach (Equipment equipment in GetDynamicEquipment())
+            {
+                if (!names.Contains(equipment.Name)) names.Add(equipment.Name);
+            }
+            return names;
+        }
+
+        public static List<Equipment> GetEquipmentLowOnStock(string equipmentName)
+        {
+            List<Equipment> lowOnStock = new List<Equipment>();
+            foreach (Equipment equipment in GetDynamicEquipment())
+            {
+                if (equipment.Name == equipmentName && equipment.Quantity < 5)
+                {
+                    lowOnStock.Add(equipment);
+                }
+            }
+            return lowOnStock;
+        }
+
+        public static List<Equipment> GetEquipmentWithSufficentStock(string equipmentName)
+        {
+            List<Equipment> sufficentlyStocked = new List<Equipment>();
+            foreach (Equipment equipment in GetDynamicEquipment())
+            {
+                if (equipment.Name == equipmentName && equipment.Quantity >= 5)
+                {
+                    sufficentlyStocked.Add(equipment);
+                }
+            }
+            return sufficentlyStocked;
+        }
+
+        public static List<List<string>> GetRowsForEquipmentLowOnStock(string equipmentName)
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (Equipment equipment in GetEquipmentLowOnStock(equipmentName))
+            {
+                rows.Add(GetTableRow(equipment));
+                
+            }
+            return rows;
+        }
+
+        public static List<List<string>> GetRowsForEquipmentWithSufficentStock(string equipmentName)
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (Equipment equipment in GetEquipmentWithSufficentStock(equipmentName))
+            {
+                rows.Add(GetTableRow(equipment));
+
+            }
+            return rows;
+        }
+
+        private static List<string> GetTableRow(Equipment equipment)
+        {
+            List<string> row = new List<string>();
+            if (equipment.Quantity == 0) row.Add("!");
+            else row.Add("");
+            row.Add(equipment.Id.ToString());
+            row.Add(equipment.Premise.Id.ToString());
+            row.Add(equipment.Premise.Name);
+            row.Add(equipment.Quantity.ToString());
+            return row;
         }
 
     }
