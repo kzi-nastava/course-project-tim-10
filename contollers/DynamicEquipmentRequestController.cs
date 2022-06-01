@@ -44,7 +44,7 @@ namespace HealthCareInfromationSystem.contollers
                 return requests;
             }
         }
-        public static void MarkSupplied(EquipmentRequest request)
+        public static void SetSuppliedStatus(EquipmentRequest request)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
