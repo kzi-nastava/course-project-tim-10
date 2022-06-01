@@ -52,5 +52,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             DynamicEquipmentAquirementForm dynamicEquipmentAquirementForm = new DynamicEquipmentAquirementForm();
             dynamicEquipmentAquirementForm.Show();
         }
+
+        private void PlacementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArrangingDynamicEquipmentForm arrangingDynamicEquipmentForm = new ArrangingDynamicEquipmentForm();
+            arrangingDynamicEquipmentForm.Show();
+        }
     }
 }
