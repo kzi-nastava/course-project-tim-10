@@ -239,6 +239,12 @@
     <Compile Include="view\SecretaryView\AppointmentRequestForm.Designer.cs">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\ArrangingDynamicEquipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\ArrangingDynamicEquipmentForm.Designer.cs">
+      <DependentUpon>ArrangingDynamicEquipmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\SecretaryView\AssignTimeToReferralForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -352,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SecretaryView\ArrangingDynamicEquipmentForm.resx">
+      <DependentUpon>ArrangingDynamicEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\AssignTimeToReferralForm.resx">
       <DependentUpon>AssignTimeToReferralForm.cs</DependentUpon>
