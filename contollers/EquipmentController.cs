@@ -85,7 +85,7 @@ namespace HealthCareInfromationSystem.contollers
             foreach (EquipmentRequest request in DynamicEquipmentRequestController.GetRequestsReadyToSupply())
             {
                 Save(request.EquipmentId.ToString(), request.Quantity); // supplies the requested quantity
-                DynamicEquipmentRequestController.MarkSupplied(request);
+                DynamicEquipmentRequestController.SetSuppliedStatus(request);
             }
         }
 
