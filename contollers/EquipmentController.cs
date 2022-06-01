@@ -80,5 +80,14 @@ namespace HealthCareInfromationSystem.contollers
             return outOfStock;
         }
 
+        public static void SupplyFromReadyRequests()
+        {
+            foreach (EquipmentRequest request in DynamicEquipmentRequestController.GetRequestsReadyToSupply())
+            {
+                Save(request.EquipmentId.ToString(), request.Quantity); // supplies the requested quantity
+                DynamicEquipmentRequestController.MarkSupplied(request);
+            }
+        }
+
     }
 }

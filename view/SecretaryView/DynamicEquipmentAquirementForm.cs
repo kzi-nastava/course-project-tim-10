@@ -19,6 +19,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         public DynamicEquipmentAquirementForm()
         {
             InitializeComponent();
+            EquipmentController.SupplyFromReadyRequests();
             DisplayEquipmentTableData();
         }
 
@@ -63,6 +64,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (IfRowSelected() && IfQuantityFieldCorrect())
             {
                 DynamicEquipmentRequestController.SendRequest(int.Parse(selectedEquipmentId), int.Parse(tbQuantity.Text));
+                MessageBox.Show("Request sent successfully.");
             }
         }
     }
