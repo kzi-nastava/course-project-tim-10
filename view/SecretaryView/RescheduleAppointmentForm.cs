@@ -1,5 +1,6 @@
 ﻿using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -50,8 +51,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (selectedAppointmentId != "")
             {
                 Appointment forRescheduling = AppointmentController.LoadOneAppointment(Constants.connectionString, $"select * from appointments where id=\"{selectedAppointmentId}\"");
-                AppointmentController.EditInBase(forRescheduling.Id.ToString(), forRescheduling.Patient.Id.ToString(), forRescheduling.Premise.Id, forRescheduling.Doctor.Id, appointmentRescheduleTime[forRescheduling.Id].ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), forRescheduling.Type.ToString());
-                AppointmentController.AddToBase(emergency.Patient.Id.ToString(), emergency.Premise.Id, forRescheduling.Doctor.Id, forRescheduling.Beginning.ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), emergency.Type.ToString());
+                Appointment appointment = new Appointment(0, new Person(forRescheduling.Doctor.Id), new Person(emergency.Patient.Id),
+                    new Premise(emergency.Premise.Id), forRescheduling.Beginning, forRescheduling.Duration, emergency.Type, "");
+                forRescheduling.Beginning = appointmentRescheduleTime[forRescheduling.Id];
+                //AppointmentController.Edit(forRescheduling.Id.ToString(), forRescheduling.Patient.Id.ToString(), forRescheduling.Premise.Id, forRescheduling.Doctor.Id, appointmentRescheduleTime[forRescheduling.Id].ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), forRescheduling.Type.ToString());
+                AppointmentController.Edit(forRescheduling);
+                AppointmentController.Add(appointment);
                 MessageBox.Show("Appointment at " + forRescheduling.Beginning.ToString("dd.MM.yyyy. HH:mm") + " rescheduled to " + appointmentRescheduleTime[forRescheduling.Id] + ".\nEmergency sucessfully booked instead.", "Success");
                 
                 forRescheduling.Beginning = appointmentRescheduleTime[forRescheduling.Id];

@@ -17,6 +17,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		public AllAppointmentsForm()
 		{
 			InitializeComponent();
+			FillView();
+		}
+
+		private void FillView()
+		{
 			List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
 			foreach (Appointment appointment in appointments)
 			{
@@ -34,44 +39,48 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void EditButtonClick(object sender, EventArgs e)
 		{
-			int selectedRowCount =
-			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
+			
+			if (OneRowSelected())
 			{
-
 				EditAppointmentForm edditAppointmentForm = new EditAppointmentForm(GetSelectedAppointmentId());
 				edditAppointmentForm.Show();
 			}
-			else
-			{
-				MessageBox.Show("Please select ONLY ONE row for editing.", "Error");
-			}
+			
 		}
 
 		private void DeleteButtonClick(object sender, EventArgs e)
 		{
+			if (OneRowSelected())
+			{
+				ApproveDelete();
+			}
+
+		}
+
+		private void ApproveDelete()
+		{
+			DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
+			if (dialogResult == DialogResult.Yes)
+			{
+				MessageBox.Show("Changes saved.", "Success");
+				AppointmentController.Delete(GetSelectedAppointmentId());
+			}
+		}
+
+		private bool OneRowSelected() {
 			int selectedRowCount =
 			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
-			{
-
-				DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
-				if (dialogResult == DialogResult.Yes)
-				{
-					MessageBox.Show("Changes saved.", "Success");
-					AppointmentController.DeleteFromBase(GetSelectedAppointmentId());
-				}
-
-			}
+			if (selectedRowCount == 1) return true;
 			else
 			{
-				MessageBox.Show("Please select ONLY ONE row for deliting.", "Error");
+				MessageBox.Show("Please select ONLY ONE row.", "Error");
+				return false;
 			}
 		}
 
 		private void CancleButtonClick(object sender, EventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 
 		private void TableAppointments_Load(object sender, EventArgs e)
@@ -79,10 +88,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		}
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
-		}
 
 		private string GetSelectedAppointmentId()
 		{

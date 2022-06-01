@@ -1,5 +1,6 @@
 ﻿using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.view.DoctorView;
 using System;
@@ -129,7 +130,10 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (dialogResult == DialogResult.Yes)
             {
                 MessageBox.Show("Changes saved.", "Success");
-                AppointmentController.AddToBase(referralLetter.Patient.Id.ToString(), premiseId, referralLetter.Doctor.Id, beginning, duration, type);
+                Enum.TryParse(type, out Appointment.AppointmentType typeP);
+                Appointment appointment = new Appointment(0, new Person(referralLetter.Doctor.Id), new Person(referralLetter.Patient.Id), 
+                    new Premise(premiseId), DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null), int.Parse(duration), typeP, "");
+                AppointmentController.Add(appointment);
                 ReferralLetterController.MarkUsed(referralLetter);
                 this.Dispose();
             }

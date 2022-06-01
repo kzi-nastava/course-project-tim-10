@@ -33,7 +33,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
         
-        public static void SaveToBase(MedicalPrescription medicalPrescription)
+        public static void Save(MedicalPrescription medicalPrescription)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

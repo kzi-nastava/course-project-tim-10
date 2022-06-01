@@ -25,7 +25,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
         {
 			try
             {
-
 				string notificationText = NotificationController.GetEmergencyNotifications(Constants.connectionString, utils.LoggedInUser.GetId());
 				notificationText += NotificationController.GetRescheduleNotifications(Constants.connectionString, "", utils.LoggedInUser.GetId());
 				if (notificationText != "")

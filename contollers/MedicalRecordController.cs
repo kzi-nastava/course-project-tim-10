@@ -31,13 +31,13 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-		internal static void EditInBase(int id, string height, string weight, string bloodType, string disease, string alergie)
+		internal static void EditInBase(MedicalRecord medicalRecord)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                String query = $"update medical_record set height=\"{height}\", weight=\"{weight}\", " +
-                    $"bloodType=\"{bloodType}\", disease=\"{disease}\", alergies=\"{alergie}\" where id=\"{id}\"";
+                String query = $"update medical_record set height=\"{medicalRecord.Height}\", weight=\"{medicalRecord.Weight}\", " +
+                    $"bloodType=\"{medicalRecord.BloodType}\", disease=\"{medicalRecord.Disease}\", alergies=\"{medicalRecord.Alergies}\" where id=\"{medicalRecord.Id}\"";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }

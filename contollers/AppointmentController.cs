@@ -182,13 +182,15 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void AddToBase(string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
+        public static void Add(Appointment appointment)
         {
             int id = GetFirstFreeId();
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                String query = $"insert into appointments values (\"{id}\", \"{doctorId}\", \"{patientId}\", \"{premiseId}\", \"{beginning}\", \"{duration}\", \"{type}\", \"\")";
+                string date = appointment.Beginning.ToString();
+                string query = $"insert into appointments values (\"{id}\", \"{appointment.Doctor.Id}\", \"{appointment.Patient.Id}\"," +
+                    $" \"{appointment.Premise.Id}\", \"{date.Substring(0, date.Length - 3)}\", \"{appointment.Duration}\", \"{appointment.Type}\", \"\")";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
@@ -207,13 +209,14 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void EditInBase(string appointmentId, string patientId, string premiseId, int doctorId, string beginning, string duration, string type)
+        public static void Edit(Appointment appointment)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                String query = $"update appointments set doctorId=\"{doctorId}\", patientId=\"{patientId}\", " +
-                    $"premiseId=\"{premiseId}\", beginning=\"{beginning}\", duration=\"{duration}\", type=\"{type}\" where id=\"{appointmentId}\"";
+                string date = appointment.Beginning.ToString();
+                String query = $"update appointments set doctorId=\"{appointment.Doctor.Id}\", patientId=\"{appointment.Patient.Id}\", " +
+                    $"premiseId=\"{appointment.Premise.Id}\", beginning=\"{date.Substring(0, date.Length - 3)}\", duration=\"{appointment.Duration}\", type=\"{appointment.Type}\" where id=\"{appointment.Id}\"";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
@@ -230,7 +233,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void DeleteFromBase(string id)
+        public static void Delete(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

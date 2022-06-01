@@ -101,19 +101,7 @@ namespace HealthCareInfromationSystem.models.entity
             set { _comment = value; }
         }
 
-        /**internal static Appointment Parse(DataGridViewRow row)
-        {
-            String id = row.Cells["ID"].Value.ToString();
-            String doctor = row.Cells["doctorId"].Value.ToString();
-            String patient = row.Cells["patientId"].Value.ToString();
-            String premise = row.Cells["premiseId"].Value.ToString();
-            String beginning = row.Cells["beginning"].Value.ToString();
-            String duration = row.Cells["duration"].Value.ToString();
-            String type = row.Cells["type"].Value.ToString();
-            String comment = row.Cells["comment"].Value.ToString();
-            return new Appointment(id, patient, doctor, premise, beginning, type, duration);
-
-        }**/
+        
 
         public static Appointment Parse(OleDbDataReader reader)
         {

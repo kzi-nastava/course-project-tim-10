@@ -25,46 +25,63 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			InitializeComponent();
 			this.MedicalRecord = medical;
+			FillFields();
+
+		}
+
+		private void FillFields()
+		{
 			heightTextBox.Text = MedicalRecord.Height.ToString();
 			weightTextBox.Text = MedicalRecord.Weight.ToString();
 			diseaseTextBox.Text = MedicalRecord.Disease;
 			alergiesTextBox.Text = MedicalRecord.Alergies;
 			bloodTypeComboBox.DataSource = Enum.GetNames(typeof(BloodType)).ToArray();
 			bloodTypeComboBox.SelectedItem = MedicalRecord.BloodType.ToString();
-
 		}
 
 		private void SaveBtnClick(object sender, EventArgs e)
 		{
-			int id = MedicalRecord.Id;
 			string height = heightTextBox.Text;
 			string weight = weightTextBox.Text;
 			string bloodType = bloodTypeComboBox.SelectedItem.ToString();
 			string disease = diseaseTextBox.Text;
 			string alergie = alergiesTextBox.Text;
+			Enum.TryParse(bloodType, out BloodType bloodTyp);
+
+			if (!IsInputValid(height, weight)) return;
+
+			MedicalRecord medicalRecord = new MedicalRecord(MedicalRecord.Id, double.Parse(height), double.Parse(weight), bloodTyp, disease, alergie);
+			SaveChanges(medicalRecord);
+
+		}
+
+		private bool IsInputValid(string height, string weight) {
 			try
 			{
 				double heightCheck = double.Parse(height);
 				double weightCheck = double.Parse(weight);
+				return true;
 			}
 			catch
 			{
 				MessageBox.Show("Please check height and weight fieled.", "Error");
-				return;
+				return false;
 			}
+		}
 
+		private static void SaveChanges(MedicalRecord medicalRecord)
+		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalRecordController.EditInBase(MedicalRecord.Id, height, weight, bloodType, disease, alergie);
+				MedicalRecordController.EditInBase(medicalRecord);
 			}
-			
 		}
 
 		private void CancelBtnClick(object sender, EventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 	}
 }

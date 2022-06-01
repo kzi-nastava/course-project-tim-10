@@ -65,7 +65,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void AddToBase(string patientId, string specialisation, string doctorId)
+        public static void Add(string patientId, string specialisation, string doctorId)
 		{
             int id = GetFirstFreeId();
             if (doctorId == "") doctorId = "null";

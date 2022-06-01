@@ -28,15 +28,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				DateTime date = DateTime.ParseExact(inputDate, "dd.MM.yyyy.", null);
 				dataGridView1.Rows.Clear();
 				dataGridView1.Refresh();
-				List<Appointment> appointments = AppointmentController.LoadAppointmentsForDate(Constants.connectionString,
-				"select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"", inputDate);
-				Console.WriteLine(appointments.Count);
-				foreach (Appointment appointment in appointments)
-				{
-					dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
-										appointment.Beginning, appointment.Duration, appointment.Type, appointment.Id);
-
-				}
+				FillTable(inputDate);
 			}
 			catch
 			{
@@ -45,11 +37,22 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		}
 
+		private void FillTable(string inputDate)
+		{
+			List<Appointment> appointments = AppointmentController.LoadAppointmentsForDate(Constants.connectionString,
+							"select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"", inputDate);
+			Console.WriteLine(appointments.Count);
+			foreach (Appointment appointment in appointments)
+			{
+				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
+									appointment.Beginning, appointment.Duration, appointment.Type, appointment.Id);
+
+			}
+		}
+
 		private void MoreInfoBtnClick(object sender, EventArgs e)
 		{
-			int selectedRowCount =
-			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
+			if (OneRowSelected())
 			{
 				string patientId = AppointmentController.GetPatientId(Constants.connectionString,
 				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
@@ -58,27 +61,17 @@ namespace HealthCareInfromationSystem.view.DoctorView
 				SingleMedicalRecordForm medicalRecordForm = new SingleMedicalRecordForm(medical);
 				medicalRecordForm.Show();
 			}
-			else
-			{
-				MessageBox.Show("Please select ONLY ONE row for viewing medical record.", "Error");
-			}
 		}
 
 		private void AmnesisBtnClick(object sender, EventArgs e)
 		{
-			int selectedRowCount =
-			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
+			if (OneRowSelected())
 			{
 				Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString,
 				"select * from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
 				Console.WriteLine($"comment:{appointment.Comment}");
 				PerformExaminationForm anamnesisInputForm = new PerformExaminationForm(appointment);
 				anamnesisInputForm.Show();
-			}
-			else
-			{
-				MessageBox.Show("Please select ONLY ONE row for inputing amnesis.", "Error");
 			}
 		}
 
@@ -94,18 +87,25 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void ReferralLetterClick(object sender, EventArgs e)
 		{
-			int selectedRowCount =
-			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
+			if (OneRowSelected())
 			{
 				string patientId = AppointmentController.GetPatientId(Constants.connectionString,
 				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
 				AddReferralLetterForm addReferralLetter = new AddReferralLetterForm(patientId);
 				addReferralLetter.Show();
 			}
+			
+		}
+
+		private bool OneRowSelected()
+		{
+			int selectedRowCount =
+			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+			if (selectedRowCount == 1) return true;
 			else
 			{
-				MessageBox.Show("Please select ONLY ONE row for creating referral letter.", "Error");
+				MessageBox.Show("Please select ONLY ONE row.", "Error");
+				return false;
 			}
 		}
 	}
