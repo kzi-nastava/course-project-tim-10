@@ -63,6 +63,20 @@ namespace HealthCareInfromationSystem
             _secretaryId = "";
         }
 
+        public AppointmentRequest(string id, Person patient, Appointment appointment, string type, Person newDoctor, string newBeginning, string reqDateTime, string state)
+        {
+            _id = id;
+            _patientId = patient.Id.ToString();
+            _patient = patient;
+            _appointment = appointment;
+            _type = type;
+            _newDoctor = newDoctor;
+            _newBeginning = newBeginning;
+            _reqDateTime = reqDateTime;
+            _state = state;
+            _secretaryId = "";
+        }
+
         public String SecretaryId
         {
             get { return _secretaryId; }
@@ -131,6 +145,7 @@ namespace HealthCareInfromationSystem
         {
             get { return _appointment; }
         }
+        
 
         public static AppointmentRequest Parse(OleDbDataReader reader)
         {
@@ -141,12 +156,12 @@ namespace HealthCareInfromationSystem
             Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString, 
                             "select * from appointments where id=\"" + reader[2].ToString() + "\"");
             string type = reader[3].ToString();
-            Person newDoctor = PersonController.LoadOnePerson(Constants.connectionString,
-                            "select * from users where id=\"" + reader[4].ToString() + "\"");
+            Person newDoctor = null;
+            if (type == "edit") newDoctor = PersonController.LoadOnePerson(Constants.connectionString, "select * from users where id=\"" + reader[4].ToString() + "\"");
             string newBeginning = reader[5].ToString();
             string reqDateTime = reader[6].ToString();
-            Console.WriteLine(id.ToString(), patient.Id, appointment.Id, type, newDoctor.Id, newBeginning, reqDateTime);
-            return new AppointmentRequest(id.ToString(), patient, appointment, type, newDoctor, newBeginning, reqDateTime);
+            string state = reader[7].ToString();
+            return new AppointmentRequest(id.ToString(), patient, appointment, type, newDoctor, newBeginning, reqDateTime, state);
         }
 
     }
