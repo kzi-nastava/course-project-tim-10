@@ -255,7 +255,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         private void SaveButton_Click(object sender, EventArgs e)
         {
             Appointment selectedApp = (Appointment) appointmentsBox.SelectedItem;
-            AppointmentController.InsertNew(selectedApp);
+            AppointmentController.Add(selectedApp);
             MessageBox.Show("You have successfully created appointment.");
         }
 

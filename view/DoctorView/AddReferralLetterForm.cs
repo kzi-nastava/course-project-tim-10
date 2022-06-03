@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
-using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AddReferralLetterForm : Form
 	{
+		MedicalRecordService medicalRecordService = new MedicalRecordService();
 		private string patientId;
 
 		public AddReferralLetterForm()
@@ -33,7 +34,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillSpecialisationComboBox()
 		{
-			List<string> specialisations = SpecialisationController.LoadSpecialisations(Constants.connectionString, "select distinct name from specialisations");
+			List<string> specialisations = medicalRecordService.LoadSpecialisations();
 			specialisations.Add("");
 			specialisationComboBox.DataSource = specialisations;
 			specialisationComboBox.SelectedItem = "";
@@ -41,7 +42,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillDoctorComboBox()
 		{
-			Dictionary<string, string> doctorPair = PersonController.LoadPair(Constants.connectionString, "select id, name, last_name from users where role = \"doctor\" ");
+			Dictionary<string, string> doctorPair = medicalRecordService.LoadFullNameAndId("doctor");
 			doctorPair.Add("", "");
 			doctorComboBox.DataSource = new BindingSource(doctorPair, null);
 			doctorComboBox.DisplayMember = "Value";
@@ -52,8 +53,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private void LoadPatient(string patientId)
 		{
 			this.patientId = patientId;
-			Person patient = PersonController.LoadOnePerson(Constants.connectionString,
-							"select * from users where id=\"" + patientId + "\"");
+			Person patient = medicalRecordService.GetPersonById(patientId);
 			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
 		}
 
@@ -73,7 +73,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				ReferralLetterController.Add(patientId, specialisation, doctorId);
+				medicalRecordService.AddToBase(patientId, specialisation, doctorId);
 			}
 		}
 

@@ -84,11 +84,36 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="repository\AppointmentSQL.cs" />
+    <Compile Include="repository\EquipmentSQL.cs" />
+    <Compile Include="repository\IAppointmentRepo.cs" />
+    <Compile Include="repository\IAppointmentRequestRepo.cs" />
+    <Compile Include="repository\IEquipmentRepo.cs" />
+    <Compile Include="repository\IMedicalRecordRepo.cs" />
+    <Compile Include="repository\IMedicineRepo.cs" />
+    <Compile Include="repository\IPersonRepo.cs" />
+    <Compile Include="repository\IPremisseRepo.cs" />
+    <Compile Include="repository\IPrescriptionRepo.cs" />
+    <Compile Include="repository\IReferealLeterRepo.cs" />
+    <Compile Include="repository\ISpecialisationRepo.cs" />
+    <Compile Include="repository\MedicalRecordSQL.cs" />
+    <Compile Include="repository\MedicineSQL.cs" />
+    <Compile Include="repository\PersonSQL.cs" />
+    <Compile Include="repository\PremisseSQL.cs" />
+    <Compile Include="repository\PrescriptionSQL.cs" />
+    <Compile Include="repository\ReferralLeterSQL.cs" />
+    <Compile Include="repository\SpecialisationSQL.cs" />
+    <Compile Include="Servise\AppointmentService.cs" />
+    <Compile Include="Servise\EquipmentService.cs" />
+    <Compile Include="Servise\MedicalRecordService.cs" />
+    <Compile Include="Servise\MedicineRequestService.cs" />
+    <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\LoggedInUser.cs" />
     <Compile Include="utils\Methods.cs" />
     <Compile Include="utils\MyConverter.cs" />
+    <Compile Include="viewController\AllAppointmentsController.cs" />
     <Compile Include="view\DoctorView\AddAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +144,7 @@
     <Compile Include="view\DoctorView\EquipmentStateForm.Designer.cs">
       <DependentUpon>EquipmentStateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\IAllApointments.cs" />
     <Compile Include="view\DoctorView\PerformExaminationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -406,5 +432,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

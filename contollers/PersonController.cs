@@ -12,23 +12,14 @@ namespace HealthCareInfromationSystem.contollers
 {
 	class PersonController
 	{
-        /*
-	    * Retrieves a specific person from dataset
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-
-            Returns:
-                    Person or null if the person is not found.
-	    * */
-
+        
         public static Person SearchPerson(string id)
         {
             return LoadOnePerson(Constants.connectionString,
                             "select * from users where id=\"" + id + "\"");
         }
 
+        //dodato
         public static Person LoadOnePerson(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -50,16 +41,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        /*
-	    * Creates dictionary used for filling in a combobox
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-
-            Returns:
-                    Dictionary where key = user id(firs value in query) and value = userd full name name(second value in query).
-	    * */
+        //dadato
         public static Dictionary<string, string> LoadPair(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))

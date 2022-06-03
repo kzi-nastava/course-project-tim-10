@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class SingleMedicalRecordForm : Form
 	{
+		MedicalRecordService medicalRecordService = new MedicalRecordService();
 		MedicalRecord MedicalRecord { get; set; }
+
 
 		public SingleMedicalRecordForm()
 		{
@@ -69,13 +72,13 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
-		private static void SaveChanges(MedicalRecord medicalRecord)
+		private void SaveChanges(MedicalRecord medicalRecord)
 		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalRecordController.EditInBase(medicalRecord);
+				medicalRecordService.EditInBase(medicalRecord);
 			}
 		}
 

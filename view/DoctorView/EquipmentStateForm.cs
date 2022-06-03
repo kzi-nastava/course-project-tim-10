@@ -11,12 +11,14 @@ using System.Data.OleDb;
 using System.Globalization;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class EquipmentStateForm : Form
 	{
 		private Premise premise;
+		EquipmentService equipmentService = new EquipmentService();
 
 		public EquipmentStateForm()
 		{
@@ -25,17 +27,16 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		public EquipmentStateForm(Premise premise)
 		{
-			this.premise = premise;
 			InitializeComponent();
-			String query = "select name, quantity, equipment_id from equipment where new_premises_id=\"" + premise.Id + "\"";
-			List < Equipment > equipments = EquipmentController.LoadEquipments(query);
+			this.premise = premise;
 			
-			FillTable(equipments);
+			FillTable();
 			
 		}
 
-		private void FillTable(List<Equipment> equipments)
+		private void FillTable()
 		{
+			List<Equipment> equipments = equipmentService.LoadEquipmentsFromPremise(premise.Id);
 			foreach (Equipment equipment in equipments)
 			{
 				dataGridView1.Rows.Add(equipment.Name, equipment.Quantity, equipment.Id);
@@ -66,7 +67,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				int newQuantity = CalculateNewQuantity();
-				EquipmentController.Save(GetSelectedEquipmentId(), newQuantity);
+				equipmentService.SaveToBase(GetSelectedEquipmentId(), newQuantity);
 				MessageBox.Show("Changes saved.", "Success");
 				
 			}

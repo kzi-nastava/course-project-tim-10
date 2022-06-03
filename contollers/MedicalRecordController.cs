@@ -11,6 +11,7 @@ namespace HealthCareInfromationSystem.contollers
 {
 	class MedicalRecordController
 	{
+        //dodato
         internal static MedicalRecord LoadMedical(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -30,8 +31,8 @@ namespace HealthCareInfromationSystem.contollers
                 return null;
             }
         }
-
-		internal static void EditInBase(MedicalRecord medicalRecord)
+        //dodato
+		internal static void Edit(MedicalRecord medicalRecord)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -42,7 +43,7 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-
+        //dodato
         public static void AddNewByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -54,7 +55,7 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
-
+        //dodato
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

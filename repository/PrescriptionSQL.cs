@@ -1,24 +1,21 @@
-﻿using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.utils;
 
-namespace HealthCareInfromationSystem.contollers
+namespace HealthCareInfromationSystem.repository
 {
-	class MedicalPrescriptionController
+	class PrescriptionSQL : IPrescriptionRepo
 	{
-        //dodato
         private static int GetFirstFreeId()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-
                 OleDbCommand command = new OleDbCommand("select * from medical_prescription", connection);
-
                 connection.Open();
                 OleDbDataReader reader = command.ExecuteReader();
                 int maxId = 0;
@@ -32,9 +29,8 @@ namespace HealthCareInfromationSystem.contollers
                 return maxId + 1;
             }
         }
-        //dodato
-        public static void Save(MedicalPrescription medicalPrescription)
-        {
+        public void Add(MedicalPrescription medicalPrescription)
+		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
@@ -49,26 +45,5 @@ namespace HealthCareInfromationSystem.contollers
                 command.ExecuteNonQuery();
             }
         }
-
-        public static List<MedicalPrescription> Load(string query)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                List<MedicalPrescription> prescriptions = new List<MedicalPrescription>();
-                OleDbCommand command = new OleDbCommand(query, connection);
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                    prescriptions.Add(MedicalPrescription.Parse(reader));
-
-                reader.Close();
-                connection.Close();
-
-                return prescriptions;
-            }
-        }
-            
-        
-    }
+	}
 }

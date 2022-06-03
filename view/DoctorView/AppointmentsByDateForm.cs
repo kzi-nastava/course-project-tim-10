@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AppointmentsByDateForm : Form
 	{
+		AppointmentService appointmentService = new AppointmentService();
+		SheduleAppointmentService sheduleAppointmentService = new SheduleAppointmentService();
 		public AppointmentsByDateForm()
 		{
 			InitializeComponent();
@@ -39,13 +42,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillTable(string inputDate)
 		{
-			List<Appointment> appointments = AppointmentController.LoadAppointmentsForDate(Constants.connectionString,
-							"select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"", inputDate);
-			Console.WriteLine(appointments.Count);
+			List<Appointment> appointments = sheduleAppointmentService.LoadAppointmentsForDoctorAtDate(inputDate);
 			foreach (Appointment appointment in appointments)
 			{
 				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
-									appointment.Beginning, appointment.Duration, appointment.Type, appointment.Id);
+									appointment.Beginning, appointment.Duration, appointment.Type, appointment.Id, appointment.Patient.Id);
 
 			}
 		}
@@ -54,22 +55,18 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			if (OneRowSelected())
 			{
-				string patientId = AppointmentController.GetPatientId(Constants.connectionString,
-				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
-				MedicalRecord medical = MedicalRecordController.LoadMedical(Constants.connectionString,
-				"select * from medical_record where patientId=\"" + patientId + "\"");
+				string patientId = GetSelectedAppointmentPatientId();
+				MedicalRecord medical = sheduleAppointmentService.GetMedicalRecordByPatient(patientId);
 				SingleMedicalRecordForm medicalRecordForm = new SingleMedicalRecordForm(medical);
 				medicalRecordForm.Show();
 			}
 		}
 
-		private void AmnesisBtnClick(object sender, EventArgs e)
+		private void PerformeExaminationBtnClick(object sender, EventArgs e)
 		{
 			if (OneRowSelected())
 			{
-				Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString,
-				"select * from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
-				Console.WriteLine($"comment:{appointment.Comment}");
+				Appointment appointment = appointmentService.GetAppointmentById(GetSelectedAppointmentId());
 				PerformExaminationForm anamnesisInputForm = new PerformExaminationForm(appointment);
 				anamnesisInputForm.Show();
 			}
@@ -85,12 +82,16 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			return dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
 		}
 
+		private string GetSelectedAppointmentPatientId()
+		{
+			return dataGridView1.SelectedRows[0].Cells[7].Value.ToString();
+		}
+
 		private void ReferralLetterClick(object sender, EventArgs e)
 		{
 			if (OneRowSelected())
 			{
-				string patientId = AppointmentController.GetPatientId(Constants.connectionString,
-				"select patientId from appointments where id=\"" + GetSelectedAppointmentId() + "\"");
+				string patientId = GetSelectedAppointmentPatientId();
 				AddReferralLetterForm addReferralLetter = new AddReferralLetterForm(patientId);
 				addReferralLetter.Show();
 			}

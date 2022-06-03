@@ -13,6 +13,7 @@ namespace HealthCareInfromationSystem.contollers
 {
 	class MedicineController
 	{
+        //dodato sve
         public static List<Medicine> LoadAll(string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

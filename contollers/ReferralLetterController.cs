@@ -43,7 +43,7 @@ namespace HealthCareInfromationSystem.contollers
                 return referralLetters;
             }
         }
-
+        //dodato
         public static int GetFirstFreeId()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -64,7 +64,7 @@ namespace HealthCareInfromationSystem.contollers
                 return maxId + 1;
             }
         }
-
+        //dodato
         public static void Add(string patientId, string specialisation, string doctorId)
 		{
             int id = GetFirstFreeId();

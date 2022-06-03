@@ -10,19 +10,30 @@ using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Servise;
 namespace HealthCareInfromationSystem.view.DoctorView
 {
-	public partial class AllAppointmentsForm : Form
+	public partial class AllAppointmentsForm : Form, IAllApointments
 	{
+		AppointmentService appointmentService = new AppointmentService();
 		public AllAppointmentsForm()
 		{
 			InitializeComponent();
+			//AssociateAndRaiseViewEvents();
 			FillView();
 		}
 
+		
+
+		public event EventHandler AddNewEvent;
+		public event EventHandler EditEvent;
+		public event EventHandler DeleteEvent;
+		public event EventHandler CancelEvent;
+
 		private void FillView()
 		{
-			List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
+			//List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
+			List<Appointment> appointments = appointmentService.LoadAppointmentsForDoctor(LoggedInUser.GetId());
 			foreach (Appointment appointment in appointments)
 			{
 				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
@@ -63,7 +74,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				AppointmentController.Delete(GetSelectedAppointmentId());
+				appointmentService.DeleteInBase(GetSelectedAppointmentId());
+				//AppointmentController.Delete(GetSelectedAppointmentId());
 			}
 		}
 
@@ -92,6 +104,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private string GetSelectedAppointmentId()
 		{
 			return dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+		}
+
+		public void SetPetListBindingSource(BindingSource petList)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

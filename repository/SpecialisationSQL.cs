@@ -1,20 +1,18 @@
-﻿using HealthCareInfromationSystem.utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.utils;
 
-namespace HealthCareInfromationSystem.contollers
+namespace HealthCareInfromationSystem.repository
 {
-    class SpecialisationController
-    {
-        //dodato
-        // Returns list of ids from doctors who have specialisation with given name
-        public static List<string> GetDoctorIds(string connectionString, string specName)
-        {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+	class SpecialisationSQL : ISpecialisationRepo
+	{
+		public List<string> GetDoctorIds(string specName)
+		{
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 string query = $"select doctors from specialisations where name=\"{specName}\"";
 
@@ -33,13 +31,13 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
-        //dodato
-        public static List<string> LoadSpecialisations(string connectionString, string queryString)
-        {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
+
+		public List<string> LoadSpecialisations()
+		{
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
 
-                OleDbCommand command = new OleDbCommand(queryString, connection);
+                OleDbCommand command = new OleDbCommand("select distinct name from specialisations", connection);
 
                 connection.Open();
                 OleDbDataReader reader = command.ExecuteReader();
@@ -53,5 +51,5 @@ namespace HealthCareInfromationSystem.contollers
                 return specialisations;
             }
         }
-    }
+	}
 }

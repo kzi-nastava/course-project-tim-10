@@ -11,6 +11,7 @@ namespace HealthCareInfromationSystem.contollers
 {
     class AppointmentRequestController
     {
+        //dodato
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

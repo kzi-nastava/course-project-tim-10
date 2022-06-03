@@ -14,16 +14,7 @@ namespace HealthCareInfromationSystem.contollers
 {
 	class AppointmentController
 	{
-        /*
-	    * Retrieves data from dataset
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-
-            Returns:
-                    array<Appointment>
-	    * */
+        //dodato
         public static List<Appointment> LoadAppointments(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -45,7 +36,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-
+        //dodato
         public static List<Appointment> LoadAppointmentsForDate(string connectionString, string queryString, string inputDate)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -74,26 +65,8 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        internal static string GetPatientId(string connectionString, string queryString)
-        {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-
-
-                while (reader.Read())
-                {
-                    return reader[0].ToString();
-                }
-                reader.Close();
-                return null;
-            }
-        }
-
+        
+        //dodato
         public static Appointment LoadOneAppointment(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -115,18 +88,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        /*
-	    * Checks if any apointments exist at this time
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-                    beginning(string): time that we want to start our appointment
-                    durration(string): how long it would last
-
-            Returns:
-                    bool value, true if we can book an appointment, false if we can not
-	    * */
+       //Lepo napisano u appointment service
         public static bool IsAvailable(string connectionString, string queryString, string beginning, string duration)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -161,6 +123,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public static int GetFirstFreeId()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -182,6 +145,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public static void Add(Appointment appointment)
         {
             int id = GetFirstFreeId();
@@ -197,6 +161,7 @@ namespace HealthCareInfromationSystem.contollers
 
         }
 
+        //AAAAAAAAAAAAAAAAAA
         public static void AddEmergencyToBase(Appointment emergency)
         {
             emergency.Id =  GetFirstFreeId();
@@ -209,6 +174,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public static void Edit(Appointment appointment)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -222,17 +188,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static void EditAppointmentComment(string appointmentId, string comment)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"update appointments set comment=\"{comment}\" where id=\"{appointmentId}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
+        //dodato
         public static void Delete(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -287,21 +243,6 @@ namespace HealthCareInfromationSystem.contollers
             return true;
         }
 
-
-        public static void InsertNew(Appointment app)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                string query = $"insert into appointments values (\"{app.Id}\", \"{app.Doctor.Id}\", \"{app.Patient.Id}\", " +
-                    $"\"{app.Premise.Id}\", \"{MyConverter.ToString(app.Beginning)}\", \"{app.Duration}\", \"{app.Type}\", \"{app.Comment}\")";
-
-                OleDbCommand command = new OleDbCommand(query, connection);
-
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-        }
 
         public static bool CheckAvailability(int doctorId, DateTime beginning, int duration, string premiseId, int patientId)
         {
