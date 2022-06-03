@@ -10,6 +10,6 @@ namespace HealthCareInfromationSystem.repository
 	interface IEquipmentRepo
 	{
 		List<Equipment> LoadEquipmentsFromPremise(string premiseId);
-		void Add(string id, int newQuantity);
+		void Save(string id, int newQuantity);
 	}
 }

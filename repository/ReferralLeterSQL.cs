@@ -8,7 +8,7 @@ using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.repository
 {
-	class ReferralLeterSQL : IReferealLeterRepo
+	class ReferralLeterSQL : IReferralLetterRepo
 	{
 		public void Add(string patientId, string specialisation, string doctorId)
 		{

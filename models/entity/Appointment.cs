@@ -111,7 +111,7 @@ namespace HealthCareInfromationSystem.models.entity
             int id = int.Parse(reader[0].ToString());
             Person doctor = appointmentService.GetPersonById(reader[1].ToString());
             Person patient = appointmentService.GetPersonById(reader[2].ToString());
-            Premise premise = appointmentService.GetPremisseById(reader[3].ToString());
+            Premise premise = appointmentService.GetPremiseById(reader[3].ToString());
             DateTime beginning = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
             int duration = int.Parse(reader[5].ToString());
             Enum.TryParse(reader[6].ToString(), out AppointmentType type);

@@ -16,8 +16,8 @@ namespace HealthCareInfromationSystem.Servise
 			return equipmentRepo.LoadEquipmentsFromPremise(premiseId);
 		}
 
-		public void SaveToBase(string id, int newQuantity) {
-			equipmentRepo.Add(id, newQuantity);
+		public void Add(string id, int newQuantity) {
+			equipmentRepo.Save(id, newQuantity);
 		}
 	}
 }

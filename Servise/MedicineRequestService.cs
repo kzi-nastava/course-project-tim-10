@@ -16,7 +16,7 @@ namespace HealthCareInfromationSystem.Servise
 			return medicineRepo.LoadAll();
 		}
 
-		public void EditInBase(Medicine medicine) {
+		public void Edit(Medicine medicine) {
 			medicineRepo.Edit(medicine);
 		}
 	}

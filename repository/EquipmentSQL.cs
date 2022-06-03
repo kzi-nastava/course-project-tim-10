@@ -32,7 +32,7 @@ namespace HealthCareInfromationSystem.repository
             }
         }
 
-		public void Add(string id, int newQuantity)
+		public void Save(string id, int newQuantity)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
@@ -16,7 +16,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AddReferralLetterForm : Form
 	{
-		MedicalRecordService medicalRecordService = new MedicalRecordService();
+		MedicalRecordController medicalRecordController = new MedicalRecordController();
 		private string patientId;
 
 		public AddReferralLetterForm()
@@ -34,7 +34,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillSpecialisationComboBox()
 		{
-			List<string> specialisations = medicalRecordService.LoadSpecialisations();
+			List<string> specialisations = medicalRecordController.LoadSpecialisations();
 			specialisations.Add("");
 			specialisationComboBox.DataSource = specialisations;
 			specialisationComboBox.SelectedItem = "";
@@ -42,7 +42,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillDoctorComboBox()
 		{
-			Dictionary<string, string> doctorPair = medicalRecordService.LoadFullNameAndId("doctor");
+			Dictionary<string, string> doctorPair = medicalRecordController.LoadFullNameAndId("doctor");
 			doctorPair.Add("", "");
 			doctorComboBox.DataSource = new BindingSource(doctorPair, null);
 			doctorComboBox.DisplayMember = "Value";
@@ -53,7 +53,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private void LoadPatient(string patientId)
 		{
 			this.patientId = patientId;
-			Person patient = medicalRecordService.GetPersonById(patientId);
+			Person patient = medicalRecordController.GetPersonById(patientId);
 			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
 		}
 
@@ -73,7 +73,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				medicalRecordService.AddToBase(patientId, specialisation, doctorId);
+				medicalRecordController.Add(patientId, specialisation, doctorId);
 			}
 		}
 

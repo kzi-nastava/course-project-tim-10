@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class PerformExaminationForm : Form
 	{
-		AppointmentService appointmentService = new AppointmentService();
+		AppointmentController appointmentController = new AppointmentController();
 		Appointment appointment { get; set; }
 
 		public PerformExaminationForm()
@@ -39,7 +39,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			{
 				string anamnesis = anamnesisTextBox.Text;
 				appointment.Comment = anamnesis;
-				appointmentService.EditInBase(appointment);
+				appointmentController.Edit(appointment);
 				MessageBox.Show("Changes saved.", "Success");
 			}
 		}
