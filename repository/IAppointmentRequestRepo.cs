@@ -12,5 +12,6 @@ namespace HealthCareInfromationSystem.repository
 		void SetState(AppointmentRequest request, string state);
 		List<AppointmentRequest> GetRequests();
 		void DeleteByPatientId(string id);
+		void Add(AppointmentRequest request);
 	}
 }

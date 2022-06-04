@@ -13,6 +13,11 @@ namespace HealthCareInfromationSystem.Servise
         AppointmentRequestSQL requestRepo = new AppointmentRequestSQL();
         AppointmentService appointmentService = new AppointmentService();
 
+        public void SaveToBase(AppointmentRequest request)
+        {
+            requestRepo.Add(request);
+        }
+
         public List<AppointmentRequest> GetRequestsOnWait()
         {
             List<AppointmentRequest> requests = new List<AppointmentRequest>();

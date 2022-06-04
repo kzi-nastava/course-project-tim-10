@@ -13,7 +13,7 @@ using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
 using static HealthCareInfromationSystem.models.entity.Appointment;
-
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {
@@ -31,6 +31,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         string priority;
 
         Appointment appointment;
+        readonly AppointmentService appointmentService = new AppointmentService();
 
         private void PriorityAppointment()
         {
@@ -255,7 +256,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         private void SaveButton_Click(object sender, EventArgs e)
         {
             Appointment selectedApp = (Appointment) appointmentsBox.SelectedItem;
-            AppointmentController.Add(selectedApp);
+            appointmentService.SaveToBase(selectedApp);
             MessageBox.Show("You have successfully created appointment.");
         }
 
