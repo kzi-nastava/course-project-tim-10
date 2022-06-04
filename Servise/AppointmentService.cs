@@ -16,16 +16,17 @@ namespace HealthCareInfromationSystem.Servise
 		IAppointmentRepo appointmentRepo = new AppointmentSQL();
 		IPersonRepo personRepo = new PersonSQL();
 		IPremisseRepo premisseRepo = new PremisseSQL();
+		IMedicalRecordRepo medicalRecordRepo = new MedicalRecordSQL();
 
-		public void SaveToBase(Appointment appointment) {
+		public void Add(Appointment appointment) {
 			appointmentRepo.Add(appointment);
 		}
 
-		public void EditInBase(Appointment appointment) {
+		public void Edit(Appointment appointment) {
 			appointmentRepo.Edit(appointment);
 		}
 
-		public void DeleteInBase(string id) {
+		public void Delete(string id) {
 			appointmentRepo.Delete(id);
 		}
 		public Appointment GetAppointmentById(string id) {
@@ -38,7 +39,7 @@ namespace HealthCareInfromationSystem.Servise
 		public Person GetPersonById(string id) {
 			return personRepo.LoadOnePerson(id);
 		}
-		public Premise GetPremisseById(string id) {
+		public Premise GetPremiseById(string id) {
 			return premisseRepo.GetPremiseById(id);
 		}
 		public Dictionary<string, string> LoadFullNameAndId(string role) {
@@ -50,79 +51,15 @@ namespace HealthCareInfromationSystem.Servise
 			return premisseRepo.LoadNameAndId();
 		}
 
-		public bool IsAppointmentAvailable(Appointment appointment) {
-			if (!IsDoctorAvailable(appointment))
-			{
-				MessageBox.Show("Doctor has an appointment.", "Error");
-				return false;
-			}
-
-			if (!IsPremiseAvailable(appointment))
-			{
-				MessageBox.Show("Premise occupied.", "Error");
-				return false;
-			}
-
-			//checking if the patient is available
-			if (!IsPatientAvailable(appointment))
-			{
-				MessageBox.Show("Patient has an appointment.", "Error");
-				return false;
-			}
-
-			return true;
-		}
-		public bool IsDoctorAvailable(Appointment appointment) {
-			List<Appointment> allAppointments = appointmentRepo.LoadAllAppointments();
-			foreach (Appointment oldAppointment in allAppointments)
-			{
-				if (appointment.Doctor.Id == oldAppointment.Doctor.Id && appointment.Id != oldAppointment.Id)
-				{
-
-					if (TimeOverlapses(appointment, oldAppointment)) return false;
-				}
-			}
-			return true;
-		}
-
-		public bool IsPremiseAvailable(Appointment appointment)
+		public MedicalRecord GetMedicalRecordByPatient(string patientId)
 		{
-			List<Appointment> allAppointments = appointmentRepo.LoadAllAppointments();
-			foreach (Appointment oldAppointment in allAppointments)
-			{
-				if (appointment.Premise.Id == oldAppointment.Premise.Id && appointment.Id != oldAppointment.Id)
-				{
-
-					if (TimeOverlapses(appointment, oldAppointment)) return false;
-				}
-			}
-			return true;
+			return medicalRecordRepo.GetMedicalRecordByPatient(patientId);
 		}
-
-		public bool IsPatientAvailable(Appointment appointment)
+		public List<Appointment> LoadAppointmentsForDoctorAtDate(string date)
 		{
-			List<Appointment> allAppointments = appointmentRepo.LoadAllAppointments();
-			foreach (Appointment oldAppointment in allAppointments)
-			{
-				if (appointment.Patient.Id == oldAppointment.Patient.Id && appointment.Id != oldAppointment.Id)
-				{
-
-					if (TimeOverlapses(appointment, oldAppointment)) return false;
-				}
-			}
-			return true;
+			return appointmentRepo.LoadAppointmentsForDate(date);
 		}
 
-		private bool TimeOverlapses(Appointment appointment, Appointment oldAppointment) {
-			DateTime endingNew = appointment.Beginning.AddMinutes(appointment.Duration);
-			DateTime endingOld = oldAppointment.Beginning.AddMinutes(oldAppointment.Duration);
-			if ((oldAppointment.Beginning <= appointment.Beginning && appointment.Beginning <= endingOld)
-				|| (oldAppointment.Beginning <= endingNew && endingNew <= endingOld)
-				|| (appointment.Beginning <= oldAppointment.Beginning && endingNew >= endingOld))
-			{
-				return true;
-			}
-			return false;
-		}
+		
 	}
 }

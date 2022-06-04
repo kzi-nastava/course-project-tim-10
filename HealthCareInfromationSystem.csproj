@@ -65,6 +65,10 @@
     <Compile Include="contollers\ReferralLetterController.cs" />
     <Compile Include="contollers\SpecialisationController.cs" />
     <Compile Include="contollers\RenovationController.cs" />
+    <Compile Include="doctorController\AppointmentController.cs" />
+    <Compile Include="doctorController\EquipmentController.cs" />
+    <Compile Include="doctorController\MedicalRecordController.cs" />
+    <Compile Include="doctorController\MedicineRequestController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
@@ -149,7 +153,6 @@
     <Compile Include="view\DoctorView\EquipmentStateForm.Designer.cs">
       <DependentUpon>EquipmentStateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\DoctorView\IAllApointments.cs" />
     <Compile Include="view\DoctorView\PerformExaminationForm.cs">
       <SubType>Form</SubType>
     </Compile>

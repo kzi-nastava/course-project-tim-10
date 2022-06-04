@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.Servise;
@@ -18,7 +18,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AddAppointmentForm : Form
 	{
-		AppointmentService appointmentService = new AppointmentService();
+		AppointmentController appointmentController = new AppointmentController();
 		public AddAppointmentForm()
 		{
 			InitializeComponent();
@@ -32,7 +32,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillPremisseComboBox()
 		{
-			Dictionary<string, string> premisePair = appointmentService.LoadPremiseNameAndId();
+			Dictionary<string, string> premisePair = appointmentController.LoadPremiseNameAndId();
 			premiseComboBox.DataSource = new BindingSource(premisePair, null);
 			premiseComboBox.DisplayMember = "Value";
 			premiseComboBox.ValueMember = "Key";
@@ -40,7 +40,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillPatientComboBox()
 		{
-			Dictionary<string, string> patientPair = appointmentService.LoadFullNameAndId("patient");
+			Dictionary<string, string> patientPair = appointmentController.LoadFullNameAndId("patient");
 			patientComboBox.DataSource = new BindingSource(patientPair, null);
 			patientComboBox.DisplayMember = "Value";
 			patientComboBox.ValueMember = "Key";
@@ -71,7 +71,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			Appointment appointment = new Appointment(0, new Person(int.Parse(LoggedInUser.GetId())), new Person(int.Parse(patientId)), new Premise(premiseId),
 			DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null), int.Parse(duration), typeP, "");
 
-			if (!appointmentService.IsAppointmentAvailable(appointment)) return;
+			if (!appointmentController.IsAppointmentAvailable(appointment)) return;
 			SaveChanges(appointment);
 		}
 
@@ -81,7 +81,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				appointmentService.SaveToBase(appointment);
+				appointmentController.Add(appointment);
 			}
 		}
 

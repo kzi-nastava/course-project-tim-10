@@ -17,7 +17,5 @@ namespace HealthCareInfromationSystem.repository
 		List<Equipment> GetEquipmentLowOnStock(string equipmentName);
 		List<Equipment> GetEquipmentWithSufficentStock(string equipmentName);
 		List<string> GetDistinctEquipmentNames();
-
-
 	}
 }

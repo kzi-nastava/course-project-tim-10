@@ -84,6 +84,7 @@ namespace HealthCareInfromationSystem.repository
                 return equipment;
             }
         }
+        
         public List<Equipment> GetDynamicEquipmentOutOfStock()
         {
             List<Equipment> outOfStock = new List<Equipment>();

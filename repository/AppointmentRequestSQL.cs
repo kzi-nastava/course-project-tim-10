@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -71,6 +72,18 @@ namespace HealthCareInfromationSystem.repository
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
 
+            }
+        }
+
+        public void Add(AppointmentRequest request)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                string query = $"insert into appointment_request values {AppointmentRequestController.GetValues(request)}";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+                connection.Close();
             }
         }
 

@@ -57,5 +57,12 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public static string GetValues(AppointmentRequest request)
+        {
+            return $"({request.ID}\", \"{request.PatientId}\", \"{request.AppointmentId}\", " +
+                   $"\"{request.Type}\", \"{request.NewDoctorId}\", \"{request.NewBeginning}\"," +
+                   $" \"{request.ReqDateTime}\", \"{request.State}\", \"{request.SecretaryId}\")";
+        }
+
     }
 }

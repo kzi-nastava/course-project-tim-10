@@ -37,33 +37,7 @@ namespace HealthCareInfromationSystem.contollers
         }
 
         //dodato
-        public static List<Appointment> LoadAppointmentsForDate(string connectionString, string queryString, string inputDate)
-        {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                List<Appointment> appointments = new List<Appointment>();
-                DateTime beginningDate = DateTime.ParseExact(inputDate, "dd.MM.yyyy.", null);
-                DateTime endingDate = beginningDate.AddDays(3);
-
-                while (reader.Read())
-                {
-                    DateTime appoinmentDate = DateTime.ParseExact(reader[4].ToString(), "dd.MM.yyyy. HH:mm", null);
-                    if (beginningDate <= appoinmentDate && appoinmentDate < endingDate)
-                    {
-                        Appointment appointment = Appointment.Parse(reader);
-                        appointments.Add(appointment);
-                    }
-
-                }
-                reader.Close();
-                return appointments;
-            }
-        }
+        
 
         
         //dodato
@@ -212,36 +186,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static bool IsAvailableAllChecks(string beginning, string duration, string premiseId, string patientId, string appointmentId) {
-            //checking if the doctor is available
-            if (!IsAvailable(Constants.connectionString,
-                "select * from appointments where doctorId =\"" + LoggedInUser.loggedIn.Id + "\" and not id=\"" + appointmentId + "\"",
-                beginning, duration))
-            {
-                MessageBox.Show("Doctor has an appointment.", "Error");
-                return false;
-            }
-
-            //checking if the room is available
-            if (!IsAvailable(Constants.connectionString,
-            "select * from appointments where premiseId =\"" + premiseId + "\" and not id=\"" + appointmentId + "\"",
-            beginning, duration))
-            {
-                MessageBox.Show("Premise occupied.", "Error");
-                return false;
-            }
-
-            //checking if the patient is available
-            if (!IsAvailable(Constants.connectionString,
-            "select * from appointments where patientId=\"" + patientId + "\" and not id=\"" + appointmentId + "\"",
-            beginning, duration))
-            {
-                MessageBox.Show("Patient has an appointment.", "Error");
-                return false;
-            }
-
-            return true;
-        }
+        
 
 
         public static bool CheckAvailability(int doctorId, DateTime beginning, int duration, string premiseId, int patientId)

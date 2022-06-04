@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class SingleMedicalRecordForm : Form
 	{
-		MedicalRecordService medicalRecordService = new MedicalRecordService();
+		MedicalRecordController medicalRecordController = new MedicalRecordController();
 		MedicalRecord MedicalRecord { get; set; }
 
 
@@ -78,7 +78,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				medicalRecordService.EditInBase(medicalRecord);
+				medicalRecordController.Edit(medicalRecord);
 			}
 		}
 

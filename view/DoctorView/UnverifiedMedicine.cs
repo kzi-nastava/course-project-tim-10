@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class UnverifiedMedicine : Form
 	{
-		MedicineRequestService medicineRequestService = new MedicineRequestService();
+		MedicineRequestController medicineRequestController = new MedicineRequestController();
 
 		public UnverifiedMedicine()
 		{
@@ -25,7 +25,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillTable()
 		{
-			List<Medicine> medicines = medicineRequestService.LoadUnverifiedMedicine();
+			List<Medicine> medicines = medicineRequestController.LoadUnverifiedMedicine();
 			foreach (Medicine medicine in medicines)
 			{
 				dataGridView1.Rows.Add(medicine.Name, medicine.Description,
@@ -65,7 +65,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
-				medicineRequestService.EditInBase(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
+				medicineRequestController.Edit(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
 					GetSelectedMedicineDescription(), GetSelectedMedicineIngridients(), status, commentComboBox.Text ));
 				MessageBox.Show("Changes saved.", "Success");
 

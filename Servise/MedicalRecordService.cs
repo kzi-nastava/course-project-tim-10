@@ -22,7 +22,7 @@ namespace HealthCareInfromationSystem.Servise
 		public MedicalRecord GetMedicalRecordByPatient(string patientId) {
 			return medicalRecordRepo.GetMedicalRecordByPatient(patientId);
 		}
-		public void EditInBase(MedicalRecord medicalRecord) {
+		public void Edit(MedicalRecord medicalRecord) {
 			medicalRecordRepo.Edit(medicalRecord);
 		}
 
@@ -37,7 +37,7 @@ namespace HealthCareInfromationSystem.Servise
 		public List<string> LoadSpecialisations() {
 			return specialisationRepo.LoadSpecialisations();
 		}
-		public void AddToBase(string patientId, string specialisation, string doctorId) {
+		public void Add(string patientId, string specialisation, string doctorId) {
 			referealLeterRepo.Add(patientId, specialisation, doctorId);
 		}
 
@@ -49,7 +49,7 @@ namespace HealthCareInfromationSystem.Servise
 			return medicineRepo.LoadOneById(id);
 		}
 
-		public void SaveToBase(MedicalPrescription prescription) {
+		public void Add(MedicalPrescription prescription) {
 			prescriptionRepo.Add(prescription);
 		}
 	}
