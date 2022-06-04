@@ -1,5 +1,4 @@
 ﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -17,29 +16,17 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         private string selectedId = "";
         private string requestType = "";
-        private AppointmentRequestController requestController = new AppointmentRequestController();
         public AppointmentRequestForm()
         {
             InitializeComponent();
-            DisplayRequestsTable();
-        }
-
-        private void DisplayRequestsTable()
-        {
-            dataGridViewRequests.Rows.Clear();
-            foreach (AppointmentRequest request in requestController.GetRequestsForDisplay())
+            string query = "select * from appointment_request where state=\"wait\"";
+            List<AppointmentRequest> requests = AppointmentRequestController.LoadAppointmentRequests(Constants.connectionString, query);
+            foreach (AppointmentRequest request in requests)
             {
-                if (request.NewDoctor != null) dataGridViewRequests.Rows.Add(request.ID, request.PatientId, request.Patient.FirstName + " " + request.Patient.LastName,
-                   request.Appointment.Beginning.ToString(), request.Type, request.NewBeginning,
-                   request.NewDoctor.FirstName + " " + request.NewDoctor.LastName,
-                   request.ReqDateTime);
-                else
-                {
-                    dataGridViewRequests.Rows.Add(request.ID, request.PatientId, request.Patient.FirstName + " " + request.Patient.LastName,
-                   request.Appointment.Beginning.ToString(), request.Type, request.NewBeginning,
-                   "",
-                   request.ReqDateTime);
-                }
+                dataGridViewRequests.Rows.Add(request.ID, request.PatientId, request.Patient.FirstName + " " + request.Patient.LastName,
+                    request.Appointment.Beginning.ToString(), request.Type, request.NewBeginning,
+                    request.NewDoctor.FirstName + " " + request.NewDoctor.LastName,
+                    request.ReqDateTime);
             }
         }
 
@@ -47,16 +34,24 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             selectedId = dataGridViewRequests.Rows[e.RowIndex].Cells[0].Value.ToString();
             requestType = dataGridViewRequests.Rows[e.RowIndex].Cells[4].Value.ToString();
+            Console.WriteLine(
+                dataGridViewRequests.Rows[e.RowIndex].Cells[0].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[1].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[2].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[3].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[4].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[5].Value.ToString(),
+                dataGridViewRequests.Rows[e.RowIndex].Cells[6].Value.ToString()
+                );
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             if (selectedId != "")
             {
-                if (requestController.AcceptRequest(selectedId, requestType))
+                if (AppointmentRequestController.AcceptRequest(selectedId, requestType))
                 {
                     labelStatus.Text = "Status: Operation succeeded.";
-                    DisplayRequestsTable();     // refresh view
                 }
                 else
                 {
@@ -69,10 +64,9 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (selectedId != "")
             {
-                if (requestController.DeclineRequest(selectedId))
+                if (AppointmentRequestController.DeclineRequest(selectedId))
                 {
                     labelStatus.Text = "Status: Operation succeeded.";
-                    DisplayRequestsTable();
                 }
                 else
                 {
