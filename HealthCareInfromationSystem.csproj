@@ -110,12 +110,15 @@
     <Compile Include="repository\PrescriptionSQL.cs" />
     <Compile Include="repository\ReferralLetterSQL.cs" />
     <Compile Include="repository\SpecialisationSQL.cs" />
+    <Compile Include="repository\users\IPatientRepo.cs" />
+    <Compile Include="repository\users\PatientSQL.cs" />
     <Compile Include="Servise\AppointmentRequestService.cs" />
     <Compile Include="Servise\AppointmentService.cs" />
     <Compile Include="Servise\EquipmentRequestService.cs" />
     <Compile Include="Servise\EquipmentService.cs" />
     <Compile Include="Servise\MedicalRecordService.cs" />
     <Compile Include="Servise\MedicineRequestService.cs" />
+    <Compile Include="Servise\PatientService.cs" />
     <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />

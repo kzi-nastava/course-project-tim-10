@@ -1,4 +1,6 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Servise;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -10,6 +12,52 @@ namespace HealthCareInfromationSystem.contollers
 {
     class PatientController
     {
+        private PatientService patientService = new PatientService();
+
+        public List<List<string>> GetRowsForBlockedPatients()
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (Person patient in patientService.GetBlockedPatients())
+            {
+                rows.Add(GetTableRow(patient));
+
+            }
+            return rows;
+        }
+        public List<List<string>> GetRowsForPatients()
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (Person patient in patientService.GetAll())
+            {
+                rows.Add(GetTableRow(patient));
+
+            }
+            return rows;
+        }
+
+        private List<string> GetTableRow(Person patient)
+        {
+            List<string> row = new List<string>();
+            row.Add(patient.Id.ToString());
+            row.Add(patient.FirstName + " " + patient.LastName);
+            row.Add(patient.Username);
+            row.Add(patient.Password);
+            row.Add(patient.Blocked.ToString());
+            row.Add(patient.Blocker.ToString());
+            return row;
+        }
+        public bool Unblock(string patientId)
+        {
+            try
+            {
+                patientService.Unblock(patientId);  
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
         public static bool CheckIfExistsById(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -79,32 +127,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static bool Unblock(string id)
-        {
-            try
-            {
-                using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-                {
-
-                    OleDbCommand command = new OleDbCommand();
-                    command.CommandType = System.Data.CommandType.Text;
-                    command.CommandText = "update users set  blocked=@blocked, blocker=@blocker where id=@id";
-                    command.Parameters.AddWithValue("@blocked", "false");
-                    command.Parameters.AddWithValue("@blocker", "0");
-                    command.Parameters.AddWithValue("@id", id);
-                    command.Connection = connection;
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-                return true;
-            }
-            catch (OleDbException)
-            {
-                return false;
-            }
-        }
         
-
         // Working with database
 
         private static void InsertPatient(string id, string name, string lastName, string username, string password, string blocked, int blocker)
