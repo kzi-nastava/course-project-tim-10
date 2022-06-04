@@ -14,7 +14,7 @@ namespace HealthCareInfromationSystem.Servise
 	{
 		IMedicalRecordRepo medicalRecordRepo = new MedicalRecordSQL();
 		IPersonRepo personRepo = new PersonSQL();
-		IReferealLeterRepo referealLeterRepo = new ReferralLeterSQL();
+		IReferralLetterRepo referealLeterRepo = new ReferralLetterSQL();
 		ISpecialisationRepo specialisationRepo = new SpecialisationSQL();
 		IMedicineRepo medicineRepo = new MedicineSQL();
 		IPrescriptionRepo prescriptionRepo = new PrescriptionSQL();

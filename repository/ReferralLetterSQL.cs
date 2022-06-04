@@ -4,11 +4,12 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.repository
 {
-	class ReferralLeterSQL : IReferealLeterRepo
+	class ReferralLetterSQL : IReferralLetterRepo
 	{
 		public void Add(string patientId, string specialisation, string doctorId)
 		{
@@ -26,7 +27,27 @@ namespace HealthCareInfromationSystem.repository
             }
         }
 
-		private int GetFirstFreeId()
+        public ReferralLetter GetById(string id)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"select * from referral_letter where ID={id}";
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                ReferralLetter referralLetter = null;
+
+                while (reader.Read())
+                {
+                    referralLetter = ReferralLetter.Parse(reader);
+                }
+                reader.Close();
+                return referralLetter;
+            }
+        }
+
+        private int GetFirstFreeId()
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

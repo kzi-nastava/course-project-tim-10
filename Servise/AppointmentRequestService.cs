@@ -10,17 +10,12 @@ namespace HealthCareInfromationSystem.Servise
 {
     class AppointmentRequestService
     {
-        AppointmentRequestSQL requestRepo = new AppointmentRequestSQL();
+        IAppointmentRequestRepo requestRepo = new AppointmentRequestSQL();
         AppointmentService appointmentService = new AppointmentService();
 
         public List<AppointmentRequest> GetRequestsOnWait()
         {
-            List<AppointmentRequest> requests = new List<AppointmentRequest>();
-            foreach (AppointmentRequest request in requestRepo.GetRequests())
-            {
-                if (request.State == "wait") requests.Add(request);
-            }
-            return requests;
+            return requestRepo.GetRequests();
         }
 
 

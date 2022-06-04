@@ -9,7 +9,15 @@ namespace HealthCareInfromationSystem.repository
 {
 	interface IEquipmentRepo
 	{
-		List<Equipment> LoadEquipmentsFromPremise(string premiseId);
-		void Add(string id, int newQuantity);
+		List<Equipment> GetEquipmentFromPremise(string premiseId);
+		void EditQuantity(string id, int newQuantity);
+		Equipment GetByNameFromPremise(string name, string premiseId);
+		List<Equipment> GetDynamicEquipment();
+		List<Equipment> GetDynamicEquipmentOutOfStock();
+		List<Equipment> GetEquipmentLowOnStock(string equipmentName);
+		List<Equipment> GetEquipmentWithSufficentStock(string equipmentName);
+		List<string> GetDistinctEquipmentNames();
+
+
 	}
 }

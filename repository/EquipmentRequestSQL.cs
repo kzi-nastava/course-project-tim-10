@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCareInfromationSystem.contollers
+namespace HealthCareInfromationSystem.repository
 {
-    class DynamicEquipmentRequestController
+    class EquipmentRequestSQL : IEquipmentRequestRepo
     {
-        private static void Add(EquipmentRequest request)
+        public void Add(EquipmentRequest request)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -24,7 +24,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static List<EquipmentRequest> GetAll()
+        public List<EquipmentRequest> GetAll()
         {
             List<EquipmentRequest> requests = new List<EquipmentRequest>();
             string query = "select * from equipment_request where supplied=\"false\"";
@@ -44,7 +44,8 @@ namespace HealthCareInfromationSystem.contollers
                 return requests;
             }
         }
-        public static void SetSuppliedStatus(EquipmentRequest request)
+
+        public void SetSuppliedStatus(EquipmentRequest request)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -55,8 +56,17 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        public List<EquipmentRequest> GetRequestsReadyToSupply()
+        {
+            List<EquipmentRequest> requests = new List<EquipmentRequest>();
+            foreach (EquipmentRequest request in GetAll())
+            {
+                if (request.DateSent < DateTime.Now.AddDays(-1)) requests.Add(request);
+            }
+            return requests;
+        }
 
-        private static EquipmentRequest Parse(OleDbDataReader reader)
+        private EquipmentRequest Parse(OleDbDataReader reader)
         {
             int requestId = int.Parse(reader[0].ToString());
             int equipmentId = int.Parse(reader[1].ToString());
@@ -64,7 +74,8 @@ namespace HealthCareInfromationSystem.contollers
             DateTime dateSent = DateTime.Parse(reader[3].ToString());
             return new EquipmentRequest(requestId, equipmentId, quantity, dateSent);
         }
-        private static int GetFirstFreeId()
+
+        private int GetFirstFreeId()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
@@ -84,24 +95,5 @@ namespace HealthCareInfromationSystem.contollers
                 return maxId + 1;
             }
         }
-
-
-        public static void SendRequest(int equipmentId, int quantity)
-        {
-            EquipmentRequest request = new EquipmentRequest(equipmentId, quantity);
-            Add(request);
-        }
-
-        public static List<EquipmentRequest> GetRequestsReadyToSupply()
-        {
-            List<EquipmentRequest> requests = new List<EquipmentRequest>();
-            foreach (EquipmentRequest request in GetAll())
-            {
-                if (request.DateSent < DateTime.Now.AddDays(-1)) requests.Add(request);
-            }
-            return requests;
-        }
-
-
     }
 }
