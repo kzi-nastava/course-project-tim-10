@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class EditAppointmentForm : Form
 	{
+		private readonly Appointment appointment;
+		AppointmentController appointmentController = new AppointmentController();
+
 		public string appointmentId { get; }
 
 		public EditAppointmentForm()
@@ -28,31 +32,44 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			InitializeComponent();
 			this.appointmentId = appointmentId;
-			Appointment appointment = AppointmentController.LoadOneAppointment(Constants.connectionString, "select * from appointments where id=\"" + appointmentId + "\"");
-			//filling in premises
-			Dictionary<string, string> premisePair = PremiseController.LoadPair(Constants.connectionString, "select premises_id, name from premises");
+			Appointment appointment = appointmentController.GetAppointmentById(appointmentId);
+			this.appointment = appointment;
+
+			FillPremiseComboBox(appointment);
+			FillPatientComboBox(appointment);
+			FillOperationComboBox(appointment);
+			FillTextBoxes(appointment);
+		}
+
+		private void FillTextBoxes(Appointment appointment)
+		{
+			beginningTextBox.Text = appointment.Beginning.ToString();
+			durationTextBox.Text = appointment.Duration.ToString();
+		}
+
+		private void FillOperationComboBox(Appointment appointment)
+		{
+			typeComboBox.DataSource = Enum.GetNames(typeof(Appointment.AppointmentType)).ToArray();
+			typeComboBox.SelectedItem = appointment.Type.ToString();
+		}
+
+		private void FillPatientComboBox(Appointment appointment)
+		{
+			Dictionary<string, string> patientPair = appointmentController.LoadFullNameAndId("patient");
+			patientComboBox.DataSource = new BindingSource(patientPair, null);
+			patientComboBox.DisplayMember = "Value";
+			patientComboBox.ValueMember = "Key";
+			patientComboBox.SelectedIndex = patientComboBox.FindString(appointment.Patient.FirstName + " " + appointment.Patient.LastName);
+		}
+
+		private void FillPremiseComboBox(Appointment appointment)
+		{
+			Dictionary<string, string> premisePair = appointmentController.LoadPremiseNameAndId();
 			premiseComboBox.DataSource = new BindingSource(premisePair, null);
 			premiseComboBox.DisplayMember = "Value";
 			premiseComboBox.ValueMember = "Key";
 			Console.WriteLine(appointment.Premise.Name);
 			premiseComboBox.SelectedIndex = premiseComboBox.FindString(appointment.Premise.Name);
-
-			//filling in patients
-			Dictionary<string, string> patientPair = PersonController.LoadPair(Constants.connectionString, "select id, name, last_name from users");
-			patientComboBox.DataSource = new BindingSource(patientPair, null);
-			patientComboBox.DisplayMember = "Value";
-			patientComboBox.ValueMember = "Key";
-			patientComboBox.SelectedIndex = patientComboBox.FindString(appointment.Patient.FirstName + " " + appointment.Patient.LastName);
-
-			//filling in operation types
-			typeComboBox.DataSource = Enum.GetNames(typeof(Appointment.AppointmentType)).ToArray();
-			typeComboBox.SelectedItem = appointment.Type.ToString();
-
-			//filling beginning
-			beginningTextBox.Text = appointment.Beginning.ToString();
-
-			//filling duration
-			durationTextBox.Text = appointment.Duration.ToString();
 		}
 
 		private void SaveBtnClick(object sender, EventArgs e)
@@ -63,38 +80,66 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			string beginning = beginningTextBox.Text;
 			string duration = durationTextBox.Text;
 			string type = typeComboBox.SelectedItem.ToString();
-			//Console.WriteLine(typeComboBox.SelectedItem.ToString());
+			Enum.TryParse(type, out Appointment.AppointmentType typeP);
 
-			//checking if data is correct
-			try
-			{
-				int durationCheck = int.Parse(duration);
-				DateTime beginningCheck = DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null);
-				if (type == "physical" && durationCheck != 15)
-				{
-					MessageBox.Show("Physical can only last 15 minutes.", "Error");
-					return;
-				}
-			}
-			catch
-			{
-				MessageBox.Show("Please check beginning or duration fild and enter correct values.", "Error");
-				return;
-			}
+			if (!IsDurationValid(duration, type)) return;
 
-			if (!AppointmentController.IsAvailableAllChecks(beginning, duration, premiseId, patientId, appointmentId)) return;
+			if (!IsBeginningValid(beginning)) return;
 
+			Appointment appointment = new Appointment(int.Parse(appointmentId), new Person(int.Parse(LoggedInUser.GetId())), new Person(int.Parse(patientId)), new Premise(premiseId),
+			DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null), int.Parse(duration), typeP, "");
+
+			if (!appointmentController.IsAppointmentAvailable(appointment)) return;
+
+			SaveChanges(appointment);
+		}
+
+		private void SaveChanges(Appointment appointment)
+		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				AppointmentController.EditInBase(appointmentId, patientId, premiseId, LoggedInUser.loggedIn.Id, beginning, duration, type);
+				appointmentController.Edit(appointment);
+			}
+		}
+
+		private bool IsDurationValid(string duration, string type)
+		{
+			try
+			{
+				int durationCheck = int.Parse(duration);
+				if (type == "physical" && durationCheck != 15)
+				{
+					MessageBox.Show("Physical can only last 15 minutes.", "Error");
+					return false;
+				}
+				return true;
+			}
+			catch
+			{
+				MessageBox.Show("Please check duration field and enter correct values.", "Error");
+				return false;
+			}
+		}
+
+		private bool IsBeginningValid(string beginning)
+		{
+			try
+			{
+				DateTime beginningCheck = DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null);
+				return true;
+			}
+			catch
+			{
+				MessageBox.Show("Please check beginning field and enter correct values.", "Error");
+				return false;
 			}
 		}
 
 		private void CancelBtnClick(object sender, EventArgs e)
 		{
-			this.Close();
+			Close();
 		}
 	}
 }

@@ -109,7 +109,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         private void SearchByKeyWord()
         {
             for (int i = 0; i < appointments.Count; i++)
-                if (appointments[i].Comment.Contains(keyWord))      // anamnesis is the same as comment
+                if (appointments[i].Comment.Contains(keyWord))      // anamnesis is the same as Comment
                     appointmentsGrid.Rows[i].Selected = true;
         }
 

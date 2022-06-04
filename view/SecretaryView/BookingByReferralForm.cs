@@ -19,28 +19,22 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         private string selectedPatientId = "";
         private string selectedReferralLetterId = "";
+        private PatientController patientController = new PatientController();
+        private ReferralLetterController referralController = new ReferralLetterController();
         public BookingByReferralForm()
         {
             InitializeComponent();
             DisplayPatientsTableData();
         }
 
-        // Adds rows of non-blocked patients to dataGridViewPatients 
+        // Adds rows of patients to dataGridViewPatients 
         // with columns ID, NAME, LAST NAME
         private void DisplayPatientsTableData()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            dataGridViewPatients.Rows.Clear();
+            foreach (List<string> row in patientController.GetRowsForPatients())
             {
-                string query = "select id, name, last_name as \'last name\', username from users where role=\"patient\" and blocked=\"false\"";
-                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-
-                adapter.Fill(table);
-                dataGridViewPatients.DataSource = table;
+                dataGridViewPatients.Rows.Add(row[0], row[1], row[2]);
             }
         }
         
@@ -48,13 +42,10 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         // with columns ID, DATE CREATED, CREATED BY
         private void DisplayReferralsTableData(string patientId)
         {
-            string query = $"select * from referral_letter where patientId=\"{patientId}\" and used=\"false\"";
-            List<ReferralLetter> referralLetters = ReferralLetterController.LoadAll(Constants.connectionString, query);
-
             dataGridViewReferrals.Rows.Clear();
-            foreach (ReferralLetter referralLetter in referralLetters)
+            foreach (List<string> row in referralController.GetRowsForPatientsReferrals(patientId))
             {
-                dataGridViewReferrals.Rows.Add(referralLetter.Id, referralLetter.DateCreated.ToString(), referralLetter.Creator.FirstName + " " + referralLetter.Creator.LastName);
+                dataGridViewReferrals.Rows.Add(row[0], row[1], row[2]);
             }
         }
 

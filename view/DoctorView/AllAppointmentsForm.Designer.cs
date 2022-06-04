@@ -65,7 +65,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.dataGridView1.RowTemplate.Height = 24;
 			this.dataGridView1.Size = new System.Drawing.Size(1100, 550);
 			this.dataGridView1.TabIndex = 0;
-			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			// 
 			// button1
 			// 
@@ -170,7 +169,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.MinimumSize = new System.Drawing.Size(1200, 800);
 			this.Name = "TableAppointments";
 			this.Text = "MainWindowDoctor";
-			this.Load += new System.EventHandler(this.TableAppointments_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 

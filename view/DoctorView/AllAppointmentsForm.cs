@@ -8,16 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Servise;
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AllAppointmentsForm : Form
 	{
+		AppointmentController appointmentController = new AppointmentController();
 		public AllAppointmentsForm()
 		{
 			InitializeComponent();
-			List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
+			FillView();
+		}
+
+		private void FillView()
+		{
+			//List<Appointment> appointments = AppointmentController.LoadAppointments(Constants.connectionString, "select * from appointments where doctorId=\"" + LoggedInUser.loggedIn.Id + "\"");
+			List<Appointment> appointments = appointmentController.LoadAppointmentsForDoctor(LoggedInUser.GetId());
 			foreach (Appointment appointment in appointments)
 			{
 				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
@@ -34,54 +42,48 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void EditButtonClick(object sender, EventArgs e)
 		{
-			int selectedRowCount =
-			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
+			
+			if (OneRowSelected())
 			{
-
 				EditAppointmentForm edditAppointmentForm = new EditAppointmentForm(GetSelectedAppointmentId());
 				edditAppointmentForm.Show();
 			}
-			else
-			{
-				MessageBox.Show("Please select ONLY ONE row for editing.", "Error");
-			}
+			
 		}
 
 		private void DeleteButtonClick(object sender, EventArgs e)
 		{
+			if (OneRowSelected())
+			{
+				ApproveDelete();
+			}
+
+		}
+
+		private void ApproveDelete()
+		{
+			DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
+			if (dialogResult == DialogResult.Yes)
+			{
+				MessageBox.Show("Changes saved.", "Success");
+				appointmentController.Delete(GetSelectedAppointmentId());
+			}
+		}
+
+		private bool OneRowSelected() {
 			int selectedRowCount =
 			dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-			if (selectedRowCount == 1)
-			{
-
-				DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this appointment?", "Check", MessageBoxButtons.YesNo);
-				if (dialogResult == DialogResult.Yes)
-				{
-					MessageBox.Show("Changes saved.", "Success");
-					AppointmentController.DeleteFromBase(GetSelectedAppointmentId());
-				}
-
-			}
+			if (selectedRowCount == 1) return true;
 			else
 			{
-				MessageBox.Show("Please select ONLY ONE row for deliting.", "Error");
+				MessageBox.Show("Please select ONLY ONE row.", "Error");
+				return false;
 			}
 		}
 
 		private void CancleButtonClick(object sender, EventArgs e)
 		{
-			this.Close();
-		}
-
-		private void TableAppointments_Load(object sender, EventArgs e)
-		{
-
-		}
-
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
-
+			Close();
 		}
 
 		private string GetSelectedAppointmentId()

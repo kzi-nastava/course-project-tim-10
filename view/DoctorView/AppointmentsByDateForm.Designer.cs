@@ -44,6 +44,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.dateTextBox = new System.Windows.Forms.TextBox();
 			this.searchBtn = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -59,7 +60,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
             this.beggining,
             this.duration,
             this.type,
-            this.Id});
+            this.Id,
+            this.Column1});
 			this.dataGridView1.Location = new System.Drawing.Point(41, 120);
 			this.dataGridView1.MinimumSize = new System.Drawing.Size(1100, 450);
 			this.dataGridView1.Name = "dataGridView1";
@@ -141,9 +143,9 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.amnesisBtn.Name = "amnesisBtn";
 			this.amnesisBtn.Size = new System.Drawing.Size(110, 45);
 			this.amnesisBtn.TabIndex = 3;
-			this.amnesisBtn.Text = "Amnesis and prescriptions";
+			this.amnesisBtn.Text = "Preforme examination";
 			this.amnesisBtn.UseVisualStyleBackColor = true;
-			this.amnesisBtn.Click += new System.EventHandler(this.AmnesisBtnClick);
+			this.amnesisBtn.Click += new System.EventHandler(this.PerformeExaminationBtnClick);
 			// 
 			// button4
 			// 
@@ -191,6 +193,14 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.ReferralLetterClick);
 			// 
+			// Column1
+			// 
+			this.Column1.HeaderText = "PatientId";
+			this.Column1.MinimumWidth = 6;
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Width = 125;
+			// 
 			// AppointmentsByDateForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -230,5 +240,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private System.Windows.Forms.TextBox dateTextBox;
 		private System.Windows.Forms.Button searchBtn;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 	}
 }

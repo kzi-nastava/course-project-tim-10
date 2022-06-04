@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,38 @@ namespace HealthCareInfromationSystem.contollers
 {
     class ReferralLetterController
     {
+        private ReferralLetterService referralService = new ReferralLetterService();
+        public void SetUsedTrue(ReferralLetter referral)
+        {
+            referralService.SetUsedTrue(referral);
+        }
+
+        public ReferralLetter GetById(string id)
+        {
+            return referralService.GetById(id);
+        }
+
+        public List<List<string>> GetRowsForPatientsReferrals(string patiendId)
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (ReferralLetter referral in referralService.GetUnusedForPatient(patiendId))
+            {
+                rows.Add(GetTableRow(referral));
+
+            }
+            return rows;
+        }
+
+        private static List<string> GetTableRow(ReferralLetter referral)
+        {
+            List<string> row = new List<string>();
+            row.Add(referral.Id.ToString());
+            row.Add(referral.DateCreated.ToString("dd.MM.yyyy. HH:mm"));
+            row.Add(referral.Creator.FirstName + " " + referral.Creator.LastName);
+            return row;
+        }
+
+
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -43,43 +76,8 @@ namespace HealthCareInfromationSystem.contollers
                 return referralLetters;
             }
         }
-
-        public static int GetFirstFreeId()
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand("select * from referral_letter", connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                int maxId = 0;
-
-                while (reader.Read())
-                {
-                    int id = int.Parse(reader[0].ToString());
-                    if (id > maxId) { maxId = id; }
-                }
-                reader.Close();
-                return maxId + 1;
-            }
-        }
-
-        public static void AddToBase(string patientId, string specialisation, string doctorId)
-		{
-            int id = GetFirstFreeId();
-            if (doctorId == "") doctorId = "null";
-            if (specialisation == "") specialisation = "null";
-            DateTime now = DateTime.Now;
-            string date = now.ToString("dd.MM.yyyy. HH:mm");
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"insert into referral_letter values (\"{id}\", \"{patientId}\", \"{specialisation}\", \"{doctorId}\", \"{date}\", \"{LoggedInUser.GetId()}\", \"{false}\")";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
+        
+        
 
         public static ReferralLetter LoadOne(string connectionString, string queryString)
         {

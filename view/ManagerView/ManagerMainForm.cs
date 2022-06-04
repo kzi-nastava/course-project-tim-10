@@ -59,5 +59,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             label1.Text = "Done checking.";
         }
+
+        private void medicineManagementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MedicineManagementForm medicineManagement = new MedicineManagementForm();
+            medicineManagement.Show();
+        }
     }
 }
