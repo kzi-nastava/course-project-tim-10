@@ -18,6 +18,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private string selectedFromPremiseId = "";
         private string selectedToPremiseId = "";
         private int selectedQuantity;
+        private EquipmentController equipmentController = new EquipmentController();
         public ArrangingDynamicEquipmentForm()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         }
         private void InitializeEquipmentNameComboBox()
         {
-            foreach (string name in EquipmentController.GetDistinctEquipmentNames())
+            foreach (string name in equipmentController.GetEquipmentNames())
             {
                 this.cbEquipmentName.Items.Add(name);
             }
@@ -45,7 +46,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void DisplayEquipmentLowOnStockTable(string equipmentName)
         {
             dataGridViewLowStock.Rows.Clear();
-            foreach (List<string> row in EquipmentController.GetRowsForEquipmentLowOnStock(equipmentName)) 
+            foreach (List<string> row in equipmentController.GetRowsForEquipmentLowOnStock(equipmentName)) 
             {
                 dataGridViewLowStock.Rows.Add(row[0], row[1], row[2], row[3], row[4]); 
             }
@@ -54,7 +55,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void DisplayEquipmentWithSufficentStockTable(string equipmentName)
         {
             dataGridViewSufficentStock.Rows.Clear();
-            foreach (List<string> row in EquipmentController.GetRowsForEquipmentWithSufficentStock(equipmentName))
+            foreach (List<string> row in equipmentController.GetRowsForEquipmentWithSufficentStock(equipmentName))
             {
                 dataGridViewSufficentStock.Rows.Add(row[0], row[1], row[2], row[3], row[4]);
             }
@@ -122,7 +123,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 try
                 {
-                EquipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
+                equipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
                 MessageBox.Show("Equipment successfully arranged.");
                 ClearFields();
                 dataGridViewLowStock.Rows.Clear();

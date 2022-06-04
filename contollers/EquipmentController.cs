@@ -7,129 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.contollers
 {
     class EquipmentController
     {
-        
+        private EquipmentService equipmentService = new EquipmentService();
 
-        internal static void Save(string id, int newQuantity)
+        public List<Equipment> GetDynamicEquipmentOutOfStock()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"update equipment set quantity=\"{newQuantity}\" where equipment_id=\"{id}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
+            return equipmentService.GetDynamicEquipmentOutOfStock();
         }
 
-        private static Equipment GetByNameAndPremise(string name, string premiseId)
+        public void SupplyFromReadyRequests()
         {
-            Equipment equipment = null;
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                string query = $"select name, quantity, equipment_id, new_premises_id from equipment where new_premises_id=\"{premiseId}\" and name=\"{name}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    equipment = Equipment.ParseWithPremise(reader);
-                }
-                reader.Close();
-                return equipment;
-            }
+            equipmentService.SupplyFromReadyRequests();
         }
 
-        public static List<Equipment> GetDynamicEquipment()
+        public List<string> GetEquipmentNames()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                string query = "select name, quantity, equipment_id, new_premises_id from equipment " +
-                    "where type=\"examination equipment\" or type=\"equipment for operations\" or type=\"office supplies\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                List<Equipment> equipment = new List<Equipment>();
-
-                while (reader.Read())
-                {
-                    Equipment e = Equipment.ParseWithPremise(reader);
-                    equipment.Add(e);
-                }
-                reader.Close();
-                return equipment;
-            }
+            return equipmentService.GetDistinctEquipmentNames();
         }
 
-        public static List<Equipment> GetDynamicEquipmentOutOfStock()
-        {
-            List<Equipment> outOfStock = new List<Equipment>();
-            foreach (Equipment equipment in GetDynamicEquipment())
-            {
-                if (equipment.Premise.Type == "warehouse" && equipment.Quantity == 0)
-                {
-                    outOfStock.Add(equipment);
-                }
-            }
-            return outOfStock;
-        }
-
-        public static void SupplyFromReadyRequests()
-        {
-            foreach (EquipmentRequest request in DynamicEquipmentRequestController.GetRequestsReadyToSupply())
-            {
-                Save(request.EquipmentId.ToString(), request.Quantity); // supplies the requested quantity
-                DynamicEquipmentRequestController.SetSuppliedStatus(request);
-            }
-        }
-
-        public static List<string> GetDistinctEquipmentNames()
-        {
-            List<string> names = new List<string>();
-            foreach (Equipment equipment in GetDynamicEquipment())
-            {
-                if (!names.Contains(equipment.Name)) names.Add(equipment.Name);
-            }
-            return names;
-        }
-
-        public static List<Equipment> GetEquipmentLowOnStock(string equipmentName)
-        {
-            List<Equipment> lowOnStock = new List<Equipment>();
-            foreach (Equipment equipment in GetDynamicEquipment())
-            {
-                if (equipment.Name == equipmentName && equipment.Quantity < 5)
-                {
-                    lowOnStock.Add(equipment);
-                }
-            }
-            return lowOnStock;
-        }
-
-        public static List<Equipment> GetEquipmentWithSufficentStock(string equipmentName)
-        {
-            List<Equipment> sufficentlyStocked = new List<Equipment>();
-            foreach (Equipment equipment in GetDynamicEquipment())
-            {
-                if (equipment.Name == equipmentName && equipment.Quantity >= 5)
-                {
-                    sufficentlyStocked.Add(equipment);
-                }
-            }
-            return sufficentlyStocked;
-        }
-
-        public static List<List<string>> GetRowsForEquipmentLowOnStock(string equipmentName)
+        public List<List<string>> GetRowsForEquipmentLowOnStock(string equipmentName)
         {
             List<List<string>> rows = new List<List<string>>();
-            foreach (Equipment equipment in GetEquipmentLowOnStock(equipmentName))
+            foreach (Equipment equipment in equipmentService.GetEquipmentLowOnStock(equipmentName))
             {
                 rows.Add(GetTableRow(equipment));
                 
@@ -137,10 +42,10 @@ namespace HealthCareInfromationSystem.contollers
             return rows;
         }
 
-        public static List<List<string>> GetRowsForEquipmentWithSufficentStock(string equipmentName)
+        public List<List<string>> GetRowsForEquipmentWithSufficentStock(string equipmentName)
         {
             List<List<string>> rows = new List<List<string>>();
-            foreach (Equipment equipment in GetEquipmentWithSufficentStock(equipmentName))
+            foreach (Equipment equipment in equipmentService.GetEquipmentWithSufficentStock(equipmentName))
             {
                 rows.Add(GetTableRow(equipment));
 
@@ -160,12 +65,9 @@ namespace HealthCareInfromationSystem.contollers
             return row;
         }
 
-        public static void Move(string equipmentName, string oldPremiseId, string newPremiseId, int quantity)
+        public void Move(string equipmentName, string oldPremiseId, string newPremiseId, int quantity)
         {
-            Equipment fromOldPremise = GetByNameAndPremise(equipmentName, oldPremiseId);
-            Equipment fromNewPremise = GetByNameAndPremise(equipmentName, newPremiseId);
-            Save(fromOldPremise.Id.ToString(), fromOldPremise.Quantity - quantity);
-            Save(fromNewPremise.Id.ToString(), fromNewPremise.Quantity + quantity);
+            equipmentService.Move(equipmentName, oldPremiseId, newPremiseId, quantity);
         }
 
     }

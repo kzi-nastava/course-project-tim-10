@@ -8,7 +8,10 @@ namespace HealthCareInfromationSystem.repository
 {
 	interface IAppointmentRequestRepo
 	{
+		AppointmentRequest Get(string id);
+		void SetState(AppointmentRequest request, string state);
+		List<AppointmentRequest> GetRequests();
 		void DeleteByPatientId(string id);
-		AppointmentRequest LoadOneRequest(string id);
+		void Add(AppointmentRequest request);
 	}
 }

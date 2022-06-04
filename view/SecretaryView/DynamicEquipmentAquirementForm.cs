@@ -16,19 +16,20 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         private string selectedEquipmentId = "";
         private int inputQuantity = -1;
+        private EquipmentController equipmentController = new EquipmentController();
+        private EquipmentRequestController requestController = new EquipmentRequestController();
         public DynamicEquipmentAquirementForm()
         {
             InitializeComponent();
-            EquipmentController.SupplyFromReadyRequests();
+            equipmentController.SupplyFromReadyRequests();
             DisplayEquipmentTableData();
         }
 
         private void DisplayEquipmentTableData()
         {
-            List<Equipment> equipment = EquipmentController.GetDynamicEquipmentOutOfStock();
-            foreach (Equipment e in equipment)
+            foreach (Equipment e in equipmentController.GetDynamicEquipmentOutOfStock())
             {
-                dataGridViewEquipment.Rows.Add(e.Id, e.Name);
+                this.dataGridViewEquipment.Rows.Add(e.Id, e.Name);
             }
         }
 
@@ -63,7 +64,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (IfRowSelected() && IfQuantityFieldCorrect())
             {
-                DynamicEquipmentRequestController.SendRequest(int.Parse(selectedEquipmentId), int.Parse(tbQuantity.Text));
+                requestController.SendRequest(int.Parse(selectedEquipmentId), int.Parse(tbQuantity.Text));
                 MessageBox.Show("Request sent successfully.");
             }
         }

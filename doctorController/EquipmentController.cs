@@ -18,7 +18,7 @@ namespace HealthCareInfromationSystem.doctorController
 
 		public void Add(string id, int newQuantity)
 		{
-			equipmentService.Add(id, newQuantity);
+			equipmentService.SaveToBase(id, newQuantity);
 		}
 	}
 }
