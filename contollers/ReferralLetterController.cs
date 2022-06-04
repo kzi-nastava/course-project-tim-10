@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,16 @@ namespace HealthCareInfromationSystem.contollers
 {
     class ReferralLetterController
     {
+        private ReferralLetterService referralService = new ReferralLetterService();
+        public void SetUsedTrue(ReferralLetter referral)
+        {
+            referralService.SetUsedTrue(referral);
+        }
+
+        public ReferralLetter GetById(string id)
+        {
+            return referralService.GetById(id);
+        }
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

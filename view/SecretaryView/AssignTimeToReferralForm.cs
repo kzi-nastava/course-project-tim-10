@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
@@ -18,9 +19,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     public partial class AssignTimeToReferralForm : Form
     {
         private ReferralLetter referralLetter;
+        private doctorController.AppointmentController appointmentController = new doctorController.AppointmentController();
+        private ReferralLetterController referralController = new ReferralLetterController();
         public AssignTimeToReferralForm(string referralLetterId)
         {
-            referralLetter = ReferralLetterController.LoadOne(Constants.connectionString, $"select * from referral_letter where ID={referralLetterId}");
+            referralLetter = referralController.GetById(referralLetterId);
             InitializeComponent();
             InitializePremiseComboBox();
             InitializeTypeComboBox();
@@ -56,85 +59,57 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         }
 
-        private void BtnAdd_Click(object sender, EventArgs e)
+        private bool CheckBeginningField()
         {
-            string premiseId = cbPremise.SelectedValue.ToString();
-            string beginning = tbBeginning.Text;
-            string duration = tbDuration.Text;
-            string type = cbType.SelectedItem.ToString();
-
-            // Checking if input is correct
             try
             {
-                int durationCheck = int.Parse(duration);
-                DateTime beginningCheck = DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null);
+                int durationCheck = int.Parse(tbDuration.Text);
+                return true;
             }
             catch
             {
                 MessageBox.Show("Beginning or duration in incorrect format.", "Error");
-                return;
+                return false;
             }
+        }
 
-            // Checking if the room is available
-            if (!AppointmentController.IsAvailable(Constants.connectionString,
-            "select * from appointments where premiseId =\"" + premiseId + "\"",
-            beginning, duration))
+        private bool CheckDurationField()
+        {
+            try
             {
-                MessageBox.Show("Premise occupied.", "Error");
-                return;
+                DateTime beginningCheck = DateTime.ParseExact(tbBeginning.Text, "dd.MM.yyyy. HH:mm", null);
+                return true;
             }
-
-            // If doctor is already assigned 
-            if (referralLetter.Specialisation == "null")
+            catch
             {
-                // Checking if the doctor is available
-                if (!AppointmentController.IsAvailable(Constants.connectionString,
-                    "select * from appointments where doctorId =\"" + referralLetter.Doctor.Id + "\"",
-                    beginning, duration))
-                {
-                    MessageBox.Show("Doctor is unavailable.", "Error");
-                    return;
-                }
-            } else
-            {
-                // Assign any doctor with given specialisation that is available at given time
-                referralLetter.AssignDoctor(beginning, duration);
-
-                // No doctors available
-                if (referralLetter.Doctor == null )
-                {
-                    tbDoctor.Text = "";
-                    if (SpecialisationController.GetDoctorIds(Constants.connectionString, referralLetter.Specialisation).Count == 0)
-                    {
-                        MessageBox.Show("No doctor exists with given specialisation.", "Error");
-                        return;
-                    }
-                    MessageBox.Show("No doctors available at given time.", "Error");
-                    return;
-                } else
-                {
-                    tbDoctor.Text = referralLetter.Doctor.FirstName + " " + referralLetter.Doctor.LastName;
-                }
+                MessageBox.Show("Beginning or duration in incorrect format.", "Error");
+                return false;
             }
+        }
 
-            // Checking if the patient is available
-            if (!AppointmentController.IsAvailable(Constants.connectionString,
-            "select * from appointments where patientId=\"" + referralLetter.Patient.Id + "\"",
-            beginning, duration))
+        private void BtnAdd_Click(object sender, EventArgs e)
+        {
+            string premiseId = cbPremise.SelectedValue.ToString();
+            string type = cbType.SelectedItem.ToString();
+            Enum.TryParse(type, out Appointment.AppointmentType parsedType);
+
+            if (!CheckDurationField() || !CheckBeginningField()) return;
+
+            if (referralLetter.Doctor != null)
             {
-                MessageBox.Show("Patient already has an appointment.", "Error");
-                return;
+                Appointment appointment = new Appointment(0, new Person(referralLetter.Doctor.Id), new Person(referralLetter.Patient.Id), new Premise(premiseId),
+                    DateTime.ParseExact(tbBeginning.Text, "dd.MM.yyyy. HH:mm", null), int.Parse(tbDuration.Text), parsedType, "");
+                if (!appointmentController.IsAppointmentAvailable(appointment)) return;
             }
 
             DialogResult dialogResult = MessageBox.Show("Confirm?", "Check", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
+                Appointment appointment = new Appointment(0, new Person(referralLetter.Doctor.Id), new Person(referralLetter.Patient.Id), new Premise(premiseId),
+                                    DateTime.ParseExact(tbBeginning.Text, "dd.MM.yyyy. HH:mm", null), int.Parse(tbDuration.Text), parsedType, "");
+                appointmentController.Add(appointment);
+                referralController.SetUsedTrue(referralLetter);
                 MessageBox.Show("Changes saved.", "Success");
-                Enum.TryParse(type, out Appointment.AppointmentType typeP);
-                Appointment appointment = new Appointment(0, new Person(referralLetter.Doctor.Id), new Person(referralLetter.Patient.Id), 
-                    new Premise(premiseId), DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null), int.Parse(duration), typeP, "");
-                AppointmentController.Add(appointment);
-                ReferralLetterController.MarkUsed(referralLetter);
                 this.Dispose();
             }
         }

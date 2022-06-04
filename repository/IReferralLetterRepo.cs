@@ -12,5 +12,7 @@ namespace HealthCareInfromationSystem.repository
         void Add(string patientId, string specialisation, string doctorId);
 
         ReferralLetter GetById(string id);
+
+        void SetUsedTrue(ReferralLetter referralLetter);
     }
 }

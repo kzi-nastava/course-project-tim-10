@@ -5,12 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.repository
 {
 	class ReferralLetterSQL : IReferralLetterRepo
 	{
+        private IPersonRepo personRepo = new PersonSQL();
 		public void Add(string patientId, string specialisation, string doctorId)
 		{
             int id = GetFirstFreeId();
@@ -40,11 +42,40 @@ namespace HealthCareInfromationSystem.repository
 
                 while (reader.Read())
                 {
-                    referralLetter = ReferralLetter.Parse(reader);
+                    referralLetter = Parse(reader);
                 }
                 reader.Close();
                 return referralLetter;
             }
+        }
+
+        public void SetUsedTrue(ReferralLetter referralLetter)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                referralLetter.Used = true;
+                OleDbCommand command = new OleDbCommand();
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "update referral_letter set used=@used where id=@id";
+                command.Parameters.AddWithValue("@used", "True");
+                command.Parameters.AddWithValue("@id", referralLetter.Id);
+                command.Connection = connection;
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+        }
+
+        public ReferralLetter Parse(OleDbDataReader reader)
+        {
+            string id = reader[0].ToString();
+            Person patient = personRepo.LoadOnePerson(reader[1].ToString());
+            string specialisation = reader[2].ToString();
+            Person doctor = personRepo.LoadOnePerson(reader[3].ToString());
+            DateTime dateCreated = DateTime.Parse(reader[4].ToString());
+            Person creator = personRepo.LoadOnePerson(reader[5].ToString());
+            bool used = bool.Parse(reader[6].ToString());
+            return new ReferralLetter(id, patient, specialisation, doctor, dateCreated, creator, used);
         }
 
         private int GetFirstFreeId()
