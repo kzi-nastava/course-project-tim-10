@@ -22,6 +22,28 @@ namespace HealthCareInfromationSystem.contollers
         {
             return referralService.GetById(id);
         }
+
+        public List<List<string>> GetRowsForPatientsReferrals(string patiendId)
+        {
+            List<List<string>> rows = new List<List<string>>();
+            foreach (ReferralLetter referral in referralService.GetUnusedForPatient(patiendId))
+            {
+                rows.Add(GetTableRow(referral));
+
+            }
+            return rows;
+        }
+
+        private static List<string> GetTableRow(ReferralLetter referral)
+        {
+            List<string> row = new List<string>();
+            row.Add(referral.Id.ToString());
+            row.Add(referral.DateCreated.ToString("dd.MM.yyyy. HH:mm"));
+            row.Add(referral.Creator.FirstName + " " + referral.Creator.LastName);
+            return row;
+        }
+
+
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

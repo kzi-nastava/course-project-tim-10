@@ -49,6 +49,36 @@ namespace HealthCareInfromationSystem.repository
             }
         }
 
+        private List<ReferralLetter> GetAll()
+        {
+            List<ReferralLetter> referrals = new List<ReferralLetter>();
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"select * from referral_letter";
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    referrals.Add(Parse(reader));
+                }
+                reader.Close();
+                return referrals;
+            }
+        }
+
+        public List<ReferralLetter> GetUnusedForPatient(string patientId)
+        {
+            List<ReferralLetter> referrals = new List<ReferralLetter>();
+            foreach (ReferralLetter referral in GetAll())
+            {
+                if (referral.Used == false && referral.Patient.Id.ToString() == patientId) referrals.Add(referral);
+            }
+            return referrals;
+        }
+
         public void SetUsedTrue(ReferralLetter referralLetter)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

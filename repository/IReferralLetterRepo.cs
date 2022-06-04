@@ -14,5 +14,7 @@ namespace HealthCareInfromationSystem.repository
         ReferralLetter GetById(string id);
 
         void SetUsedTrue(ReferralLetter referralLetter);
+
+        List<ReferralLetter> GetUnusedForPatient(string patientId);
     }
 }

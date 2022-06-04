@@ -22,5 +22,10 @@ namespace HealthCareInfromationSystem.Servise
             repository.SetUsedTrue(referral);
         }
 
+        public List<ReferralLetter> GetUnusedForPatient(string patientId)
+        {
+            return repository.GetUnusedForPatient(patientId);
+        }
+        
     }
 }

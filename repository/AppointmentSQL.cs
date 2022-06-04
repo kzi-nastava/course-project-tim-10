@@ -65,7 +65,7 @@ namespace HealthCareInfromationSystem.repository
 			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
 			{
 				connection.Open();
-				string date = appointment.Beginning.ToString();
+				string date = appointment.Beginning.ToString("dd.MM.yyyy. HH:mm");
 				String query = $"update appointments set doctorId=\"{appointment.Doctor.Id}\", patientId=\"{appointment.Patient.Id}\", " +
 					$"premiseId=\"{appointment.Premise.Id}\", beginning=\"{date.Substring(0, date.Length - 3)}\", duration=\"{appointment.Duration}\", type=\"{appointment.Type}\", comment=\"{appointment.Comment}\" where id=\"{appointment.Id}\"";
 				OleDbCommand command = new OleDbCommand(query, connection);
