@@ -29,7 +29,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             dataGridViewBlockedPatients.Rows.Clear();
             foreach (List<string> row in patientController.GetRowsForBlockedPatients())
             {
-                dataGridViewBlockedPatients.Rows.Add(row[0], row[1], row[2], row[5]);
+                dataGridViewBlockedPatients.Rows.Add(row[0], row[1] + " " + row[2], row[3], row[5]);
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static HealthCareInfromationSystem.models.users.Person;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {
@@ -18,6 +20,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     {
         private string selectedId = "";
         private string selectedUsername = "";
+        private PatientController patientController = new PatientController();
         public ManagePatientsForm()
         {
             InitializeComponent();
@@ -28,58 +31,47 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             DisplayTableData();
         }
 
-        // GridView Table
-        private void FillTable(String query, OleDbConnection connection)
-        {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            dataGridViewPatients.DataSource = table;
-        }
-
         private void DisplayTableData()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            dataGridViewPatients.Rows.Clear();
+            foreach (List<string> row in patientController.GetRowsForPatients())
             {
-                FillTable("select id, name, last_name as 'last name', username, password, blocked from users where role=\"patient\"", connection);
+                dataGridViewPatients.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
             }
         }
 
+        // Field manipulation
+        // 
 
         // Displays data from selected patient in fields
         private void DataGridViewPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            selectedId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            tbId.Text = selectedId;
-            tbId.Enabled = false;
-
-            tbName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[1].Value.ToString();
-            tbLastName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[2].Value.ToString();
-            selectedUsername = dataGridViewPatients.Rows[e.RowIndex].Cells[3].Value.ToString();
-            tbUsername.Text = selectedUsername;
-            tbPassword.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[4].Value.ToString();
-
-            if (bool.TryParse(dataGridViewPatients.Rows[e.RowIndex].Cells[5].Value.ToString(), out bool blocked))
+            if (dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value != null)
             {
-                cbBlocked.Checked = blocked;
-                if (blocked == true)
+                selectedId = dataGridViewPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
+                tbId.Text = selectedId;
+                tbId.Enabled = false;
+
+                tbName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[1].Value.ToString();
+                tbLastName.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[2].Value.ToString();
+                selectedUsername = dataGridViewPatients.Rows[e.RowIndex].Cells[3].Value.ToString();
+                tbUsername.Text = selectedUsername;
+                tbPassword.Text = dataGridViewPatients.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+                if (bool.TryParse(dataGridViewPatients.Rows[e.RowIndex].Cells[5].Value.ToString(), out bool blocked))
                 {
-                    cbBlocked.Enabled = false;
-                }
-                else
-                {
-                    cbBlocked.Enabled = true;
+                    cbBlocked.Checked = blocked;
+                    if (blocked == true)
+                    {
+                        cbBlocked.Enabled = false;
+                    }
+                    else
+                    {
+                        cbBlocked.Enabled = true;
+                    }
                 }
             }
         }
-
-
-        // Field manipulation
 
         private bool CheckIfFilledFields()
         {
@@ -107,65 +99,56 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             ClearFields();
         }
 
-        private void BtnAddNew_Click(object sender, EventArgs e)
+        private bool FieldCheck()
         {
             if (!CheckIfFilledFields())
             {
                 labelStatus.Text = "Status: Incomplete fields.";
-                return;
+                return false;
             }
-            if (PatientController.CheckIfExistsById(this.tbId.Text))
+            if (patientController.CheckIfExistsById(this.tbId.Text) && selectedId != this.tbId.Text)
             {
                 labelStatus.Text = "Status: User exists under assigned Id.";
-                return;
+                return false;
             }
-            if (PatientController.CheckIfExistsByUsername(this.tbUsername.Text))
+            if (patientController.CheckIfExistsByUsername(this.tbUsername.Text) && selectedUsername != this.tbUsername.Text)
             {
                 labelStatus.Text = "Status: User exists under assigned Username.";
-                return;
+                return false;
             }
+            return true;
+        }
+
+        private void BtnAddNew_Click(object sender, EventArgs e)
+        {
+            if (!FieldCheck()) return;
 
             int blocker = 0;
             if (this.cbBlocked.Checked)
             {
                 blocker = 1;
             }
-            if (PatientController.AddNew(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUsername.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            Person patient = new Person(int.Parse(this.tbId.Text), this.tbName.Text, this.tbLastName.Text, Roles.patient, tbPassword.Text, this.cbBlocked.Checked, blocker, tbUsername.Text);
+            if (patientController.Create(patient))
             {
                 ClearFields();
                 labelStatus.Text = "Status: Operation succeeded.";
                 DisplayTableData();
             }
-            else
-            {
-                labelStatus.Text = "Status: Operation fail.";
-            }
+            else labelStatus.Text = "Status: Operation fail.";
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
         {
-            if (!CheckIfFilledFields())
-            {
-                labelStatus.Text = "Status: Incomplete fields.";
-                return;
-            }
-            if (tbId.Text != selectedId && PatientController.CheckIfExistsById(this.tbId.Text))
-            {
-                labelStatus.Text = "Status: Patient exists under assigned Id.";
-                return;
-            }
-            if (tbUsername.Text != selectedUsername && PatientController.CheckIfExistsByUsername(this.tbUsername.Text))
-            {
-                labelStatus.Text = "Status: Patient exists under assigned Username.";
-                return;
-            }
+            if (!FieldCheck()) return;
 
             int blocker = 0;
             if (this.cbBlocked.Checked)
             {
                 blocker = 1;
             }
-            if (PatientController.Edit(this.tbId.Text, this.tbName.Text, this.tbLastName.Text, tbUsername.Text, tbPassword.Text, this.cbBlocked.Checked.ToString().ToLower(), blocker))
+            Person patient = new Person(int.Parse(this.tbId.Text), this.tbName.Text, this.tbLastName.Text, Roles.patient, tbPassword.Text, this.cbBlocked.Checked, blocker, tbUsername.Text);
+            if (patientController.Update(patient)) 
             {
                 labelStatus.Text = "Status: Operation succeeded.";
                 DisplayTableData();
@@ -180,7 +163,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (selectedId != "")
             {
-                if (PatientController.Delete(selectedId))
+                if (patientController.Delete(selectedId))
                 {
                     ClearFields();
                     labelStatus.Text = "Status: Operation succeeded.";

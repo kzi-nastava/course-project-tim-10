@@ -16,7 +16,8 @@ namespace HealthCareInfromationSystem.repository.users
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                string query = $"insert into users values (\"{patient.Id.ToString()}\", \"{patient.FirstName}\", \"{patient.LastName}\", \"patient\", \"{patient.Username}\", \"{patient.Password}\", \"{patient.Blocked.ToString().ToLower()}\", {patient.Blocker.ToString()})";
+                string query = $"insert into users values (\"{patient.Id.ToString()}\", \"{patient.FirstName}\", \"{patient.LastName}\", \"patient\", \"{patient.Username}\", \"{patient.Password}\", \"{patient.Blocked.ToString().ToLower()}\", \"{patient.Blocker.ToString()}\")";
+                Console.WriteLine(query);
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }

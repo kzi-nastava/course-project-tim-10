@@ -39,7 +39,8 @@ namespace HealthCareInfromationSystem.contollers
         {
             List<string> row = new List<string>();
             row.Add(patient.Id.ToString());
-            row.Add(patient.FirstName + " " + patient.LastName);
+            row.Add(patient.FirstName);
+            row.Add(patient.LastName);
             row.Add(patient.Username);
             row.Add(patient.Password);
             row.Add(patient.Blocked.ToString());
@@ -58,50 +59,36 @@ namespace HealthCareInfromationSystem.contollers
                 return false;
             }
         }
-        public static bool CheckIfExistsById(string id)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                string query = $"select * from users where id=\"{id}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                OleDbDataReader reader = command.ExecuteReader();
-                return reader.HasRows;
-            }
-        }
 
-        public static bool CheckIfExistsByUsername(string username)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                string query = $"select * from users where username=\"{username}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                OleDbDataReader reader = command.ExecuteReader();
-                return reader.HasRows;
-            }
-        }
-
-        public static bool AddNew(string id, string name, string lastName, string username, string password, string blocked, int blocker)
+        public bool Create(Person patient)
         {
             try
             {
-                InsertPatient(id, name, lastName, username, password, blocked, blocker);
-                MedicalRecordController.AddNewByPatientId(id);
+                patientService.Add(patient);
                 return true;
             }
             catch (OleDbException)
             {
-                DeletePatient(id);
                 return false;
             }
         }
-
-        public static bool Edit(string id, string name, string lastName, string username, string password, string blocked, int blocker)
+        public bool Update(Person patient)
         {
             try
             {
-                UpdatePatient(id, name, lastName, username, password, blocked, blocker);
+                patientService.Edit(patient);
+                return true;
+            }
+            catch (OleDbException)
+            {
+                return false;
+            }
+        }
+        public bool Delete(string patientId)
+        {
+            try
+            {
+                patientService.Delete(patientId);
                 return true;
             }
             catch (OleDbException)
@@ -110,70 +97,16 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        public static bool Delete(string id)
+        public bool CheckIfExistsById(string id)
         {
-            try
-            {
-                DeletePatient(id);
-                MedicalRecordController.DeleteByPatientId(id);
-                AppointmentController.DeleteByPatientId(id);
-                ReferralLetterController.DeleteByPatientId(id);
-                AppointmentRequestController.DeleteByPatientId(id);
-                return true;
-            }
-            catch (OleDbException)
-            {
-                return false;
-            }
+            return patientService.IfExistsById(id);
+        }
+        public bool CheckIfExistsByUsername(string username)
+        {
+            return patientService.IfExistsByUsername(username);
         }
 
         
-        // Working with database
-
-        private static void InsertPatient(string id, string name, string lastName, string username, string password, string blocked, int blocker)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                string query = $"insert into users values (\"{id}\", \"{name}\", \"{lastName}\", \"patient\", \"{username}\", \"{password}\", \"{blocked}\", {blocker})";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
-        public static void UpdatePatient(string id, string name, string lastName, string username, string password, string blocked, int blocker)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand();
-                command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "update users set name=@name, last_name=@lastName, username=@userName, [password]=@password, blocked=@blocked, blocker=@blocker where id=@id";
-                command.Parameters.AddWithValue("@name", name);
-                command.Parameters.AddWithValue("@lastName", lastName);
-                command.Parameters.AddWithValue("@userName", username);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@blocked", blocked);
-                command.Parameters.AddWithValue("@blocker", blocker.ToString());
-                command.Parameters.AddWithValue("@id", id);
-                command.Connection = connection;
-                connection.Open();
-                command.ExecuteNonQuery();
-
-            }
-        }
-
-        private static void DeletePatient(string id)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                string query = $"delete from users where id=\"{id}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
-
         internal static bool IsPossibleLogin()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

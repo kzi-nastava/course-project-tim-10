@@ -38,6 +38,18 @@ namespace HealthCareInfromationSystem.Servise
         {
             return patientRepository.IfExistsByUsername(username);
         }
-
+        public void Add(Person patient)
+        {
+            patientRepository.Add(patient);
+        }
+        public void Edit(Person patient)
+        {
+            patientRepository.Edit(patient);
+        }
+        public void Delete(string id)
+        {
+            Person patient = personRepository.LoadOnePerson(id);
+            patientRepository.Delete(patient);
+        }
     }
 }
