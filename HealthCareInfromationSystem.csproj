@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="contollers\AppointmentController.cs" />
     <Compile Include="contollers\AppointmentRequestController.cs" />
-    <Compile Include="contollers\DynamicEquipmentRequestController.cs" />
+    <Compile Include="contollers\EquipmentRequestController.cs" />
     <Compile Include="contollers\EquipmentController.cs" />
     <Compile Include="contollers\MedicalPrescriptionController.cs" />
     <Compile Include="contollers\MedicalRecordController.cs" />
@@ -88,11 +88,14 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="repository\AppointmentRequestSQL.cs" />
     <Compile Include="repository\AppointmentSQL.cs" />
+    <Compile Include="repository\EquipmentRequestSQL.cs" />
     <Compile Include="repository\EquipmentSQL.cs" />
     <Compile Include="repository\IAppointmentRepo.cs" />
     <Compile Include="repository\IAppointmentRequestRepo.cs" />
     <Compile Include="repository\IEquipmentRepo.cs" />
+    <Compile Include="repository\IEquipmentRequestRepo.cs" />
     <Compile Include="repository\IMedicalRecordRepo.cs" />
     <Compile Include="repository\IMedicineRepo.cs" />
     <Compile Include="repository\IPersonRepo.cs" />
@@ -105,12 +108,18 @@
     <Compile Include="repository\PersonSQL.cs" />
     <Compile Include="repository\PremisseSQL.cs" />
     <Compile Include="repository\PrescriptionSQL.cs" />
-    <Compile Include="repository\ReferralLeterSQL.cs" />
+    <Compile Include="repository\ReferralLetterSQL.cs" />
     <Compile Include="repository\SpecialisationSQL.cs" />
+    <Compile Include="repository\users\IPatientRepo.cs" />
+    <Compile Include="repository\users\PatientSQL.cs" />
+    <Compile Include="Servise\AppointmentRequestService.cs" />
     <Compile Include="Servise\AppointmentService.cs" />
+    <Compile Include="Servise\EquipmentRequestService.cs" />
     <Compile Include="Servise\EquipmentService.cs" />
     <Compile Include="Servise\MedicalRecordService.cs" />
     <Compile Include="Servise\MedicineRequestService.cs" />
+    <Compile Include="Servise\PatientService.cs" />
+    <Compile Include="Servise\ReferralLetterService.cs" />
     <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />

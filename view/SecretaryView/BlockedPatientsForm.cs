@@ -17,46 +17,38 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     public partial class BlockedPatientsForm : Form
     {
         private string selectedId = "";
+        private PatientController patientController = new PatientController();
         public BlockedPatientsForm()
         {
             InitializeComponent();
             DisplayTableData();
         }
 
-        private void FillTable(String query, OleDbConnection connection)
-        {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            dataGridViewBlockedPatients.DataSource = table;
-        }
-
         private void DisplayTableData()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            dataGridViewBlockedPatients.Rows.Clear();
+            foreach (List<string> row in patientController.GetRowsForBlockedPatients())
             {
-                FillTable("select id, name, last_name as \'last name\', username, blocker from users where role=\"patient\" and blocked=\"true\"", connection);
+                dataGridViewBlockedPatients.Rows.Add(row[0], row[1] + " " + row[2], row[3], row[5]);
             }
         }
 
         // Previews selected patient in fields
         private void DataGridViewBlockedPatients_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            selectedId = dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
-            tbId.Text = selectedId;
+            if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[0].Value != null)
+            {
+                selectedId = dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[0].Value.ToString();
+                tbId.Text = selectedId;
 
-            if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[4].Value.ToString() == "1")
-            {
-                tbBlocker.Text = "Secretary";
-            }
-            else if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[4].Value.ToString() == "2")
-            {
-                tbBlocker.Text = "System";
+                if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[3].Value.ToString() == "1")
+                {
+                    tbBlocker.Text = "Secretary";
+                }
+                else if (dataGridViewBlockedPatients.Rows[e.RowIndex].Cells[3].Value.ToString() == "2")
+                {
+                    tbBlocker.Text = "System";
+                }
             }
         }
 
@@ -64,7 +56,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (selectedId != "")
             {
-                if (PatientController.Unblock(selectedId)) {
+                if (patientController.Unblock(selectedId)) {
                     DisplayTableData();
                     labelStatus.Text = "Status: Operation succeeded.";
                 } 
