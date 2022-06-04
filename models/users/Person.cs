@@ -109,6 +109,9 @@ namespace HealthCareInfromationSystem.models.users
 			this._username = username;
 		
 		}
+		public Person(int id) {
+			_id = id;
+		}
 
 
 		public Person DeepCopy()

@@ -20,6 +20,10 @@ namespace HealthCareInfromationSystem.models.entity
             this.type = type;
         }
 
+        public Premise(string id) {
+            this.id = id;
+        }
+
         public string Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public string Type { get => type; set => type = value; }

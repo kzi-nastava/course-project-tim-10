@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class UnverifiedMedicine : Form
 	{
-		MedicineController medicineController = new MedicineController();
+		MedicineRequestController medicineRequestController = new MedicineRequestController();
 
 		public UnverifiedMedicine()
 		{
@@ -24,11 +25,12 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillTable()
 		{
-			List<Medicine> medicines = MedicineController.LoadAll("select * from medicine where status = \"in progress\" ");
+			List<Medicine> medicines = medicineRequestController.LoadUnverifiedMedicine();
 			foreach (Medicine medicine in medicines)
 			{
 				dataGridView1.Rows.Add(medicine.Name, medicine.Description,
-									   medicine.ConvertIngredientsForTable(), medicine.Id) ;
+									   string.Join(", ", medicine.Ingredients).Trim(), medicine.Id) ;
+				Console.WriteLine(medicine.Ingredients.Length);
 
 			}
 		}
@@ -63,7 +65,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
-				medicineController.Edit(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
+				medicineRequestController.Edit(new Medicine(GetSelectedMedicineId(), GetSelectedMedicineName(),
 					GetSelectedMedicineDescription(), GetSelectedMedicineIngridients(), status, commentComboBox.Text ));
 				MessageBox.Show("Changes saved.", "Success");
 

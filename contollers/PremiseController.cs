@@ -41,6 +41,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public void SavePremise(Premise premise)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -52,6 +53,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public void EditPremise(Premise premise)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -63,6 +65,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
+        //dodato
         public void DeletePremise(String id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -118,16 +121,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        /*
-	    * Retrieves a specific premise from dataset
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-
-            Returns:
-                    Premise or null if the premise is not found.
-	    * */
+        //ne dodaj ovo
         public static Premise LoadOnePremise(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -149,16 +143,7 @@ namespace HealthCareInfromationSystem.contollers
             }
         }
 
-        /*
-	    * Creates dictionary used for filling in a combobox
-
-            Parameters:
-                    connectionString(string): name of the connection
-                    queryString(string): query for retrieving data
-
-            Returns:
-                    Dictionary where key = premise id(firs value in query) and value = premise name(second value in query).
-	    * */
+        //dadato
         public static Dictionary<string, string> LoadPair(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
@@ -185,6 +170,7 @@ namespace HealthCareInfromationSystem.contollers
             return LoadOnePremise(Constants.connectionString, $"select * from premises where premises_id = \"{id}\"");
         }
 
+        //dodato
         public static Premise GetPremiseById(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

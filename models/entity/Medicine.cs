@@ -38,10 +38,7 @@ namespace HealthCareInfromationSystem.models.entity
 			_comment = comment;
 		}
 
-		internal string ConvertIngredientsForTable()
-		{
-			return String.Join(", ", Ingredients).Trim();
-		}
+		
 
 		public int Id { get => _id; set => _id = value; }
         public string Name { get => _name; set => _name = value; }

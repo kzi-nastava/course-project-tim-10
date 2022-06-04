@@ -7,16 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AddPrescriptionForm : Form
 	{
-		private int patientId;
+		MedicalRecordController medicalRecordController = new MedicalRecordController();
+		private string patientId;
 		private Person patient;
 
 		public AddPrescriptionForm()
@@ -24,15 +26,16 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			InitializeComponent();
 		}
 
-		public AddPrescriptionForm(int id)
+		public AddPrescriptionForm(int patientId)
 		{
 			InitializeComponent();
-			patientId = id;
-			Person patient = PersonController.LoadOnePerson(Constants.connectionString,
-							"select * from users where id=\"" + patientId + "\"");
-			this.patient = patient;
-			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
-			Dictionary<string, string> medicinePair = MedicineController.LoadPair("select id, name from medicine where status = \"accepted\" ");
+			LoadPatient(patientId);
+			FillMedicineComboBox();
+		}
+
+		private void FillMedicineComboBox()
+		{
+			Dictionary<string, string> medicinePair = medicalRecordController.LoadMedicineNameAndId();
 			medicineComboBox.DataSource = new BindingSource(medicinePair, null);
 			medicineComboBox.DisplayMember = "Value";
 			medicineComboBox.ValueMember = "Key";
@@ -44,42 +47,78 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			}
 		}
 
+		private void LoadPatient(int id)
+		{
+			patientId = id.ToString();
+			Person patient = medicalRecordController.GetPersonById(patientId);
+			this.patient = patient;
+			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
+		}
+
 		private void SaveClick(object sender, EventArgs e)
 		{
-			MedicalRecord medical = MedicalRecordController.LoadMedical(Constants.connectionString,
-							"select * from medical_record where patientId=\"" + patientId + "\""); 
+			MedicalRecord medical = medicalRecordController.GetMedicalRecordByPatient(patientId);
 			string medicineId = medicineComboBox.SelectedValue.ToString();
-			Medicine medicine = MedicineController.LoadOneById(medicineId);
-			//string tymeOfConsumption = periodComboBox.SelectedItem.ToString();
-			//Enum.TryParse(periodComboBox.SelectedItem.ToString(), out Medicine.DrinkingPeriod timeOfConsumption);
+			Medicine medicine = medicalRecordController.GetMedicine(medicineId);
 			string time = periodTextBox.Text;
 			string quantity = quantityTextBox.Text;
 			string date = dateTextBox.Text;
-			DateTime dateCheck, timeTaking;
-			try
-			{
-				dateCheck = DateTime.ParseExact(date, "dd.MM.yyyy.", null);
-				timeTaking = DateTime.ParseExact(time, "HH:mm", null);
-			}
-			catch
-			{
-				MessageBox.Show("Please check date field and enter correct values.", "Error");
-				return;
-			}
 
-			if (medical.IsAlergic(medicine.Ingredients))
-			{
-				MessageBox.Show("Patient is alergic to an ingredient", "Error");
-				return;
-			}
+			if (!IsDateVAlid(date)) return;
+			if (!IsTimeVAlid(time)) return;
+
+			if (IsPatientAlergic(medical, medicine)) return;
+			MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, DateTime.ParseExact(time, "HH:mm", null), patient, DateTime.Now, DateTime.ParseExact(date, "dd.MM.yyyy.", null));
+
+			SaveChanges(medicalPrescription);
+
+		}
+
+		private void SaveChanges(MedicalPrescription  medicalPrescription)
+		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, timeTaking, patient, DateTime.Now, dateCheck);
-				MedicalPrescriptionController.SaveToBase(medicalPrescription);
-			}
 
+				medicalRecordController.Add(medicalPrescription);
+			}
+		}
+
+		private bool IsPatientAlergic(MedicalRecord medical, Medicine medicine) {
+			if (medical.IsAlergic(medicine.Ingredients))
+			{
+				MessageBox.Show("Patient is alergic to an ingredient", "Error");
+				return true;
+			}
+			return false;
+		}
+
+		private bool IsDateVAlid(string date) {
+			try
+			{
+				DateTime dateCheck = DateTime.ParseExact(date, "dd.MM.yyyy.", null);
+				return true;
+			}
+			catch
+			{
+				MessageBox.Show("Please check date field and enter correct values.", "Error");
+				return false;
+			}
+		}
+
+		private bool IsTimeVAlid(String time)
+		{
+			try
+			{
+				DateTime timeTaking = DateTime.ParseExact(time, "HH:mm", null);
+				return true;
+			}
+			catch
+			{
+				MessageBox.Show("Please check time field and enter correct values.", "Error");
+				return false;
+			}
 		}
 
 		private void CancelClick(object sender, EventArgs e)

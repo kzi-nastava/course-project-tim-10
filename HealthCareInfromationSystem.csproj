@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -65,6 +65,10 @@
     <Compile Include="contollers\ReferralLetterController.cs" />
     <Compile Include="contollers\SpecialisationController.cs" />
     <Compile Include="contollers\RenovationController.cs" />
+    <Compile Include="doctorController\AppointmentController.cs" />
+    <Compile Include="doctorController\EquipmentController.cs" />
+    <Compile Include="doctorController\MedicalRecordController.cs" />
+    <Compile Include="doctorController\MedicineRequestController.cs" />
     <Compile Include="models\entity\Appointment.cs" />
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
@@ -84,11 +88,36 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="repository\AppointmentSQL.cs" />
+    <Compile Include="repository\EquipmentSQL.cs" />
+    <Compile Include="repository\IAppointmentRepo.cs" />
+    <Compile Include="repository\IAppointmentRequestRepo.cs" />
+    <Compile Include="repository\IEquipmentRepo.cs" />
+    <Compile Include="repository\IMedicalRecordRepo.cs" />
+    <Compile Include="repository\IMedicineRepo.cs" />
+    <Compile Include="repository\IPersonRepo.cs" />
+    <Compile Include="repository\IPremisseRepo.cs" />
+    <Compile Include="repository\IPrescriptionRepo.cs" />
+    <Compile Include="repository\IReferralLetterRepo.cs" />
+    <Compile Include="repository\ISpecialisationRepo.cs" />
+    <Compile Include="repository\MedicalRecordSQL.cs" />
+    <Compile Include="repository\MedicineSQL.cs" />
+    <Compile Include="repository\PersonSQL.cs" />
+    <Compile Include="repository\PremisseSQL.cs" />
+    <Compile Include="repository\PrescriptionSQL.cs" />
+    <Compile Include="repository\ReferralLeterSQL.cs" />
+    <Compile Include="repository\SpecialisationSQL.cs" />
+    <Compile Include="Servise\AppointmentService.cs" />
+    <Compile Include="Servise\EquipmentService.cs" />
+    <Compile Include="Servise\MedicalRecordService.cs" />
+    <Compile Include="Servise\MedicineRequestService.cs" />
+    <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\LoggedInUser.cs" />
     <Compile Include="utils\Methods.cs" />
     <Compile Include="utils\MyConverter.cs" />
+    <Compile Include="viewController\AllAppointmentsController.cs" />
     <Compile Include="view\DoctorView\AddAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -406,5 +435,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

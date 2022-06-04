@@ -43,43 +43,8 @@ namespace HealthCareInfromationSystem.contollers
                 return referralLetters;
             }
         }
-
-        public static int GetFirstFreeId()
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand("select * from referral_letter", connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                int maxId = 0;
-
-                while (reader.Read())
-                {
-                    int id = int.Parse(reader[0].ToString());
-                    if (id > maxId) { maxId = id; }
-                }
-                reader.Close();
-                return maxId + 1;
-            }
-        }
-
-        public static void AddToBase(string patientId, string specialisation, string doctorId)
-		{
-            int id = GetFirstFreeId();
-            if (doctorId == "") doctorId = "null";
-            if (specialisation == "") specialisation = "null";
-            DateTime now = DateTime.Now;
-            string date = now.ToString("dd.MM.yyyy. HH:mm");
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"insert into referral_letter values (\"{id}\", \"{patientId}\", \"{specialisation}\", \"{doctorId}\", \"{date}\", \"{LoggedInUser.GetId()}\", \"{false}\")";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
+        
+        
 
         public static ReferralLetter LoadOne(string connectionString, string queryString)
         {

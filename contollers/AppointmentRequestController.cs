@@ -5,11 +5,13 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.entity;
 
 namespace HealthCareInfromationSystem.contollers
 {
     class AppointmentRequestController
     {
+        //dodato
         public static void DeleteByPatientId(string id)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -41,9 +43,11 @@ namespace HealthCareInfromationSystem.contollers
             ChangeRequestState(id, "accepted");
             string query = $"select * from appointment_request where request_id =\"{id}\"";
             AppointmentRequest request = AppointmentRequestController.LoadOneRequest(Constants.connectionString, query);
-            models.entity.Appointment appointment = request.Appointment;
+            Appointment appointment = request.Appointment;
             appointment.Doctor = request.NewDoctor;
-            AppointmentController.EditInBase(appointment.Id.ToString(), appointment.Patient.Id.ToString(), appointment.Premise.Id, appointment.Doctor.Id, request.NewBeginning, appointment.Duration.ToString(), appointment.Type.ToString());
+            appointment.Beginning = DateTime.ParseExact(request.NewBeginning, "dd.MM.yyyy. HH:mm", null); ;
+            //AppointmentController.Edit(appointment.Id.ToString(), appointment.Patient.Id.ToString(), appointment.Premise.Id, appointment.Doctor.Id, request.NewBeginning, appointment.Duration.ToString(), appointment.Type.ToString());
+            AppointmentController.Edit(appointment);
         }
 
         private static void AcceptRequestCancellation(string id)
@@ -51,7 +55,7 @@ namespace HealthCareInfromationSystem.contollers
             ChangeRequestState(id, "accepted");
             string query = $"select * from appointment_request where request_id =\"{id}\"";
             AppointmentRequest request = AppointmentRequestController.LoadOneRequest(Constants.connectionString, query);
-            AppointmentController.DeleteFromBase(request.Appointment.Id.ToString());
+            AppointmentController.Delete(request.Appointment.Id.ToString());
         }
 
         public static bool DeclineRequest(string id)

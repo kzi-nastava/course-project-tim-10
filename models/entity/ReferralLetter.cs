@@ -31,6 +31,12 @@ namespace HealthCareInfromationSystem.models.entity
             this.used = used;
         }
 
+        public ReferralLetter(Person patient, string specialisation, Person doctor) {
+            this.patient = patient;
+            this.specialisation = specialisation;
+            this.doctor = doctor;
+        }
+
         public string Id
         {
             get { return id; }

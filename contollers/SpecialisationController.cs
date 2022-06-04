@@ -10,6 +10,7 @@ namespace HealthCareInfromationSystem.contollers
 {
     class SpecialisationController
     {
+        //dodato
         // Returns list of ids from doctors who have specialisation with given name
         public static List<string> GetDoctorIds(string connectionString, string specName)
         {
@@ -32,7 +33,7 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
-
+        //dodato
         public static List<string> LoadSpecialisations(string connectionString, string queryString)
         {
             using (OleDbConnection connection = new OleDbConnection(connectionString))
