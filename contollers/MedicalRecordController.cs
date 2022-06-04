@@ -31,18 +31,7 @@ namespace HealthCareInfromationSystem.contollers
                 return null;
             }
         }
-        //dodato
-		internal static void Edit(MedicalRecord medicalRecord)
-		{
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"update medical_record set height=\"{medicalRecord.Height}\", weight=\"{medicalRecord.Weight}\", " +
-                    $"bloodType=\"{medicalRecord.BloodType}\", disease=\"{medicalRecord.Disease}\", alergies=\"{medicalRecord.Alergies}\" where id=\"{medicalRecord.Id}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
-        }
+        
         //dodato
         public static void AddNewByPatientId(string id)
         {

@@ -169,7 +169,6 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.MinimumSize = new System.Drawing.Size(1200, 800);
 			this.Name = "TableAppointments";
 			this.Text = "MainWindowDoctor";
-			this.Load += new System.EventHandler(this.TableAppointments_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.ResumeLayout(false);
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
 
@@ -18,7 +18,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 	public partial class EditAppointmentForm : Form
 	{
 		private readonly Appointment appointment;
-		private readonly AppointmentService appointmentService;
+		AppointmentController appointmentController = new AppointmentController();
 
 		public string appointmentId { get; }
 
@@ -32,13 +32,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			InitializeComponent();
 			this.appointmentId = appointmentId;
-			Appointment appointment = appointmentService.GetAppointmentById(appointmentId);
+			Appointment appointment = appointmentController.GetAppointmentById(appointmentId);
 			this.appointment = appointment;
 
 			FillPremiseComboBox(appointment);
-
 			FillPatientComboBox(appointment);
-
 			FillOperationComboBox(appointment);
 			FillTextBoxes(appointment);
 		}
@@ -57,7 +55,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillPatientComboBox(Appointment appointment)
 		{
-			Dictionary<string, string> patientPair = appointmentService.LoadFullNameAndId("patient");
+			Dictionary<string, string> patientPair = appointmentController.LoadFullNameAndId("patient");
 			patientComboBox.DataSource = new BindingSource(patientPair, null);
 			patientComboBox.DisplayMember = "Value";
 			patientComboBox.ValueMember = "Key";
@@ -66,7 +64,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillPremiseComboBox(Appointment appointment)
 		{
-			Dictionary<string, string> premisePair = appointmentService.LoadPremiseNameAndId();
+			Dictionary<string, string> premisePair = appointmentController.LoadPremiseNameAndId();
 			premiseComboBox.DataSource = new BindingSource(premisePair, null);
 			premiseComboBox.DisplayMember = "Value";
 			premiseComboBox.ValueMember = "Key";
@@ -91,7 +89,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			Appointment appointment = new Appointment(int.Parse(appointmentId), new Person(int.Parse(LoggedInUser.GetId())), new Person(int.Parse(patientId)), new Premise(premiseId),
 			DateTime.ParseExact(beginning, "dd.MM.yyyy. HH:mm", null), int.Parse(duration), typeP, "");
 
-			if (!appointmentService.IsAppointmentAvailable(appointment)) return;
+			if (!appointmentController.IsAppointmentAvailable(appointment)) return;
 
 			SaveChanges(appointment);
 		}
@@ -102,7 +100,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				appointmentService.EditInBase(appointment);
+				appointmentController.Edit(appointment);
 			}
 		}
 

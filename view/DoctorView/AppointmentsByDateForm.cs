@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
@@ -16,8 +16,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AppointmentsByDateForm : Form
 	{
-		AppointmentService appointmentService = new AppointmentService();
-		SheduleAppointmentService sheduleAppointmentService = new SheduleAppointmentService();
+		AppointmentController appointmentController = new AppointmentController();
 		public AppointmentsByDateForm()
 		{
 			InitializeComponent();
@@ -42,7 +41,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillTable(string inputDate)
 		{
-			List<Appointment> appointments = sheduleAppointmentService.LoadAppointmentsForDoctorAtDate(inputDate);
+			List<Appointment> appointments = appointmentController.LoadAppointmentsForDoctorAtDate(inputDate);
 			foreach (Appointment appointment in appointments)
 			{
 				dataGridView1.Rows.Add(appointment.Premise.Name, appointment.Patient.FirstName, appointment.Patient.LastName,
@@ -56,7 +55,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (OneRowSelected())
 			{
 				string patientId = GetSelectedAppointmentPatientId();
-				MedicalRecord medical = sheduleAppointmentService.GetMedicalRecordByPatient(patientId);
+				MedicalRecord medical = appointmentController.GetMedicalRecordByPatient(patientId);
 				SingleMedicalRecordForm medicalRecordForm = new SingleMedicalRecordForm(medical);
 				medicalRecordForm.Show();
 			}
@@ -66,7 +65,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		{
 			if (OneRowSelected())
 			{
-				Appointment appointment = appointmentService.GetAppointmentById(GetSelectedAppointmentId());
+				Appointment appointment = appointmentController.GetAppointmentById(GetSelectedAppointmentId());
 				PerformExaminationForm anamnesisInputForm = new PerformExaminationForm(appointment);
 				anamnesisInputForm.Show();
 			}

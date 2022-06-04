@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HealthCareInfromationSystem.repository
 {
-	interface IReferealLeterRepo
+	interface IReferralLetterRepo
 	{
 		void Add(string patientId, string specialisation, string doctorId);
 	}

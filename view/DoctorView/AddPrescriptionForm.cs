@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.doctorController;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.models.entity;
@@ -17,7 +17,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AddPrescriptionForm : Form
 	{
-		MedicalRecordService medicalRecordService = new MedicalRecordService();
+		MedicalRecordController medicalRecordController = new MedicalRecordController();
 		private string patientId;
 		private Person patient;
 
@@ -35,7 +35,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void FillMedicineComboBox()
 		{
-			Dictionary<string, string> medicinePair = medicalRecordService.LoadMedicineNameAndId();
+			Dictionary<string, string> medicinePair = medicalRecordController.LoadMedicineNameAndId();
 			medicineComboBox.DataSource = new BindingSource(medicinePair, null);
 			medicineComboBox.DisplayMember = "Value";
 			medicineComboBox.ValueMember = "Key";
@@ -50,16 +50,16 @@ namespace HealthCareInfromationSystem.view.DoctorView
 		private void LoadPatient(int id)
 		{
 			patientId = id.ToString();
-			Person patient = medicalRecordService.GetPersonById(patientId);
+			Person patient = medicalRecordController.GetPersonById(patientId);
 			this.patient = patient;
 			patientFullNameLabel.Text = patient.FirstName + " " + patient.LastName;
 		}
 
 		private void SaveClick(object sender, EventArgs e)
 		{
-			MedicalRecord medical = medicalRecordService.GetMedicalRecordByPatient(patientId);
+			MedicalRecord medical = medicalRecordController.GetMedicalRecordByPatient(patientId);
 			string medicineId = medicineComboBox.SelectedValue.ToString();
-			Medicine medicine = medicalRecordService.GetMedicine(medicineId);
+			Medicine medicine = medicalRecordController.GetMedicine(medicineId);
 			string time = periodTextBox.Text;
 			string quantity = quantityTextBox.Text;
 			string date = dateTextBox.Text;
@@ -68,7 +68,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (!IsTimeVAlid(time)) return;
 
 			if (IsPatientAlergic(medical, medicine)) return;
-			MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, DateTime.ParseExact(time, "HH:mm", null), patient, DateTime.ParseExact(date, "dd.MM.yyyy.", null), DateTime.Now);
+			MedicalPrescription medicalPrescription = new MedicalPrescription(0, medicine, quantity, DateTime.ParseExact(time, "HH:mm", null), patient, DateTime.Now, DateTime.ParseExact(date, "dd.MM.yyyy.", null));
 
 			SaveChanges(medicalPrescription);
 
@@ -80,8 +80,8 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			if (dialogResult == DialogResult.Yes)
 			{
 				MessageBox.Show("Changes saved.", "Success");
-				
-				medicalRecordService.SaveToBase(medicalPrescription);
+
+				medicalRecordController.Add(medicalPrescription);
 			}
 		}
 
