@@ -73,6 +73,7 @@
     <Compile Include="models\entity\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
     <Compile Include="models\entity\ComplexRenovation.cs" />
+    <Compile Include="models\entity\PollDoctor.cs" />
     <Compile Include="models\entity\Equipment.cs" />
     <Compile Include="models\entity\EquipmentRequest.cs" />
     <Compile Include="models\entity\MedicalPrescription.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="models\entity\Premise.cs" />
     <Compile Include="models\entity\ReferralLetter.cs" />
     <Compile Include="models\entity\SimpleRenovation.cs" />
+    <Compile Include="models\entity\PollHospital.cs" />
     <Compile Include="models\users\Doctor.cs" />
     <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="repository\IMedicalRecordRepo.cs" />
     <Compile Include="repository\IMedicineRepo.cs" />
     <Compile Include="repository\IPersonRepo.cs" />
+    <Compile Include="repository\IPollHospitalRepo.cs" />
     <Compile Include="repository\IPremisseRepo.cs" />
     <Compile Include="repository\IPrescriptionRepo.cs" />
     <Compile Include="repository\IReferralLetterRepo.cs" />
@@ -106,11 +109,14 @@
     <Compile Include="repository\MedicalRecordSQL.cs" />
     <Compile Include="repository\MedicineSQL.cs" />
     <Compile Include="repository\PersonSQL.cs" />
+    <Compile Include="repository\PollHospitalSQL.cs" />
     <Compile Include="repository\PremisseSQL.cs" />
     <Compile Include="repository\PrescriptionSQL.cs" />
     <Compile Include="repository\ReferralLetterSQL.cs" />
     <Compile Include="repository\SpecialisationSQL.cs" />
+    <Compile Include="repository\PollDoctorSQL.cs" />
     <Compile Include="repository\users\IPatientRepo.cs" />
+    <Compile Include="repository\IPollDoctorRepo.cs" />
     <Compile Include="repository\users\PatientSQL.cs" />
     <Compile Include="Servise\AppointmentRequestService.cs" />
     <Compile Include="Servise\AppointmentService.cs" />
@@ -119,6 +125,7 @@
     <Compile Include="Servise\MedicalRecordService.cs" />
     <Compile Include="Servise\MedicineRequestService.cs" />
     <Compile Include="Servise\PatientService.cs" />
+    <Compile Include="Servise\PollService.cs" />
     <Compile Include="Servise\ReferralLetterService.cs" />
     <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
@@ -245,6 +252,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.Designer.cs" />
+    <Compile Include="view\PatientView\AllAppointmentsForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\AllAppointmentsForm2.Designer.cs">
+      <DependentUpon>AllAppointmentsForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\AnamnesisReviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +283,12 @@
     </Compile>
     <Compile Include="view\PatientView\SearchDoctorForm.Designer.cs">
       <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PatientView\PollDoctorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\PollDoctorForm.Designer.cs">
+      <DependentUpon>PollDoctorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\SecretaryView\AppointmentRequestForm.cs">
       <SubType>Form</SubType>
@@ -383,6 +402,9 @@
       <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
+    <EmbeddedResource Include="view\PatientView\AllAppointmentsForm2.resx">
+      <DependentUpon>AllAppointmentsForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AnamnesisReviewForm.resx">
       <DependentUpon>AnamnesisReviewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +415,9 @@
     <EmbeddedResource Include="view\PatientView\PriorityAppointmentForm.resx" />
     <EmbeddedResource Include="view\PatientView\SearchDoctorForm.resx">
       <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PatientView\PollDoctorForm.resx">
+      <DependentUpon>PollDoctorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>

@@ -101,7 +101,7 @@ namespace HealthCareInfromationSystem.view.PatientView
 
         private void AppointmentReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            serviceForm = new AllAppointmentsForm();
+            serviceForm = new AllAppointmentsForm2();
             serviceForm.Show();
         }
 
