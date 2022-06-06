@@ -14,50 +14,53 @@ using System.Windows.Forms;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {
-    public partial class PollDoctorForm : Form
+    public partial class PollHospitalForm : Form
     {
         private int quality;
+        private int cleanliness;
+        private int impression;
         private int recommendation;
         private string comment;
         private Person patient = LoggedInUser.loggedIn;
-        private Person doctor;
 
         PollService pollService = new PollService();
 
 
-        public PollDoctorForm(Person doctor)
+        public PollHospitalForm()
         {
             InitializeComponent();
-            this.doctor = doctor;
         }
 
-        private void GetDoctorPollValues()
+        private void GetHospitalPollValues()
         {
             quality = GetCheckedRadioButton(qualityRB1, qualityRB2, qualityRB3, qualityRB4, qualityRB5);
+            cleanliness = GetCheckedRadioButton(cleanRB1, cleanRB2, cleanRB3, cleanRB4, cleanRB5);
+            impression = GetCheckedRadioButton(impressionRB1, impressionRB2, impressionRB3, impressionRB4, impressionRB5);
             recommendation = GetCheckedRadioButton(recommendRB1, recommendRB2, recommendRB3, recommendRB4, recommendRB5);
             comment = commentTxt.Text;
         }
 
         private bool ValidInput()
         {
-            return (quality != -1) && (recommendation != -1);
+            return (quality != -1) && (cleanliness != -1) && (impression != -1) && (recommendation != -1);
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SavePollHospital()
         {
-            GetDoctorPollValues();
+            
+            int id = int.Parse(BaseFunctions.GenerateId("poll_hospital", "ID"));
+            PollHospital pollHospital = new PollHospital(id, quality, cleanliness, impression, recommendation, comment, patient);
+            pollService.AddPollHospital(pollHospital);
+            MessageBox.Show("Poll successfully saved.");
+        }
+
+        private void SaveButton_Click_1(object sender, EventArgs e)
+        {
+            GetHospitalPollValues();
             if (ValidInput())
-                SaveSurveyDoctor();
+                SavePollHospital();
             else
                 MessageBox.Show("Only comment is not required.");
-        }
-        
-        private void SaveSurveyDoctor()
-        {
-            int id = int.Parse(BaseFunctions.GenerateId("poll_doctor", "ID"));
-            PollDoctor pollDoctor = new PollDoctor(id, quality, recommendation, comment, doctor, patient);
-            pollService.AddPollDoctor(pollDoctor);
-            MessageBox.Show("Poll successfully saved.");
         }
 
         public static int GetCheckedRadioButton(params RadioButton[] radioButtons)
@@ -67,5 +70,7 @@ namespace HealthCareInfromationSystem.view.PatientView
                     return int.Parse(button.Text);
             return -1;
         }
+
+
     }
 }

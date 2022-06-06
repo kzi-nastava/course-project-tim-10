@@ -129,6 +129,10 @@ namespace HealthCareInfromationSystem.view.PatientView
             serviceForm.Show();
         }
 
-
+        private void PollHospitalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serviceForm = new PollHospitalForm();
+            serviceForm.Show();
+        }
     }
 }

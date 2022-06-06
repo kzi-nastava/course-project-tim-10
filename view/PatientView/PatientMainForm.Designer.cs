@@ -43,6 +43,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.welcomeLbl = new System.Windows.Forms.Label();
             this.notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pollHospitalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +65,8 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.createAppointmentToolStripMenuItem,
             this.createPriorityAppointmentToolStripMenuItem,
             this.anamnesisReviewToolStripMenuItem,
-            this.searchDoctorsToolStripMenuItem});
+            this.searchDoctorsToolStripMenuItem,
+            this.pollHospitalToolStripMenuItem});
             this.chooseOptionToolStripMenuItem.Name = "chooseOptionToolStripMenuItem";
             this.chooseOptionToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.chooseOptionToolStripMenuItem.Text = "Options";
@@ -149,6 +151,13 @@ namespace HealthCareInfromationSystem.view.PatientView
             // 
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
+            // pollHospitalToolStripMenuItem
+            // 
+            this.pollHospitalToolStripMenuItem.Name = "pollHospitalToolStripMenuItem";
+            this.pollHospitalToolStripMenuItem.Size = new System.Drawing.Size(277, 26);
+            this.pollHospitalToolStripMenuItem.Text = "Poll hospital";
+            this.pollHospitalToolStripMenuItem.Click += new System.EventHandler(this.PollHospitalToolStripMenuItem_Click);
+            // 
             // PatientMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -185,5 +194,6 @@ namespace HealthCareInfromationSystem.view.PatientView
         private System.Windows.Forms.Label welcomeLbl;
         private System.Windows.Forms.NotifyIcon notify;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem pollHospitalToolStripMenuItem;
     }
 }

@@ -27,7 +27,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        protected void InitializeComponent()
         {
             this.doctorSurveyLbl = new System.Windows.Forms.Label();
             this.commentLbl = new System.Windows.Forms.Label();
@@ -59,9 +59,9 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.doctorSurveyLbl.AutoSize = true;
             this.doctorSurveyLbl.Location = new System.Drawing.Point(395, 31);
             this.doctorSurveyLbl.Name = "doctorSurveyLbl";
-            this.doctorSurveyLbl.Size = new System.Drawing.Size(96, 17);
+            this.doctorSurveyLbl.Size = new System.Drawing.Size(76, 17);
             this.doctorSurveyLbl.TabIndex = 0;
-            this.doctorSurveyLbl.Text = "Doctor survey";
+            this.doctorSurveyLbl.Text = "Doctor poll";
             // 
             // commentLbl
             // 
@@ -273,7 +273,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.recommendRB1.Text = "1";
             this.recommendRB1.UseVisualStyleBackColor = true;
             // 
-            // SurveyDoctorForm
+            // PollDoctorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -289,7 +289,7 @@ namespace HealthCareInfromationSystem.view.PatientView
             this.Controls.Add(this.neverLbl);
             this.Controls.Add(this.commentLbl);
             this.Controls.Add(this.doctorSurveyLbl);
-            this.Name = "SurveyDoctorForm";
+            this.Name = "PollDoctorForm";
             this.Text = "SurveyDoctor";
             this.qualityBox.ResumeLayout(false);
             this.qualityBox.PerformLayout();
