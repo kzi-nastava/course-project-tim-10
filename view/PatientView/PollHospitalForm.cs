@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.Poll;
+using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;

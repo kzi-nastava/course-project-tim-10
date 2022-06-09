@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCareInfromationSystem.models.entity
+namespace HealthCareInfromationSystem.Core.Poll
 {
     class PollDoctor
     {

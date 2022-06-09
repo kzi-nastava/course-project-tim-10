@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCareInfromationSystem.repository
+namespace HealthCareInfromationSystem.Core.Poll
 {
     interface IPollHospitalRepo
     {

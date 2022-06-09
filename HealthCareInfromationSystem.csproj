@@ -72,7 +72,7 @@
     <Compile Include="Core\AppointmentRequest\AppointmentRequest.cs" />
     <Compile Include="models\entity\ComplexMoving.cs" />
     <Compile Include="models\entity\ComplexRenovation.cs" />
-    <Compile Include="models\entity\PollDoctor.cs" />
+    <Compile Include="Core\Poll\PollDoctor.cs" />
     <Compile Include="Core\Equipment\Equipment.cs" />
     <Compile Include="Core\EquipmentRequest\EquipmentRequest.cs" />
     <Compile Include="Core\MedicalPrescription\MedicalPrescription.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="models\entity\Premise.cs" />
     <Compile Include="models\entity\ReferralLetter.cs" />
     <Compile Include="models\entity\SimpleRenovation.cs" />
-    <Compile Include="models\entity\PollHospital.cs" />
+    <Compile Include="Core\Poll\PollHospital.cs" />
     <Compile Include="models\users\Doctor.cs" />
     <Compile Include="models\users\Patient.cs" />
     <Compile Include="models\users\Person.cs" />
@@ -100,7 +100,7 @@
     <Compile Include="Core\MedicalRecord\IMedicalRecordRepo.cs" />
     <Compile Include="Core\MedicineManagment\IMedicineRepo.cs" />
     <Compile Include="repository\IPersonRepo.cs" />
-    <Compile Include="repository\IPollHospitalRepo.cs" />
+    <Compile Include="Core\Poll\IPollHospitalRepo.cs" />
     <Compile Include="repository\IPremisseRepo.cs" />
     <Compile Include="Core\MedicalPrescription\IPrescriptionRepo.cs" />
     <Compile Include="repository\IReferralLetterRepo.cs" />
@@ -108,14 +108,14 @@
     <Compile Include="Core\MedicalRecord\MedicalRecordSQL.cs" />
     <Compile Include="Core\MedicineManagment\MedicineSQL.cs" />
     <Compile Include="repository\PersonSQL.cs" />
-    <Compile Include="repository\PollHospitalSQL.cs" />
+    <Compile Include="Core\Poll\PollHospitalSQL.cs" />
     <Compile Include="repository\PremisseSQL.cs" />
     <Compile Include="Core\MedicalPrescription\PrescriptionSQL.cs" />
     <Compile Include="repository\ReferralLetterSQL.cs" />
     <Compile Include="repository\SpecialisationSQL.cs" />
-    <Compile Include="repository\PollDoctorSQL.cs" />
+    <Compile Include="Core\Poll\PollDoctorSQL.cs" />
     <Compile Include="repository\users\IPatientRepo.cs" />
-    <Compile Include="repository\IPollDoctorRepo.cs" />
+    <Compile Include="Core\Poll\IPollDoctorRepo.cs" />
     <Compile Include="repository\users\PatientSQL.cs" />
     <Compile Include="Core\AppointmentRequest\AppointmentRequestService.cs" />
     <Compile Include="Servise\AppointmentService.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="Core\MedicalRecord\MedicalRecordService.cs" />
     <Compile Include="Core\MedicineManagment\MedicineRequestService.cs" />
     <Compile Include="Servise\PatientService.cs" />
-    <Compile Include="Servise\PollService.cs" />
+    <Compile Include="Core\Poll\PollService.cs" />
     <Compile Include="Servise\ReferralLetterService.cs" />
     <Compile Include="Servise\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />

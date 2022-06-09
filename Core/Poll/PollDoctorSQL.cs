@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.repository.users;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -7,50 +8,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HealthCareInfromationSystem.repository
+namespace HealthCareInfromationSystem.Core.Poll
 {
-    class PollHospitalSQL : IPollHospitalRepo
+    class PollDoctorSQL : IPollDoctorRepo
     {
-        public void Add(PollHospital pollHospital)
+        public void Add(PollDoctor pollDoctor)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                string query = $"insert into poll_hospital values (\"{pollHospital.Id}\", \"{pollHospital.Quality}\", " +
-                    $"\"{pollHospital.Cleanliness}\", \"{pollHospital.Impression}\", \"{pollHospital.Recommendation}\"," +
-                    $" \"{pollHospital.Comment}\", \"{pollHospital.Patient.Id}\")";
+                string query = $"insert into poll_doctor values (\"{pollDoctor.Id}\", \"{pollDoctor.Quality}\", \"{pollDoctor.Recommendation}\"," +
+                    $" \"{pollDoctor.Comment}\", \"{pollDoctor.Doctor.Id}\", \"{pollDoctor.Patient.Id}\")";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
         }
 
-        public void Edit(PollHospital pollHospital)
+        public void Edit(PollDoctor pollDoctor)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
-                string query = $"update poll_hospital set quality=\"{pollHospital.Quality}\", cleanliness=\"{pollHospital.Cleanliness}\", " +
-                    $"impression=\"{pollHospital.Impression}\", recommendation=\"{pollHospital.Recommendation}\", " +
-                    $"comment=\"{pollHospital.Comment}\", patientId=\"{pollHospital.Patient.Id}\" " +
-                    $"where ID=\"{pollHospital.Id}\"";
+                string query = $"update poll_doctor set quality=\"{pollDoctor.Quality}\", recommendation=\"{pollDoctor.Recommendation}\", " +
+                    $"comment=\"{pollDoctor.Comment}\", doctorId=\"{pollDoctor.Doctor.Id}\", patientId=\"{pollDoctor.Patient.Id}\" " +
+                    $"where ID=\"{pollDoctor.Id}\"";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
         }
 
-        public List<PollHospital> LoadAll()
+        public List<PollDoctor> LoadAll()
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-                OleDbCommand command = new OleDbCommand("select * from poll_hospital", connection);
+                OleDbCommand command = new OleDbCommand("select * from poll_doctor", connection);
 
                 connection.Open();
                 OleDbDataReader reader = command.ExecuteReader();
-                List<PollHospital> polls = new List<PollHospital>();
+                List<PollDoctor> polls = new List<PollDoctor>();
 
                 while (reader.Read())
                 {
-                    PollHospital poll = PollHospital.Parse(reader);
+                    PollDoctor poll = PollDoctor.Parse(reader);
                     polls.Add(poll);
                 }
                 reader.Close();
