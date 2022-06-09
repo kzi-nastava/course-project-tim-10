@@ -101,7 +101,7 @@ namespace HealthCareInfromationSystem.view.PatientView
 
         private void AppointmentReviewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            serviceForm = new AllAppointmentsForm();
+            serviceForm = new AllAppointmentsForm2();
             serviceForm.Show();
         }
 
@@ -129,6 +129,10 @@ namespace HealthCareInfromationSystem.view.PatientView
             serviceForm.Show();
         }
 
-
+        private void PollHospitalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            serviceForm = new PollHospitalForm();
+            serviceForm.Show();
+        }
     }
 }
