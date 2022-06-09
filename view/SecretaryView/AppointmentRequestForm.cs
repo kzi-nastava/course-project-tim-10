@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.Core.AppointmentRequest;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;

@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Core.AppointmentRequest;
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem

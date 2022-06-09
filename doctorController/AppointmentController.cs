@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.Servise;
+using HealthCareInfromationSystem.Core.MedicalRecord;
+
 
 namespace HealthCareInfromationSystem.doctorController
 {

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.doctorController;
+using HealthCareInfromationSystem.Core.MedicalRecord;
+using HealthCareInfromationSystem.Core.MedicalPrescription;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView

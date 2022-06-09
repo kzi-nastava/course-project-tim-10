@@ -1,4 +1,6 @@
 ﻿using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.Core.EquipmentRequest;
+using HealthCareInfromationSystem.Core.Equipment;
 using HealthCareInfromationSystem.models.entity;
 using System;
 using System.Collections.Generic;

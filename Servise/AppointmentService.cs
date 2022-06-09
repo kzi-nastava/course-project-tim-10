@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.repository;
-
+using HealthCareInfromationSystem.Core.MedicalRecord;
 
 namespace HealthCareInfromationSystem.Servise
 {

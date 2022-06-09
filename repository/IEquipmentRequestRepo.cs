@@ -1,4 +1,4 @@
-﻿using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.EquipmentRequest;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.doctorController;
+using HealthCareInfromationSystem.Core.MedicalPrescription;
 using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Core.MedicineManagment;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Core.MedicalRecord;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView
@@ -74,7 +76,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		}
 
-		private void SaveChanges(MedicalPrescription  medicalPrescription)
+		private void SaveChanges(MedicalPrescription medicalPrescription)
 		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure you want to save changes?", "Check", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)

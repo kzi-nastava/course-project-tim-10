@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.Servise;
 
-namespace HealthCareInfromationSystem.contollers
+namespace HealthCareInfromationSystem.Core.AppointmentRequest
 {
     class AppointmentRequestController
     {

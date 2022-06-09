@@ -1,5 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Core.MedicalPrescription;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;

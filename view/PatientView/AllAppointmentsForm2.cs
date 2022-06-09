@@ -1,4 +1,5 @@
 ﻿using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Core.AppointmentRequest;
 using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 using System;

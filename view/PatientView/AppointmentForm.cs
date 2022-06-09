@@ -8,6 +8,7 @@ using HealthCareInfromationSystem.models.entity;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.AppointmentRequest;
 using static HealthCareInfromationSystem.models.entity.Appointment;
 using static HealthCareInfromationSystem.models.users.Person;
 

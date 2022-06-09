@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.doctorController;
+using HealthCareInfromationSystem.Core.MedicineManagment;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HealthCareInfromationSystem.models.entity;
+using HealthCareInfromationSystem.Core.MedicalRecord;
 
 namespace HealthCareInfromationSystem.models.users
 {
