@@ -124,11 +124,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 try
                 {
-                equipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
-                MessageBox.Show("Equipment successfully arranged.");
-                ClearFields();
-                dataGridViewLowStock.Rows.Clear();
-                dataGridViewSufficentStock.Rows.Clear();
+                    equipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
+                    MessageBox.Show("Equipment successfully arranged.");
+                    ClearFields();
+                    dataGridViewLowStock.Rows.Clear();
+                    dataGridViewSufficentStock.Rows.Clear();
                 } catch (OleDbException)
                 {
                     MessageBox.Show("Error occured.");

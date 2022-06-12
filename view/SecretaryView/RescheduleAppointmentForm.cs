@@ -16,33 +16,27 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 {
     public partial class RescheduleAppointmentForm : Form
     {
-        Appointment emergency;
-        string selectedAppointmentId;
-        Dictionary<int, DateTime> appointmentRescheduleTime = new Dictionary<int, DateTime>();
-        List<String> doctorIds;
-        public RescheduleAppointmentForm(Appointment emergency, List<String> doctorIds)
+        private AppointmentController appointmentController = new AppointmentController();
+        private Appointment emergency;
+        private string specialisation;
+        private string selectedAppointmentId;
+        private DateTime selectedRescheduleTime;
+        public RescheduleAppointmentForm(Appointment emergency, string specialisation)
         {
             this.emergency = emergency;
-            this.doctorIds = doctorIds;
+            this.specialisation = specialisation;
             InitializeComponent();
             DisplayAppointmentsTable();
         }
 
         // Adds rows for first five appointments that have the least delay for rescheduling
-        // with columns ORIGINAL BEGINNING, DOCTOR, PATIENT, RESCHEDULED BEGINNING
+        // with columns ORIGINAL BEGINNING, DOCTOR, PATIENT, RESCHEDULED BEGINNING, APPOINTMENT ID
         private void DisplayAppointmentsTable()
         {
-            List<KeyValuePair<Appointment,DateTime>> appointments = AppointmentController.SortEarliestToReschedule(doctorIds);
-            int i = 0;
-            foreach (KeyValuePair<Appointment, DateTime> pair in appointments)
+            dataGridViewAppointments.Rows.Clear();
+            foreach(List<string> row in appointmentController.GetRowsForEarliestAppointments(specialisation))
             {
-                appointmentRescheduleTime[pair.Key.Id] = pair.Value;
-                dataGridViewAppointments.Rows.Add(pair.Key.Beginning.ToString(), pair.Key.Duration.ToString(), pair.Value.ToString(), pair.Key.Doctor.FirstName + " " + pair.Key.Doctor.LastName, pair.Key.Patient.FirstName + " " + pair.Key.Patient.LastName, pair.Key.Id.ToString());
-                ++i;
-                if (i>5)
-                {
-                    break;
-                }
+                dataGridViewAppointments.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
             }
         }
 
@@ -50,17 +44,21 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (selectedAppointmentId != "")
             {
+                // TODO
                 Appointment forRescheduling = AppointmentController.LoadOneAppointment(Constants.connectionString, $"select * from appointments where id=\"{selectedAppointmentId}\"");
-                Appointment appointment = new Appointment(0, new Person(forRescheduling.Doctor.Id), new Person(emergency.Patient.Id),
-                    new Premise(emergency.Premise.Id), forRescheduling.Beginning, forRescheduling.Duration, emergency.Type, "");
-                forRescheduling.Beginning = appointmentRescheduleTime[forRescheduling.Id];
-                //AppointmentController.Edit(forRescheduling.Id.ToString(), forRescheduling.Patient.Id.ToString(), forRescheduling.Premise.Id, forRescheduling.Doctor.Id, appointmentRescheduleTime[forRescheduling.Id].ToString("dd.MM.yyyy. HH:mm"), forRescheduling.Duration.ToString(), forRescheduling.Type.ToString());
-                AppointmentController.Edit(forRescheduling);
-                AppointmentController.Add(appointment);
-                MessageBox.Show("Appointment at " + forRescheduling.Beginning.ToString("dd.MM.yyyy. HH:mm") + " rescheduled to " + appointmentRescheduleTime[forRescheduling.Id] + ".\nEmergency sucessfully booked instead.", "Success");
                 
-                forRescheduling.Beginning = appointmentRescheduleTime[forRescheduling.Id];
+                Appointment appointment = new Appointment(0, new Person(forRescheduling.Doctor.Id), new Person(emergency.Patient.Id),
+                    new Premise(emergency.Premise.Id), forRescheduling.Beginning, forRescheduling.Duration, emergency.Type);
+                forRescheduling.Beginning = selectedRescheduleTime;
+
+                // TODO
+                AppointmentController.Edit(forRescheduling);
+                AppointmentController.AddEmergencyToBase(appointment);
+                MessageBox.Show("Selected appointment rescheduled to " + selectedRescheduleTime.ToString("dd.MM.yyyy. HH:mm") + ".\nEmergency sucessfully booked instead.", "Success");
+                
+                // TODO
                 NotificationController.AddRescheduleNotification(forRescheduling);
+                this.Dispose();
             }
         }
 
@@ -69,6 +67,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (dataGridViewAppointments.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 selectedAppointmentId = dataGridViewAppointments.Rows[e.RowIndex].Cells[5].Value.ToString();
+                selectedRescheduleTime = DateTime.Parse(dataGridViewAppointments.Rows[e.RowIndex].Cells[2].Value.ToString());
             }
         }
     }

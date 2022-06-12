@@ -4,12 +4,14 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HealthCareInfromationSystem.models.users;
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.repository
 {
 	class SpecialisationSQL : ISpecialisationRepo
 	{
+        private IPersonRepo personRepo = new PersonSQL();
 		public List<string> GetDoctorIds(string specName)
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
@@ -32,7 +34,30 @@ namespace HealthCareInfromationSystem.repository
             }
         }
 
-		public List<string> LoadSpecialisations()
+        public List<Person> GetDoctors(string specialisationName)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = $"select doctors from specialisations where name=\"{specialisationName}\"";
+
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<Person> doctors = new List<Person>();
+
+                while (reader.Read())
+                {
+                    doctors.Add(personRepo.LoadOnePerson(reader[0].ToString()));
+                }
+                reader.Close();
+                return doctors;
+
+            }
+        }
+
+
+        public List<string> LoadSpecialisations()
 		{
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {

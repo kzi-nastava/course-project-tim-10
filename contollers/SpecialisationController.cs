@@ -1,4 +1,6 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.repository;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
@@ -10,6 +12,7 @@ namespace HealthCareInfromationSystem.contollers
 {
     class SpecialisationController
     {
+        private ISpecialisationRepo specialisationRepo = new SpecialisationSQL();
         //dodato
         // Returns list of ids from doctors who have specialisation with given name
         public static List<string> GetDoctorIds(string connectionString, string specName)
@@ -33,25 +36,15 @@ namespace HealthCareInfromationSystem.contollers
 
             }
         }
-        //dodato
-        public static List<string> LoadSpecialisations(string connectionString, string queryString)
+
+        public List<Person> GetDoctors(string specialisation)
         {
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
-            {
-
-                OleDbCommand command = new OleDbCommand(queryString, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                List<string> specialisations = new List<string>();
-
-                while (reader.Read())
-                {
-                    specialisations.Add(reader[0].ToString());
-                }
-                reader.Close();
-                return specialisations;
-            }
+            return specialisationRepo.GetDoctors(specialisation);
+        }
+        //dodato
+        public List<string> LoadSpecialisations(string connectionString, string queryString)
+        {
+            return specialisationRepo.LoadSpecialisations();
         }
     }
 }

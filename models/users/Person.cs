@@ -97,6 +97,11 @@ namespace HealthCareInfromationSystem.models.users
 
 		public Person() { }
 
+		public Person(string id)
+        {
+			this._id = int.Parse(id);
+        }
+
 		public Person(int id, string name, string lastName, Roles role, 
 			          string password, bool blocked, int blocker, string username) {
 			this._id = id;

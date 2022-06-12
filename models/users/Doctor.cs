@@ -8,13 +8,20 @@ namespace HealthCareInfromationSystem.models.users
 {
 	class Doctor : Person
 	{
-		string specialisation;
+		private string _specialisation;
 
+		public String Specialisation
+		{
+			get { return _specialisation; }
+			set { _specialisation = value; }
+		}
 
 		public Doctor() : base() { }
-		public Doctor(int id, string name, string lastName, Roles role,
-					  string password, bool blocked, int blocker, string username) : base(id, name, lastName, role,
+		public Doctor(int id, string name, string lastName,
+					  string password, bool blocked, int blocker, string username, string specialisation) : base(id, name, lastName, Roles.doctor,
 						  password, blocked, blocker, username)
-		{ }
+		{
+			this._specialisation = specialisation;
+		}
 	}
 }
