@@ -17,6 +17,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
     public partial class RescheduleAppointmentForm : Form
     {
         private AppointmentController appointmentController = new AppointmentController();
+        private NotificationController notificationController = new NotificationController();
         private Appointment emergency;
         private string specialisation;
         private string selectedAppointmentId;
@@ -57,7 +58,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                 MessageBox.Show("Selected appointment rescheduled to " + selectedRescheduleTime.ToString("dd.MM.yyyy. HH:mm") + ".\nEmergency sucessfully booked instead.", "Success");
                 
                 // TODO
-                NotificationController.AddRescheduleNotification(forRescheduling);
+                notificationController.AddRescheduleNotification(forRescheduling);
                 this.Dispose();
             }
         }

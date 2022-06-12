@@ -15,6 +15,7 @@ namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class DoctorMainForm : Form
 	{
+		private NotificationController notificationController = new NotificationController();
 		public DoctorMainForm()
 		{
 			InitializeComponent();
@@ -23,20 +24,14 @@ namespace HealthCareInfromationSystem.view.DoctorView
 
 		private void ShowNotifications()
         {
-			try
-            {
-				string notificationText = NotificationController.GetEmergencyNotifications(Constants.connectionString, utils.LoggedInUser.GetId());
-				notificationText += NotificationController.GetRescheduleNotifications(Constants.connectionString, "", utils.LoggedInUser.GetId());
-				if (notificationText != "")
-				{
-					MessageBox.Show(notificationText);
-					NotificationController.MarkEmergencyNotificationsAsRecieved(Constants.connectionString, utils.LoggedInUser.GetId());
-					NotificationController.MarkRescheduleNotificationsAsRecieved(Constants.connectionString, "", utils.LoggedInUser.GetId());
-				}
-            } catch (OleDbException)
+			string notificationText = notificationController.GetEmergencyNotifications(utils.LoggedInUser.GetId());
+			notificationText += notificationController.GetRescheduleNotifications(utils.LoggedInUser.GetId());
+			if (notificationText != "")
 			{
-				Console.WriteLine("Error while recieving notifications.");
-            }
+				MessageBox.Show(notificationText);
+				notificationController.MarkEmergencyNotificationsAsRecieved(utils.LoggedInUser.GetId());
+				notificationController.MarkRescheduleNotificationsAsRecieved(utils.LoggedInUser.GetId());
+			}
 
 		}
 

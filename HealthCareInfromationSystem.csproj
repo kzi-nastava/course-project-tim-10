@@ -91,6 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\AppointmentRequest\AppointmentRequestSQL.cs" />
     <Compile Include="repository\AppointmentSQL.cs" />
+    <Compile Include="repository\EmergencyNotificationSQL.cs" />
     <Compile Include="repository\EquipmentRequestSQL.cs" />
     <Compile Include="Core\Equipment\EquipmentSQL.cs" />
     <Compile Include="repository\IAppointmentRepo.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="repository\IEquipmentRequestRepo.cs" />
     <Compile Include="Core\MedicalRecord\IMedicalRecordRepo.cs" />
     <Compile Include="Core\MedicineManagment\IMedicineRepo.cs" />
+    <Compile Include="repository\INotification.cs" />
     <Compile Include="repository\IPersonRepo.cs" />
     <Compile Include="Core\Poll\IPollHospitalRepo.cs" />
     <Compile Include="repository\IPremisseRepo.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Core\Poll\IPollDoctorRepo.cs" />
     <Compile Include="repository\users\PatientSQL.cs" />
     <Compile Include="Core\AppointmentRequest\AppointmentRequestService.cs" />
+    <Compile Include="repository\RescheduleNotificationSQL.cs" />
     <Compile Include="Servise\AppointmentService.cs" />
     <Compile Include="Core\EquipmentRequest\EquipmentRequestService.cs" />
     <Compile Include="Core\Equipment\EquipmentService.cs" />

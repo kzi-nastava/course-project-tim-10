@@ -18,10 +18,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 {
     public partial class BookingEmergency : Form
     {
-        private string selectedPatientId = "";
-        private PatientController patientController = new PatientController();
         private SpecialisationController specialisationController = new SpecialisationController();
         private AppointmentController appointmentController = new AppointmentController();
+        private NotificationController notificationController = new NotificationController();
+        private string selectedPatientId = "";
+        private PatientController patientController = new PatientController();
         public BookingEmergency()
         {
             InitializeComponent();
@@ -129,7 +130,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                         // appointmentController.Add(appointment);
                         AppointmentController.AddEmergencyToBase(appointment);
                         MessageBox.Show("Emergency booked.", "Success");
-                        NotificationController.AddEmergencyNotification(appointment);
+                        notificationController.AddEmergencyNotification(appointment);
                     }
                 }
                 else
