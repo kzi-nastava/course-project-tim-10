@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
-using HealthCareInfromationSystem.contollers;
 using HealthCareInfromationSystem.view.ManagerView;
 using HealthCareInfromationSystem.view.DoctorView;
 using HealthCareInfromationSystem.view.SecretaryView;
 using HealthCareInfromationSystem.view.PatientView;
+using HealthCareInfromationSystem.Core.User.Patient;
 
 namespace HealthCareInfromationSystem.view
 {

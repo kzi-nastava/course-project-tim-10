@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.Core.MedicalPrescription;
-using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.MedicalRecord.MedicalPrescription;
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Core.MedicineManagment;
-using HealthCareInfromationSystem.models.entity;
+ 
 using HealthCareInfromationSystem.Core.MedicalRecord;
 using HealthCareInfromationSystem.Servise;
 

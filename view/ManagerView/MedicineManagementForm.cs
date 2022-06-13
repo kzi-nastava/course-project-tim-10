@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.Core.MedicineManagment;
+﻿using HealthCareInfromationSystem.Core.MedicineManagment;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;

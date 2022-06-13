@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.Core.MedicalPrescription;
+﻿using HealthCareInfromationSystem.Core.MedicalRecord.MedicalPrescription;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.contollers;
+using HealthCareInfromationSystem.Core.Appointment.Notification;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {

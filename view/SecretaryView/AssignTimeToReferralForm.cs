@@ -1,9 +1,8 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.doctorController;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+﻿
+ 
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
-using HealthCareInfromationSystem.view.DoctorView;
+using HealthCareInfromationSystem.Core.PremiseManagment;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.MedicalRecord.ReferralLetter;
+using HealthCareInfromationSystem.Core.Appointment;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {
     public partial class AssignTimeToReferralForm : Form
     {
         private ReferralLetter referralLetter;
-        private doctorController.AppointmentController appointmentController = new doctorController.AppointmentController();
+        private AppointmentController appointmentController = new AppointmentController();
         private ReferralLetterController referralController = new ReferralLetterController();
         public AssignTimeToReferralForm(string referralLetterId)
         {

@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.PremiseManagment;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;

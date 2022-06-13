@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using HealthCareInfromationSystem.Core.MedicalPrescription;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.MedicalRecord.MedicalPrescription;
+using HealthCareInfromationSystem.Core.MedicalRecord.ReferralLetter;
+using HealthCareInfromationSystem.Core.User;
+ 
 using HealthCareInfromationSystem.Core.MedicineManagment;
-
-
 using HealthCareInfromationSystem.repository;
+using HealthCareInfromationSystem.User.Doctor;
 
 namespace HealthCareInfromationSystem.Core.MedicalRecord
 {

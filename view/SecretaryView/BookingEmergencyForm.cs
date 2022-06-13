@@ -1,7 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
-using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Core.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.Appointment;
+using HealthCareInfromationSystem.Core.User.Patient;
+using HealthCareInfromationSystem.Core.Appointment.Notification;
+using HealthCareInfromationSystem.User.Doctor;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {
@@ -21,8 +24,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private SpecialisationController specialisationController = new SpecialisationController();
         private AppointmentController appointmentController = new AppointmentController();
         private NotificationController notificationController = new NotificationController();
-        private string selectedPatientId = "";
         private PatientController patientController = new PatientController();
+        private string selectedPatientId = "";
         public BookingEmergency()
         {
             InitializeComponent();
@@ -126,9 +129,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                     DialogResult dialogResult = MessageBox.Show(GetConfirmationDialogText(appointment), "Check", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        // TODO
-                        // appointmentController.Add(appointment);
-                        AppointmentController.AddEmergencyToBase(appointment);
+                        appointmentController.Add(appointment);
                         MessageBox.Show("Emergency booked.", "Success");
                         notificationController.AddEmergencyNotification(appointment);
                     }

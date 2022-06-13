@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.doctorController;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
-using HealthCareInfromationSystem.Servise;
+ 
+using HealthCareInfromationSystem.Core.User;
+using HealthCareInfromationSystem.Core.PremiseManagment;
 
 using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Core.Appointment;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {

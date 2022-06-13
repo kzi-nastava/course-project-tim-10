@@ -1,6 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+﻿using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -11,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.Appointment.Notification;
+using HealthCareInfromationSystem.Core.Appointment;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {
@@ -45,19 +46,16 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         {
             if (selectedAppointmentId != "")
             {
-                // TODO
-                Appointment forRescheduling = AppointmentController.LoadOneAppointment(Constants.connectionString, $"select * from appointments where id=\"{selectedAppointmentId}\"");
-                
+                Appointment forRescheduling = appointmentController.GetAppointmentById(selectedAppointmentId);
+
                 Appointment appointment = new Appointment(0, new Person(forRescheduling.Doctor.Id), new Person(emergency.Patient.Id),
                     new Premise(emergency.Premise.Id), forRescheduling.Beginning, forRescheduling.Duration, emergency.Type);
                 forRescheduling.Beginning = selectedRescheduleTime;
 
-                // TODO
-                AppointmentController.Edit(forRescheduling);
-                AppointmentController.AddEmergencyToBase(appointment);
+                appointmentController.Edit(forRescheduling);
+                appointmentController.Add(appointment);
                 MessageBox.Show("Selected appointment rescheduled to " + selectedRescheduleTime.ToString("dd.MM.yyyy. HH:mm") + ".\nEmergency sucessfully booked instead.", "Success");
                 
-                // TODO
                 notificationController.AddRescheduleNotification(forRescheduling);
                 this.Dispose();
             }

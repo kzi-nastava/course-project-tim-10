@@ -4,7 +4,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthCareInfromationSystem.models.entity;
+ 
 using HealthCareInfromationSystem.utils;
 
 namespace HealthCareInfromationSystem.Core.MedicineManagment

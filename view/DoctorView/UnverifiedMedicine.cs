@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.models.entity;
+ 
 using HealthCareInfromationSystem.Core.MedicineManagment;
 using HealthCareInfromationSystem.Servise;
 

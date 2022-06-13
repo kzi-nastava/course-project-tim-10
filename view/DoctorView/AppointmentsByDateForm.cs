@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.doctorController;
-using HealthCareInfromationSystem.models.entity;
+ 
 using HealthCareInfromationSystem.Core.MedicalRecord;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
+using HealthCareInfromationSystem.Core.Appointment;
 
 namespace HealthCareInfromationSystem.view.DoctorView
 {

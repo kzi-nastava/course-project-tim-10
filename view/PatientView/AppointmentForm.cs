@@ -4,13 +4,14 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
-using HealthCareInfromationSystem.models.entity;
+ 
 using HealthCareInfromationSystem.utils;
-using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.users;
-using HealthCareInfromationSystem.Core.AppointmentRequest;
-using static HealthCareInfromationSystem.models.entity.Appointment;
-using static HealthCareInfromationSystem.models.users.Person;
+using HealthCareInfromationSystem.Core.User;
+using HealthCareInfromationSystem.Core.Appointment.AppointmentRequest;
+using HealthCareInfromationSystem.Core.Appointment;
+using static HealthCareInfromationSystem.Core.User.Person;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using static HealthCareInfromationSystem.Core.Appointment.Appointment;
 
 namespace HealthCareInfromationSystem
 {

@@ -8,12 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
-using HealthCareInfromationSystem.contollers;
-using static HealthCareInfromationSystem.models.entity.Appointment;
-
+using HealthCareInfromationSystem.Core.Appointment;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using static HealthCareInfromationSystem.Core.Appointment.Appointment;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {
@@ -31,6 +30,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         string priority;
 
         Appointment appointment;
+        private AppointmentController appointmentController = new AppointmentController();
 
         private void PriorityAppointment()
         {
@@ -255,7 +255,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         private void SaveButton_Click(object sender, EventArgs e)
         {
             Appointment selectedApp = (Appointment) appointmentsBox.SelectedItem;
-            AppointmentController.Add(selectedApp);
+            appointmentController.Add(selectedApp);
             MessageBox.Show("You have successfully created appointment.");
         }
 

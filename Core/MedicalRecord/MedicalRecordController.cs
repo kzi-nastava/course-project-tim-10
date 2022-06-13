@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+ 
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.Core.MedicineManagment;
 
 namespace HealthCareInfromationSystem.Core.MedicalRecord

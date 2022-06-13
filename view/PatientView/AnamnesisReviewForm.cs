@@ -1,6 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+﻿ 
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HealthCareInfromationSystem.Core.MedicalRecord;
+using HealthCareInfromationSystem.Core.Appointment;
 
 
 namespace HealthCareInfromationSystem.view.PatientView
