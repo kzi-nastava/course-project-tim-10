@@ -1,5 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.users;
+﻿using HealthCareInfromationSystem.Core.User;
+using HealthCareInfromationSystem.Core.User.Patient;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static HealthCareInfromationSystem.models.users.Person;
+using static HealthCareInfromationSystem.Core.User.Person;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {

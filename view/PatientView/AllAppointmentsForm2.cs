@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.models.entity;
+﻿ 
+using HealthCareInfromationSystem.Core.Appointment.AppointmentRequest;
 using HealthCareInfromationSystem.Servise;
 using HealthCareInfromationSystem.utils;
 using System;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.Appointment;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {

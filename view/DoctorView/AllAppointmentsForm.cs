@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.doctorController;
+ 
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
+using HealthCareInfromationSystem.Core.Appointment;
+
 namespace HealthCareInfromationSystem.view.DoctorView
 {
 	public partial class AllAppointmentsForm : Form

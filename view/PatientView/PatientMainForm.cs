@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.MedicalRecord.MedicalPrescription;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.Appointment.Notification;
 
 namespace HealthCareInfromationSystem.view.PatientView
 {
@@ -22,6 +22,8 @@ namespace HealthCareInfromationSystem.view.PatientView
         private readonly DateTime now = DateTime.Now;
         private List<MedicalPrescription> myPrescriptions;
         private readonly string notificationTitle = "Reminder";
+
+        private NotificationController notificationController = new NotificationController();
 
         private void LoadPrescriptions()
         {
@@ -37,6 +39,7 @@ namespace HealthCareInfromationSystem.view.PatientView
         public PatientMainForm()
         {
             InitializeComponent();
+            ShowNotifications();
             LoadPrescriptions();
         }
 
@@ -133,6 +136,17 @@ namespace HealthCareInfromationSystem.view.PatientView
         {
             serviceForm = new PollHospitalForm();
             serviceForm.Show();
+        }
+
+        private void ShowNotifications()
+        {
+            string notificationText = notificationController.GetRescheduleNotifications(utils.LoggedInUser.GetId());
+            if (notificationText != "")
+            {
+                MessageBox.Show(notificationText);
+                notificationController.MarkRescheduleNotificationsAsRecieved(utils.LoggedInUser.GetId());
+            }
+
         }
     }
 }

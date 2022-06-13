@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿ 
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -13,6 +12,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.PremiseManagment.Renovation;
 
 namespace HealthCareInfromationSystem.view.ManagerView
 {

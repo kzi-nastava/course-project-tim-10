@@ -1,5 +1,6 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.MedicalRecord.ReferralLetter;
+using HealthCareInfromationSystem.Core.User.Patient;
+ 
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
