@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,5 +19,6 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment
 		bool CheckIfPremiseIsOccupied(String id, String startDate, String endDate);
 		void SimpleDeletePremise(String id);
 		List<Premise> LoadAll();
+		DataTable LoadEquipmentByPremise(String id);
 	}
 }

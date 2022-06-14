@@ -11,5 +11,13 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment.Renovation
         List<SimpleRenovation> LoadAllSimpleRenovations();
         void SaveSimpleRenovation(SimpleRenovation renovation);
         bool CheckIfSimpleRenovationExistsById(string id);
+
+
+        void SaveComplexRenovation(ComplexRenovation renovation);
+        void SaveCombiningComplexMoving(ComplexMoving moving);
+        void SaveDividingComplexMoving(ComplexMoving moving, String equipmentId);
+
+        void CheckForComplexRenovationToExecute();
+        void CheckForComplexMovingToExecute();
     }
 }

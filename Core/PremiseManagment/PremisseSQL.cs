@@ -2,7 +2,9 @@
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +58,31 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment
 				OleDbCommand command = new OleDbCommand(query, connection);
 				OleDbDataReader reader = command.ExecuteReader();
 				return reader.HasRows;
+			}
+		}
+
+		public DataTable LoadEquipmentByPremise(String id)
+        {
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
+
+				String query = $"" +
+					$"select eq.equipment_id, eq.name, eq.quantity, eq.type " +
+					$"from equipment as eq " +
+					$"where switch (" +
+					$"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.old_premises_id, " +
+					$"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) >= DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.new_premises_id " +
+					$") = \"{id}\"";
+
+				OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+				DataTable table = new DataTable
+				{
+					Locale = CultureInfo.InvariantCulture
+				};
+
+				adapter.Fill(table);
+				return table;
 			}
 		}
 
