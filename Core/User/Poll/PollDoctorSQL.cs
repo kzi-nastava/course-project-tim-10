@@ -57,7 +57,26 @@ namespace HealthCareInfromationSystem.Core.User.Poll
             }
         }
 
+        public String GetAverageForDoctorPollItem(String item, String doctorId)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                OleDbCommand command = new OleDbCommand($"" +
+                    $"select avg({item}) from poll_doctor where doctorId=\"{doctorId}\"" +
+                    $"", connection);
 
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                String avg = "";
 
+                while (reader.Read())
+                    avg = reader[0].ToString();
+
+                reader.Close();
+                return avg;
+            }
+        }
+
+        
     }
 }

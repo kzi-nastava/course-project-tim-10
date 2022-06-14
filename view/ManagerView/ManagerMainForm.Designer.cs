@@ -36,9 +36,10 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.arrangingEquipmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.simpleRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.complexRenovationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
-            this.medicineManagementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pollStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +64,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.arrangingEquipmentToolStripMenuItem,
             this.simpleRenovationsToolStripMenuItem,
             this.complexRenovationsToolStripMenuItem,
-            this.medicineManagementToolStripMenuItem});
+            this.medicineManagementToolStripMenuItem,
+            this.pollStatisticsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(92, 29);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -103,6 +105,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.complexRenovationsToolStripMenuItem.Text = "Complex renovations";
             this.complexRenovationsToolStripMenuItem.Click += new System.EventHandler(this.ComplexRenovationsToolStripMenuItem_Click);
             // 
+            // medicineManagementToolStripMenuItem
+            // 
+            this.medicineManagementToolStripMenuItem.Name = "medicineManagementToolStripMenuItem";
+            this.medicineManagementToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.medicineManagementToolStripMenuItem.Text = "Medicine management";
+            this.medicineManagementToolStripMenuItem.Click += new System.EventHandler(this.medicineManagementToolStripMenuItem_Click);
+            // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
@@ -118,12 +127,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
-            // medicineManagementToolStripMenuItem
+            // pollStatisticsToolStripMenuItem
             // 
-            this.medicineManagementToolStripMenuItem.Name = "medicineManagementToolStripMenuItem";
-            this.medicineManagementToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
-            this.medicineManagementToolStripMenuItem.Text = "Medicine management";
-            this.medicineManagementToolStripMenuItem.Click += new System.EventHandler(this.medicineManagementToolStripMenuItem_Click);
+            this.pollStatisticsToolStripMenuItem.Name = "pollStatisticsToolStripMenuItem";
+            this.pollStatisticsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.pollStatisticsToolStripMenuItem.Text = "Poll statistics";
+            this.pollStatisticsToolStripMenuItem.Click += new System.EventHandler(this.pollStatisticsToolStripMenuItem_Click);
             // 
             // ManagerMainForm
             // 
@@ -155,5 +164,6 @@ namespace HealthCareInfromationSystem.view.ManagerView
         private System.Windows.Forms.ToolStripMenuItem complexRenovationsToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem medicineManagementToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pollStatisticsToolStripMenuItem;
     }
 }
