@@ -6,7 +6,7 @@ using System.Data.OleDb;
 
 namespace HealthCareInfromationSystem.Core.Appointment.Notification
 {
-    class EmergencyNotificationSQL : INotification
+    class EmergencyNotificationSQL : IAppointmentNotificationRepo
     {
         private IAppointmentRepo appointmentRepo = new AppointmentSQL();
         public void Add(Appointment appointment)
@@ -34,7 +34,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
                 List<string> notifications = new List<string>();
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
-                    string query = $"select * from emergency_notifications where receiver=\"{doctorId}\" and recieved=\"false\"";
+                    string query = $"select * from emergency_notifications where reciever=\"{doctorId}\" and recieved=\"false\"";
                     OleDbCommand command = new OleDbCommand(query, connection);
 
                     connection.Open();
@@ -70,7 +70,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
                     connection.Open();
-                    string query = $"update emergency_notifications set recieved=\"true\" where receiver=\"{doctorId}\"";
+                    string query = $"update emergency_notifications set recieved=\"true\" where reciever=\"{doctorId}\"";
                     OleDbCommand command = new OleDbCommand(query, connection);
                     command.ExecuteNonQuery();
                 }

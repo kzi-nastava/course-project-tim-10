@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequestController.cs" />
+    <Compile Include="Core\Appointment\Notification\INotificationRepo.cs" />
+    <Compile Include="Core\Appointment\Notification\IVacationNotificationRepo.cs" />
+    <Compile Include="Core\Appointment\Notification\VacationNotificationSQL.cs" />
     <Compile Include="Core\Appointment\VacationRequest\IVacationRequestRepo.cs" />
     <Compile Include="Core\Appointment\VacationRequest\VacationRequest.cs" />
     <Compile Include="Core\Appointment\VacationRequest\VacationRequestController.cs" />
@@ -105,7 +108,7 @@
     <Compile Include="Core\Equipment\Repository\IEquipmentRequestRepo.cs" />
     <Compile Include="Core\MedicalRecord\IMedicalRecordRepo.cs" />
     <Compile Include="Core\MedicineManagment\IMedicineRepo.cs" />
-    <Compile Include="Core\Appointment\Notification\INotification.cs" />
+    <Compile Include="Core\Appointment\Notification\IAppointmentNotificationRepo.cs" />
     <Compile Include="Core\User\IPersonRepo.cs" />
     <Compile Include="Core\User\Poll\IPollHospitalRepo.cs" />
     <Compile Include="Core\PremiseManagment\IPremisseRepo.cs" />

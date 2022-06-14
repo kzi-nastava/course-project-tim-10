@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthCareInfromationSystem.Core.Appointment.Notification;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,20 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
     class VacationRequestController
     {
         private VacationRequestService requestService = new VacationRequestService();
+        private NotificationController notificationController = new NotificationController();
 
         public void Accept(string requestId)
         {
-            requestService.Accept(requestService.Get(requestId));
+            VacationRequest request = requestService.Get(requestId);
+            requestService.Accept(request);
+            notificationController.AddVacationNotification(request);
         }
 
         public void Decline(string requestId, string declineReason)
         {
-            requestService.Decline(requestService.Get(requestId), declineReason);
+            VacationRequest request = requestService.Get(requestId);
+            requestService.Decline(request, declineReason);
+            notificationController.AddVacationNotification(request, declineReason);
         }
 
         public List<List<string>> GetRowsForRequests()

@@ -56,7 +56,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             if (CheckIfRequestSelected() && CheckReasonInput())
             {
                 if (cbAction.SelectedItem.ToString() == "Accept") requestController.Accept(selectedRequestId);
-                else requestController.Decline(selectedRequestId, tbDeclineReason.ToString());
+                else requestController.Decline(selectedRequestId, tbDeclineReason.Text.ToString());
                 MessageBox.Show("Action successful.");
                 DisplayRequestsTable();
             }

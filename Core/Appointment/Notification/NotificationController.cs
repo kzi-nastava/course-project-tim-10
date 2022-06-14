@@ -8,8 +8,9 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
 {
     class NotificationController
     {
-        private INotification emergencyNotifRepo = new EmergencyNotificationSQL();
-        private INotification rescheduleNotifRepo = new RescheduleNotificationSQL();
+        private IAppointmentNotificationRepo emergencyNotifRepo = new EmergencyNotificationSQL();
+        private IAppointmentNotificationRepo rescheduleNotifRepo = new RescheduleNotificationSQL();
+        private IVacationNotificationRepo vacationNotifiRepo = new VacationNotificationSQL();
 
         public void AddEmergencyNotification(Appointment appointment)
         {
@@ -41,6 +42,21 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
         public void MarkRescheduleNotificationsAsRecieved(string userId)
         {
             rescheduleNotifRepo.MarkRecieved(userId);
+        }
+
+        public void AddVacationNotification(VacationRequest.VacationRequest request, string reason="")
+        {
+            vacationNotifiRepo.Add(request, reason);
+        }
+
+        public string GetVacationNotifications(string userId)
+        {
+            return vacationNotifiRepo.GetUnreceived(userId);
+        }
+
+        public void MarkVacationNotificationsAsReceived(string userId)
+        {
+            vacationNotifiRepo.MarkRecieved(userId);
         }
 
     }

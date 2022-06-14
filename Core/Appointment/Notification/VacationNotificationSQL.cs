@@ -1,4 +1,4 @@
-﻿ 
+﻿using HealthCareInfromationSystem.Core.Appointment.VacationRequest;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -8,23 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HealthCareInfromationSystem.Core.Appointment.Notification
-{ 
-    class RescheduleNotificationSQL : IAppointmentNotificationRepo
+{
+    class VacationNotificationSQL : IVacationNotificationRepo
     {
-        private IAppointmentRepo appointmentRepo = new AppointmentSQL();
-        public void Add(Appointment appointment)
+        public void Add(VacationRequest.VacationRequest request, string reason)
         {
             try
             {
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
                     connection.Open();
-                    string query = $"insert into reschedule_notifications values (\"{GetFirstFreeId()}\", \"{appointment.Patient.Id.ToString()}\", \"{appointment.Id.ToString()}\", \"false\")";
+                    string query = $"insert into vacation_notification values (\"{GetFirstFreeId("emergency_notifications")}\", \"{request.Doctor.Id}\", \"{request.Id}\", \"false\", \"{reason}\")";
                     OleDbCommand command = new OleDbCommand(query, connection);
-                    command.ExecuteNonQuery();
-
-                    query = $"insert into reschedule_notifications values (\"{GetFirstFreeId()}\", \"{appointment.Doctor.Id.ToString()}\", \"{appointment.Id.ToString()}, \"false\")";
-                    command = new OleDbCommand(query, connection);
                     command.ExecuteNonQuery();
                 }
             }
@@ -34,26 +29,27 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
             }
         }
 
-        public string GetUnreceived(string userId)
+        public string GetUnreceived(string doctorId)
         {
             try
             {
+                List<string> notifications = new List<string>();
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
-                    string query = $"select * from reschedule_notifications where receiver=\"{userId}\" and received=\"false\"";
-
+                    VacationRequestService requestService = new VacationRequestService();
+                    string query = $"select * from vacation_notifications where receiver=\"{doctorId}\" and received=\"false\"";
                     OleDbCommand command = new OleDbCommand(query, connection);
 
                     connection.Open();
                     OleDbDataReader reader = command.ExecuteReader();
-                    List<string> notifications = new List<string>();
 
                     while (reader.Read())
                     {
-                        Appointment appointment = appointmentRepo.LoadOneAppointment(reader[2].ToString());
-                        if (appointment.Patient.Id.ToString() == userId) notifications.Add("Rescheduled appointment with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName + " to " + appointment.Beginning.ToString() + ".");
-                        else notifications.Add("Rescheduled appointment with patient " + appointment.Patient.FirstName + " " + appointment.Patient.LastName + " to " + appointment.Beginning.ToString() + ".");
+                        string reason = reader[4].ToString();
+                        VacationRequest.VacationRequest request = requestService.Get(reader[2].ToString());
+                        notifications.Add(GetNotificationText(request, reason));
                     }
+
                     reader.Close();
 
                     string notificationText = "";
@@ -61,41 +57,49 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
                     {
                         notificationText += notification + "\n";
                     }
+
                     return notificationText;
                 }
             }
             catch (OleDbException)
             {
-                Console.WriteLine("Error while recieving notifications.");
+                Console.WriteLine("Error while receiving notifications.");
                 return "";
             }
         }
 
-        public void MarkRecieved(string userId)
+        private string GetNotificationText(VacationRequest.VacationRequest request, string reason)
+        {
+            if (request.Status == VacationRequest.VacationRequest.RequestStatus.accepted) return "Request for vacation from " + request.DateBegin.ToString("dd.MM.yyyy.") + " to " + request.DateEnd.ToString("dd.MM.yyyy.") + " has been approved.";
+            else return "Request for vacation from " + request.DateBegin.ToString("dd.MM.yyyy.") + " to " + request.DateEnd.ToString("dd.MM.yyyy.") + " has been declined" +
+                    "\n for the following reason: " + reason + ".";
+        }
+
+        public void MarkRecieved(string doctorId)
         {
             try
             {
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
                     connection.Open();
-                    string query = $"update reschedule_notifications set received=\"true\" where receiver=\"{userId}\"";
+                    string query = $"update vacation_notification set received=\"true\" where receiver=\"{doctorId}\"";
                     OleDbCommand command = new OleDbCommand(query, connection);
                     command.ExecuteNonQuery();
                 }
             }
             catch (OleDbException)
             {
-                Console.WriteLine("Error while recieving notifications.");
+                Console.WriteLine("Error while receiving notifications.");
             }
         }
 
-        public static string GetFirstFreeId()
+        private string GetFirstFreeId(string tableName)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
 
-                string query = $"select * from reschedule_notifications";
+                string query = $"select * from vacation_notification";
                 OleDbCommand command = new OleDbCommand(query, connection);
 
 

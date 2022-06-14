@@ -19,14 +19,12 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
         {
             request.Status = VacationRequest.RequestStatus.accepted;
             requestRepo.Edit(request);
-            // Send notif
         }
 
         public void Decline(VacationRequest request, string declineReason)
         {
             request.Status = VacationRequest.RequestStatus.declined;
             requestRepo.Edit(request);
-            // Send notif
         }
 
         public VacationRequest Get(string id)
