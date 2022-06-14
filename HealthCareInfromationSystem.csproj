@@ -57,12 +57,15 @@
     <Compile Include="Core\MedicalRecord\MedicalPrescription\MedicalPrescriptionController.cs" />
     <Compile Include="Core\MedicineManagment\MedicineController.cs" />
     <Compile Include="Core\Appointment\Notification\NotificationController.cs" />
+    <Compile Include="Core\PremiseManagment\PremiseService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\IRenovationRepo.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationSQL.cs" />
     <Compile Include="Core\User\Patient\PatientController.cs" />
     <Compile Include="Core\User\PersonController.cs" />
     <Compile Include="Core\PremiseManagment\PremiseController.cs" />
     <Compile Include="Core\MedicalRecord\ReferralLetter\ReferralLetterController.cs" />
     <Compile Include="Core\User\Doctor\SpecialisationController.cs" />
-    <Compile Include="Core\PremiseManagment\Renovation\RenovationController.cs" />
     <Compile Include="Core\Appointment\AppointmentController.cs" />
     <Compile Include="Core\MedicalRecord\MedicalRecordController.cs" />
     <Compile Include="Core\MedicineManagment\MedicineRequestController.cs" />

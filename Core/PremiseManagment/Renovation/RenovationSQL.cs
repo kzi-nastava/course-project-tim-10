@@ -1,19 +1,45 @@
-﻿ 
-using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HealthCareInfromationSystem.Core.PremiseManagment;
-
 
 namespace HealthCareInfromationSystem.Core.PremiseManagment.Renovation
 {
-    class RenovationController
+    class RenovationSQL : IRenovationRepo
     {
-        PremiseController premiseController = new PremiseController();
+        private PremiseService premiseService = new PremiseService();
+
+        public List<SimpleRenovation> LoadAllSimpleRenovations()
+        {
+			List<SimpleRenovation> renovations = new List<SimpleRenovation>();
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				connection.Open();
+				String query = $"select * from simple_renovations";
+				OleDbCommand command = new OleDbCommand(query, connection);
+				OleDbDataReader reader = command.ExecuteReader();
+
+				while (reader.Read())
+					renovations.Add(SimpleRenovation.Parse(reader));
+
+				reader.Close();
+				return renovations;
+			}
+		}
+
+        public void SaveSimpleRenovation(SimpleRenovation renovation)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"insert into simple_renovations values (\"{renovation.Id}\", \"{renovation.PremiseId}\", \"{renovation.StartDate}\", \"{renovation.EndDate}\")";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
+            }
+        }
 
         public bool CheckIfSimpleRenovationExistsById(String id)
         {
@@ -24,17 +50,6 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment.Renovation
                 OleDbCommand command = new OleDbCommand(query, connection);
                 OleDbDataReader reader = command.ExecuteReader();
                 return reader.HasRows;
-            }
-        }
-
-        public void SaveSimpleRenovation(SimpleRenovation renovation)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"insert into simple_renovations values (\"{renovation.Id}\", \"{renovation.PremiseId}\", \"{renovation.StartDate}\", \"{renovation.EndDate}\")";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
             }
         }
 
@@ -52,7 +67,7 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment.Renovation
         public void SaveCombiningComplexMoving(ComplexMoving moving)
         {
             String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
-           
+
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
                 connection.Open();
@@ -115,11 +130,11 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment.Renovation
                     if (flag == "add")
                     {
                         Premise premise = new Premise(premisesId, name, type);
-                        premiseController.SavePremise(premise);
+                        premiseService.Save(premise);
                     }
                     else
                     {
-                        premiseController.SimpleDeletePremise(premisesId);
+                        premiseService.SimpleDeletePremise(premisesId);
                     }
                 }
 

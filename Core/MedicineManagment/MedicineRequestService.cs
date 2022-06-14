@@ -19,5 +19,15 @@ namespace HealthCareInfromationSystem.Core.MedicineManagment
 		public void Edit(Medicine medicine) {
 			medicineRepo.Edit(medicine);
 		}
+
+		public void Save(Medicine medicine)
+        {
+			medicineRepo.Save(medicine);
+        }
+
+		public List<Medicine> LoadDenied()
+        {
+			return medicineRepo.LoadDenied();
+        }
 	}
 }
