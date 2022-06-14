@@ -12,6 +12,6 @@ namespace HealthCareInfromationSystem.Core.User.Poll
 		void Add(PollDoctor pollDoctor);
 		void Edit(PollDoctor pollDoctor);
 		List<PollDoctor> LoadAll();
-
+		String GetAverageForDoctorPollItem(String item, String doctorId);
 	}
 }

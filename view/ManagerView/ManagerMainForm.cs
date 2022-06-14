@@ -65,5 +65,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             MedicineManagementForm medicineManagement = new MedicineManagementForm();
             medicineManagement.Show();
         }
+
+        private void pollStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PollStatisticsForm pollStatisticsForm = new PollStatisticsForm();
+            pollStatisticsForm.Show();
+        }
     }
 }

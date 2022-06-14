@@ -11,5 +11,6 @@ namespace HealthCareInfromationSystem.Core.User
 		Person LoadOnePerson(string id);
 
 		Dictionary<string, string> LoadFullNameAndId(string role);
+		List<Person> LoadAllDoctors();
 	}
 }
