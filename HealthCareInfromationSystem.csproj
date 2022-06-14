@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequestController.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\IVacationRequestRepo.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequest.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestController.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestService.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestSQL.cs" />
     <Compile Include="Core\Equipment\Controller\EquipmentRequestController.cs" />
     <Compile Include="Core\Equipment\Controller\EquipmentController.cs" />
     <Compile Include="Core\MedicalRecord\MedicalPrescription\MedicalPrescriptionController.cs" />
