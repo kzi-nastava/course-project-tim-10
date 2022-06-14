@@ -12,6 +12,64 @@ namespace HealthCareInfromationSystem.Core.PremiseManagment
 {
 	class PremisseSQL : IPremisseRepo
 	{
+		public List<Premise> LoadAll()
+        {
+			List<Premise> premises = new List<Premise>();
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				connection.Open();
+				String query = $"select * from premises";
+				OleDbCommand command = new OleDbCommand(query, connection);
+				OleDbDataReader reader = command.ExecuteReader();
+
+				while (reader.Read())
+					premises.Add(Premise.Parse(reader));
+
+				reader.Close();
+				return premises;
+			}
+		}
+
+		public bool CheckIfPremiseExistsById(String id)
+		{
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				connection.Open();
+				String query = $"select * from premises where premises_id = \"{id}\"";
+				OleDbCommand command = new OleDbCommand(query, connection);
+				OleDbDataReader reader = command.ExecuteReader();
+				return reader.HasRows;
+			}
+		}
+
+		public bool CheckIfPremiseIsOccupied(String id, String startDate, String endDate)
+		{
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				connection.Open();
+				String query = $"" +
+					$"select premiseId, Mid(beginning, 1, 11) " +
+					$"from appointments " +
+					$"where premiseId=\"{id}\" and " +
+					$"DateValue(Replace(Replace(\"{startDate}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(Mid(beginning, 1, 11), \'.\', \'/\', 1, 2), \'.\', \'\')) and " +
+					$"DateValue(Replace(Replace(\"{endDate}\", \'.\', \'/\', 1, 2), \'.\', \'\')) > DateValue(Replace(Replace(Mid(beginning, 1, 11), \'.\', \'/\', 1, 2), \'.\', \'\'))";
+				OleDbCommand command = new OleDbCommand(query, connection);
+				OleDbDataReader reader = command.ExecuteReader();
+				return reader.HasRows;
+			}
+		}
+
+		public void SimpleDeletePremise(String id)
+		{
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				connection.Open();
+				String query = $"delete from premises where premises_id=\"{id}\"";
+				OleDbCommand command = new OleDbCommand(query, connection);
+				command.ExecuteNonQuery();
+			}
+		}
+
 		public void Delete(string id)
 		{
 			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

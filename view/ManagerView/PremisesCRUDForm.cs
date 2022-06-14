@@ -18,7 +18,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class PremisesCRUDForm : Form
     {
-        private PremiseController premiseController = new PremiseController();
+        private PremiseService premiseService = new PremiseService();
 
         public PremisesCRUDForm()
         {
@@ -52,35 +52,16 @@ namespace HealthCareInfromationSystem.view.ManagerView
             comboBox1.Text = "";
         }
 
-        private bool CheckIfTextBoxesAreEmpty()
+        private bool ValidateForm()
         {
             return String.IsNullOrWhiteSpace(textBox1.Text) &&
                     String.IsNullOrWhiteSpace(textBox2.Text) &&
                     String.IsNullOrWhiteSpace(comboBox1.SelectedItem.ToString());
         }
 
-        private void FillTable(String query, OleDbConnection connection)
+        private void FillTable()
         {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-            //OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(adapter);
-            //BindingSource bindingSource = new BindingSource();
-            //dataGridView1.DataSource = bindingSource;
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            //bindingSource.DataSource = table;
-            dataGridView1.DataSource = table;
-        }
-
-        private void RefreshTable()
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                FillTable("select * from premises where type <> \"warehouse\"", connection);
-            }
+            dataGridView1.DataSource = premiseService.LoadAll();
         }
 
         private void PremisesCRUDForm_Load(object sender, EventArgs e)
@@ -88,7 +69,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             SetLabelsAndButtons();
             FillComboBox();
             dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-            RefreshTable();
+            FillTable();
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -99,6 +80,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             String premiseId = currentRow.Cells[0].Value.ToString();
             String name = currentRow.Cells[1].Value.ToString();
             String type = currentRow.Cells[2].Value.ToString();
+
             textBox1.Text = premiseId;
             textBox1.Enabled = false;
             textBox2.Text = name;
@@ -107,18 +89,20 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (CheckIfTextBoxesAreEmpty() ||
+            if (ValidateForm() ||
                 !textBox1.Enabled ||
-                premiseController.CheckIfPremiseExistsById(textBox1.Text))
+                premiseService.CheckIfPremiseExistsById(textBox1.Text))
                 return;
 
             String premiseId = textBox1.Text;
             String name = textBox2.Text;
             String type = comboBox1.SelectedItem.ToString();
+
             Premise premise = new Premise(premiseId, name, type);
-            premiseController.SavePremise(premise);
+            premiseService.Save(premise);
+
             ResetTextBoxes();
-            RefreshTable();
+            FillTable();
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -129,25 +113,29 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            if (CheckIfTextBoxesAreEmpty() || textBox1.Enabled) return;
+            if (ValidateForm() || textBox1.Enabled) return;
 
             String premiseId = textBox1.Text;
             String name = textBox2.Text;
             String type = comboBox1.SelectedItem.ToString();
+
             Premise premise = new Premise(premiseId, name, type);
-            premiseController.EditPremise(premise);
+            premiseService.Edit(premise);
+
             ResetTextBoxes();
-            RefreshTable();
+            FillTable();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (CheckIfTextBoxesAreEmpty() || textBox1.Enabled) return;
+            if (ValidateForm() || textBox1.Enabled) return;
 
             String premiseId = textBox1.Text;
-            premiseController.DeletePremise(premiseId);
+
+            premiseService.Delete(premiseId);
+
             ResetTextBoxes();
-            RefreshTable();
+            FillTable();
         }
     }
 }
