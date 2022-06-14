@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.Core.User.Poll;
+﻿using HealthCareInfromationSystem.Core.User;
+using HealthCareInfromationSystem.Core.User.Poll;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             FIllTables();
             HospitalPollStatistics();
             DoctorPollStatistics();
+            ShowBestAndWorstDoctors();
         }
 
         private void HospitalPollStatistics()
@@ -57,6 +59,21 @@ namespace HealthCareInfromationSystem.view.ManagerView
         private void DoctorPollStatistics()
         {
             label5.Text = pollService.GetDoctorPollStatistics();
+        }
+
+        private void ShowBestAndWorstDoctors()
+        {
+            label6.Text = "Best marked doctors\n";
+            label7.Text = "Worst marked doctors\n";
+
+            List<KeyValuePair<Person, float>> doctorsWithAverageMarks = pollService.GetDoctorsWithAverageMarks();
+
+            for (int i = 0; i < 3; i++)
+            {
+                label6.Text += $"{doctorsWithAverageMarks[i].Key.FirstName} {doctorsWithAverageMarks[i].Key.LastName}: {doctorsWithAverageMarks[i].Value}\n";
+
+                label7.Text += $"{doctorsWithAverageMarks[doctorsWithAverageMarks.Count - i - 1].Key.FirstName} {doctorsWithAverageMarks[doctorsWithAverageMarks.Count - i - 1].Key.LastName}: {doctorsWithAverageMarks[doctorsWithAverageMarks.Count - i - 1].Value}\n";
+            }
         }
     }
 }

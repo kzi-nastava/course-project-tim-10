@@ -105,5 +105,20 @@ namespace HealthCareInfromationSystem.Core.User.Poll
 
 			return ret;
 		}
+
+		public List<KeyValuePair<Person, float>> GetDoctorsWithAverageMarks()
+        {
+			Dictionary<Person, float> doctorsWithAverageMarks = new Dictionary<Person, float>();
+
+			foreach (Person doctor in personRepo.LoadAllDoctors())
+				doctorsWithAverageMarks.Add(doctor, float.Parse(GetAverageMarkForDoctor(doctor.Id.ToString())));
+
+			List<KeyValuePair<Person, float>> ret = new List<KeyValuePair<Person, float>>(doctorsWithAverageMarks);
+
+			ret.Sort((x, y) => x.Value.CompareTo(y.Value));
+			ret.Reverse();
+
+			return ret;
+        }
 	}
 }
