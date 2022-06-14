@@ -56,69 +56,69 @@ namespace HealthCareInfromationSystem.Core.User.Poll
 
 		public String GetCountOfMarksForDoctorItem(String mark, String doctorId)
 		{
-			int ret = 0;
+			int count = 0;
 
 			foreach (PollDoctor pollDoctor in pollDoctorRepo.LoadAll())
 			{
 				if (pollDoctor.Doctor.Id.ToString() == doctorId && pollDoctor.Quality.ToString() == mark)
-					ret++;
+					count++;
 				if (pollDoctor.Doctor.Id.ToString() == doctorId && pollDoctor.Recommendation.ToString() == mark)
-					ret++;
+					count++;
 			}
 
-			return ret.ToString();
+			return count.ToString();
 		}
 
 		public String GetAverageMarkForDoctor(String doctorId)
 		{
-			float ret = 0;
+			float count = 0;
 			int numOfPolls = 0;
 
 			foreach (PollDoctor pollDoctor in pollDoctorRepo.LoadAll())
 				if (pollDoctor.Doctor.Id.ToString() == doctorId)
 				{
-					ret += pollDoctor.Quality + pollDoctor.Recommendation;
+					count += pollDoctor.Quality + pollDoctor.Recommendation;
 					numOfPolls++;
 				}
 
-			return numOfPolls == 0 ? "0" : (ret / (numOfPolls * 2)).ToString();
+			return numOfPolls == 0 ? "0" : (count / (numOfPolls * 2)).ToString();
 		}
 
 		public String GetDoctorPollStatistics()
 		{
-			String ret = "";
+			String text = "";
 			foreach (Person doctor in personRepo.LoadAllDoctors())
             {
 				String id = doctor.Id.ToString();
 
-				ret += $"{doctor.FirstName} {doctor.LastName}: Average quality ({pollDoctorRepo.GetAverageForDoctorPollItem("quality", id)}), recommendation ({pollDoctorRepo.GetAverageForDoctorPollItem("recommendation", id)}). ";
+				text += $"{doctor.FirstName} {doctor.LastName}: Average quality ({pollDoctorRepo.GetAverageForDoctorPollItem("quality", id)}), recommendation ({pollDoctorRepo.GetAverageForDoctorPollItem("recommendation", id)}). ";
 
-				ret += $"(mark, number of marks): ";
+				text += $"(mark, number of marks): ";
 
 				for (int i = 1; i < 6; i++)
                 {
-					ret += $"({i}, {GetCountOfMarksForDoctorItem(i.ToString(), id)}) ";
+					text += $"({i}, {GetCountOfMarksForDoctorItem(i.ToString(), id)}) ";
                 }
 
-				ret += $"Average mark: {GetAverageMarkForDoctor(id)} \n";
+				text += $"Average mark: {GetAverageMarkForDoctor(id)} \n";
 			}
 
-			return ret;
+			return text;
 		}
 
 		public List<KeyValuePair<Person, float>> GetDoctorsWithAverageMarks()
         {
-			Dictionary<Person, float> doctorsWithAverageMarks = new Dictionary<Person, float>();
+			Dictionary<Person, float> averageMarks = new Dictionary<Person, float>();
 
 			foreach (Person doctor in personRepo.LoadAllDoctors())
-				doctorsWithAverageMarks.Add(doctor, float.Parse(GetAverageMarkForDoctor(doctor.Id.ToString())));
+				averageMarks.Add(doctor, float.Parse(GetAverageMarkForDoctor(doctor.Id.ToString())));
 
-			List<KeyValuePair<Person, float>> ret = new List<KeyValuePair<Person, float>>(doctorsWithAverageMarks);
+			List<KeyValuePair<Person, float>> doctorsWithAverageMarks = new List<KeyValuePair<Person, float>>(averageMarks);
 
-			ret.Sort((x, y) => x.Value.CompareTo(y.Value));
-			ret.Reverse();
+			doctorsWithAverageMarks.Sort((x, y) => x.Value.CompareTo(y.Value));
+			doctorsWithAverageMarks.Reverse();
 
-			return ret;
+			return doctorsWithAverageMarks;
         }
 	}
 }
