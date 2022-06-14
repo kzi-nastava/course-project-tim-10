@@ -21,7 +21,7 @@ namespace HealthCareInfromationSystem.Core.Equipment.Repository
 		List<string> GetDistinctEquipmentNames();
 		DataTable LoadAll();
 		DataTable SearchByTerm(string term);
-		DataTable SearchByCriteria(string query);
+		DataTable SearchByCriteria(string premisesType, string quantity, string equipmentType);
 		void Transfer(string id, string newPremiseId, string date);
 	}
 }

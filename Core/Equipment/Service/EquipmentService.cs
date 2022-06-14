@@ -25,26 +25,7 @@ namespace HealthCareInfromationSystem.Core.Equipment.Service
 
         public DataTable SearchByCriteria(string premisesType, string quantity, string equipmentType)
         {
-            String premisesTypeQuery = premisesType == "" ? "" : $"(pr1.type=\"{premisesType}\" or pr2.type=\"{premisesType}\")";
-
-            String quantityQuery = "";
-            if (quantity == "") quantityQuery = "";
-            else if (quantity == "out of stock") quantityQuery = "eq.quantity=0";
-            else if (quantity == "0-10") quantityQuery = "(eq.quantity > 0 and eq.quantity <= 10)";
-            else if (quantity == "10+") quantityQuery = "eq.quantity > 10";
-
-            String equipmentTypeQuery = equipmentType == "" ? "" : $"eq.type=\"{equipmentType}\"";
-
-            String query = $"" +
-                $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
-                $"from equipment as eq, premises as pr1, premises as pr2 " +
-                $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
-
-            if (premisesTypeQuery != "") query += $" and {premisesTypeQuery}";
-            if (quantityQuery != "") query += $" and {quantityQuery}";
-            if (equipmentTypeQuery != "") query += $" and {equipmentTypeQuery}";
-
-            return equipmentRepo.SearchByCriteria(query);
+            return equipmentRepo.SearchByCriteria(premisesType, quantity, equipmentType);
         }
 
         public Dictionary<string, string> LoadPremiseNameAndId()
