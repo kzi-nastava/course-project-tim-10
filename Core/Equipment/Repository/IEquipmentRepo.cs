@@ -20,6 +20,8 @@ namespace HealthCareInfromationSystem.Core.Equipment.Repository
 		List<Equipment> GetEquipmentWithSufficentStock(string equipmentName);
 		List<string> GetDistinctEquipmentNames();
 		DataTable LoadAll();
+		DataTable SearchByTerm(string term);
+		DataTable SearchByCriteria(string query);
 		void Transfer(string id, string newPremiseId, string date);
 	}
 }

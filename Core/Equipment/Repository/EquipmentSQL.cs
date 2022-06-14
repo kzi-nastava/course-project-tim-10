@@ -86,6 +86,53 @@ namespace HealthCareInfromationSystem.Core.Equipment.Repository
             }
         }
 
+        public DataTable SearchByTerm(string term)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"" +
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                    $"from equipment as eq, premises as pr1, premises as pr2 " +
+                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id and " +
+                    $"(" +
+                    $"eq.equipment_id like \"%{term}%\" or " +
+                    $"eq.name like \"%{term}%\" or " +
+                    $"eq.quantity like \"%{term}%\" or " +
+                    $"eq.type like \"%{term}%\" or " +
+                    $"eq.move_date like \"%{term}%\" or " +
+                    $"pr1.name like \"%{term}%\" or " +
+                    $"pr2.name like \"%{term}%\"" +
+                    $")";
+
+                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+                DataTable table = new DataTable
+                {
+                    Locale = CultureInfo.InvariantCulture
+                };
+
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        public DataTable SearchByCriteria(string query)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+
+                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+                DataTable table = new DataTable
+                {
+                    Locale = CultureInfo.InvariantCulture
+                };
+
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
         public void Transfer(string id, string newPremiseId, string date)
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))

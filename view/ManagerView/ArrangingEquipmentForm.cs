@@ -33,7 +33,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             button1.Text = "Move";
         }
 
-        private bool CheckIfTextBoxesAreEmpty()
+        private bool ValidateForm()
         {
             return String.IsNullOrWhiteSpace(textBox1.Text) ||
                     comboBox1.SelectedItem == null ||
@@ -84,7 +84,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             DataGridViewRow currentRow = dataGridView1.CurrentRow;
             if (currentRow == null) return;
-            if (CheckIfTextBoxesAreEmpty()) return;
+            if (ValidateForm()) return;
 
             String equipmentId = currentRow.Cells[0].Value.ToString();
             String newPremiseId = comboBox1.SelectedItem.ToString().Split('-')[0].Trim();
