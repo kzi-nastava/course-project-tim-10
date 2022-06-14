@@ -58,6 +58,9 @@
     <Compile Include="Core\MedicineManagment\MedicineController.cs" />
     <Compile Include="Core\Appointment\Notification\NotificationController.cs" />
     <Compile Include="Core\PremiseManagment\PremiseService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\IRenovationRepo.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationSQL.cs" />
     <Compile Include="Core\User\Patient\PatientController.cs" />
     <Compile Include="Core\User\PersonController.cs" />
     <Compile Include="Core\PremiseManagment\PremiseController.cs" />
