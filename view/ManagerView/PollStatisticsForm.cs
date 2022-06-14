@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace HealthCareInfromationSystem.view.ManagerView
 {
-    public partial class PollHospitalStatisticsForm : Form
+    public partial class PollStatisticsForm : Form
     {
         private PollService pollService = new PollService();
 
-        public PollHospitalStatisticsForm()
+        public PollStatisticsForm()
         {
             InitializeComponent();
         }
@@ -56,7 +56,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void DoctorPollStatistics()
         {
-
+            label5.Text = pollService.GetDoctorPollStatistics();
         }
     }
 }

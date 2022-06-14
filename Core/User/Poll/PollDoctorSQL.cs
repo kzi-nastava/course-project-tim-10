@@ -77,25 +77,6 @@ namespace HealthCareInfromationSystem.Core.User.Poll
             }
         }
 
-        public String GetCountOfMarksForDoctorItem(String mark, String item, String doctorId)
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                OleDbCommand command = new OleDbCommand($"" +
-                    $"select count(*) from poll_doctor where {item}=\"{mark}\" and doctorId=\"{doctorId}\"" +
-                    $"", connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-                String count = "";
-
-                while (reader.Read())
-                    count = reader[0].ToString();
-
-                reader.Close();
-                return count;
-            }
-        }
-
+        
     }
 }

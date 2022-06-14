@@ -70,5 +70,5 @@ namespace HealthCareInfromationSystem.Core.User
                 return doctors;
             }
         }
-	}
+    }
 }

@@ -237,11 +237,11 @@
     <Compile Include="view\ManagerView\MedicineManagementForm.Designer.cs">
       <DependentUpon>MedicineManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\ManagerView\PollHospitalStatisticsForm.cs">
+    <Compile Include="view\ManagerView\PollStatisticsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\ManagerView\PollHospitalStatisticsForm.Designer.cs">
-      <DependentUpon>PollHospitalStatisticsForm.cs</DependentUpon>
+    <Compile Include="view\ManagerView\PollStatisticsForm.Designer.cs">
+      <DependentUpon>PollStatisticsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\ManagerView\PremisesCRUDForm.cs">
       <SubType>Form</SubType>
@@ -408,8 +408,8 @@
     <EmbeddedResource Include="view\ManagerView\MedicineManagementForm.resx">
       <DependentUpon>MedicineManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\ManagerView\PollHospitalStatisticsForm.resx">
-      <DependentUpon>PollHospitalStatisticsForm.cs</DependentUpon>
+    <EmbeddedResource Include="view\ManagerView\PollStatisticsForm.resx">
+      <DependentUpon>PollStatisticsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
