@@ -7,6 +7,8 @@ using System.Threading.Tasks;
  
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Core.Equipment.Service;
+using System.Data;
+using System.Globalization;
 
 namespace HealthCareInfromationSystem.Core.Equipment.Repository
 {
@@ -61,6 +63,37 @@ namespace HealthCareInfromationSystem.Core.Equipment.Repository
                 }
                 reader.Close();
                 return equipment;
+            }
+        }
+
+        public DataTable LoadAll()
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"" +
+                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
+                    $"from equipment as eq, premises as pr1, premises as pr2 " +
+                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
+                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
+                DataTable table = new DataTable
+                {
+                    Locale = CultureInfo.InvariantCulture
+                };
+
+                adapter.Fill(table);
+                return table;
+            }
+        }
+
+        public void Transfer(string id, string newPremiseId, string date)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                connection.Open();
+                String query = $"update equipment set new_premises_id=\"{newPremiseId}\", move_date=\"{date}\" where equipment_id=\"{id}\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+                command.ExecuteNonQuery();
             }
         }
 

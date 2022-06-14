@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using HealthCareInfromationSystem.Core.Equipment.Repository;
 using HealthCareInfromationSystem.Core.Equipment;
 using HealthCareInfromationSystem.repository;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using System.Data.OleDb;
+using System.Data;
 
 namespace HealthCareInfromationSystem.Core.Equipment.Service
 {
@@ -13,8 +16,14 @@ namespace HealthCareInfromationSystem.Core.Equipment.Service
 	{
 		IEquipmentRepo equipmentRepo = new EquipmentSQL();
         IEquipmentRequestRepo requestRepo = new EquipmentRequestSQL();
+        IPremisseRepo premiseRepo = new PremisseSQL();
 
-		public List<Equipment> LoadEquipmentsFromPremise(string premiseId) {
+        public Dictionary<string, string> LoadPremiseNameAndId()
+        {
+            return premiseRepo.LoadNameAndId();
+        }
+
+        public List<Equipment> LoadEquipmentsFromPremise(string premiseId) {
 			return equipmentRepo.GetEquipmentFromPremise(premiseId);
 		}
 
@@ -40,6 +49,16 @@ namespace HealthCareInfromationSystem.Core.Equipment.Service
         public List<string> GetDistinctEquipmentNames()
         {
             return equipmentRepo.GetDistinctEquipmentNames();
+        }
+
+        public DataTable LoadAll()
+        {
+            return equipmentRepo.LoadAll();
+        }
+
+        public void Transfer(string id, string newPremiseId, string date)
+        {
+            equipmentRepo.Transfer(id, newPremiseId, date);
         }
 
         public void Move(string equipmentName, string oldPremiseId, string newPremiseId, int quantity)

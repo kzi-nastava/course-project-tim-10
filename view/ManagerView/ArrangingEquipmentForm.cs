@@ -1,4 +1,5 @@
-﻿using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.Core.Equipment.Service;
+using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ArrangingEquipmentForm : Form
     {
+        EquipmentService equipmentService = new EquipmentService();
+
         public ArrangingEquipmentForm()
         {
             InitializeComponent();
@@ -40,56 +43,22 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void FillComboBox()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String query = "select premises_id, name from premises";
+            Dictionary<string, string> names = equipmentService.LoadPremiseNameAndId();
 
-                OleDbCommand command = new OleDbCommand(query, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    comboBox1.Items.Add(reader[0] + " - " + reader[1]);
-                }
-                reader.Close();
-            }
+            foreach (KeyValuePair<string, string> name in names)
+                comboBox1.Items.Add(name.Key + " - " + name.Value);
         }
 
-        private void FillTable(String query, OleDbConnection connection)
+        private void FillTable()
         {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-            //OleDbCommandBuilder commandBuilder = new OleDbCommandBuilder(adapter);
-            //BindingSource bindingSource = new BindingSource();
-            //dataGridView1.DataSource = bindingSource;
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            //bindingSource.DataSource = table;
-            dataGridView1.DataSource = table;
-        }
-
-        private void RefreshTable()
-        {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String query = $"" +
-                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type, pr1.name as old_premise, pr2.name as new_premise, eq.move_date as move_date " +
-                    $"from equipment as eq, premises as pr1, premises as pr2 " +
-                    $"where eq.old_premises_id=pr1.premises_id and eq.new_premises_id=pr2.premises_id";
-                FillTable(query, connection);
-            }
+            dataGridView1.DataSource = equipmentService.LoadAll();
         }
 
         private void ArrangingEquipmentForm_Load(object sender, EventArgs e)
         {
             SetLabelsAndButtons();
             FillComboBox();
-            RefreshTable();
+            FillTable();
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -121,18 +90,11 @@ namespace HealthCareInfromationSystem.view.ManagerView
             String newPremiseId = comboBox1.SelectedItem.ToString().Split('-')[0].Trim();
             String date = textBox2.Text;
 
-            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
-            if (!Regex.IsMatch(date, dateRegex)) return;
+            if (!Regex.IsMatch(date, Constants.dateRegex)) return;
 
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                connection.Open();
-                String query = $"update equipment set new_premises_id=\"{newPremiseId}\", move_date=\"{date}\" where equipment_id=\"{equipmentId}\"";
-                OleDbCommand command = new OleDbCommand(query, connection);
-                command.ExecuteNonQuery();
-            }
+            equipmentService.Transfer(equipmentId, newPremiseId, date);
 
-            RefreshTable();
+            FillTable();
         }
     }
 }
