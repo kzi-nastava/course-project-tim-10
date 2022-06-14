@@ -37,7 +37,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.Notification
                 using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
                 {
                     VacationRequestService requestService = new VacationRequestService();
-                    string query = $"select * from vacation_notifications where receiver=\"{doctorId}\" and received=\"false\"";
+                    string query = $"select * from vacation_notification where receiver=\"{doctorId}\" and received=\"false\"";
                     OleDbCommand command = new OleDbCommand(query, connection);
 
                     connection.Open();
