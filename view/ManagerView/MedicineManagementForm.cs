@@ -16,7 +16,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class MedicineManagementForm : Form
     {
-        MedicineController medicineController = new MedicineController();
+        MedicineRequestService medicineRequestService = new MedicineRequestService();
 
         public MedicineManagementForm()
         {
@@ -45,21 +45,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void FillTable()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String query = $"" +
-                    $"select id, name, description, ingredients, comment " +
-                    $"from medicine " +
-                    $"where status=\"denied\"";
-                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-
-                adapter.Fill(table);
-                dataGridView1.DataSource = table;
-            }
+            dataGridView1.DataSource = medicineRequestService.LoadDenied();
         }
 
         private void MedicineManagementForm_Load(object sender, EventArgs e)
@@ -114,7 +100,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             Medicine medicine = new Medicine(id, name, description, ingredients, "in progress", "");
 
-            medicineController.Save(medicine);
+            medicineRequestService.Save(medicine);
 
             MessageBox.Show("Medicine added.");
         }
@@ -131,7 +117,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             Medicine medicine = new Medicine(id, name, description, ingredients, "in progress", comment);
 
-            medicineController.Edit(medicine);
+            medicineRequestService.Edit(medicine);
 
             MessageBox.Show("Medicine edited.");
 

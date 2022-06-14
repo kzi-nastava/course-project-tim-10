@@ -44,6 +44,29 @@ namespace HealthCareInfromationSystem.Core.MedicineManagment
 			}
 		}
 
+		public List<Medicine> LoadDenied()
+        {
+			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+			{
+				String query = $"" +
+					$"select * " +
+					$"from medicine " +
+					$"where status=\"denied\"";
+				OleDbCommand command = new OleDbCommand(query, connection);
+
+				connection.Open();
+				OleDbDataReader reader = command.ExecuteReader();
+				List<Medicine> medicines = new List<Medicine>();
+
+				while (reader.Read())
+					medicines.Add(Medicine.Parse(reader));
+
+				reader.Close();
+
+				return medicines;
+			}
+		}
+
 		public Dictionary<string, string> LoadNameAndId()
 		{
 			using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
