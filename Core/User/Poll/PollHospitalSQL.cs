@@ -58,7 +58,45 @@ namespace HealthCareInfromationSystem.Core.User.Poll
             }
         }
 
+        public String GetAverageForHospitalPollItem(String item)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                OleDbCommand command = new OleDbCommand($"" +
+                    $"select avg({item}) from poll_hospital" +
+                    $"", connection);
 
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                String avg = "";
+
+                while (reader.Read())
+                    avg = reader[0].ToString();
+
+                reader.Close();
+                return avg;
+            }
+        }
+
+        public String GetCountOfMarksForHospitalItem(String mark, String item)
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                OleDbCommand command = new OleDbCommand($"" +
+                    $"select count(*) from poll_hospital where {item}=\"{mark}\"" +
+                    $"", connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                String count = "";
+
+                while (reader.Read())
+                    count = reader[0].ToString();
+
+                reader.Close();
+                return count;
+            }
+        }
 
     }
 }

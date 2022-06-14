@@ -51,5 +51,24 @@ namespace HealthCareInfromationSystem.Core.User
                 return person;
             }
         }
+
+        public List<Person> LoadAllDoctors()
+        {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+
+                OleDbCommand command = new OleDbCommand("select * from users where role=\"doctor\"", connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<Person> doctors = new List<Person>();
+
+                while (reader.Read())
+                    doctors.Add(Person.Parse(reader));
+
+                reader.Close();
+                return doctors;
+            }
+        }
 	}
 }

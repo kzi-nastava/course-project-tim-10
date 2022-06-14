@@ -43,6 +43,24 @@ namespace HealthCareInfromationSystem.Core.User.Poll
 			return pollHospitalRepo.LoadAll();
 		}
 
+		public String GetAverageForHospitalPollItem(String item)
+        {
+			return pollHospitalRepo.GetAverageForHospitalPollItem(item);
+        }
 
+		public String GetCountOfMarksForHospitalItem(String mark, String item)
+        {
+			return pollHospitalRepo.GetCountOfMarksForHospitalItem(mark, item);
+        }
+
+		public String GetAverageForDoctorPollItem(String item, String doctorId)
+		{
+			return pollDoctorRepo.GetAverageForDoctorPollItem(item, doctorId);
+		}
+
+		public String GetCountOfMarksForDoctorItem(String mark, String item, String doctorId)
+		{
+			return pollDoctorRepo.GetCountOfMarksForDoctorItem(mark, item, doctorId);
+		}
 	}
 }
