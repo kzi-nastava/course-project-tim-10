@@ -29,7 +29,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
         {
             using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
             {
-                string query = $"select * from vacation_request where request_id =\"{id}\"";
+                string query = $"select * from vacation_request where id={int.Parse(id)}";
                 OleDbCommand command = new OleDbCommand(query, connection);
 
                 connection.Open();
@@ -53,10 +53,9 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
                 string dateBegin = request.DateBegin.ToString("dd.MM.yyyy. HH:mm");
                 string dateEnd = request.DateEnd.ToString("dd.MM.yyyy. HH:mm");
                 connection.Open();
-                String query = $"update appointments set doctorId=\"{request.Doctor.Id}\", dateSent=\"{dateSent.Substring(0, dateSent.Length - 3)}\", " +
-                   $"dateBegin=\"{dateBegin.Substring(0, dateBegin.Length - 3)}\", dateEnd=\"{dateEnd.Substring(0, dateEnd.Length - 3)}\"," +
-                   $" reason=\"{request.Reason}\", status=\"{request.Status}\"" +
-                   "$\"where id=\"{request.Id}\"";
+                String query = $"update vacation_request set doctorId=\"{request.Doctor.Id}\", dateSent=\"{dateSent}\", " +
+                   $"dateBegin=\"{dateBegin}\", dateEnd=\"{dateEnd}\"," +
+                   $" reason=\"{request.Reason}\", status=\"{request.Status}\" where id={request.Id}";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
             }
@@ -103,7 +102,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             string dateBegin = request.DateBegin.ToString("dd.MM.yyyy. HH:mm");
             string dateEnd = request.DateEnd.ToString("dd.MM.yyyy. HH:mm");
 
-            return $"({request.Id}\", \"{request.Doctor.Id}\", \"{dateSent.Substring(0, dateSent.Length - 3)}\", " +
+            return $"({request.Id}, \"{request.Doctor.Id}\", \"{dateSent.Substring(0, dateSent.Length - 3)}\", " +
                    $"\"{dateBegin.Substring(0, dateBegin.Length - 3)}\", \"{dateEnd.Substring(0, dateEnd.Length - 3)}\"," +
                    $" \"{request.Reason}\", \"{request.Status}\")";
         }

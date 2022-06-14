@@ -27,6 +27,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             lblReason.Hide();
             cbAction.Items.Add("Accept");
             cbAction.Items.Add("Decline");
+            cbAction.SelectedItem = "Accept";
         }
 
         private void DisplayRequestsTable()
@@ -56,6 +57,8 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 if (cbAction.SelectedItem.ToString() == "Accept") requestController.Accept(selectedRequestId);
                 else requestController.Decline(selectedRequestId, tbDeclineReason.ToString());
+                MessageBox.Show("Action successful.");
+                DisplayRequestsTable();
             }
         }
 
