@@ -19,7 +19,12 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             notificationController.AddVacationNotification(request);
         }
 
-        public void Decline(string requestId, string declineReason)
+		public List<VacationRequest> GetAllRequestsForDoctor(string id)
+		{
+			return requestService.GetAllRequestsForDoctor(id);
+		}
+
+		public void Decline(string requestId, string declineReason)
         {
             VacationRequest request = requestService.Get(requestId);
             requestService.Decline(request, declineReason);

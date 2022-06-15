@@ -14,5 +14,7 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
         VacationRequest Get(string id);
         List<VacationRequest> GetAll();
 
+        List<VacationRequest> GetAllRequestsForDoctor(string id);
+
     }
 }

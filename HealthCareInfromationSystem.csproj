@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -161,6 +161,12 @@
     <Compile Include="view\DoctorView\AddReferralLetterForm.Designer.cs">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\AddVacationRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AddVacationRequestForm.Designer.cs">
+      <DependentUpon>AddVacationRequestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\DoctorView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,12 @@
     </Compile>
     <Compile Include="view\DoctorView\UnverifiedMedicine.Designer.cs">
       <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\VacationRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\VacationRequestForm.Designer.cs">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
@@ -392,6 +404,9 @@
     <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\AddVacationRequestForm.resx">
+      <DependentUpon>AddVacationRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\DoctorMainForm.resx">
       <DependentUpon>DoctorMainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\UnverifiedMedicine.resx">
       <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\VacationRequestForm.resx">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>

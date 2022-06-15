@@ -32,7 +32,13 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             return requestRepo.Get(id);
         }
 
-        public List<VacationRequest> GetAllOnWait()
+		public List<VacationRequest> GetAllRequestsForDoctor(string id)
+		{
+            return requestRepo.GetAllRequestsForDoctor(id);
+		}
+
+
+		public List<VacationRequest> GetAllOnWait()
         {
             return requestRepo.GetAll();
         }

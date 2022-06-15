@@ -85,8 +85,9 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(129, 49);
 			this.button4.TabIndex = 3;
-			this.button4.Text = "button4";
+			this.button4.Text = "Vacation Requests";
 			this.button4.UseVisualStyleBackColor = true;
+			this.button4.Click += new System.EventHandler(this.VacationRequestBtnClick);
 			// 
 			// DoctorMainForm
 			// 
