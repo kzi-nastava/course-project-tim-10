@@ -54,5 +54,11 @@ namespace HealthCareInfromationSystem.view.DoctorView
 			UnverifiedMedicine unverifiedMedicine = new UnverifiedMedicine();
 			unverifiedMedicine.Show();
 		}
+
+		private void VacationRequestBtnClick(object sender, EventArgs e)
+		{
+			VacationRequestForm vacationRequestForm = new VacationRequestForm();
+			vacationRequestForm.Show();
+		}
 	}
 }

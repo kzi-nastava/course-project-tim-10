@@ -18,7 +18,8 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             {
                 request.Id = GetFirstFreeId();
                 connection.Open();
-                string query = $"insert into vacation_request values {GetValues(request)}";
+                string query = $"insert into vacation_request values (\"{request.Id}\", \"{LoggedInUser.GetId()}\", \"{request.DateSent.ToString("dd.MM.yyyy. HH:mm")}\"," +
+                    $" \"{request.DateBegin.ToString("dd.MM.yyyy. HH:mm")}\", \"{request.DateEnd.ToString("dd.MM.yyyy. HH:mm")}\", \"{request.Reason}\", \"{request.Status}\")";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -124,6 +125,26 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
                 }
                 reader.Close();
                 return maxId + 1;
+            }
+        }
+
+        public List<VacationRequest> GetAllRequestsForDoctor(string id) {
+            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            {
+                string query = "select * from vacation_request where doctorId=\"" + id + "\"";
+                OleDbCommand command = new OleDbCommand(query, connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+                List<VacationRequest> requests = new List<VacationRequest>();
+
+                while (reader.Read())
+                {
+                    VacationRequest request = Parse(reader);
+                    requests.Add(request);
+                }
+                reader.Close();
+                return requests;
             }
         }
 

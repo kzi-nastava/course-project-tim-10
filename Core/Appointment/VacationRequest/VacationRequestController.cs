@@ -19,7 +19,12 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             notificationController.AddVacationNotification(request);
         }
 
-        public void Decline(string requestId, string declineReason)
+		public List<VacationRequest> GetAllRequestsForDoctor(string id)
+		{
+			return requestService.GetAllRequestsForDoctor(id);
+		}
+
+		public void Decline(string requestId, string declineReason)
         {
             VacationRequest request = requestService.Get(requestId);
             requestService.Decline(request, declineReason);
@@ -47,6 +52,16 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             row.Add(request.DateEnd.ToString("dd.MM.yyyy. HH:mm"));
             row.Add(request.Reason);
             return row;
+        }
+
+        public bool IsDoctorAvailableForTime(DateTime start, DateTime end)
+        {
+            return requestService.IsDoctorAvailableForTime(start, end);
+        }
+
+        public void Add(VacationRequest request)
+        {
+            requestService.Add(request);
         }
 
 
