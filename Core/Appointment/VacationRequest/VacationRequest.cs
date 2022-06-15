@@ -18,13 +18,13 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
         private RequestStatus _status;
 
         // For creating new request
-        public VacationRequest(Person doctor, DateTime dateBegin, DateTime dateEnd, string reason)
+        public VacationRequest(Person doctor, DateTime dateBegin, DateTime dateEnd, string reason, RequestStatus status)
         {
             this.Doctor = doctor;
             this.DateSent = DateTime.Now;
             this.DateBegin = dateBegin;
             this.DateEnd = dateEnd;
-            this.Status = RequestStatus.wait;
+            this.Status = status;
             this.Reason = reason;
         }
 

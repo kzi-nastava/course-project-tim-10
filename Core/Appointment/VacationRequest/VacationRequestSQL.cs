@@ -18,7 +18,8 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             {
                 request.Id = GetFirstFreeId();
                 connection.Open();
-                string query = $"insert into vacation_request values {GetValues(request)}";
+                string query = $"insert into vacation_request values (\"{request.Id}\", \"{LoggedInUser.GetId()}\", \"{request.DateSent.ToString("dd.MM.yyyy. HH:mm")}\"," +
+                    $" \"{request.DateBegin.ToString("dd.MM.yyyy. HH:mm")}\", \"{request.DateEnd.ToString("dd.MM.yyyy. HH:mm")}\", \"{request.Reason}\", \"{request.Status}\")";
                 OleDbCommand command = new OleDbCommand(query, connection);
                 command.ExecuteNonQuery();
                 connection.Close();

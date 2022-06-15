@@ -54,6 +54,16 @@ namespace HealthCareInfromationSystem.Core.Appointment.VacationRequest
             return row;
         }
 
+        public bool IsDoctorAvailableForTime(DateTime start, DateTime end)
+        {
+            return requestService.IsDoctorAvailableForTime(start, end);
+        }
+
+        public void Add(VacationRequest request)
+        {
+            requestService.Add(request);
+        }
+
 
     }
 }
