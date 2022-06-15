@@ -26,11 +26,13 @@ namespace HealthCareInfromationSystem.view.DoctorView
         {
 			string notificationText = notificationController.GetEmergencyNotifications(utils.LoggedInUser.GetId());
 			notificationText += notificationController.GetRescheduleNotifications(utils.LoggedInUser.GetId());
+			notificationText += notificationController.GetVacationNotifications(utils.LoggedInUser.GetId());
 			if (notificationText != "")
 			{
 				MessageBox.Show(notificationText);
 				notificationController.MarkEmergencyNotificationsAsRecieved(utils.LoggedInUser.GetId());
 				notificationController.MarkRescheduleNotificationsAsRecieved(utils.LoggedInUser.GetId());
+				notificationController.MarkVacationNotificationsAsReceived(utils.LoggedInUser.GetId());
 			}
 
 		}
