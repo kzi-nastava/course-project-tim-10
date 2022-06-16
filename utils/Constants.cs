@@ -18,5 +18,6 @@ namespace HealthCareInfromationSystem.utils
         public static string DateFmt = "dd.MM.yyyy.";
         public static string TimeFmt = "HH:mm";
         public static string FullTimeFmt = "HH:mm:ss";
+        public static string dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
     }
 }

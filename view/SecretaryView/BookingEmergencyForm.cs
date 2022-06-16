@@ -1,6 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.utils;
+﻿using HealthCareInfromationSystem.utils;
+using HealthCareInfromationSystem.Core.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,11 +11,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.Appointment;
+using HealthCareInfromationSystem.Core.User.Patient;
+using HealthCareInfromationSystem.Core.Appointment.Notification;
+using HealthCareInfromationSystem.User.Doctor;
 
 namespace HealthCareInfromationSystem.view.SecretaryView
 {
     public partial class BookingEmergency : Form
     {
+        private SpecialisationController specialisationController = new SpecialisationController();
+        private AppointmentController appointmentController = new AppointmentController();
+        private NotificationController notificationController = new NotificationController();
+        private PatientController patientController = new PatientController();
         private string selectedPatientId = "";
         public BookingEmergency()
         {
@@ -24,24 +32,12 @@ namespace HealthCareInfromationSystem.view.SecretaryView
 
         }
 
-        private void FillTable(String query, OleDbConnection connection)
-        {
-            OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-
-            DataTable table = new DataTable
-            {
-                Locale = CultureInfo.InvariantCulture
-            };
-
-            adapter.Fill(table);
-            dataGridViewPatients.DataSource = table;
-        }
-
         private void DisplayPatientsTableData()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            dataGridViewPatients.Rows.Clear();
+            foreach (List<string> row in patientController.GetRowsForPatients())
             {
-                FillTable("select id, name, last_name as 'last name', username from users where role=\"patient\"", connection);
+                dataGridViewPatients.Rows.Add(row[0], row[1], row[2]);
             }
         }
 
@@ -66,7 +62,7 @@ namespace HealthCareInfromationSystem.view.SecretaryView
         private void InitializeSpecialisationComboBox()
         {
             string query = "select distinct name from specialisations";
-            foreach (string specialisation in SpecialisationController.LoadSpecialisations(Constants.connectionString, query))
+            foreach (string specialisation in specialisationController.LoadSpecialisations(Constants.connectionString, query))
             {
                 cbSpecialisation.Items.Add(specialisation);
                 cbSpecialisation.SelectedItem = specialisation;
@@ -90,39 +86,52 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             }
         }
 
+        private bool CheckDurationField()
+        {
+            try
+            {
+                int durationCheck = int.Parse(tbDuration.Text);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Duration in incorrect format.", "Error");
+                return false;
+            }
+        }
+
+        private bool CheckSelectedPatient()
+        {
+            if (selectedPatientId != "") return true;
+            else
+            {
+                MessageBox.Show("Patient must be selected.");
+                return false;
+            }
+        }
+
+        private string GetConfirmationDialogText(Appointment appointment)
+        {
+            return "Found available appointment at " + appointment.Beginning.ToString()
+                        + " with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName
+                        + "\nConfirm booking?";
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (selectedPatientId != "" && tbDuration.Text != "")
+            if (CheckSelectedPatient() && CheckDurationField())
             {
-                try
+                Appointment appointment = new Appointment(0, null, new Person(selectedPatientId), new Premise(cbPremise.SelectedValue.ToString()), DateTime.Now, int.Parse(tbDuration.Text), cbType.SelectedItem.ToString() == "physical" ? Appointment.AppointmentType.physical : Appointment.AppointmentType.operation);
+                
+                if (appointmentController.BookEmergency(appointment, cbSpecialisation.SelectedItem.ToString()))
                 {
-                    int durationCheck = int.Parse(tbDuration.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Duration in incorrect format.", "Error");
-                    return;
-                }
-
-                Appointment appointment = new Appointment();
-                appointment.Patient = PersonController.LoadOnePerson(Constants.connectionString, $"select * from users where id=\"{selectedPatientId}\"");
-                appointment.Premise = PremiseController.LoadOnePremise(Constants.connectionString, $"select * from premises where premises_id=\"{cbPremise.SelectedValue}\"");
-                if (cbType.SelectedItem.ToString() == "physical") appointment.Type = Appointment.AppointmentType.physical;
-                else appointment.Type = Appointment.AppointmentType.operation;
-                appointment.Duration = int.Parse(tbDuration.Text);
-
-                List<string> doctorIds = SpecialisationController.GetDoctorIds(Constants.connectionString, cbSpecialisation.SelectedItem.ToString());
-                if (appointment.AssignEmergencySlot(doctorIds))
-                {
-                    // found doctor and time
-                    DialogResult dialogResult = MessageBox.Show("Found available appointment at " + appointment.Beginning.ToString() 
-                        + " with doctor " + appointment.Doctor.FirstName + " " + appointment.Doctor.LastName 
-                        + "\nConfirm booking?", "Check", MessageBoxButtons.YesNo);
+                    // Found doctor and time
+                    DialogResult dialogResult = MessageBox.Show(GetConfirmationDialogText(appointment), "Check", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        AppointmentController.AddEmergencyToBase(appointment);
+                        appointmentController.Add(appointment);
                         MessageBox.Show("Emergency booked.", "Success");
-                        NotificationController.AddEmergencyNotification(appointment);
+                        notificationController.AddEmergencyNotification(appointment);
                     }
                 }
                 else
@@ -130,21 +139,17 @@ namespace HealthCareInfromationSystem.view.SecretaryView
                     DialogResult dialogResult = MessageBox.Show("Unable to find available appointment in the next two hours.\nContinue to rescheduling?", "Check", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        RescheduleAppointmentForm rescheduleAppointmentForm = new RescheduleAppointmentForm(appointment, doctorIds);
+                        RescheduleAppointmentForm rescheduleAppointmentForm = new RescheduleAppointmentForm(appointment, cbSpecialisation.SelectedItem.ToString());
                         rescheduleAppointmentForm.Show();
                     }
                 }
 
-            } else
-            {
-                MessageBox.Show("Incomplete selection.", "Error");
             }
-
         }
 
         private void CbType_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            // If type of appointment set to physical duration is fixed to 15 minutes
+            // If type of appointment set to physical duration is set to 15 minutes
             if (cbType.SelectedItem.ToString() == Enum.GetName(typeof(Appointment.AppointmentType), Appointment.AppointmentType.physical))
             {
                 tbDuration.Text = "15";

@@ -58,5 +58,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             ArrangingDynamicEquipmentForm arrangingDynamicEquipmentForm = new ArrangingDynamicEquipmentForm();
             arrangingDynamicEquipmentForm.Show();
         }
+
+        private void VacationRequestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VacationRequestForm vacationRequestForm = new VacationRequestForm();
+            vacationRequestForm.Show();
+        }
     }
 }

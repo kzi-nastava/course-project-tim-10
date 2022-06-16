@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HealthCareInfromationSystem.doctorController;
-using HealthCareInfromationSystem.models.users;
+using HealthCareInfromationSystem.Core.MedicalRecord;
+using HealthCareInfromationSystem.Core.MedicalRecord.MedicalPrescription;
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
 using HealthCareInfromationSystem.Servise;
 

@@ -1,4 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
+﻿using HealthCareInfromationSystem.Core.PremiseManagment.Renovation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ManagerMainForm : Form
     {
-        private RenovationController renovationController = new RenovationController();
+        private RenovationService renovationService = new RenovationService();
 
         public ManagerMainForm()
         {
@@ -54,8 +54,8 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             label1.Text = "Checking if there is complex renovations to be executed...";
 
-            renovationController.CheckForComplexRenovationToExecute();
-            renovationController.CheckForComplexMovingToExecute();
+            renovationService.CheckForComplexRenovationToExecute();
+            renovationService.CheckForComplexMovingToExecute();
 
             label1.Text = "Done checking.";
         }
@@ -64,6 +64,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
         {
             MedicineManagementForm medicineManagement = new MedicineManagementForm();
             medicineManagement.Show();
+        }
+
+        private void pollStatisticsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PollStatisticsForm pollStatisticsForm = new PollStatisticsForm();
+            pollStatisticsForm.Show();
         }
     }
 }

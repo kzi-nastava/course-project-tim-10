@@ -1,4 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
+﻿using HealthCareInfromationSystem.Core.User.Patient;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;

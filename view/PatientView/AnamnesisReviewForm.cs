@@ -1,6 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.models.users;
+﻿ 
+using HealthCareInfromationSystem.Core.User;
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -12,12 +11,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.MedicalRecord;
+using HealthCareInfromationSystem.Core.Appointment;
+
 
 namespace HealthCareInfromationSystem.view.PatientView
 {
     public partial class AnamnesisReviewForm : Form
     {
         OleDbConnection connection;
+
+        private MedicalRecordController recordController = new MedicalRecordController();
 
         List<Appointment> appointments;
         Appointment selectedAppointment;
@@ -62,7 +66,8 @@ namespace HealthCareInfromationSystem.view.PatientView
             connection = new OleDbConnection(Constants.connectionString);
             patient = LoggedInUser.loggedIn;
             string medicalQuery = $"Select * from medical_record where patientId = \"{patient.Id}\"";
-            medicalRecord = MedicalRecordController.LoadMedical(Constants.connectionString, medicalQuery);
+            //medicalRecord = MedicalRecordController.LoadMedical(Constants.connectionString, medicalQuery);
+            medicalRecord = recordController.GetMedicalRecordByPatient(patient.Id.ToString());
             string appointmentQuery = $"Select * from appointments where patientId = \"{patient.Id}\"";
             appointments = AppointmentController.LoadAppointments(Constants.connectionString, appointmentQuery);
         }

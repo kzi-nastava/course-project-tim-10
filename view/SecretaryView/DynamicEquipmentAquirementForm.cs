@@ -1,5 +1,7 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿using HealthCareInfromationSystem.Core.Equipment;
+using HealthCareInfromationSystem.Core.Equipment;
+using HealthCareInfromationSystem.Core.Equipment.Controller;
+ 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

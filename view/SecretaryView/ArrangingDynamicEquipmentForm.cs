@@ -1,5 +1,5 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿ 
+using HealthCareInfromationSystem.Core.Equipment.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -123,11 +123,11 @@ namespace HealthCareInfromationSystem.view.SecretaryView
             {
                 try
                 {
-                equipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
-                MessageBox.Show("Equipment successfully arranged.");
-                ClearFields();
-                dataGridViewLowStock.Rows.Clear();
-                dataGridViewSufficentStock.Rows.Clear();
+                    equipmentController.Move(cbEquipmentName.Text, selectedFromPremiseId, selectedToPremiseId, int.Parse(tbQuantity.Text.ToString()));
+                    MessageBox.Show("Equipment successfully arranged.");
+                    ClearFields();
+                    dataGridViewLowStock.Rows.Clear();
+                    dataGridViewSufficentStock.Rows.Clear();
                 } catch (OleDbException)
                 {
                     MessageBox.Show("Error occured.");

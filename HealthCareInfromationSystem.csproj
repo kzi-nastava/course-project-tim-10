@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>true</Prefer32Bit>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,82 +51,98 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="contollers\AppointmentController.cs" />
-    <Compile Include="contollers\AppointmentRequestController.cs" />
-    <Compile Include="contollers\EquipmentRequestController.cs" />
-    <Compile Include="contollers\EquipmentController.cs" />
-    <Compile Include="contollers\MedicalPrescriptionController.cs" />
-    <Compile Include="contollers\MedicalRecordController.cs" />
-    <Compile Include="contollers\MedicineController.cs" />
-    <Compile Include="contollers\NotificationController.cs" />
-    <Compile Include="contollers\PatientController.cs" />
-    <Compile Include="contollers\PersonController.cs" />
-    <Compile Include="contollers\PremiseController.cs" />
-    <Compile Include="contollers\ReferralLetterController.cs" />
-    <Compile Include="contollers\SpecialisationController.cs" />
-    <Compile Include="contollers\RenovationController.cs" />
-    <Compile Include="doctorController\AppointmentController.cs" />
-    <Compile Include="doctorController\EquipmentController.cs" />
-    <Compile Include="doctorController\MedicalRecordController.cs" />
-    <Compile Include="doctorController\MedicineRequestController.cs" />
-    <Compile Include="models\entity\Appointment.cs" />
-    <Compile Include="models\entity\AppointmentRequest.cs" />
-    <Compile Include="models\entity\ComplexMoving.cs" />
-    <Compile Include="models\entity\ComplexRenovation.cs" />
-    <Compile Include="models\entity\Equipment.cs" />
-    <Compile Include="models\entity\EquipmentRequest.cs" />
-    <Compile Include="models\entity\MedicalPrescription.cs" />
-    <Compile Include="models\entity\MedicalRecord.cs" />
-    <Compile Include="models\entity\Medicine.cs" />
-    <Compile Include="models\entity\Premise.cs" />
-    <Compile Include="models\entity\ReferralLetter.cs" />
-    <Compile Include="models\entity\SimpleRenovation.cs" />
-    <Compile Include="models\users\Doctor.cs" />
-    <Compile Include="models\users\Patient.cs" />
-    <Compile Include="models\users\Person.cs" />
-    <Compile Include="models\users\Secretary.cs" />
+    <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequestController.cs" />
+    <Compile Include="Core\Appointment\Notification\INotificationRepo.cs" />
+    <Compile Include="Core\Appointment\Notification\IVacationNotificationRepo.cs" />
+    <Compile Include="Core\Appointment\Notification\VacationNotificationSQL.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\IVacationRequestRepo.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequest.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestController.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestService.cs" />
+    <Compile Include="Core\Appointment\VacationRequest\VacationRequestSQL.cs" />
+    <Compile Include="Core\Equipment\Controller\EquipmentRequestController.cs" />
+    <Compile Include="Core\Equipment\Controller\EquipmentController.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalPrescription\MedicalPrescriptionController.cs" />
+    <Compile Include="Core\MedicineManagment\MedicineController.cs" />
+    <Compile Include="Core\Appointment\Notification\NotificationController.cs" />
+    <Compile Include="Core\PremiseManagment\PremiseService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\IRenovationRepo.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationService.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\RenovationSQL.cs" />
+    <Compile Include="Core\User\Patient\PatientController.cs" />
+    <Compile Include="Core\User\PersonController.cs" />
+    <Compile Include="Core\PremiseManagment\PremiseController.cs" />
+    <Compile Include="Core\MedicalRecord\ReferralLetter\ReferralLetterController.cs" />
+    <Compile Include="Core\User\Doctor\SpecialisationController.cs" />
+    <Compile Include="Core\Appointment\AppointmentController.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalRecordController.cs" />
+    <Compile Include="Core\MedicineManagment\MedicineRequestController.cs" />
+    <Compile Include="Core\Appointment\Appointment.cs" />
+    <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequest.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\ComplexMoving.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\ComplexRenovation.cs" />
+    <Compile Include="Core\User\Poll\PollDoctor.cs" />
+    <Compile Include="Core\Equipment\Equipment.cs" />
+    <Compile Include="Core\Equipment\EquipmentRequest.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalPrescription\MedicalPrescription.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalRecord.cs" />
+    <Compile Include="Core\MedicineManagment\Medicine.cs" />
+    <Compile Include="Core\PremiseManagment\Premise.cs" />
+    <Compile Include="Core\MedicalRecord\ReferralLetter\ReferralLetter.cs" />
+    <Compile Include="Core\PremiseManagment\Renovation\SimpleRenovation.cs" />
+    <Compile Include="Core\User\Poll\PollHospital.cs" />
+    <Compile Include="Core\User\Doctor\Doctor.cs" />
+    <Compile Include="Core\User\Patient\Patient.cs" />
+    <Compile Include="Core\User\Person.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="repository\AppointmentRequestSQL.cs" />
-    <Compile Include="repository\AppointmentSQL.cs" />
-    <Compile Include="repository\EquipmentRequestSQL.cs" />
-    <Compile Include="repository\EquipmentSQL.cs" />
-    <Compile Include="repository\IAppointmentRepo.cs" />
-    <Compile Include="repository\IAppointmentRequestRepo.cs" />
-    <Compile Include="repository\IEquipmentRepo.cs" />
-    <Compile Include="repository\IEquipmentRequestRepo.cs" />
-    <Compile Include="repository\IMedicalRecordRepo.cs" />
-    <Compile Include="repository\IMedicineRepo.cs" />
-    <Compile Include="repository\IPersonRepo.cs" />
-    <Compile Include="repository\IPremisseRepo.cs" />
-    <Compile Include="repository\IPrescriptionRepo.cs" />
-    <Compile Include="repository\IReferralLetterRepo.cs" />
-    <Compile Include="repository\ISpecialisationRepo.cs" />
-    <Compile Include="repository\MedicalRecordSQL.cs" />
-    <Compile Include="repository\MedicineSQL.cs" />
-    <Compile Include="repository\PersonSQL.cs" />
-    <Compile Include="repository\PremisseSQL.cs" />
-    <Compile Include="repository\PrescriptionSQL.cs" />
-    <Compile Include="repository\ReferralLetterSQL.cs" />
-    <Compile Include="repository\SpecialisationSQL.cs" />
-    <Compile Include="repository\users\IPatientRepo.cs" />
-    <Compile Include="repository\users\PatientSQL.cs" />
-    <Compile Include="Servise\AppointmentRequestService.cs" />
-    <Compile Include="Servise\AppointmentService.cs" />
-    <Compile Include="Servise\EquipmentRequestService.cs" />
-    <Compile Include="Servise\EquipmentService.cs" />
-    <Compile Include="Servise\MedicalRecordService.cs" />
-    <Compile Include="Servise\MedicineRequestService.cs" />
-    <Compile Include="Servise\PatientService.cs" />
-    <Compile Include="Servise\ReferralLetterService.cs" />
-    <Compile Include="Servise\SheduleAppointmentService.cs" />
+    <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequestSQL.cs" />
+    <Compile Include="Core\Appointment\AppointmentSQL.cs" />
+    <Compile Include="Core\Appointment\Notification\EmergencyNotificationSQL.cs" />
+    <Compile Include="Core\Equipment\Repository\EquipmentRequestSQL.cs" />
+    <Compile Include="Core\Equipment\Repository\EquipmentSQL.cs" />
+    <Compile Include="Core\Appointment\IAppointmentRepo.cs" />
+    <Compile Include="Core\Appointment\AppointmentRequest\IAppointmentRequestRepo.cs" />
+    <Compile Include="Core\Equipment\Repository\IEquipmentRepo.cs" />
+    <Compile Include="Core\Equipment\Repository\IEquipmentRequestRepo.cs" />
+    <Compile Include="Core\MedicalRecord\IMedicalRecordRepo.cs" />
+    <Compile Include="Core\MedicineManagment\IMedicineRepo.cs" />
+    <Compile Include="Core\Appointment\Notification\IAppointmentNotificationRepo.cs" />
+    <Compile Include="Core\User\IPersonRepo.cs" />
+    <Compile Include="Core\User\Poll\IPollHospitalRepo.cs" />
+    <Compile Include="Core\PremiseManagment\IPremisseRepo.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalPrescription\IPrescriptionRepo.cs" />
+    <Compile Include="Core\MedicalRecord\ReferralLetter\IReferralLetterRepo.cs" />
+    <Compile Include="Core\User\Doctor\ISpecialisationRepo.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalRecordSQL.cs" />
+    <Compile Include="Core\MedicineManagment\MedicineSQL.cs" />
+    <Compile Include="Core\User\PersonSQL.cs" />
+    <Compile Include="Core\User\Poll\PollHospitalSQL.cs" />
+    <Compile Include="Core\PremiseManagment\PremisseSQL.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalPrescription\PrescriptionSQL.cs" />
+    <Compile Include="Core\MedicalRecord\ReferralLetter\ReferralLetterSQL.cs" />
+    <Compile Include="Core\User\Doctor\SpecialisationSQL.cs" />
+    <Compile Include="Core\User\Poll\PollDoctorSQL.cs" />
+    <Compile Include="Core\User\Patient\IPatientRepo.cs" />
+    <Compile Include="Core\User\Poll\IPollDoctorRepo.cs" />
+    <Compile Include="Core\User\Patient\PatientSQL.cs" />
+    <Compile Include="Core\Appointment\AppointmentRequest\AppointmentRequestService.cs" />
+    <Compile Include="Core\Appointment\Notification\RescheduleNotificationSQL.cs" />
+    <Compile Include="Core\Appointment\AppointmentService.cs" />
+    <Compile Include="Core\Equipment\Service\EquipmentRequestService.cs" />
+    <Compile Include="Core\Equipment\Service\EquipmentService.cs" />
+    <Compile Include="Core\MedicalRecord\MedicalRecordService.cs" />
+    <Compile Include="Core\MedicineManagment\MedicineRequestService.cs" />
+    <Compile Include="Core\User\Patient\PatientService.cs" />
+    <Compile Include="Core\User\Poll\PollService.cs" />
+    <Compile Include="Core\MedicalRecord\ReferralLetter\ReferralLetterService.cs" />
+    <Compile Include="Core\Appointment\SheduleAppointmentService.cs" />
     <Compile Include="utils\BaseFunctions.cs" />
     <Compile Include="utils\Constants.cs" />
     <Compile Include="utils\LoggedInUser.cs" />
     <Compile Include="utils\Methods.cs" />
     <Compile Include="utils\MyConverter.cs" />
-    <Compile Include="viewController\AllAppointmentsController.cs" />
     <Compile Include="view\DoctorView\AddAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +160,12 @@
     </Compile>
     <Compile Include="view\DoctorView\AddReferralLetterForm.Designer.cs">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DoctorView\AddVacationRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\AddVacationRequestForm.Designer.cs">
+      <DependentUpon>AddVacationRequestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\DoctorView\AllAppointmentsForm.cs">
       <SubType>Form</SubType>
@@ -193,6 +215,12 @@
     <Compile Include="view\DoctorView\UnverifiedMedicine.Designer.cs">
       <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\DoctorView\VacationRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DoctorView\VacationRequestForm.Designer.cs">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\LogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +257,12 @@
     <Compile Include="view\ManagerView\MedicineManagementForm.Designer.cs">
       <DependentUpon>MedicineManagementForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ManagerView\PollStatisticsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ManagerView\PollStatisticsForm.Designer.cs">
+      <DependentUpon>PollStatisticsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ManagerView\PremisesCRUDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +279,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\PatientView\AllAppointmentsForm.Designer.cs" />
+    <Compile Include="view\PatientView\AllAppointmentsForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\AllAppointmentsForm2.Designer.cs">
+      <DependentUpon>AllAppointmentsForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\AnamnesisReviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +301,12 @@
     <Compile Include="view\PatientView\PatientMainForm.Designer.cs">
       <DependentUpon>PatientMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\PatientView\PollHospitalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\PollHospitalForm.Designer.cs">
+      <DependentUpon>PollHospitalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PatientView\PriorityAppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,6 +316,12 @@
     </Compile>
     <Compile Include="view\PatientView\SearchDoctorForm.Designer.cs">
       <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PatientView\PollDoctorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PatientView\PollDoctorForm.Designer.cs">
+      <DependentUpon>PollDoctorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="view\SecretaryView\AppointmentRequestForm.cs">
       <SubType>Form</SubType>
@@ -331,6 +383,12 @@
     <Compile Include="view\SecretaryView\SecretaryMainForm.Designer.cs">
       <DependentUpon>SecretaryMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SecretaryView\VacationRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SecretaryView\VacationRequestForm.Designer.cs">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -345,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\AddReferralLetterForm.resx">
       <DependentUpon>AddReferralLetterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\AddVacationRequestForm.resx">
+      <DependentUpon>AddVacationRequestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\DoctorView\DoctorMainForm.resx">
       <DependentUpon>DoctorMainForm.cs</DependentUpon>
@@ -361,6 +422,9 @@
     <EmbeddedResource Include="view\DoctorView\UnverifiedMedicine.resx">
       <DependentUpon>UnverifiedMedicine.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\DoctorView\VacationRequestForm.resx">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\ArrangingEquipmentForm.resx">
       <DependentUpon>ArrangingEquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,6 +440,9 @@
     <EmbeddedResource Include="view\ManagerView\MedicineManagementForm.resx">
       <DependentUpon>MedicineManagementForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\ManagerView\PollStatisticsForm.resx">
+      <DependentUpon>PollStatisticsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ManagerView\PremisesCRUDForm.resx">
       <DependentUpon>PremisesCRUDForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -383,6 +450,9 @@
       <DependentUpon>SimpleRenovationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AllAppointmentsForm.resx" />
+    <EmbeddedResource Include="view\PatientView\AllAppointmentsForm2.resx">
+      <DependentUpon>AllAppointmentsForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\AnamnesisReviewForm.resx">
       <DependentUpon>AnamnesisReviewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -390,9 +460,15 @@
     <EmbeddedResource Include="view\PatientView\PatientMainForm.resx">
       <DependentUpon>PatientMainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\PatientView\PollHospitalForm.resx">
+      <DependentUpon>PollHospitalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\PatientView\PriorityAppointmentForm.resx" />
     <EmbeddedResource Include="view\PatientView\SearchDoctorForm.resx">
       <DependentUpon>SearchDoctorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PatientView\PollDoctorForm.resx">
+      <DependentUpon>PollDoctorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\SecretaryView\AppointmentRequestForm.resx">
       <DependentUpon>AppointmentRequestForm.cs</DependentUpon>
@@ -424,9 +500,10 @@
     <EmbeddedResource Include="view\SecretaryView\SecretaryMainForm.resx">
       <DependentUpon>SecretaryMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="contollers\.gitkeep" />
-    <None Include="models\entity\.gitkeep" />
-    <None Include="models\users\.gitkeep" />
+    <EmbeddedResource Include="view\SecretaryView\VacationRequestForm.resx">
+      <DependentUpon>VacationRequestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Core\Appointment\VacationRequest\.gitkeep" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\HealthCareInfromationSystem.csproj.AssemblyReference.cache" />
     <None Include="bin\Debug\HealthCareInfromationSystem.exe.config" />
@@ -439,11 +516,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="view\.gitkeep" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\User\Poll\statistics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

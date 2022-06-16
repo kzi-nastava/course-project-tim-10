@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿ 
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -13,13 +12,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.PremiseManagment.Renovation;
 
 namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class SimpleRenovationsForm : Form
     {
-        private PremiseController premiseController = new PremiseController();
-        private RenovationController RenovationController = new RenovationController();
+        private RenovationService renovationService = new RenovationService();
+        private PremiseService premiseService = new PremiseService();
 
         public SimpleRenovationsForm()
         {
@@ -35,7 +36,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
             button1.Text = "Add renovation";
         }
 
-        private bool CheckIfTextBoxesAreEmpty()
+        private bool ValidateForm()
         {
             return String.IsNullOrWhiteSpace(textBox1.Text) ||
                     String.IsNullOrWhiteSpace(textBox2.Text);
@@ -43,34 +44,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void FillRenovationTable()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String query = $"select * from simple_renovations";
-                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-
-                adapter.Fill(table);
-                dataGridView1.DataSource = table;
-            }
+            dataGridView1.DataSource = renovationService.LoadAllSimpleRenovations();
         }
 
         private void FillPremiseTable()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String query = $"select * from premises";
-                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-
-                adapter.Fill(table);
-                dataGridView2.DataSource = table;
-            }
+            dataGridView2.DataSource = premiseService.LoadAll();
         }
 
         private void SimpleRenovationsForm_Load(object sender, EventArgs e)
@@ -95,26 +74,25 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (CheckIfTextBoxesAreEmpty()) return;
+            if (ValidateForm()) return;
 
             String renovationId = textBox1.Text;
             String premiseId = textBox2.Text.Split('-')[0].Trim();
             String startDate = textBox3.Text;
             String endDate = textBox4.Text;
 
-            if (RenovationController.CheckIfSimpleRenovationExistsById(renovationId)) return;
+            if (renovationService.CheckIfSimpleRenovationExistsById(renovationId)) return;
 
-            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
-            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+            if (!Regex.IsMatch(startDate, Constants.dateRegex) || !Regex.IsMatch(endDate, Constants.dateRegex)) return;
 
-            if (premiseController.CheckIfPremiseIsOccupied(premiseId, startDate, endDate))
+            if (premiseService.CheckIfPremiseIsOccupied(premiseId, startDate, endDate))
             {
                 MessageBox.Show("Premise is occupied in that time interval.");
                 return;
             }
 
             SimpleRenovation renovation = new SimpleRenovation(renovationId, premiseId, startDate, endDate);
-            RenovationController.SaveSimpleRenovation(renovation);
+            renovationService.SaveSimpleRenovation(renovation);
 
             FillRenovationTable();
             textBox1.Clear();

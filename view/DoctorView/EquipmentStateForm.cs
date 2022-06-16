@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Globalization;
-using HealthCareInfromationSystem.models.entity;
-using HealthCareInfromationSystem.doctorController;
+ 
+using HealthCareInfromationSystem.Core.Equipment.Controller;
+using HealthCareInfromationSystem.Core.Equipment;
+using HealthCareInfromationSystem.Core.PremiseManagment;
 using HealthCareInfromationSystem.Servise;
 
 namespace HealthCareInfromationSystem.view.DoctorView

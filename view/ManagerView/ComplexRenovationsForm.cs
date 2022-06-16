@@ -1,5 +1,4 @@
-﻿using HealthCareInfromationSystem.contollers;
-using HealthCareInfromationSystem.models.entity;
+﻿ 
 using HealthCareInfromationSystem.utils;
 using System;
 using System.Collections.Generic;
@@ -13,13 +12,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HealthCareInfromationSystem.Core.PremiseManagment;
+using HealthCareInfromationSystem.Core.PremiseManagment.Renovation;
 
 namespace HealthCareInfromationSystem.view.ManagerView
 {
     public partial class ComplexRenovationsForm : Form
     {
-        private PremiseController premiseController = new PremiseController();
-        private RenovationController renovationController = new RenovationController();
+        private RenovationService renovationService = new RenovationService();
+        private PremiseService premiseService = new PremiseService();
 
         public ComplexRenovationsForm()
         {
@@ -52,22 +53,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
         private void FillComboBox()
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
+            Dictionary<string, string> names = renovationService.LoadPremiseNameAndId();
+
+            foreach (KeyValuePair<string, string> name in names)
             {
-                String query = "select premises_id, name from premises";
-
-                OleDbCommand command = new OleDbCommand(query, connection);
-
-                connection.Open();
-                OleDbDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    comboBox1.Items.Add(reader[0] + " - " + reader[1]);
-                    comboBox2.Items.Add(reader[0] + " - " + reader[1]);
-                    comboBox4.Items.Add(reader[0] + " - " + reader[1]);
-                }
-                reader.Close();
+                comboBox1.Items.Add(name.Key + " - " + name.Value);
+                comboBox2.Items.Add(name.Key + " - " + name.Value);
+                comboBox4.Items.Add(name.Key + " - " + name.Value);
             }
 
             List<String> types = new List<string> { "operational room", "examination room", "rest room", "other" };
@@ -135,13 +127,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             String startDate = textBox3.Text;
             String endDate = textBox4.Text;
 
-            if (premiseController.CheckIfPremiseExistsById(newPremiseId) ||
-                premiseController.CheckIfPremiseIsOccupied(firstPremiseId, startDate, endDate) ||
-                premiseController.CheckIfPremiseIsOccupied(secondPremiseId, startDate, endDate))
+            if (premiseService.CheckIfPremiseExistsById(newPremiseId) ||
+                premiseService.CheckIfPremiseIsOccupied(firstPremiseId, startDate, endDate) ||
+                premiseService.CheckIfPremiseIsOccupied(secondPremiseId, startDate, endDate))
                 return;
 
-            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
-            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+            if (!Regex.IsMatch(startDate, Constants.dateRegex) || !Regex.IsMatch(endDate, Constants.dateRegex)) return;
 
             Premise firstPremise = new Premise(firstPremiseId, "", "");
             Premise secondPremise = new Premise(secondPremiseId, "", "");
@@ -151,13 +142,13 @@ namespace HealthCareInfromationSystem.view.ManagerView
             ComplexRenovation secondPremiseRenovation = new ComplexRenovation(secondPremise, "delete", endDate);
             ComplexRenovation newPremiseRenovation = new ComplexRenovation(newPremise, "add", endDate);
 
-            renovationController.SaveComplexRenovation(firstPremiseRenovation);
-            renovationController.SaveComplexRenovation(secondPremiseRenovation);
-            renovationController.SaveComplexRenovation(newPremiseRenovation);
+            renovationService.SaveComplexRenovation(firstPremiseRenovation);
+            renovationService.SaveComplexRenovation(secondPremiseRenovation);
+            renovationService.SaveComplexRenovation(newPremiseRenovation);
 
             ComplexMoving complexMoving = new ComplexMoving(firstPremise.Id, secondPremise.Id, newPremiseId, "combine", endDate);
 
-            renovationController.SaveCombiningComplexMoving(complexMoving);
+            renovationService.SaveCombiningComplexMoving(complexMoving);
 
             MessageBox.Show("Scheduled complex renovation.");
         }
@@ -176,13 +167,12 @@ namespace HealthCareInfromationSystem.view.ManagerView
             String startDate = textBox9.Text;
             String endDate = textBox10.Text;
 
-            if (premiseController.CheckIfPremiseExistsById(firstNewPremiseId) ||
-                premiseController.CheckIfPremiseExistsById(secondNewPremiseId) ||
-                premiseController.CheckIfPremiseIsOccupied(oldPremiseId, startDate, endDate))
+            if (premiseService.CheckIfPremiseExistsById(firstNewPremiseId) ||
+                premiseService.CheckIfPremiseExistsById(secondNewPremiseId) ||
+                premiseService.CheckIfPremiseIsOccupied(oldPremiseId, startDate, endDate))
                 return;
 
-            String dateRegex = "^([123]?\\d\\.{1})([1]?\\d\\.{1})([12]{1}\\d{3}\\.{1})$";
-            if (!Regex.IsMatch(startDate, dateRegex) || !Regex.IsMatch(endDate, dateRegex)) return;
+            if (!Regex.IsMatch(startDate, Constants.dateRegex) || !Regex.IsMatch(endDate, Constants.dateRegex)) return;
 
             Premise oldPremise = new Premise(oldPremiseId, "", "");
             Premise firstNewPremise = new Premise(firstNewPremiseId, firstNewPremiseName, firstNewPremiseType);
@@ -192,37 +182,17 @@ namespace HealthCareInfromationSystem.view.ManagerView
             ComplexRenovation firstNewPremiseRenovation = new ComplexRenovation(firstNewPremise, "add", endDate);
             ComplexRenovation secondNewPremiseRenovation = new ComplexRenovation(secondNewPremise, "add", endDate);
 
-            renovationController.SaveComplexRenovation(oldPremiseRenovation);
-            renovationController.SaveComplexRenovation(firstNewPremiseRenovation);
-            renovationController.SaveComplexRenovation(secondNewPremiseRenovation);
+            renovationService.SaveComplexRenovation(oldPremiseRenovation);
+            renovationService.SaveComplexRenovation(firstNewPremiseRenovation);
+            renovationService.SaveComplexRenovation(secondNewPremiseRenovation);
 
             MessageBox.Show("Scheduled complex renovation.");
         }
 
         private void ComboBox4_SelectedValueChanged(object sender, EventArgs e)
         {
-            using (OleDbConnection connection = new OleDbConnection(Constants.connectionString))
-            {
-                String id = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
-                String today = $"{DateTime.Today.Day.ToString()}.{DateTime.Today.Month.ToString()}.{DateTime.Today.Year.ToString()}.";
-
-                String query = $"" +
-                    $"select eq.equipment_id, eq.name, eq.quantity, eq.type " +
-                    $"from equipment as eq " +
-                    $"where switch (" +
-                    $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) < DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.old_premises_id, " +
-                    $"DateValue(Replace(Replace(\"{today}\", \'.\', \'/\', 1, 2), \'.\', \'\')) >= DateValue(Replace(Replace(move_date, \'.\', \'/\', 1, 2), \'.\', \'\')), eq.new_premises_id " +
-                    $") = \"{id}\"";
-
-                OleDbDataAdapter adapter = new OleDbDataAdapter(query, connection);
-                DataTable table = new DataTable
-                {
-                    Locale = CultureInfo.InvariantCulture
-                };
-
-                adapter.Fill(table);
-                dataGridView1.DataSource = table;
-            }
+            String id = comboBox4.SelectedItem.ToString().Split('-')[0].Trim();
+            dataGridView1.DataSource = renovationService.LoadEquipmentByPremise(id);
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -238,7 +208,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             ComplexMoving complexMoving = new ComplexMoving(oldPremiseId, firstNewPremiseId, secondNewPremiseId, "divide-1", endDate);
 
-            renovationController.SaveDividingComplexMoving(complexMoving, equipmentId);
+            renovationService.SaveDividingComplexMoving(complexMoving, equipmentId);
 
             MessageBox.Show("Scheduled to move to first new premise.");
         }
@@ -256,7 +226,7 @@ namespace HealthCareInfromationSystem.view.ManagerView
 
             ComplexMoving complexMoving = new ComplexMoving(oldPremiseId, firstNewPremiseId, secondNewPremiseId, "divide-2", endDate);
 
-            renovationController.SaveDividingComplexMoving(complexMoving, equipmentId);
+            renovationService.SaveDividingComplexMoving(complexMoving, equipmentId);
 
             MessageBox.Show("Scheduled to move to second new premise.");
         }
